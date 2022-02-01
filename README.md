@@ -11,7 +11,7 @@
 - Character 클래스의 메소드중, <code>isLowerCase</code>와 <code>isUpperCase</code>를 이용해서 대문자인지 소문자인지 알 수 있다. 
 ### 1-3 가장 긴 부분문자열
 - nextLine()으로 줄바꿈 된 문자열을 입력 받는다.
-- <code>String[] strs = String.split("CH") </code>로 <code>?"CH"</code>을 기준으로 쪼개진 문자열 배열을 얻는다.
+- <code>String[] strs = String.split("CH") </code>로 <code>"CH"</code>을 기준으로 쪼개진 문자열 배열을 얻는다.
 - <code>int pos = str.indexOf("CH")</code> 로, <code>"CH"</code> 문자가 있는 인덱스를 pos에 반환받는다. 발견하지 못하면, pos에 -1를 리턴한다.
 - <code>String temp = str.substring(index1, index2)</code> 로, index1 ~ index1 의 부분 문자열을 temp에 담을 수 있다
 

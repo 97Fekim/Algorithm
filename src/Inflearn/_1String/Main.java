@@ -1,13 +1,16 @@
 package Inflearn._1String;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args){
         Scanner kb = new Scanner(System.in);
-        String str = kb.nextLine();
+        String str = kb.next();
 
-        System.out.println();
     }
 
     /* 1. 문자 찾기 */
@@ -22,7 +25,6 @@ public class Main {
         }
         return answer;
     }*/
-
     /* 2. 대소문자 변환 */
     /*public static String upperLowerTranslate(String str){
 
@@ -37,7 +39,6 @@ public class Main {
         }
         return sb.toString();
     }*/
-
     /* 3-1. 가장 긴 부분문자열(split) */
     /*public static String longestSubStringUsingSplit(String str){
         String answer = "";
@@ -52,7 +53,6 @@ public class Main {
         }
         return answer;
     }*/
-
     /* 3-2. 가장 긴 부분문자열(indexOf) */
     /*public static String longestSubStringUsingIndexOf(String str){
         String answer = "";
@@ -71,7 +71,6 @@ public class Main {
 
         return answer;
     }*/
-
     /* 4-1. 문장 뒤집기(StringBuilder) */
     /*public static ArrayList<String> reverseStringUsingStringBuilder(int n, String[] strs){
         ArrayList<String> answer = new ArrayList<>();
@@ -82,7 +81,6 @@ public class Main {
         }
         return answer;
     }*/
-
     /* 4-2. 문장 뒤집기(BruteForce) */
     /*public static ArrayList<String> reverseStringUsingBruteForce(int n, String[] strs){
         ArrayList<String> answer = new ArrayList<>();
@@ -102,7 +100,6 @@ public class Main {
         }
         return answer;
     }*/
-
     /* 5. 특정 문자 뒤집기(isAlphabetic) */
     /*public static String reverseSpecificChar(String str){
         String answer;
@@ -127,7 +124,6 @@ public class Main {
         answer = String.valueOf(cStr);
         return answer;
     }*/
-
     /* 6. 중복 문자 제거(indexOf) */
     /*public static String deleteDuplicatedChar(String str){
         String answer = "";
@@ -139,7 +135,6 @@ public class Main {
 
         return answer;
     }*/
-
     /* 7-1. 회문문자열(lt, rt 활용) */
     /*public static String palindromeStringUsingLtRt(String str){
         int lt = 0;
@@ -158,7 +153,6 @@ public class Main {
         return "YES";
 
     }*/
-
     /* 7-2. 회문문자열(StrungBuilder 활용) */
     /*public static String palindromeStringUsingStringBuilder(String str){
 
@@ -170,7 +164,6 @@ public class Main {
         else
             return "NO";
     }*/
-
     /* 8-1. 유효한 회문문자열(lt, rt 활용) */
     /*public static String palindromeStringOnlyAlphabetUsingLtRt(String str){
 
@@ -192,7 +185,6 @@ public class Main {
         }
         return "YES";
     }*/
-
     /* 8-2. 유효한 회문문자열(replaceAll 활용) */
     /*public static String palindromeStringOnlyAlphabetUsingReplaceAll(String str){
         String answer = "NO";
@@ -202,5 +194,93 @@ public class Main {
             return "YES";
         else
             return "NO";
+    }*/
+    /* 9-1. 숫자만 추출 (parseInt 활용) */
+    /*public static int extractOnlyNumberUsingParseInt(String str){
+
+        String answer = "";
+        for(int i=0; i<str.length(); ++i){
+            if(!Character.isAlphabetic(str.charAt(i)))
+                answer += str.charAt(i);
+        }
+
+        return Integer.parseInt(answer);
+    }*/
+    /* 9-2. 숫자만 추출 (곱셈 로직 활용) */
+    /*public static int extractOnlyNumberUsingMultiply(String str){
+        int answer = 0;
+        for(char c : str.toCharArray()){
+            if((c > 48) && (c < 57)){
+                answer = answer * 10 + (c - 48);
+            }
+        }
+
+        return answer;
+    }*/
+    /* 10. 가장 짧은 문자거리 (양방향 로직 활용) */
+    /*public static int[] shortestCharDistance(String str, char c){
+        int[] result = new int[str.length()];
+        int p = 1000;
+
+        for(int i=0; i < str.length(); ++i){
+            if(str.charAt(i) != c){
+                p++;
+                result[i] = p;
+            }
+            else{
+                p = 0;
+                result[i] = p;
+            }
+        }
+
+        p = 1000;
+        for(int i=str.length()-1; i >= 0; i--){
+            if(str.charAt(i) != c){
+                p++;
+                result[i] = Math.min(result[i],p);
+            }
+            else{
+                p = 0;
+            }
+        }
+
+        return result;
+    }*/
+    /* 11. 문자 압축 (끝에 빈문자 추가 주의) */
+    /*public static String compressString(String str){
+        StringBuilder answer = new StringBuilder();
+        answer.append(str.charAt(0));
+        int count = 1;
+        str += " ";
+
+        for(int i=1; i<str.length(); ++i){
+            if(answer.charAt(answer.length()-1) == str.charAt(i)){
+                count++;
+            }
+            else{
+                if(count == 1)
+                    answer.append(str.charAt(i));
+                else{
+                    answer.append(count);
+                    answer.append(str.charAt(i));
+                    count = 1;
+                }
+            }
+        }
+
+        return answer.toString();
+    }*/
+    /* 12. 암호(replace, parseInt(str,2) 활용) */
+    /*public static String password(int n,String str){
+        String answer = "";
+        for(int i=0; i<n; ++i){
+            String temp = str.substring(0,7)
+                    .replace('#', '1')
+                    .replace('*','0');
+            int num = Integer.parseInt(temp, 2);
+            answer += (char)num;
+            str = str.substring(7);
+        }
+        return answer;
     }*/
 }

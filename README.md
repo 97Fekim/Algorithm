@@ -70,6 +70,13 @@
 - 3) 곱셈 로직 활용 : ascii 넘버를 활용하여, int 변수 answer에 값을 축적시킨다. 0~9는 ascii표에서 48 ~ 57에 대응한다.<br>
 </details>   
  
+<details>
+<summary> <strong>10. 문자 거리 </strong> </summary>
+- step1) 거리를 나타낼 변수 p를 1000으로 초기화한다.<br>
+- step2) for문을 앞에서부터 한번 돌면서, e를 만나면 0으로 초기화하고 e가 아니면 1씩 증가시키며 배열에 넣는다.<br>
+- step3) for문을 뒤에서부터 다시 돌면서 똑같이 배열에 넣는데, 이때는 p값과 원래 int 배열의 값을 비교하여 작은 값을 넣는다, <code>Math.min(answer[i], p)</code> 활용<br>
+</details>   
+ 
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

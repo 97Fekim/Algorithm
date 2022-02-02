@@ -24,8 +24,11 @@
 - <code>while(lt < rt)</code> 를 항상 기억
 - 특정문자일 경우에만 lt를 증가시키거나 rt를 감소시키는 로직으로 구현.
 - <code>Character.isAlphabetic(CH)</code> 메소드 활용 (특정 문자가 알파벳임을 확인)
-- char[] 를 String으로 변환하려면 반드시 <code>String str = String.valueOf(char[])</code> 을 활용해라
-
+- char[] 를 String으로 변환하려면 반드시 <code>String str = String.valueOf(char[])</code> 을 활용해라.
+### 문자열-6) 중복 문자 제거
+- String 클래스의 indexOf()를 활용하여 해결한다.
+ 
+  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

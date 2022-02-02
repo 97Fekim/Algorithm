@@ -64,9 +64,10 @@
  
 <details>
 <summary> <strong>9. 숫자만 추출 </strong> </summary>
-- 두 가지 풀이가 가능하다.
+- 세 가지 풀이가 가능하다.
 - 1) parseInt 활용 : <code>int n = Integer.parseInt(str)</code>를 활용해 String -> int 형 변환이 가능하다. 이때, 맨앞 0을 사라진다.<br>
-- 2) 곱셈 로직 활용 : ascii 넘버를 활용하여, int 변수 answer에 값을 축적시킨다. 0~9는 ascii표에서 48 ~ 57에 대응한다.<br>
+- 2) isDigit 활용 : <code>Character.isDigit(ch)</code>을 활용해 문자가 숫자인지 확인하여 해결 가능하다.<br>
+- 3) 곱셈 로직 활용 : ascii 넘버를 활용하여, int 변수 answer에 값을 축적시킨다. 0~9는 ascii표에서 48 ~ 57에 대응한다.<br>
 </details>   
  
 ## 마구잡이 정리 노트

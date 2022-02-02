@@ -4,8 +4,8 @@
 - [문제풀이](https://velog.io/@16fekim?tag=%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
 
 ## 인프런 인강
-### 1) 문자열
 - [코드로 이동](https://github.com/97Fekim/Algorithm/blob/master/src/Inflearn_String/Main.java)
+### 1) 문자열
 <details>
 <summary> <strong>1. 문자 찾기</strong> </summary>
 - 소문자 <-> 대문자 변형시, <code>c = Character.to____Case(c) </code> 이용하여 변형한다.<br>

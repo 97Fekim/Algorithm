@@ -75,7 +75,21 @@
 - step1) 거리를 나타낼 변수 p를 1000으로 초기화한다.<br>
 - step2) for문을 앞에서부터 한번 돌면서, e를 만나면 0으로 초기화하고 e가 아니면 1씩 증가시키며 배열에 넣는다.<br>
 - step3) for문을 뒤에서부터 다시 돌면서 똑같이 배열에 넣는데, 이때는 p값과 원래 int 배열의 값을 비교하여 작은 값을 넣는다, <code>Math.min(answer[i], p)</code> 활용<br>
-</details>   
+</details>  
+ 
+<details>
+<summary> <strong>11. 문자 압축 </strong> </summary>
+- StringBuilder를 이용<br>
+- count를 누적시키는 방법을 이용<br>
+- <strong>마지막에 빈문자를 넣어줄것!!! <code> str += " ";</code></strong><br>
+</details> 
+ 
+<details>
+<summary> <strong>12. 암호 </strong> </summary>
+- 반복문 속 substring 이용<br>
+- <code>String temp = str.replace('#','1").replace('*','0')</code> 이용<br>
+- <code>int num = Integer.parseInt(str,2)</code> 이용하여 이진수 문자열을 십진수로 변환<br>
+</details>
  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기

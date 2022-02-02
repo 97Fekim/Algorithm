@@ -1,13 +1,14 @@
 package Inflearn_String;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args){
-        Scanner kb=new Scanner(System.in);
-        //String str = kb.next();         // next하면 문자열 하나 읽어들임
-        String str = kb.nextLine();
+        Scanner kb = new Scanner(System.in);
+        String str = kb.next();
 
+        System.out.println(reverseSpecificChar(str));
     }
 
     /* 1. 문자 찾기 */
@@ -69,6 +70,62 @@ public class Main {
         if(str.length() > m)
             answer = str;
 
+        return answer;
+    }*/
+
+    /* 4-1. 문장 뒤집기(StringBuilder) */
+    /*public static ArrayList<String> reverseStringUsingStringBuilder(int n, String[] strs){
+        ArrayList<String> answer = new ArrayList<>();
+
+        for(String str : strs){
+            String temp = new StringBuilder(str).reverse().toString();
+            answer.add(temp);
+        }
+        return answer;
+    }*/
+
+    /* 4-2. 문장 뒤집기(BruteForce) */
+    /*public static ArrayList<String> reverseStringUsingBruteForce(int n, String[] strs){
+        ArrayList<String> answer = new ArrayList<>();
+
+        for(String str : strs){
+            char[] s = str.toCharArray();
+            int lt = 0;
+            int rt = s.length -1;
+            while(lt < rt){
+                char tmp = s[lt];
+                s[lt] = s[rt];
+                lt ++;
+                rt --;
+            }
+            String temp = String.ValueOf(str);
+            answer.add(temp);
+        }
+        return answer;
+    }*/
+
+    /* 5. 특정 문자 뒤집기(isAlphabetic) */
+    /*public static String reverseSpecificChar(String str){
+        String answer;
+        char[] cStr = str.toCharArray();
+        int lt = 0;
+        int rt = str.length()-1;
+
+        while(lt < rt){
+            if(!Character.isAlphabetic(cStr[lt]))
+                lt ++;
+            else if(!Character.isAlphabetic(cStr[rt]))
+                rt --;
+            else{
+                char temp = cStr[lt];
+                cStr[lt] = cStr[rt];
+                cStr[rt] = temp;
+                lt++;
+                rt--;
+            }
+        }
+
+        answer = String.valueOf(cStr);
         return answer;
     }*/
 

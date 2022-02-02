@@ -48,8 +48,15 @@
  
 <details>
 <summary> <strong>7. 회문 문자열 (Palindrome) </strong> </summary>
-- lt, rt를 활용!
+- lt, rt를 활용!<br>
+- StringBuilder의 reverse를 활용하여 비교할때는, String의 equalsIgnoreCase 메소드를 이용하여 비교하면 대소문자를 무시하고 비교 가능하다.<br>
 </details>  
+ 
+<details>
+<summary> <strong>8.  (Palindrome) </strong> </summary>
+- <br>
+- <br>
+</details>   
  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기

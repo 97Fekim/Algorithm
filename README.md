@@ -53,9 +53,12 @@
 </details>  
  
 <details>
-<summary> <strong>8.  (Palindrome) </strong> </summary>
-- <br>
-- <br>
+<summary> <strong>8. 유효한 회문 문자열 </strong> </summary>
+- <code>str = str.replaceAll("[^A-Z]","")</code>로 A-Z가 아닌 모든 문자를 ""로 변환 가능하다.<br>
+- 세가지 풀이가 가능하다<br>
+- 1) if-elseif-else 구문으로 문자만 체크해서 lt,rt를 증감 시키는 로직<br>
+- 2) replaceAll과 toUpperCase로 대문자 알파벳만 남긴 후 lt,rt 를 활용하는 로직<br>
+- 3) replaceAll과 toUpperCase로 대문자 알파벳만 남긴 후, StringBuilder의 reverse를 활용하는 로직<br>
 </details>   
  
 ## 마구잡이 정리 노트

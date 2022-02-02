@@ -1,17 +1,14 @@
-package Inflearn_String;
-import java.util.ArrayList;
+package Inflearn._1String;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args){
         Scanner kb = new Scanner(System.in);
-        String str = kb.next();
+        String str = kb.nextLine();
+
         System.out.println();
-
-
     }
-
 
     /* 1. 문자 찾기 */
     /*public static int findChar(String str, char t){
@@ -169,6 +166,39 @@ public class Main {
         String temp = sb.reverse().toString();
 
         if(str.equalsIgnoreCase(temp))
+            return "YES";
+        else
+            return "NO";
+    }*/
+
+    /* 8-1. 유효한 회문문자열(lt, rt 활용) */
+    /*public static String palindromeStringOnlyAlphabetUsingLtRt(String str){
+
+        int lt = 0;
+        int rt = str.length()-1;
+        str = str.toUpperCase();
+
+        while(lt < rt){
+            if(!Character.isAlphabetic(str.charAt(lt)))
+                lt++;
+            else if(!Character.isAlphabetic(str.charAt(rt)))
+                rt--;
+            else{
+                if(str.charAt(lt) != str.charAt(rt))
+                    return "NO";
+                lt++;
+                rt--;
+            }
+        }
+        return "YES";
+    }*/
+
+    /* 8-2. 유효한 회문문자열(replaceAll 활용) */
+    /*public static String palindromeStringOnlyAlphabetUsingReplaceAll(String str){
+        String answer = "NO";
+        str = str.toUpperCase().replaceAll("[^A-Z]","");
+        String temp = new StringBuilder(str).reverse().toString();
+        if(temp.equals(str))
             return "YES";
         else
             return "NO";

@@ -7,9 +7,11 @@ public class Main {
     public static void main(String[] args){
         Scanner kb = new Scanner(System.in);
         String str = kb.next();
+        System.out.println();
 
-        System.out.println(reverseSpecificChar(str));
+
     }
+
 
     /* 1. 문자 찾기 */
     /*public static int findChar(String str, char t){
@@ -129,4 +131,46 @@ public class Main {
         return answer;
     }*/
 
+    /* 6. 중복 문자 제거(indexOf) */
+    /*public static String deleteDuplicatedChar(String str){
+        String answer = "";
+
+        for(int i=0; i<str.length(); ++i){
+            if(i == str.indexOf(str.charAt(i)))
+                answer += str.charAt(i);
+        }
+
+        return answer;
+    }*/
+
+    /* 7-1. 회문문자열(lt, rt 활용) */
+    /*public static String palindromeStringUsingLtRt(String str){
+        int lt = 0;
+        int rt = str.length()-1;
+        str = str.toUpperCase();
+
+        while(lt < rt){
+            if(str.charAt(lt) != str.charAt(rt))
+                return "NO";
+            else{
+                lt++;
+                rt--;
+            }
+
+        }
+        return "YES";
+
+    }*/
+
+    /* 7-2. 회문문자열(StrungBuilder 활용) */
+    /*public static String palindromeStringUsingStringBuilder(String str){
+
+        StringBuilder sb = new StringBuilder(str);
+        String temp = sb.reverse().toString();
+
+        if(str.equalsIgnoreCase(temp))
+            return "YES";
+        else
+            return "NO";
+    }*/
 }

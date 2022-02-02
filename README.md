@@ -4,7 +4,7 @@
 - [문제풀이](https://velog.io/@16fekim?tag=%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98)
 
 ## 인프런 인강
-- [코드로 이동](https://github.com/97Fekim/Algorithm/blob/master/src/Inflearn_String/Main.java)
+- [코드로 이동](https://github.com/97Fekim/Algorithm/blob/master/src/Inflearn/_1String/Main.java)
 ### 1) 문자열
 <details>
 <summary> <strong>1. 문자 찾기</strong> </summary>
@@ -48,7 +48,7 @@
 </details> 
  
 <details>
-<summary> <strong>7. 회문 문자열 (Palindrome) </strong> </summary>
+<summary> <strong>7. 회문 문자열 </strong> </summary>
 - lt, rt를 활용!<br>
 - StringBuilder의 reverse를 활용하여 비교할때는, String의 equalsIgnoreCase 메소드를 이용하여 비교하면 대소문자를 무시하고 비교 가능하다.<br>
 </details>  

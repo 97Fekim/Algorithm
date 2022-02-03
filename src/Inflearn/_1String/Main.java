@@ -1,9 +1,7 @@
 package Inflearn._1String;
+import java.awt.image.AreaAveragingScaleFilter;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -11,9 +9,10 @@ public class Main {
         Scanner kb = new Scanner(System.in);
         String str = kb.next();
 
+        System.out.println();
     }
 
-    /* 1. 문자 찾기 */
+    /* 1. 문자 찾기 */  //1ok
     /*public static int findChar(String str, char t){
         int answer = 0;
         str = str.toUpperCase();
@@ -25,7 +24,7 @@ public class Main {
         }
         return answer;
     }*/
-    /* 2. 대소문자 변환 */
+    /* 2. 대소문자 변환 */    //1ok
     /*public static String upperLowerTranslate(String str){
 
         StringBuilder sb = new StringBuilder();
@@ -39,7 +38,7 @@ public class Main {
         }
         return sb.toString();
     }*/
-    /* 3-1. 가장 긴 부분문자열(split) */
+    /* 3-1. 가장 긴 부분문자열(split) */    //1ok
     /*public static String longestSubStringUsingSplit(String str){
         String answer = "";
         int m = Integer.MIN_VALUE;
@@ -71,7 +70,7 @@ public class Main {
 
         return answer;
     }*/
-    /* 4-1. 문장 뒤집기(StringBuilder) */
+    /* 4-1. 문장 뒤집기(StringBuilder) */    //1ok
     /*public static ArrayList<String> reverseStringUsingStringBuilder(int n, String[] strs){
         ArrayList<String> answer = new ArrayList<>();
 
@@ -81,7 +80,7 @@ public class Main {
         }
         return answer;
     }*/
-    /* 4-2. 문장 뒤집기(BruteForce) */
+    /* 4-2. 문장 뒤집기(lt, rt) */   //1ok
     /*public static ArrayList<String> reverseStringUsingBruteForce(int n, String[] strs){
         ArrayList<String> answer = new ArrayList<>();
 
@@ -100,7 +99,7 @@ public class Main {
         }
         return answer;
     }*/
-    /* 5. 특정 문자 뒤집기(isAlphabetic) */
+    /* 5. 특정 문자 뒤집기(isAlphabetic) */    //1ok
     /*public static String reverseSpecificChar(String str){
         String answer;
         char[] cStr = str.toCharArray();
@@ -124,7 +123,7 @@ public class Main {
         answer = String.valueOf(cStr);
         return answer;
     }*/
-    /* 6. 중복 문자 제거(indexOf) */
+    /* 6. 중복 문자 제거(indexOf) */  //1ok
     /*public static String deleteDuplicatedChar(String str){
         String answer = "";
 
@@ -135,7 +134,7 @@ public class Main {
 
         return answer;
     }*/
-    /* 7-1. 회문문자열(lt, rt 활용) */
+    /* 7-1. 회문문자열(lt, rt) */    //1ok
     /*public static String palindromeStringUsingLtRt(String str){
         int lt = 0;
         int rt = str.length()-1;
@@ -153,7 +152,7 @@ public class Main {
         return "YES";
 
     }*/
-    /* 7-2. 회문문자열(StrungBuilder 활용) */
+    /* 7-2. 회문문자열(StrungBuilder 활용) */  //1ok
     /*public static String palindromeStringUsingStringBuilder(String str){
 
         StringBuilder sb = new StringBuilder(str);
@@ -164,7 +163,7 @@ public class Main {
         else
             return "NO";
     }*/
-    /* 8-1. 유효한 회문문자열(lt, rt 활용) */
+    /* 8-1. 유효한 회문문자열(lt, rt) */    //1ok
     /*public static String palindromeStringOnlyAlphabetUsingLtRt(String str){
 
         int lt = 0;
@@ -185,7 +184,7 @@ public class Main {
         }
         return "YES";
     }*/
-    /* 8-2. 유효한 회문문자열(replaceAll 활용) */
+    /* 8-2. 유효한 회문문자열(replaceAll 활용) */ //1ok
     /*public static String palindromeStringOnlyAlphabetUsingReplaceAll(String str){
         String answer = "NO";
         str = str.toUpperCase().replaceAll("[^A-Z]","");
@@ -195,7 +194,7 @@ public class Main {
         else
             return "NO";
     }*/
-    /* 9-1. 숫자만 추출 (parseInt 활용) */
+    /* 9-1. 숫자만 추출 (parseInt 활용) */     //1ok
     /*public static int extractOnlyNumberUsingParseInt(String str){
 
         String answer = "";
@@ -206,7 +205,7 @@ public class Main {
 
         return Integer.parseInt(answer);
     }*/
-    /* 9-2. 숫자만 추출 (곱셈 로직 활용) */
+    /* 9-2. 숫자만 추출 (곱셈 로직 활용) */    //1ok
     /*public static int extractOnlyNumberUsingMultiply(String str){
         int answer = 0;
         for(char c : str.toCharArray()){
@@ -217,7 +216,7 @@ public class Main {
 
         return answer;
     }*/
-    /* 10. 가장 짧은 문자거리 (양방향 로직 활용) */
+    /* 10. 가장 짧은 문자거리 (양방향 로직 활용) */    //1ok
     /*public static int[] shortestCharDistance(String str, char c){
         int[] result = new int[str.length()];
         int p = 1000;

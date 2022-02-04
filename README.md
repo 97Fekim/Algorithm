@@ -91,6 +91,21 @@
 - <code>int num = Integer.parseInt(str,2)</code> 이용하여 이진수 문자열을 십진수로 변환<br>
 </details>
  
+### 2) 배열
+<details>
+<summary> <strong>1. 소수(에라토스테네스 체) </strong> </summary>
+- 1) 입력된 정수의 개수만큼 공백 배열 생성 후, 순회<br>
+- 2) 소수를 찾았다? > answer 1증가.<br>
+- 3) 그 소수만큼 이동하면서 모든 자리에 체크 (소수가 아님을 1로 표시)<br>
+</details> 
+ 
+<details>
+<summary> <strong>2. 뒤집어진 소수 </strong> </summary>
+- 1) (t = temp를 10으로 나눈 나머지) > (res = res*10 + t) > (temp를 10으로 나누기) 로직으로 정수 뒤집기<br>
+- 2) 뒤집어진 정수를 소수 판단 함수로 보내기<br>
+- 3) 소수 판단 함수 : 약수가 있다( if(res%i != 0)사용) > false<br>
+</details> 
+ 
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

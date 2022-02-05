@@ -106,6 +106,20 @@
 - 3) 소수 판단 함수 : 약수가 있다( if(res%i != 0)사용) > false<br>
 </details> 
  
+<details>
+<summary> <strong>3. 봉우리 </strong> </summary>
+- 1) Out of index 에러 주의!<br>
+- 2) int[] dx = {1,0,-1,0}; <br>
+- 3) int[] dy = {0,1,0,-1}; dx, dy 두 배열을 이용하여, 양옆좌우를 손쉽게 탐색<br>  
+</details> 
+ 
+<details>
+<summary> <strong>3. 봉우리 </strong> </summary>
+- 1) <br>
+- 2) <br>
+- 3) <br>  
+</details> 
+ 
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

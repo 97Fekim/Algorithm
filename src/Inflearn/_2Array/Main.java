@@ -11,8 +11,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         int n = kb.nextInt();
+        int[][] arr = new int[5][n];
 
-
+        for(int i=0; i<5; ++i){
+            for(int j=0; j<n; ++j){
+                arr[i][j] = kb.nextInt();
+            }
+        }
+        System.out.println();
     }
 
     /* 1. 큰 수 출력하기 */   // ok
@@ -91,7 +97,7 @@ public class Main {
         }
         return true;
     }*/
-    /* 7. 점수 계산 */
+    /* 7. 점수 계산 */      // ok
     /*public static int calScore(int n, int[] scores){
         int answer = 0;
         int sequence = 0;
@@ -101,7 +107,7 @@ public class Main {
         }
         return answer;
     }*/
-    /* 8. 등수 구하기 */
+    /* 8. 등수 구하기 */     // ok
     /*public static ArrayList<Integer> lineUp(int n, int[] scores){
         ArrayList<Integer> rank = new ArrayList<>();
 
@@ -115,7 +121,7 @@ public class Main {
         }
         return rank;
     }*/
-    /* 9. 격자판 최대합 */
+    /* 9. 격자판 최대합 */    // ok
     /*public static int gridSum(int[][] arr){
         int max = -1;
         int sum1=0; int sum2=0; int sum3=0; int sum4 = 0;
@@ -150,5 +156,61 @@ public class Main {
 
         return max;
     }*/
+    /* 10-1. 봉우리 (if문 활용) */
+    /*public static int peaks1(int[][] arr){
+        int answer = 0;
+        int[][] temp = new int[arr[0].length+2][arr[0].length+2];
+
+        for(int i=0; i<arr[0].length; ++i){
+            for(int j=0; j<arr[0].length; ++j) {
+                temp[i + 1][j + 1] = arr[i][j];
+            }
+        }
+
+        for(int i=1; i<temp[0].length-1; ++i) {
+            for (int j = 1; j < temp[0].length - 1; ++j) {
+                if (temp[i][j] > temp[i - 1][j] &&
+                        temp[i][j] > temp[i][j - 1] &&
+                        temp[i][j] > temp[i + 1][j] &&
+                        temp[i][j] > temp[i][j + 1])
+                    answer++;
+            }
+        }
+        return answer;
+    }*/
+    /* 10-2. 봉우리(dx, dy 활용) */
+    /*public static int peaks2(int[][] arr) {
+        int answer = 0;
+
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, 1, 0, -1};
+
+        int[][] temp = new int[arr[0].length + 2][arr[0].length + 2];
+
+        for (int i = 0; i < arr[0].length; ++i) {
+            for (int j = 0; j < arr[0].length; ++j) {
+                temp[i + 1][j + 1] = arr[i][j];
+            }
+        }
+
+        for (int i = 1; i < temp[0].length - 1; ++i) {
+            for (int j = 1; j < temp[0].length - 1; ++j) {
+                int flag = 1;
+                for (int k = 0; k < dx.length; ++k) {
+                    if (temp[i][j] < temp[i + dx[k]][j + dy[k]])
+                        flag = 0;
+                }
+                if(flag==1)
+                    answer++;
+            }
+        }
+        return answer;
+    }*/
+    /* 11. 임시 반장 */ // 나중에 다시
+    /*public static int tempClassLeader(int[][] arr){
+        return 0;
+    }*/
+    /* 12. 멘토멘티 */  // 나중에 다시
+
 
 }

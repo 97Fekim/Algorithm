@@ -112,13 +112,15 @@
 - 2) int[] dx = {1,0,-1,0}; <br>
 - 3) int[] dy = {0,1,0,-1}; dx, dy 두 배열을 이용하여, 양옆좌우를 손쉽게 탐색<br>  
 </details> 
- 
+  
+
+### 3) 투 포인터 / 슬라이딩 윈도우
+- 시간복잡도 O(n^2) -> O(n)
 <details>
-<summary> <strong>3. 봉우리 </strong> </summary>
-- 1) <br>
-- 2) <br>
-- 3) <br>  
+<summary> <strong>1. 두 배열 합치기 </strong> </summary>
+- 오름차순 돼 있는 두 배열을 더해서 다시 정렬을 하면, 시간 복잡도가 nlogn 이 된다. 이를 투 포인터를 사용하면 O(n)으로 구현 가능하다 <br>
 </details> 
+
  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기

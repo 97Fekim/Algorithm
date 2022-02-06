@@ -10,33 +10,34 @@ public class Main {
         Scanner kb = new Scanner(System.in);
 
         int n = kb.nextInt();
-        int k = kb.nextInt();
-        int[] arr = new int[n];
 
-        for(int i=0; i<n; ++i){
-            arr[i] = kb.nextInt();
-        }
-
-        System.out.println(maxSubSequence(k,arr));
+        System.out.println();
     }
 
-    public static int maxSubSequence(int k, int[] arr){
+    /* 5. 연속된 자연수의 합 */
+    /*public static int sumOfConsequenceInteger(int n){
         int answer = 0, sum=0, lt=0;
+
+        int[] arr = new int[n/2+1];
+        for(int i=0; i<arr.length; ++i){
+            arr[i] = i+1;
+        }
 
         for(int rt=0; rt<arr.length; ++rt){
             sum += arr[rt];
-            if(sum == k){
+            if(sum == n){
                 answer++;
             }
-            while(sum >= k){
+            while(sum >= n){
                 sum -= arr[lt];
                 lt++;
-                if(sum == k)
+                if(sum == n)
                     answer++;
             }
         }
         return answer;
-    }
+    }*/
+
     /* 1. 두 오름차순 배열 합치기 */
     /*public static ArrayList<Integer> sumTwoArray(int[] arr1, int[] arr2){
         ArrayList<Integer> answer = new ArrayList<>();
@@ -106,6 +107,24 @@ public class Main {
             answer = Math.max(max,answer);
         }
 
+        return answer;
+    }*/
+    /* 4. 연속 부분 수열 */
+    /*public static int maxSubSequence(int k, int[] arr){
+        int answer = 0, sum=0, lt=0;
+
+        for(int rt=0; rt<arr.length; ++rt){
+            sum += arr[rt];
+            if(sum == k){
+                answer++;
+            }
+            while(sum >= k){
+                sum -= arr[lt];
+                lt++;
+                if(sum == k)
+                    answer++;
+            }
+        }
         return answer;
     }*/
 

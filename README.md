@@ -106,7 +106,57 @@
 - 3) 소수 판단 함수 : 약수가 있다( if(res%i != 0)사용) > false<br>
 </details> 
  
+<details>
+<summary> <strong>3. 봉우리 </strong> </summary>
+- 1) Out of index 에러 주의!<br>
+- 2) int[] dx = {1,0,-1,0}; <br>
+- 3) int[] dy = {0,1,0,-1}; dx, dy 두 배열을 이용하여, 양옆좌우를 손쉽게 탐색<br>  
+</details> 
+  
+
+### 3) 투 포인터 / 슬라이딩 윈도우
+- 시간복잡도 : O(n^2) -> O(n)<br>
+- 정렬된 두 배열에만 적용 가능한 알고리즘<br>
+<details>
+<summary> <strong>1. 두 배열 합치기 </strong> </summary>
+- 오름차순 돼 있는 두 배열을 더해서 다시 정렬을 하면, 시간 복잡도가 nlogn 이 된다. 이를 투 포인터를 사용하면 O(n)으로 구현 가능하다 <br>
+</details> 
+ 
+<details>
+<summary> <strong>2. 공통 원소 구하기 </strong> </summary>
+- 결과가 오름차순 정렬되어 있어야 하므로, 반드시 입력 배열 둘다 미리 오름차순 정렬해야 한다. <br>
+- 1) 두 배열을 <code>Arrays.sort</code>를 이용해 정렬한다.
+- 2) 오름차순 정렬된 두 배열을 비교한다.<br>
+- 3) 값이 작은 위치의 포인터를 증가시킨다.<br>
+- 4) 값이 같다면 두 포인터를 모두 증가시킨다.<br> 
+</details> 
+ 
+<details>
+<summary> <strong>3. 최대 매출 </strong> </summary>
+- 슬라이딩 윈도우를 이용한다.<br>
+- 배열의 특정 구간을 다뤄야 하는 문제를 풀때, 이중 for문 대신에 사용한다,<br>
+</details> 
+
+<details>
+<summary> <strong>4. 연속 부분 수열 </strong> </summary>
+- 투 포인터를 이용한다.<br>
+- 부분합이 타겟보다 작다면, rt를 증가한다. 증가 후 비교한다.<br>
+- 부분합이 타겟보다 크다면, lt를 증가한다. 비교 후 감소한다.<br>
+- 제1 for문에 rt 를 iterator로 넣는 로직을 사용한다.(어차피 rt는 끝까지 가야하기 때문)<br> 
+</details>
+ 
+<details>
+<summary> <strong>5. 연속된 자연수의 합 </strong> </summary>
+- 투 포인터를 이용한다.<br>
+- n이 1000이라면, 1~500 까지만 배열에 넣는다.(500 이후부터는 절대 두수의 합이 1000이 될 수 없으므로)<br>
+- 이후 연속 부분 수열의 로직을 똑같이 사용한다. (1반복문의 itrerator로 rt를 기억!)<br>
+- 수학적 알고리즘을 활용해서도 풀이가 가능하다.(딱 떨어지는 나머지를 활용)<br>
+</details> 
+
+ 
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기
 - 쌍을 맞춰야 하는 연산자, 수식이 있다면 <strong>스택</strong> 고려하기
+- 정렬된 배열을 다룬다면 <strong>투포인터</strong> 고려하기
+- 배열에서 특정 구간씩 다룰때, <strong>슬라이딩 윈도우</strong> 고려하기

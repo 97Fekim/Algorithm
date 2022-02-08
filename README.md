@@ -152,6 +152,13 @@
 - 이후 연속 부분 수열의 로직을 똑같이 사용한다. (1반복문의 itrerator로 rt를 기억!)<br>
 - 수학적 알고리즘을 활용해서도 풀이가 가능하다.(딱 떨어지는 나머지를 활용)<br>
 </details> 
+ 
+<details>
+<summary> <strong>6. 최대길이 연속부분수열 </strong> </summary>
+- 투 포인터를 이용한다.<br>
+- 제1 for문의 iterator를 rt로 지정하는 점에 유의한다.<br>
+- 다른 투포인터 예제들과 마찬가지로, <strong>rt가 증가하다가, target보다 넘어서는 지점이 생기면, lt증가 while문에 걸리도록 로직을 구성한다.</strong>
+</details>
 
  
 ## 마구잡이 정리 노트

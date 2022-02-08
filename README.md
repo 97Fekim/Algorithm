@@ -161,9 +161,16 @@
 ### 4. HashMap, TreeSet (해쉬, 정렬지원 Set)
 
 <details>
-<summary> <strong>6. temp </strong> </summary>
-- <br>
-- <br>
+<summary> <strong>1. 학급 회장 </strong> </summary>
+- <code>map.put(x, map.getOrDefault(x,0)+1);</code>를 이용해, 각 알파벳을 카운트하여 맵이 넣는다.<br>
+- keySet으로 순회하며, value중 가장 큰 값을 찾는다. <br>
+- etc : map.containsKey(key), map.containsValue(value), map.size(), map.remove()<br>
+</details> 
+ 
+<details>
+<summary> <strong>2. 아나그램 </strong> </summary>
+- 풀이1) 해쉬맵 두개를 만들어 비교한다.<br>
+- 풀이2) 해쉬맵 하나를 채운뒤, 두번째 해쉬맵을 빼면서 비교한다.<br>
 </details> 
  
  

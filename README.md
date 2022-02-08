@@ -115,8 +115,6 @@
   
 
 ### 3) 투 포인터 / 슬라이딩 윈도우
-- 시간복잡도 : O(n^2) -> O(n)<br>
-- 투포인터는 정렬된 두 배열에만 적용 가능하다<br>
 <details>
 <summary> <strong>1. 두 배열 합치기 </strong> </summary>
 - 오름차순 돼 있는 두 배열을 더해서 다시 정렬을 하면, 시간 복잡도가 nlogn 이 된다. 이를 투 포인터를 사용하면 O(n)으로 구현 가능하다 <br>
@@ -156,7 +154,7 @@
 <details>
 <summary> <strong>6. 최대길이 연속부분수열 </strong> </summary>
 - 투 포인터를 이용한다.<br>
-- 제1 for문의 iterator를 rt로 지정하는 점에 유의한다.<br>
+- <strong>제1 for문의 iterator를 rt로 지정</strong>하는 점에 유의한다.<br>
 - 다른 투포인터 예제들과 마찬가지로, <strong>rt가 증가하다가, target보다 넘어서는 지점이 생기면, lt증가 while문에 걸리도록 로직을 구성한다.</strong>
 </details>
 

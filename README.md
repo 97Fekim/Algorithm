@@ -173,6 +173,12 @@
 - 풀이2) 해쉬맵 하나를 채운뒤, 두번째 해쉬맵을 빼면서 비교한다.<br>
 </details> 
  
+<details>
+<summary> <strong>3. 매출액의 종류 </strong> </summary>
+- 슬라이딩 윈도우를 이용한다.<br>
+- <br>
+</details>
+ 
  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기

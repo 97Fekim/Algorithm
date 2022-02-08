@@ -18,33 +18,7 @@ public class Main {
         System.out.println();
     }
 
-    /* 6. 최대 길이 연속부분수열 */
-    /*public static int longestSubSequence(int k, int[] arr){
-        int answer = 0;
-        int lt=0, cnt=0;
-        int length = 0;
 
-        for(int rt=0; rt<arr.length; ++rt)
-        {
-            if(arr[rt] == 0){
-                cnt++;
-            }
-
-            while(cnt > k){
-                if(arr[lt]==1)
-                    lt++;
-                else{
-                    cnt--;
-                    lt++;
-                }
-            }
-
-            if(rt - lt + 1 > answer)
-                answer = rt - lt + 1;
-
-        }
-        return answer;
-    }*/
     /* 1. 두 오름차순 배열 합치기 */
     /*public static ArrayList<Integer> sumTwoArray(int[] arr1, int[] arr2){
         ArrayList<Integer> answer = new ArrayList<>();
@@ -164,6 +138,31 @@ public class Main {
         }
         return answer;
     }*/
+    /* 6. 최대 길이 연속부분수열 */
+    /*public static int longestSubSequence(int k, int[] arr){
+        int answer = 0;
+        int lt=0, cnt=0;
+        int length = 0;
 
+        for(int rt=0; rt<arr.length; ++rt)
+        {
+            if(arr[rt] == 0){
+                cnt++;
+            }
 
+            while(cnt > k){
+                if(arr[lt]==1)
+                    lt++;
+                else{
+                    cnt--;
+                    lt++;
+                }
+            }
+
+            if(rt - lt + 1 > answer)
+                answer = rt - lt + 1;
+
+        }
+        return answer;
+    }*/
 }

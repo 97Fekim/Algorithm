@@ -176,13 +176,15 @@
 <details>
 <summary> <strong>3. 매출액의 종류 </strong> </summary>
 - 슬라이딩 윈도우를 이용한다.<br>
-- <br>
+- 제1 for문에 rt를 iterator로 지정한다.<br>
+- map에서 arr[lt]를 제거한 후, value값이 0인지 반드시 체크한다.<br>
 </details>
  
 <details>
 <summary> <strong>4. 모든 아나그램 찾기 </strong> </summary>
-- <br>
-- <br>
+- 슬라이딩 윈도우를 이용한다<br>
+- 제1 for문에 rt를 iterator로 지정한다.<br>
+- map에서 arr[lt]를 제거한 후, value값이 0인지 반드시 체크한다.<br>
 </details>
  
 <details>

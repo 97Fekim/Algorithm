@@ -179,6 +179,17 @@
 - <br>
 </details>
  
+<details>
+<summary> <strong>4. 모든 아나그램 찾기 </strong> </summary>
+- <br>
+- <br>
+</details>
+ 
+<details>
+<summary> <strong>5. k번째 큰 수 </strong> </summary>
+- 중복 제거를 위해 HashSet을 이용한다. <br>
+</details>
+ 
  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기

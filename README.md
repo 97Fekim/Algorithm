@@ -187,9 +187,9 @@
  
 <details>
 <summary> <strong>5. k번째 큰 수 </strong> </summary>
-- 배열의 모든 3중 합을 구하려면, 3중 for문을 이용하여 i=0부터, j는 i+1부터, k는j+1부터로 돌린다.
+- 배열의 모든 3중 합을 구하려면, 3중 for문을 이용하여 i=0부터, j는 i+1부터, k는j+1부터로 돌린다.<br>
 - 중복 제거를 위해 HashSet을 이용한다. <br>
-- HashSet 관련 메소드에는 add, remove, size, first, last가 있다.
+- HashSet 관련 메소드에는 add, remove, size, first, last가 있다.<br>
 </details>
  
  

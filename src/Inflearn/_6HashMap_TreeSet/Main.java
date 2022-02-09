@@ -1,9 +1,6 @@
 package Inflearn._6HashMap_TreeSet;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,8 +11,7 @@ public class Main {
         for(int i=0; i<n; ++i){
             arr[i] = kb.nextInt();
         }
-        for(int i : kindsOfSales(k,arr))
-            System.out.print(i+" ");
+        System.out.println();
     }
 
     /* 1. 학급 회장
@@ -83,6 +79,66 @@ public class Main {
         }
 
         return answer;
+    }*/
+    /* 4. 모든 아나그램 찾기 */
+    /*public static int findAllAnagram(String str1, String str2){
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        HashMap<Character, Integer> map2 = new HashMap<>();
+        int answer = 0;
+        int len = str2.length();
+
+        for(int i=0; i<len-1; ++i){
+            map1.put(str1.charAt(i), map1.getOrDefault(str1.charAt(i),0)+1);
+        }
+        for(int i=0; i<str2.length(); ++i){
+            map2.put(str2.charAt(i), map2.getOrDefault(str2.charAt(i),0)+1);
+        }
+        int lt = 0;
+        for(int rt = len-1; rt < str1.length(); ++rt){
+            map1.put(str1.charAt(rt), map1.getOrDefault(str1.charAt(rt),0)+1);
+
+            // test
+            if(map1.equals(map2))
+                answer++;
+
+            // remove value[lt]
+            map1.put(str1.charAt(lt),map1.get(str1.charAt(lt))-1);
+            if(map1.get(str1.charAt(lt)) == 0)
+                map1.remove(str1.charAt(lt));
+
+            // raise lt
+            lt ++;
+        }
+
+        return answer;
+    }*/
+
+    /* 5. k번째 큰 수 (TreeSet)
+     * 1) new TreeSet<>(Collections.reverseOrder())
+     * 2) Test.add()
+     * 3) Tset.remove()
+     * 4) Tset.size()
+     * 5) Tset,first()
+     * 6) Tset.last()
+     * */
+   /* public static int kthBigNumber(int k, int[] arr){
+        int answer = 0;
+        TreeSet<Integer> Test = new TreeSet<>(Collections.reverseOrder());
+
+        for(int i=0; i<arr.length; ++i){
+            for(int j=i+1; j<arr.length; ++j){
+                for(int l=j+1; l<arr.length; ++l){
+                    Test.add(arr[i] + arr[j] + arr[l]);
+                }
+            }
+        }
+        int cnt = 0;
+        for(int x : Test) {
+            cnt++;
+            if(cnt == k)
+                return x;
+        }
+        return -1;
     }*/
 }
 

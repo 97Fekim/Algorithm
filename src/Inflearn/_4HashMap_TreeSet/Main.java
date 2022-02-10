@@ -1,4 +1,4 @@
-package Inflearn._6HashMap_TreeSet;
+package Inflearn._4HashMap_TreeSet;
 
 import java.util.*;
 

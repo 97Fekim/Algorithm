@@ -194,6 +194,22 @@
 - HashSet 관련 메소드에는 add, remove, size, first, last가 있다.<br>
 </details>
  
+### 5. Stack, Queue
+<details>
+<summary> <strong>1. 올바른 괄호 </strong> </summary>
+- 문제가 <strong>괄호를 다룬다면</strong> 10중8,9 stack을 사용하는 문제다<br>
+- 1) '('가 들어올때, -> push()<br>
+- 2) ')'가 들어올때,<br>
+- 2-1) 스택이 공백이라면 -> return "NO"<br>
+- 2-2) 그 외의 경우에는 -> pop()<br>
+</details>
+ 
+<details>
+<summary> <strong>2. 올바른 괄호 </strong> </summary>
+- 1) '('가 들어올때, -> push()<br>
+- 2) ')'가 들어올때, -> pop()<br>
+- 3) 알파벳이 들어올때, 스택이 비어있다면 -> answer에 알파벳 추가<br>
+</details>
  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기

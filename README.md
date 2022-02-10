@@ -205,10 +205,20 @@
 </details>
  
 <details>
-<summary> <strong>2. 올바른 괄호 </strong> </summary>
+<summary> <strong>2. 괄호문자 제거 </strong> </summary>
+(풀이1)<br>
 - 1) '('가 들어올때, -> push()<br>
 - 2) ')'가 들어올때, -> pop()<br>
 - 3) 알파벳이 들어올때, 스택이 비어있다면 -> answer에 알파벳 추가<br>
+(풀이2)<br>
+- 1) ')'가 들어올때, -> '('를 만날때까지 pop() -> <code>while(stack.pop()!='(');(</code><br>
+- 2) 그 외의 모든 문자 -> push()<br>
+- 3) answer에 stack.get()으로 stack의 첫 index부터 삽입<br>
+</details>
+
+<details>
+<summary> <strong>3. 크레인 게임 </strong> </summary>
+- pop()을 하기전, 스택이 공백인지 check한다.<br>
 </details>
  
 ## 마구잡이 정리 노트

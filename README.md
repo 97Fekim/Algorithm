@@ -158,7 +158,7 @@
 - 다른 투포인터 예제들과 마찬가지로, <strong>rt가 증가하다가, target보다 넘어서는 지점이 생기면, lt증가 while문에 걸리도록 로직을 구성한다.</strong>
 </details>
 
-### 4. HashMap, TreeSet (해쉬, 정렬지원 Set)
+### 4) HashMap, TreeSet (해쉬, 정렬지원 Set)
 
 <details>
 <summary> <strong>1. 학급 회장 </strong> </summary>
@@ -194,7 +194,7 @@
 - HashSet 관련 메소드에는 add, remove, size, first, last가 있다.<br>
 </details>
  
-### 5. Stack, Queue
+### 5) Stack, Queue
 <details>
 <summary> <strong>1. 올바른 괄호 </strong> </summary>
 - 문제가 <strong>괄호를 다룬다면</strong> 10중8,9 stack을 사용하는 문제다<br>

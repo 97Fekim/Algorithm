@@ -1,21 +1,14 @@
 package Inflearn._5StackQueue;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
-        int n = kb.nextInt();
-        int[][] arr1 = new int[n][n];
-        for(int i=0; i<n; ++i)
-            for(int j=0; j<n; ++j)
-                arr1[i][j] = kb.nextInt();
-        int k = kb.nextInt();
-        int[] arr2 = new int[k];
-        for(int l=0; l<k; ++l)
-            arr2[l] = kb.nextInt();
+        String str1 = kb.next();
+        String str2 = kb.next();
+
+        System.out.println();
     }
 
     /* 1. 올바른 괄호 */
@@ -99,5 +92,73 @@ public class Main {
         }
 
         return answer;
+    }*/
+    /* 4. 후위식 연산(postfix) */
+    /*public static int postfix(String str){
+        int res=0;
+        Stack<Integer> stack = new Stack<>();
+
+        for(char c : str.toCharArray()){
+            if(Character.isDigit(c))
+                stack.push(c -'0');
+            else{
+                int rt = stack.pop();
+                int lt = stack.pop();
+                if(c == '+')
+                    res = lt + rt;
+                else if(c == '-')
+                    res = lt - rt;
+                else if(c == '*')
+                    res = lt * rt;
+                else if(c == '/')
+                    res = lt / rt;
+                stack.push(res);
+            }
+        }
+        return stack.pop();
+    }*/
+    /* 6. 공주 구하기
+     * Queue<Integer> Q = new LinkedList<>();
+     * 1) q.offer() : 맨 뒤에 넣기
+     * 2) q.poll() : 맨 앞 꺼내기
+     * 3) q.peek() : 맨앞 찾기
+     * 4) q.size() : queue의 사이즈
+     * 5) q.contains(object) : object가 있는지 확인
+     * */
+    /*public static int rescuePrincess(int n, int k){
+        int answer = 0;
+        Queue<Integer> Q = new LinkedList<>();
+        for(int i=1; i<=n; ++i)
+            Q.offer(i);
+
+        while(Q.size()>1){
+            for(int i=1; i<k; ++i){
+                Q.offer(Q.poll());
+            }
+            Q.poll();
+        }
+
+        answer = Q.poll();
+        return answer;
+    }*/
+    /* 7. 커리큘럼 설계 */
+    /*public static String designCurriculum(String str1, String str2){
+        Queue<Character> Q = new LinkedList<>();
+        for(char c : str1.toCharArray())
+            Q.offer(c);
+
+        for(char c : str2.toCharArray()){
+            if(Q.contains(c)){
+                if(Q.peek() == c)
+                    Q.poll();
+                else
+                    return "NO";
+            }
+        }
+
+        if(!Q.isEmpty())
+            return "NO";
+
+        return "YES";
     }*/
 }

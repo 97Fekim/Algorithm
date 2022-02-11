@@ -221,6 +221,12 @@
 - pop()을 하기전, 스택이 공백인지 check한다.<br>
 </details>
  
+<details>
+<summary> <strong>4. 후위식 연산(postfix) </strong> </summary>
+- char -> int 변환은 <code>int n = c - '0';</code>을 이용한다<br>
+- 연산을 할때 pop()의 순서에 주의한다. (거꾸로 연산될 수도 있음을 유의)<br> 
+</details>
+ 
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

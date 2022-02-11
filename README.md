@@ -227,6 +227,12 @@
 - 연산을 할때 pop()의 순서에 주의한다. (거꾸로 연산될 수도 있음을 유의)<br> 
 </details>
  
+<details>
+<summary> <strong>5. 공주 구하기</strong> </summary>
+- 큐의 선언 : <code>Queue<Integer> Q = new LinkedList<>();</code><br>
+- 큐 관련 메소드 : offer(), poll(), peek(), size(), isEmpty(), comtains()<br> 
+</details> 
+ 
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

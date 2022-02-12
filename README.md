@@ -65,7 +65,7 @@
 <details>
 <summary> <strong>9. 숫자만 추출 </strong> </summary>
 - 세 가지 풀이가 가능하다.
-- 1) parseInt 활용 : <code>int n = Integer.parseInt(str)</code>를 활용해 String -> int 형 변환이 가능하다. 이때, 맨앞 0을 사라진다.<br>
+- 1) parseInt 활용 : <code>int n = Integer.parseInt(str)</code>를 활용해 String -&gt; int 형 변환이 가능하다. 이때, 맨앞 0을 사라진다.<br>
 - 2) isDigit 활용 : <code>Character.isDigit(ch)</code>을 활용해 문자가 숫자인지 확인하여 해결 가능하다.<br>
 - 3) 곱셈 로직 활용 : ascii 넘버를 활용하여, int 변수 answer에 값을 축적시킨다. 0~9는 ascii표에서 48 ~ 57에 대응한다.<br>
 </details>   
@@ -101,7 +101,7 @@
  
 <details>
 <summary> <strong>2. 뒤집어진 소수 </strong> </summary>
-- 1) (t = temp를 10으로 나눈 나머지) > (res = res*10 + t) > (temp를 10으로 나누기) 로직으로 정수 뒤집기<br>
+- 1) (t = temp를 10으로 나눈 나머지) &gt; (res = res*10 + t) &gt; (temp를 10으로 나누기) 로직으로 정수 뒤집기<br>
 - 2) 뒤집어진 정수를 소수 판단 함수로 보내기<br>
 - 3) 소수 판단 함수 : 약수가 있다( if(res%i != 0)사용) &gt; false<br>
 </details> 
@@ -211,7 +211,7 @@
 - 2) ')'가 들어올때, -&gt; pop()<br>
 - 3) 알파벳이 들어올때, 스택이 비어있다면 -&gt; answer에 알파벳 추가<br>
 (풀이2)<br>
-- 1) ')'가 들어올때, -&gt; '('를 만날때까지 pop() -> <code>while(stack.pop()!='(');(</code><br>
+- 1) ')'가 들어올때, -&gt; '('를 만날때까지 pop() -&gt; <code>while(stack.pop()!='(');(</code><br>
 - 2) 그 외의 모든 문자 -&gt; push()<br>
 - 3) answer에 stack.get()으로 stack의 첫 index부터 삽입<br>
 </details>
@@ -223,13 +223,13 @@
  
 <details>
 <summary> <strong>4. 후위식 연산(postfix) </strong> </summary>
-- char -> int 변환은 <code>int n = c - '0';</code>을 이용한다<br>
+- char -&gt; int 변환은 <code>int n = c - '0';</code>을 이용한다<br>
 - 연산을 할때 pop()의 순서에 주의한다. (거꾸로 연산될 수도 있음을 유의)<br> 
 </details>
  
 <details>
 <summary> <strong>5. 공주 구하기</strong> </summary>
-- 큐의 선언 : <code>Queue<Integer> Q = new LinkedList<>();</code><br>
+- 큐의 선언 : <code>Queue&lt;Integer&gt; Q = new LinkedList&lt;&gt;();</code><br>
 - 큐 관련 메소드 : offer(), poll(), peek(), size(), isEmpty(), comtains()<br> 
 </details> 
  

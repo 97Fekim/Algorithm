@@ -255,13 +255,13 @@
 <details>
 <summary> <strong>2. 버블정렬</strong> </summary>
 - 현재와 다음 배열값을 비교하며 밀고 나가여,<br>
-- [_,_,_,_,_,max]<br>
-- [_,_,_,_,second,max]<br>
-- [_,_,_,third,second,max]<br>
+- [ _ , _ , _ , _ , _ , max ]<br>
+- [ _ , _ , _ , _ , second , max ]<br>
+- [ _ , _ , _ , third , second , max ]<br>
 - 혹은<br>
-- [_,_,_,_,_,min]<br>
-- [_,_,_,_,second,min]<br>
-- [_,_,_,third,second,min]<br>
+- [ _ , _ , _ , _ , _ , min ]<br>
+- [ _ , _ , _ , _ , second , min ]<br>
+- [ _ , _ , _ , third , second , min ]<br>
 - 의 형태로 남겨가며 정렬을 진행한다.<br>
 
 </details>

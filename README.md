@@ -244,6 +244,19 @@
 - priorty를 비교하며 poll()과 offer()를 수행하고 최종적으로 id를 비교하여 문제를 해결한다.<br>
 </details>
 
+### 5) Sorting and Searching(정렬, 이분검색과 결정알고리즘)
+<details>
+<summary> <strong>1. 선택정렬</strong> </summary>
+- 제1 for문(i=0 ~ i=len-1)의 시작에서 idx에 i를 넣는다.<br>
+- 제2 for문(j=i+1 ~ j=len)을 돌며 가장 큰 혹은 작은 값의 index를 찾아 idx에 넣는다.<br>
+- 제1 for문의 끝에서 arr[i]와 arr[idx]를 스위칭한다.<br>
+</details>
+
+<details>
+<summary> <strong>2. </strong> </summary>
+- <br>
+</details>
+
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

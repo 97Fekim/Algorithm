@@ -5,8 +5,12 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
-        String str1 = kb.next();
-        String str2 = kb.next();
+        int n = kb.nextInt();
+        int k = kb.nextInt();
+        int[] arr = new int[n];
+
+        for(int i=0; i<n; ++i)
+            arr[i] = kb.nextInt();
 
         System.out.println();
     }
@@ -160,5 +164,38 @@ public class Main {
             return "NO";
 
         return "YES";
+    }*/
+    /* 8.응급실 */
+    /*public static int emergencyRoom(int[] arr, int k){
+        int answer = 0;
+        Queue<Person> Q = new LinkedList<>();
+        for(int i=0; i<arr.length; ++i)
+            Q.add(new Person(i, arr[i]));
+
+        while(!Q.isEmpty()){
+            Person tmp = Q.poll();
+            for(Person x : Q){
+                if(x.priority > tmp.priority) {
+                    Q.offer(tmp);
+                    tmp = null;
+                    break;
+                }
+            }
+            if(tmp != null){
+                answer++;
+                if(tmp.id == k)
+                    return answer;
+            }
+        }
+        return answer;
+    }
+    public static class Person{
+        int id;
+        int priority;
+
+        public Person(int id, int priority) {
+            this.id = id;
+            this.priority = priority;
+        }
     }*/
 }

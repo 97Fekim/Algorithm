@@ -247,9 +247,9 @@
 ### 5) Sorting and Searching(정렬, 이분검색과 결정알고리즘)
 <details>
 <summary> <strong>1. 선택정렬</strong> </summary>
-- 제1 for문(i=0 ~ i=len-1)의 시작에서 idx에 i를 넣는다.<br>
-- 제2 for문(j=i+1 ~ j=len)을 돌며 가장 큰 혹은 작은 값의 index를 찾아 idx에 넣는다.<br>
-- 제1 for문의 끝에서 arr[i]와 arr[idx]를 스위칭한다.<br>
+- 1) 제1 for문(i=0 ~ i=len-1)의 시작에서 idx에 i를 넣는다.<br>
+- 2) 제2 for문(j=i+1 ~ j=len)을 돌며 가장 큰 혹은 작은 값의 index를 찾아 idx에 넣는다.<br>
+- 3) 제1 for문의 끝에서 arr[i]와 arr[idx]를 스위칭한다.<br>
 </details>
 
 <details>
@@ -263,7 +263,16 @@
 - [ _ , _ , _ , _ , second , min ]<br>
 - [ _ , _ , _ , third , second , min ]<br>
 - 의 형태로 남겨가며 정렬을 진행한다.<br>
+</details>
 
+<details>
+<summary> <strong>3. 삽입정렬</strong> </summary>
+- 1) 제1 for문(i=1 ~ i=len)의 시작에서 tmp에 arr[i]를 넣는다.<br>
+- 2) 제2 for문(j=i-1 ~ j=0)을 돈다<br>
+- 2-1) arr[j]가 tmp보다 크/작 다면 arr[j+1]에 arr[j]를 넣는다.<br>
+- 2-2) 위의 조건을 만족하지 않는다면, arr[i](tmp)가 자리를 찾은것이므로, break한다.<br>
+- 3) 제1 for문의 끝에서 arr[j+1]에 tmp를 삽입한다.<br>
+- j가 j for loop 밖에서 사용되야 하므로, j를 for loop 밖에서 선언해야 함을 유의한다.<br>
 </details>
 
 ## 마구잡이 정리 노트

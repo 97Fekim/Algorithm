@@ -236,7 +236,13 @@
 <details>
 <summary> <strong>6. 커리큘럼 설계</strong> </summary>
 - <br>
-</details>  
+</details>
+
+<details>
+<summary> <strong>7. 응급실</strong> </summary>
+- 중복되는 위험도에 대해 특정 index를 부여하기 위해, id와 priority를 가진 Person 객체를 생성한다. <br>
+- priorty를 비교하며 poll()과 offer()를 수행하고 최종적으로 id를 비교하여 문제를 해결한다.<br>
+</details>
  
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기

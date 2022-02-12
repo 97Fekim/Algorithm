@@ -8,7 +8,7 @@
 ### 1) 문자열
 <details>
 <summary> <strong>1. 문자 찾기</strong> </summary>
-- 소문자 <-> 대문자 변형시, <code>c = Character.to____Case(c) </code> 이용하여 변형한다.<br>
+- 소문자 &lt;-&gt; 대문자 변형시, <code>c = Character.to____Case(c) </code> 이용하여 변형한다.<br>
 - 문자열에서 for-each 문을 돌릴때, <code>for(char c : str.toCharArray){} </code> 의 형태로, char 배열을 이용해서 for문을 돌려야 한다.<br>
 </details>
 
@@ -28,15 +28,15 @@
 
 <details>
 <summary> <strong>4. 단어 뒤집기</strong> </summary>
-- ArrayList<String> 활용<br>
+- ArrayList&lt;String&gt; 활용<br>
 - StringBuilder의 reverse 메소드 활용<br>
-- 손코딩시에는, 왼쪽 오른쪽을 lt rt로 지정하여, while(lt<rt) 루프 활용<br>
+- 손코딩시에는, 왼쪽 오른쪽을 lt rt로 지정하여, while(lt&lt;rt) 루프 활용<br>
 - <code>String str = String.valueOf(char[] temp)</code> 로, char 배열을 String으로 변환 가능하다.<br>
 </details> 
  
 <details>
 <summary> <strong>5. 특정문자 뒤집기</strong> </summary>
-- <code>while(lt < rt)</code> 를 항상 기억<br>
+- <code>while(lt &lt; rt)</code> 를 항상 기억<br>
 - 특정문자일 경우에만 lt를 증가시키거나 rt를 감소시키는 로직으로 구현.<br>
 - <code>Character.isAlphabetic(CH)</code> 메소드 활용 (특정 문자가 알파벳임을 확인)<br>
 - char[] 를 String으로 변환하려면 반드시 <code>String str = String.valueOf(char[])</code> 을 활용해라.<br>
@@ -95,7 +95,7 @@
 <details>
 <summary> <strong>1. 소수(에라토스테네스 체) </strong> </summary>
 - 1) 입력된 정수의 개수만큼 공백 배열 생성 후, 순회<br>
-- 2) 소수를 찾았다? > answer 1증가.<br>
+- 2) 소수를 찾았다? &gt; answer 1증가.<br>
 - 3) 그 소수만큼 이동하면서 모든 자리에 체크 (소수가 아님을 1로 표시)<br>
 </details> 
  
@@ -103,7 +103,7 @@
 <summary> <strong>2. 뒤집어진 소수 </strong> </summary>
 - 1) (t = temp를 10으로 나눈 나머지) > (res = res*10 + t) > (temp를 10으로 나누기) 로직으로 정수 뒤집기<br>
 - 2) 뒤집어진 정수를 소수 판단 함수로 보내기<br>
-- 3) 소수 판단 함수 : 약수가 있다( if(res%i != 0)사용) > false<br>
+- 3) 소수 판단 함수 : 약수가 있다( if(res%i != 0)사용) &gt; false<br>
 </details> 
  
 <details>
@@ -198,21 +198,21 @@
 <details>
 <summary> <strong>1. 올바른 괄호 </strong> </summary>
 - 문제가 <strong>괄호를 다룬다면</strong> 10중8,9 stack을 사용하는 문제다<br>
-- 1) '('가 들어올때, -> push()<br>
+- 1) '('가 들어올때, -&gt; push()<br>
 - 2) ')'가 들어올때,<br>
-- 2-1) 스택이 공백이라면 -> return "NO"<br>
-- 2-2) 그 외의 경우에는 -> pop()<br>
+- 2-1) 스택이 공백이라면 -&gt; return "NO"<br>
+- 2-2) 그 외의 경우에는 -&gt; pop()<br>
 </details>
  
 <details>
 <summary> <strong>2. 괄호문자 제거 </strong> </summary>
 (풀이1)<br>
-- 1) '('가 들어올때, -> push()<br>
-- 2) ')'가 들어올때, -> pop()<br>
-- 3) 알파벳이 들어올때, 스택이 비어있다면 -> answer에 알파벳 추가<br>
+- 1) '('가 들어올때, -&gt; push()<br>
+- 2) ')'가 들어올때, -&gt; pop()<br>
+- 3) 알파벳이 들어올때, 스택이 비어있다면 -&gt; answer에 알파벳 추가<br>
 (풀이2)<br>
-- 1) ')'가 들어올때, -> '('를 만날때까지 pop() -> <code>while(stack.pop()!='(');(</code><br>
-- 2) 그 외의 모든 문자 -> push()<br>
+- 1) ')'가 들어올때, -&gt; '('를 만날때까지 pop() -> <code>while(stack.pop()!='(');(</code><br>
+- 2) 그 외의 모든 문자 -&gt; push()<br>
 - 3) answer에 stack.get()으로 stack의 첫 index부터 삽입<br>
 </details>
 
@@ -243,7 +243,7 @@
 - 중복되는 위험도에 대해 특정 index를 부여하기 위해, id와 priority를 가진 Person 객체를 생성한다. <br>
 - priorty를 비교하며 poll()과 offer()를 수행하고 최종적으로 id를 비교하여 문제를 해결한다.<br>
 </details>
- 
+
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

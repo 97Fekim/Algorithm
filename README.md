@@ -282,6 +282,22 @@
 - 2) pos값을 판단하여, hit와 miss 두 로직을 구성한다.<br>
 </details>
 
+<details>
+ <summary> <strong>5. 중복확인</strong> </summary>
+- 세가지 풀이가 가능하다.<br>
+- 1) HashMap을 활용한 풀이 (O(n))<br>
+- 2) TreeSet을 활용한 풀이 (O(n))<br>
+- 3) 정렬을 활용한 풀이 (O(nlog(n)))<br>
+</details>
+
+<details>
+ <summary> <strong>6. 장난꾸러기</strong> </summary>
+- 정렬 후, 정렬 전 배열과 비교하여 문제를 해결한다.<br>
+- 배열을 복사할때, <strong>깊은복사와 얕은복사</strong>의 차이점을 주의한다.<br>
+- <strong>깊은복사</strong> : '실제 값'을 새로운 메모리에 복사한다.<br>
+- <strong>얕은복사</strong> : '주소 값'을 복사한다.<br>
+</details>
+
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

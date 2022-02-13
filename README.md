@@ -275,8 +275,46 @@
 - j가 j for loop 밖에서 사용되야 하므로, j를 for loop 밖에서 선언해야 함을 유의한다.<br>
 </details>
 
+<details>
+ <summary> <strong>4. LRU(Least Recently Used) cashe</strong> </summary>
+- 배열에서 한칸씩 밀리는 로직을 짤때, insertion 로직을 사용한다<br>
+- 1) Hit 발생했는지 확인하고, 발생했다면 pos에 그 지점을 넣는다.<br>
+- 2) pos값을 판단하여, hit와 miss 두 로직을 구성한다.<br>
+</details>
+
+<details>
+ <summary> <strong>5. 중복확인</strong> </summary>
+- 세가지 풀이가 가능하다.<br>
+- 1) HashMap을 활용한 풀이 (O(n))<br>
+- 2) TreeSet을 활용한 풀이 (O(n))<br>
+- 3) 정렬을 활용한 풀이 (O(nlog(n)))<br>
+</details>
+
+<details>
+ <summary> <strong>6. 장난꾸러기</strong> </summary>
+- 정렬 후, 정렬 전 배열과 비교하여 문제를 해결한다.<br>
+- 배열을 복사할때, <strong>깊은복사와 얕은복사</strong>의 차이점을 주의한다.<br>
+- <strong>깊은복사</strong> : '실제 값'을 새로운 메모리에 복사한다.<br>
+- <strong>얕은복사</strong> : '주소 값'을 복사한다.<br>
+</details>
+
+<details>
+ <summary> <strong>7. 좌표정렬</strong> </summary>
+- 1) x,y좌표를 가진 Point class를 선언한다.<br>
+- 2) Point class를 Arrays.sort()의 인자로 사용하기 위해 Comparable interface를 implements한다.<br> 
+- 3) Point class에 compareTo() 함수를 오버라이딩한다.<br>
+- 4) 오버라이딩한 compareTo()함수에 <code>x가 같을시 y로 정렬</code>를 구현한다<br>
+- 5-1) 오름차순 정렬시 <code>return this - o</code> 를 기억한다.<br>
+- 5-2) 내림차순 정렬시 <code>return o - this</code> 를 기억한다.<br> 
+</details>
+
+<details>
+ <summary> <strong>8. 이분검색</strong> </summary>
+- 이분검색은 <strong>정렬된 배열</strong>에만 사용 가능하다<br> 
+</details>
+
 ## 마구잡이 정리 노트
-- 배열 순회시 <strong>이진 탐색</strong> 고려하기
+- 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기
 - 쌍을 맞춰야 하는 연산자, 수식이 있다면 <strong>스택</strong> 고려하기
 - 정렬된 배열을 다룬다면 <strong>투포인터</strong> 고려하기

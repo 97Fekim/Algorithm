@@ -308,8 +308,13 @@
 - 5-2) 내림차순 정렬시 <code>return o - this</code> 를 기억한다.<br> 
 </details>
 
+<details>
+ <summary> <strong>8. 이분검색</strong> </summary>
+- 이분검색은 <strong>정렬된 배열</strong>에만 사용 가능하다<br> 
+</details>
+
 ## 마구잡이 정리 노트
-- 배열 순회시 <strong>이진 탐색</strong> 고려하기
+- 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기
 - 쌍을 맞춰야 하는 연산자, 수식이 있다면 <strong>스택</strong> 고려하기
 - 정렬된 배열을 다룬다면 <strong>투포인터</strong> 고려하기

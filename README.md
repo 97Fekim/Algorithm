@@ -311,6 +311,7 @@
 <details>
  <summary> <strong>8. 이분검색</strong> </summary>
 - 이분검색은 <strong>정렬된 배열</strong>에만 사용 가능하다<br> 
+- 완전탐색의 시간복잡도는 O(n)이지만, 이분검색을 이용하면 O(logn)으로 줄일 수 있다.<br> 
 </details>
 
 ## 마구잡이 정리 노트

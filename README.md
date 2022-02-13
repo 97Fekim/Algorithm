@@ -275,6 +275,12 @@
 - j가 j for loop 밖에서 사용되야 하므로, j를 for loop 밖에서 선언해야 함을 유의한다.<br>
 </details>
 
+<details>
+- 배열에서 한칸씩 밀리는 로직을 짤때, insertion 로직을 사용한다<br>
+- 1) Hit 발생했는지 확인하고, 발생했다면 pos에 그 지점을 넣는다.<br>
+- 2) pos값을 판단하여, hit와 miss 두 로직을 구성한다.<br>
+</details>
+
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

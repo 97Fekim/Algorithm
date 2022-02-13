@@ -276,6 +276,7 @@
 </details>
 
 <details>
+ <summary> <strong>4. LRU(Least Recently Used) cashe</strong> </summary>
 - 배열에서 한칸씩 밀리는 로직을 짤때, insertion 로직을 사용한다<br>
 - 1) Hit 발생했는지 확인하고, 발생했다면 pos에 그 지점을 넣는다.<br>
 - 2) pos값을 판단하여, hit와 miss 두 로직을 구성한다.<br>

@@ -298,6 +298,16 @@
 - <strong>얕은복사</strong> : '주소 값'을 복사한다.<br>
 </details>
 
+<details>
+ <summary> <strong>7. 좌표정렬</strong> </summary>
+- 1) x,y좌표를 가진 Point class를 선언한다.<br>
+- 2) Point class를 Arrays.sort()의 인자로 사용하기 위해 Comparable interface를 implements한다.<br> 
+- 3) Point class에 compareTo() 함수를 오버라이딩한다.<br>
+- 4) 오버라이딩한 compareTo()함수에 <code>x가 같을시 y로 정렬</code>를 구현한다<br>
+- 5-1) 오름차순 정렬시 <code>return this - o</code> 를 기억한다.<br>
+- 5-2) 내림차순 정렬시 <code>return o - this</code> 를 기억한다.<br> 
+</details>
+
 ## 마구잡이 정리 노트
 - 배열 순회시 <strong>이진 탐색</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

@@ -1,19 +1,45 @@
 package Inflearn._6Sort;
 
-import java.util.Arrays;
+import java.lang.reflect.Array;
+import java.text.CollationElementIterator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         int n = kb.nextInt();
-        int target = kb.nextInt();
-        int[] arr = new int[n];
-        for(int i=0; i<n; ++i)
-            arr[i] = kb.nextInt();
+        ArrayList<Point> arr = new ArrayList<>();
+        for(int i=0; i<n; ++i){
+            int x = kb.nextInt();
+            int y = kb.nextInt();
+            arr.add(new Point(x,y));
+        }
 
-        System.out.println();
+        Collections.sort(arr);
+        for(Point p : arr){
+            System.out.println(p.x + " " + p.y);
+        }
 
+    }
+
+    public static class Point implements Comparable<Point>{
+        public int x;
+        public int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public int compareTo(Point o) {
+            if(this.y == o.y)
+                return this.x - o.x;
+            else
+                return this.y - o.y;
+        }
     }
 
     /* 1. 선택정렬 (제1 for문 시작과 끝 idx) */
@@ -55,6 +81,8 @@ public class Main {
                     break;;
             }
             arr[j+1] = tmp;
+            if(j == -1)
+                System.out.println("j 지금 -1이에요~~");
         }
         return arr;
     }*/

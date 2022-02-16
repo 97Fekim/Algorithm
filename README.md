@@ -327,6 +327,19 @@
 - 이 문제에서는, mid값이 인자로 들어오면 mid값 만큼 떨어지게 말을 배치했을때 반복문이 k번 이상 반복되는지 확인한다.
 </details>
 
+### 6) Recursive, Tree, Graph(DFS, BFS 기초)
+<details>
+<summary> <strong>1. 재귀함수(스택프레임)</strong> </summary>
+- 재귀함수를 짤때는 if-else 문으로 종료점을 정해라.<br>
+- <strong>(1)재귀함수를 호출하는 부분</strong>과 <strong>유의미한 기능이 실행되는 부분</strong>의 순서를 바꾸는 것만으로도 큰 차이를 가져온다.<br>
+</details>
+
+<details>
+<summary> <strong>2. </strong> </summary>
+- <br>
+- <strong>(1)재귀함수를 호출하는 부분</strong>과 <strong>유의미한 기능이 실행되는 부분</strong>의 순서를 바꾸는 것만으로도 큰 차이를 가져온다.
+</details>
+
 ## 마구잡이 정리 노트
 - 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

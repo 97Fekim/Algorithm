@@ -321,7 +321,7 @@
 </details>
 
 <details>
- <summary> <strong>9. 뮤직비디오</strong> </summary>
+ <summary> <strong>10. 뮤직비디오</strong> </summary>
 - 결정 알고리즘을 사용하는 문제다.<br>
 - mid값을 검증하는 함수의 로직을 짜는게 관건이다.<br>
 - 이 문제에서는, mid값이 인자로 들어오면 mid값 만큼 떨어지게 말을 배치했을때 반복문이 k번 이상 반복되는지 확인한다.

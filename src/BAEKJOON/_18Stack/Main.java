@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 
-/* 1406 에디터 (시간초과) */
+
+/* 1406 에디터 (시간초과 > 블로그 보고 다시품) */
 /*public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -22,47 +23,25 @@ import java.util.Stack;
         // 스택에 문자열을 넣는다.
         for(char c : input.toCharArray())
             stack.push(c);
-        // 커서를 맨 오른쪽으로 초기화한다.
-        int cursor = 0;
 
         while(n --> 0){
             String[] command = bf.readLine().split(" ");
-
             String command_char = command[0];
 
             if(command_char.equals("P")){
-                char beAdd = command[1].charAt(0);
-                // cursor번만큼 stack -> tmp
-                for(int i=0; i<cursor; ++i){
-                    tmp.push(stack.pop());
-                }
-                stack.push(beAdd);  // 새로운 문자 추가
-                // cursor번만큼 tmp -> stack
-                for(int i=0; i<cursor; ++i){
-                    stack.push(tmp.pop());
-                }
+                stack.push(command[1].charAt(0));
             }
             else if(command_char.equals("B")){
-                // 커서가 맨 왼쪽이 아닐경우에만 시행한다.
-                if(!(cursor == stack.size())) {
-                    for(int i=0; i<cursor; ++i){
-                        tmp.push(stack.pop());
-                    }
+                if(!stack.isEmpty())
                     stack.pop();
-                    for(int i=0; i<cursor; ++i){
-                        stack.push(tmp.pop());
-                    }
-                }
             }
             else if(command_char.equals("L")){
-                // 카사기 맨 왼쪽이 아니라면, 커서를 내린다.
-                if(!(cursor==stack.size()))
-                    cursor++;
+                if(!stack.isEmpty())
+                    tmp.push(stack.pop());
             }
             else if(command_char.equals("D")){
-                // 커서가 맨 오른쪽이 아니라면, 커서를 올린다
-                if(!(cursor == 0))
-                    cursor--;
+                if(!tmp.isEmpty())
+                    stack.push(tmp.pop());
             }
 
         }

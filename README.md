@@ -320,6 +320,13 @@
 - 이 문제의 결정 범위 : 배열의 최댓값 ~ 배열의 총합<br>
 </details>
 
+<details>
+ <summary> <strong>9. 뮤직비디오</strong> </summary>
+- 결정 알고리즘을 사용하는 문제다.<br>
+- mid값을 검증하는 함수의 로직을 짜는게 관건이다.<br>
+- 이 문제에서는, mid값이 인자로 들어오면 mid값 만큼 떨어지게 말을 배치했을때 반복문이 k번 이상 반복되는지 확인한다.
+</details>
+
 ## 마구잡이 정리 노트
 - 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

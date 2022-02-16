@@ -314,6 +314,12 @@
 - 완전탐색의 시간복잡도는 O(n)이지만, 이분검색을 이용하면 O(logn)으로 줄일 수 있다.<br> 
 </details>
 
+<details>
+ <summary> <strong>9. 뮤직비디오</strong> </summary>
+- 결정 알고리즘은 답이 될 수 있는 범위를 정해놓고 그 범위를 이분탐색하여 문제를 해결하는 방법이다.<br> 
+- 이 문제의 결정 범위 : 배열의 최댓값 ~ 배열의 총합<br>
+</details>
+
 ## 마구잡이 정리 노트
 - 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

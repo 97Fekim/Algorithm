@@ -3,6 +3,7 @@ package Inflearn._6Sort;
 import java.lang.reflect.Array;
 import java.text.CollationElementIterator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -10,36 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         int n = kb.nextInt();
-        ArrayList<Point> arr = new ArrayList<>();
-        for(int i=0; i<n; ++i){
-            int x = kb.nextInt();
-            int y = kb.nextInt();
-            arr.add(new Point(x,y));
-        }
 
-        Collections.sort(arr);
-        for(Point p : arr){
-            System.out.println(p.x + " " + p.y);
-        }
-
-    }
-
-    public static class Point implements Comparable<Point>{
-        public int x;
-        public int y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public int compareTo(Point o) {
-            if(this.y == o.y)
-                return this.x - o.x;
-            else
-                return this.y - o.y;
-        }
     }
 
     /* 1. 선택정렬 (제1 for문 시작과 끝 idx) */
@@ -86,7 +58,7 @@ public class Main {
         }
         return arr;
     }*/
-    /* 4. LRU(캐시) */    // 다시(복습 요망)
+    /* 4. LRU(캐시) */ // 다시(복습 요망)
     /*public static int[] cashMemory(int k, int[] arr){
         int[] cashe = new int[k];
         for(int x : arr){
@@ -201,4 +173,34 @@ public class Main {
         }
         return 0;
     }*/
+    /* 10. 마구간 정하기(결정알고리즘) */
+    /*public static int horseRange(int k, int[] arr){
+        Arrays.sort(arr);
+        int lt = 1;
+        int rt = arr[arr.length-1];
+        int answer = 0;
+        while(lt < rt){
+            int mid = (lt+rt)/2;
+            if(count(arr, mid)>=k){
+                answer = mid;
+                lt = mid + 1;
+            }
+            else
+                rt = mid - 1;
+        }
+        return answer;
+    }
+    public static int count(int[] arr, int dist){
+        int cnt = 1;
+        int ep = arr[0];
+
+        for(int i=1; i<arr.length; ++i){
+            if(arr[i] - ep >= dist){
+                cnt++;
+                ep = arr[i];
+            }
+        }
+        return cnt;
+    }*/
+
 }

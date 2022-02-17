@@ -1,4 +1,4 @@
-package _2AddTwoList;
+package LeetCode._2AddTwoList;
 
 public class _2AddTwoNumbers_list
 {

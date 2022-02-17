@@ -1,4 +1,4 @@
-package _35SearchInsertPosition;
+package LeetCode._35SearchInsertPosition;
 
 public class Run {
     public static void main(String[] args) {

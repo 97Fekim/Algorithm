@@ -1,4 +1,4 @@
-package _9PalindromeNumber;
+package LeetCode._9PalindromeNumber;
 
 public class _1UsingString
 {

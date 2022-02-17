@@ -1,4 +1,4 @@
-package _21MergeTwoSortedLists;
+package LeetCode._21MergeTwoSortedLists;
 
 class Solution {
 

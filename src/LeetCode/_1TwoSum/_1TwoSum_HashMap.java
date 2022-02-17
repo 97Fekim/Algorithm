@@ -1,7 +1,6 @@
-package _1TwoSum;
+package LeetCode._1TwoSum;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class _1TwoSum_HashMap
 {

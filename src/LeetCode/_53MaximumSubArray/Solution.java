@@ -1,4 +1,4 @@
-package _53MaximumSubArray;
+package LeetCode._53MaximumSubArray;
 
 
 public class Solution {

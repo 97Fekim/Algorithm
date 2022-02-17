@@ -1,6 +1,5 @@
-package _13RomanToInteger;
+package LeetCode._13RomanToInteger;
 import java.util.HashMap;
-import java.util.Map;
 
 public class RomanToInteger
 {

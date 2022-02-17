@@ -1,4 +1,4 @@
-package _26RemoveDuplicatesFromSortedArray;
+package LeetCode._26RemoveDuplicatesFromSortedArray;
 
 public class Run {
 

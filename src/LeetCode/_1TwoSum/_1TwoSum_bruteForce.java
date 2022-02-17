@@ -1,4 +1,4 @@
-package _1TwoSum;
+package LeetCode._1TwoSum;
 
 public class _1TwoSum_bruteForce
 {

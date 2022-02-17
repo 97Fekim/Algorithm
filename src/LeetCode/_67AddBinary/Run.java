@@ -1,4 +1,4 @@
-package _67AddBinary;
+package LeetCode._67AddBinary;
 
 public class Run {
     public static void main(String[] args) {

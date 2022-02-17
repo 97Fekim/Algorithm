@@ -6,12 +6,161 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        int a = sc.nextInt();
+        int b = sc.nextInt();
 
 
+        int m = min(a,b);
+        System.out.println(m);
+        System.out.println(a*b/m);
+
+    }
+
+    public static int min(int i, int j){
+
+        for(int k=Math.min(i,j)/2; k>0; k--){
+            if(i%k == 0 && j%k == 0)
+                return k;
+        }
+        return 1;
     }
 }
 
+/* 11626 접미사 배열 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        String strs[] = new String[input.length()];
+
+        for(int i=0; i<input.length();++i){
+            strs[i] = input.substring(i);
+        }
+        Arrays.sort(strs);
+
+        for(String s : strs)
+            System.out.println(s);
+    }
+}*/
+/* 10824 네 수 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        long n1 = sc.nextInt();
+        long n2 = sc.nextInt();
+        long n3 = sc.nextInt();
+        long n4 = sc.nextInt();
+
+        String str1 = ""+n1+n2;
+        String str2 = ""+n3+n4;
+
+        System.out.println(Long.parseLong(str1.toString()) + Long.parseLong(str2.toString()));
+
+    }
+}*/
+/* 2743 단어 길이 재기 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+        System.out.println(str.length());
+
+    }
+}*/
+/* 10808 알파벳 개수 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+        int[] answer = new int[26];
+
+        for(char c : str.toCharArray()){
+            answer[c-'a']++;
+        }
+
+        for(int i:answer)
+            System.out.print(i+" ");
+    }
+}*/
+/* 1918 후위표기식 (맑은 정신으로 다시 풀어보자) */
+/*public class Main {
+    public static void main(String[] args) {
+
+    }
+}*/
+/* 1935 후의표기식2 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Stack<Double> stack = new Stack<>();
+
+        int n = Integer.parseInt(sc.nextLine());
+        String input = sc.nextLine();
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        char ch = 'A';
+        for(int i=0; i<n; ++i)
+            map.put(ch++, sc.nextInt());
+
+        for(int i=0; i<input.length(); ++i){
+            ch = input.charAt(i);
+            
+            if(Character.isAlphabetic(ch))       // 알파벳인 경우
+                stack.push((double)map.get(ch));    // 알파벳(key)의 정수(value)를 꺼내 스택에 push
+            else {                       // 알파벳이 아닌 경우
+                double right = stack.pop();
+                double left = stack.pop();
+                switch (ch) {
+                    case '+':
+                        stack.push(left + right); break;
+                    case '-':
+                        stack.push(left - right); break;
+                    case '*':
+                        stack.push(left * right); break;
+                    case '/':
+                        stack.push(left / right); break;
+                    case '%':
+                        stack.push(left % right); break;
+                }
+            }
+        }
+        System.out.printf("%.2f", stack.pop());
+    }
+}*/
 /* 10799 쇠막대기 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Stack<Character> stack = new Stack<>();
+        String input = sc.next();
+        int result = 0;
+
+        char tmp = 'c';
+        for(char c : input.toCharArray()){
+            if(c == '('){           // c가 ( 일때
+                stack.push(c);
+            }
+            else{                   // c가 ) 일때
+                if(tmp == '('){     // () 레이저로 지이잉
+                    stack.pop();
+                    result += stack.size();
+                }
+                else{               // )) 하나만 떨구기
+                    stack.pop();
+                    result += 1;
+                }
+            }
+            tmp = c;
+        }
+
+        System.out.println(result);
+    }
+}*/
+/* 17413 단어 뒤집기2 */
 /*public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

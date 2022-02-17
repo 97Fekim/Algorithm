@@ -320,6 +320,37 @@
 - 이 문제의 결정 범위 : 배열의 최댓값 ~ 배열의 총합<br>
 </details>
 
+<details>
+ <summary> <strong>10. 뮤직비디오</strong> </summary>
+- 결정 알고리즘을 사용하는 문제다.<br>
+- mid값을 검증하는 함수의 로직을 짜는게 관건이다.<br>
+- 이 문제에서는, mid값이 인자로 들어오면 mid값 만큼 떨어지게 말을 배치했을때 반복문이 k번 이상 반복되는지 확인한다.
+</details>
+
+### 6) Recursive, Tree, Graph(DFS, BFS 기초)
+<details>
+<summary> <strong>1. 재귀함수(스택프레임)</strong> </summary>
+- 재귀함수를 짤때는 if-else 문으로 종료점을 정해라.<br>
+- <strong>(1)재귀함수를 호출하는 부분</strong>과 <strong>유의미한 기능이 실행되는 부분</strong>의 순서를 바꾸는 것만으로도 큰 차이를 가져온다.<br>
+</details>
+
+<details>
+<summary> <strong>2. 피보나치 재귀(메모이제이션)</strong> </summary>
+- 재귀로 구현한 피보나치 수열은, fibonacci(10)을 호출하면, fibonacc(1),fibonacc(2),fibonacc(3).....fibonacc(9),fibonacc(10)을 모두 계산한다.<br>
+- 따라서 n의 크기를 가진 배열을 선언후, fibonacci(10)이 호출될 때 1~9의 계산값들을 모두 저장해 둔다면, 시간을 대폭 줄일 수 있다.<br>
+- 추가로, 계산이 재귀함수가 호출되기 전에 배열에 값이 있는지 확인하여,, 배열에 값이 있다면 재귀함수를 호출하지 않고 배열값을 리턴하도록 구현한다면, 시간을 추가적으로 대폭 줄일 수 있다.<br> 
+</details>
+
+<details>
+<summary> <strong>3. 이진트리순회(DFS)</strong> </summary>
+- 1~10출력과 10~1 출력의 순서를 재귀함수안 명령의 위치를 다르게하여 바꿀 수 있던 것처럼, 트리의 전위 중위 후위 순회 또한 마찬가지로 바꿀 수 있다.<br>
+</details>
+
+<details>
+<summary> <strong>4. 부분집합 구하기</strong> </summary>
+- 무조건 트리와 스택을 그려보면서 푼다<br>
+</details>
+
 ## 마구잡이 정리 노트
 - 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

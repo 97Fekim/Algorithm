@@ -6,7 +6,7 @@
 - [문제풀이](https://velog.io/@16fekim?tag=leetcode)
 ## 인프런 인강
 - [코드로 이동](https://github.com/97Fekim/Algorithm/blob/master/src/Inflearn/_1String/Main.java)
-
+- [문제 유형별 키워드](https://github.com/97Fekim/Algorithm/blob/master/Inflearn%20Algorithm%20Basic.md)
 ## 마구잡이 정리 노트
 - 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기

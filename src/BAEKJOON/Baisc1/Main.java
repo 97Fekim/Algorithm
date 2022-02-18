@@ -3,29 +3,169 @@ package BAEKJOON.Baisc1;
 import java.util.*;
 
 public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String str = sc.nextLine();
+
+        System.out.println(str);
+
+        System.out.println(str.charAt(0));
+        System.out.println(str.charAt(1));
+        System.out.println(str.charAt(2));
+        System.out.println(str.charAt(3));
+        System.out.println(str.charAt(4));
+
+
+        }
+
+}
+
+/* 17087 숨바꼭질 6 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        int s = sc.nextInt();
+
+        for(int i=0; i<n; ++i)
+            arr[i] = Math.abs(s-sc.nextInt());
+
+        int gcd = arr[0];
+
+        for(int i=1; i<arr.length; ++i) {
+            gcd = GCD(gcd, arr[i]);
+        }
+        System.out.println(gcd);
+    }
+
+    public static int GCD(int i, int j){
+        if(j == 0)
+            return i;
+        else
+            return GCD(j, i%j);
+    }
+}*/
+/* 9613 GCC합 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-->0){
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for(int i=0; i<n; ++i)
+                arr[i] = sc.nextInt();
+
+            for(int i : arr)
+                System.out.println(i);
+
+            long sum = 0;
+            for(int i=0; i<arr.length; ++i)
+                for(int j=i+1; j<arr.length; ++j) {
+                    sum += GCD(arr[i], arr[j]);
+                    System.out.print("arr[i] : "+arr[i]+
+                            " arr[j] : "+arr[j] + " sum : "+sum);
+                    System.out.println();
+                }
+            System.out.println(sum);
+        }
+    }
+    public static int GCD(int i, int j){
+        if(j == 0)
+            return i;
+        else
+            return GCD(j, i%j);
+    }
+}*/
+/* 6588 골드바흐의 추측 */
+/*public class Main {
+    public static void main(String[] args) {
+
+        boolean[] check = new boolean[1000001];
+        // true : 소수x
+        // false : 소수
+        
+        for(int i=2; i<Math.sqrt(check.length); ++i){
+            if(!check[i])
+                for(int j=i+i; j<check.length; j = j+i)
+                    check[j] = true;
+        }
+
+        Scanner sc = new Scanner(System.in);
+
+        while(true) {
+
+            int n = sc.nextInt();
+
+            if(n == 0)
+                break;
+
+            for (int i = 2; i < n - 1; ++i) {
+                if (!check[n - i] && !check[i]) {
+                    System.out.println(n + " = " + i + " + " + (n-i));
+                    break;
+                }
+            }
+        }
+    }
+}*/
+/* 1934 최소공배수 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        while(n-->0){
+            int i= sc.nextInt();
+            int j= sc.nextInt();
+            System.out.println(i * j / GCD(i,j));
+        }
+    }
+    public static int GCD(int i, int j){
+        if(j==0)
+            return i;
+        else
+            return GCD(j, i%j);
+    }
+}*/
+/*2609 최대공약수와 최소공배수 (유클리드 호제법)*/
+/*public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         int a = sc.nextInt();
         int b = sc.nextInt();
-
-
-        int m = min(a,b);
+        int m = GCD1(a,b);
         System.out.println(m);
         System.out.println(a*b/m);
-
     }
 
-    public static int min(int i, int j){
-
-        for(int k=Math.min(i,j)/2; k>0; k--){
-            if(i%k == 0 && j%k == 0)
-                return k;
+    // 재귀 버전
+    public static int GCD1(int i, int j) {
+        if(j==0)
+            return i;
+        else{
+            return GCD1(j, i%j);
         }
-        return 1;
     }
-}
-
+    // 반복문 버전
+    public static int GCD2(int i, int j){
+        if(i == 1 || j == 1)
+            return 1;
+        int a = i;
+        int b = j;
+        while(b != 0){
+            int c = a % b;
+            a = b;
+            b = c;
+        }
+        return a;
+    }
+}*/
 /* 11626 접미사 배열 */
 /*public class Main {
     public static void main(String[] args) {

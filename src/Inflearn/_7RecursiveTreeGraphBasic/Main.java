@@ -2,9 +2,6 @@ package Inflearn._7RecursiveTreeGraphBasic;
 
 public class Main {
 
-    public static void main(String[] args) {
-
-    }
 
     /* 6. 부분집합 구하기(DFS) */
     /*static int n;       // 집합 원소의 갯수

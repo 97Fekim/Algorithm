@@ -343,3 +343,9 @@
 <summary> <strong>4. 부분집합 구하기</strong> </summary>
 - 무조건 트리와 스택을 그려보면서 푼다<br>
 </details>
+
+<details>
+<summary> <strong>5. 이진트리 레벨탐색(BFS) </strong> </summary>
+- BFS는 Queue를 활용한다.<br>
+- 처음엔 root 노드를 Queue에 넣은 후, poll()과 동시에 lt rt에 있는 노드를 다시 큐에 offer한다.<br>
+</details>

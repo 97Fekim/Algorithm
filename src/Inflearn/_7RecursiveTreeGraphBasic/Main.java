@@ -1,8 +1,81 @@
 package Inflearn._7RecursiveTreeGraphBasic;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
 public class Main {
 
-
+    /* 8. 송아지 찾기 */
+    /*static int[] dis = {1,-1,5};
+    static int[] check;
+    static Queue<Integer> q = new LinkedList<>();
+    public static int BFS(int s, int e){
+       check = new int[10001];
+       q.offer(s);
+       int L = 0;
+       while(!q.isEmpty()){
+           int len = q.size();
+           for(int i=0; i<len; ++i){
+               int x = q.poll();
+               for(int j=0; j<3; ++j){
+                   int nx = x + dis[j];
+                   if(nx == e)
+                       return L+1;
+                   if(nx >= 1 && nx <= 10000 && check[nx]==0){
+                       q.offer(nx);
+                       check[nx] = 1;
+                   }
+               }
+           }
+           L++;
+       }
+       return 0;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int s = sc.nextInt();
+        int e = sc.nextInt();
+        System.out.println(BFS(s,e));
+    }*/
+    /* 7. 이진트리 레벨탐색(BFS) */
+    /*public static class Node{
+        int data;
+        Node lt, rt;
+        public Node(int val){
+            this.data = val;
+            lt=rt=null;
+        }
+    }
+    public static void BFS(Node root){
+        Queue<Node> q = new LinkedList<>();
+        int L = 1;
+        q.offer(root);
+        while(!q.isEmpty()){
+            int len = q.size();
+            System.out.print(L+" level : ");
+            for(int i=0; i<len; ++i){
+                Node cur = q.poll();
+                System.out.print(cur.data+ " ");
+                if(cur.lt != null)
+                    q.offer(cur.lt);
+                if(cur.rt != null)
+                    q.offer(cur.rt);
+            }
+            L++;
+            System.out.println();
+        }
+    }
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.lt = new Node(2);
+        root.rt = new Node(3);
+        root.lt.lt = new Node(4);
+        root.lt.rt = new Node(5);
+        root.rt.lt = new Node(6);
+        root.rt.rt = new Node(7);
+        BFS(root);
+    }*/
     /* 6. 부분집합 구하기(DFS) */
     /*static int n;       // 집합 원소의 갯수
     static int[] ch;    // Check 배열

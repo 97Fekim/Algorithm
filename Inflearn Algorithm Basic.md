@@ -351,7 +351,7 @@
 </details>
 
 <details>
-<summary> <strong>5. 송아지 찾기 </strong> </summary>
+<summary> <strong>6. 송아지 찾기 </strong> </summary>
 - Queue를 활용한 BFS<br>
 - 모든 노드의 값을 담을 수 있는 check 배열 이용<br>
 - 1, -1, 5를 담은 배열을 생성하여, 3번 반복하는 for문으로 다음 노드를 처리한다.<br>

@@ -349,3 +349,11 @@
 - BFS는 Queue를 활용한다.<br>
 - 처음엔 root 노드를 Queue에 넣은 후, poll()과 동시에 lt rt에 있는 노드를 다시 큐에 offer한다.<br>
 </details>
+
+<details>
+<summary> <strong>5. 송아지 찾기 </strong> </summary>
+- Queue를 활용한 BFS<br>
+- 모든 노드의 값을 담을 수 있는 check 배열 이용<br>
+- 1, -1, 5를 담은 배열을 생성하여, 3번 반복하는 for문으로 다음 노드를 처리한다.<br>
+- check 배열의 인덱스 값의 범위에 유의한다.<br>
+</details>

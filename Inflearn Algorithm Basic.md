@@ -379,4 +379,12 @@
 - check 배열을 이용하여 풀어야 하며 들어갈때는 check배열을 체크하고, 나올때는 다시 check배열을 풀어야 함을 유의한다.<br>
 </details>
 
+<details>
+<summary> <strong>10. 경로탐색(인접리스트) </strong> </summary>
+- 인접행렬로 정점과 간선을 구현하게 되면, 많은 정점과 간선을 다루게 될 시 공간복잡도와 시간복잡도 모두 기하급수적으로 늘어나게 된다.<br>
+ (2차원 배열의 크기와 탐색해야하는 경우의 수 모두 크게 늘어나기 때문에)<br>
+- ArrayList를 Element로 갖는 ArrayList를 graph로 활용한다<br>
+- 2차원 배열 한줄을 모두 뒤질 필요 없이, <code>for(int nv : graph.get(v))</code> 한줄을 통해서 어레이 리스트 한줄만 뒤지면 들어가야 할 정점을 탐색 가능하다.<br>
+- 정점과 간선을 입력 받아 graph에 삽입할때는, <code>graph.get(a).add(b)</code><br>
+</details>
 

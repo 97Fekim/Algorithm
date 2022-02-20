@@ -388,3 +388,8 @@
 - 정점과 간선을 입력 받아 graph에 삽입할때는, <code>graph.get(a).add(b)</code><br>
 </details>
 
+<details>
+<summary> <strong>11. 그래프 최단거리(BFS, 인접리스트) </strong> </summary>
+- ArrayList<ArrayList<Integer>>를 이용해 다음 노드가 있는 노드만을 큐에 offer()한다.<br>
+- 큐에서 꺼낸 정수가 end point와 같다면, 해당 레벨을 return한다.<br>
+</details>

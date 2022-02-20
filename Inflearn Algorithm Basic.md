@@ -393,3 +393,10 @@
 - ArrayList<ArrayList<Integer>>를 이용해 다음 노드가 있는 노드만을 큐에 offer()한다.<br>
 - 큐에서 꺼낸 정수가 end point와 같다면, 해당 레벨을 return한다.<br>
 </details>
+
+<details>
+<summary> <strong>12. 그래프 최단거리(BFS, distance 배열) </strong> </summary>
+- 큐와 인접리스트(ArrayList<ArrayList<Integer>>)를 이용한 BFS로 해결한다.<br>
+- 각 노드까지의 최단거리를 저장하는 배열을 만든다.<br>
+- 다음 노드로 이동할때, 현재 노드까지의 최단거리에 +1 값을 더하여 distance 배열의 다음 노드 index에 저장한다<br>
+</details>

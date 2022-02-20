@@ -1,11 +1,223 @@
 package Inflearn._7RecursiveTreeGraphBasic;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
 
+    /* 12-2. 그래프 최단거리(dis 배열 이용) */
+    /*static int n,m;
+    static int[] ch;
+    static int[] dis;
+    static ArrayList<ArrayList<Integer>> graph;
+    public static void BFS(int s){
+        Queue<Integer> q = new LinkedList<>();
+        dis[s] = 0;
+        ch[s] = 1;
+        q.offer(s);
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i=0; i<len; ++i){
+                int x = q.poll();
+                for(int nx : graph.get(x)) {
+                    if(ch[nx] == 0){
+                        ch[nx] = 1;
+                        dis[nx] = dis[x]+1;
+                        q.offer(nx);
+                    }
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        ch = new int[n+1];
+        dis = new int[n+1];
+        graph = new ArrayList<ArrayList<Integer>>();
+        for(int i=0; i<=n; ++i)
+            graph.add(new ArrayList<Integer>());
+        for(int i=0; i<m; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            graph.get(a).add(b);
+        }
+        BFS(1);
+        for(int i:dis)
+            System.out.print(i+" ");
+    }*/
+    /* 12-1. 그래프 최단거리(BFS) */
+    /*static int n,m;
+    static ArrayList<ArrayList<Integer>> graph;
+    public static int BFS(int s, int end){
+        int L=0;
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(s);
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i=0; i<len; ++i){
+                int x = q.poll();
+                if(x == end)
+                    return L;
+                for(int nx : graph.get(x))
+                    q.offer(nx);
+            }
+            L++;
+        }
+        return 0;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        graph = new ArrayList<ArrayList<Integer>>();
+        for(int i=0; i<=n; ++i)
+            graph.add(new ArrayList<Integer>());
+        for(int i=0; i<m; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            graph.get(a).add(b);
+        }
+        for(int i=2; i<=n; ++i)
+            System.out.println("1 에서 "+ i+" 까지의 최단 경로 : " + BFS(1,i));
+    }*/
+    /* 11. 경로탐색(인접리스트) */
+    /*static int m,n,answer=0;
+    static int[] ch;
+    static ArrayList<ArrayList<Integer>> graph;
+    public static void DFS(int v){
+        if(v==n)
+            answer++;
+        else{
+            for(int nv : graph.get(v)){
+                if(ch[nv]==0){
+                    ch[nv] = 1;
+                    DFS(nv);
+                    ch[nv] = 0;
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        ch = new int[n+1];
+        graph = new ArrayList<ArrayList<Integer>>();
+        for(int i=0; i<=n; ++i){
+            graph.add(new ArrayList<Integer>());
+        }
+        for(int i=0; i<m; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            graph.get(a).add(b);
+        }
+        ch[1] = 1;
+        DFS(1);
+        System.out.println(answer);
+    }*/
+    /* 10. 경로탐색(DFS) */
+    /*static int n,m,answer=0;
+    static int[] ch;
+    static int[][] graph;
+    public static void DFS(int v){
+        if(v==n)
+            answer++;
+        else{
+            for(int i=1; i<=n; ++i){
+                if(ch[i]==0 && graph[v][i]==1){
+                    ch[i] = 1;
+                    DFS(i);
+                    ch[i] = 0;
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        graph = new int[n+1][n+1];
+        ch = new int[n+1];
+        for(int i=0; i<m; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            graph[a][b] = 1;
+        }
+
+        ch[1] = 1;
+        DFS(1);
+        System.out.println(answer);
+    }*/
+    /* 9-1. 말단노드까지 최소거리(DFS) // 완전트리가 아닐시 에러 */
+    /*public static class Node{
+        int data;
+        Node lt;
+        Node rt;
+        public Node(int data){
+            this.data = data;
+            this.lt = this.rt = null;
+        }
+    }
+
+    public static int DFS(Node root, int L){
+        if(root.lt == null && root.rt == null)
+            return L;
+        else
+            return Math.min(
+                    DFS(root.lt, L+1),
+                    DFS(root.rt, L+1));
+    }
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.lt = new Node(2);
+        root.rt = new Node(3);
+        root.lt.lt = new Node(4);
+        root.lt.rt = new Node(5);
+        System.out.println(DFS(root,0));
+    }*/
+    /* 9-2. 말단노드까지 최소거리(BFS) */
+    /*public static class Node{
+        int data;
+        Node lt;
+        Node rt;
+        public Node(int data){
+            this.data = data;
+            this.lt = this.rt = null;
+        }
+    }
+    public static int DFS(Node root){
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+        int L = 0;
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i=0; i<len; ++i){
+                Node x = q.poll();
+                if(x.lt==null && x.rt == null)
+                    return L;
+                if(x.lt != null)
+                    q.offer(x.lt);
+                if(x.rt != null)
+                    q.offer(x.rt);
+            }
+            L++;
+        }
+        return 0;
+    }
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.lt = new Node(2);
+        root.rt = new Node(3);
+        root.lt.lt = new Node(4);
+        root.lt.rt = new Node(5);
+        System.out.println(DFS(root));
+    }*/
     /* 8. 송아지 찾기 */
     /*static int[] dis = {1,-1,5};
     static int[] check;

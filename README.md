@@ -15,5 +15,5 @@
 - 정렬된 배열을 다룬다면 <strong>투포인터</strong> 고려하기
 - 배열에서 특정 구간씩 다룰때, <strong>슬라이딩 윈도우</strong> 고려하기
 - 배열에서 범위가 어느정도 정해진 정답을 구해야 할때, <strong>결정 알고리즘</strong> 고려하기
-- BFS 구현시 <strong>visited배열</strong>을 쓰지 않으면 시간,메모리 초과 발생
+- BFS 구현시 <strong>visited배열</strong>을 쓰지 않으면 시간,메모리 초과 발생함. 그리고 항상 null pointer exception을 주의하자.
 - 

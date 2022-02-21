@@ -86,7 +86,7 @@ public class Main {
         for(int i=2; i<=n; ++i)
             System.out.println("1 에서 "+ i+" 까지의 최단 경로 : " + BFS(1,i));
     }*/
-    /* 11. 경로탐색(인접리스트) */
+    /* 11. 경로탐색(DFS 인접리스트) */
     /*static int m,n,answer=0;
     static int[] ch;
     static ArrayList<ArrayList<Integer>> graph;
@@ -121,7 +121,7 @@ public class Main {
         DFS(1);
         System.out.println(answer);
     }*/
-    /* 10. 경로탐색(DFS) */
+    /* 10. 경로탐색(DFS 인접행렬) */
     /*static int n,m,answer=0;
     static int[] ch;
     static int[][] graph;

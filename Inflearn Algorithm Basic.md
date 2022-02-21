@@ -400,3 +400,9 @@
 - 각 노드까지의 최단거리를 저장하는 배열을 만든다.<br>
 - 다음 노드로 이동할때, 현재 노드까지의 최단거리에 +1 값을 더하여 distance 배열의 다음 노드 index에 저장한다<br>
 </details>
+
+### 7) DFS, BFS 활용
+<details>
+<summary> <strong>1. 합이 같은 부분집합 </strong> </summary>
+- 무난한 DFS 문제<br>
+</details>

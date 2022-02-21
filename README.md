@@ -1,11 +1,11 @@
 # Algorithm
 🗝<br>
 ## BOJ 풀이
-- [코드](https://github.com/97Fekim/Algorithm/tree/master/src/BAEKJOON)
+- [코드로 이동](https://github.com/97Fekim/Algorithm/tree/master/src/BAEKJOON)
 ## LeetCode 풀이
 - [문제풀이](https://velog.io/@16fekim?tag=leetcode)
 ## [자바(Java) 알고리즘 문제풀이 : 코딩테스트 대비] ,인프런
-- [코드로 이동](https://github.com/97Fekim/Algorithm/blob/master/src/Inflearn/_1String/Main.java)
+- [코드로 이동](https://github.com/97Fekim/Algorithm/tree/master/src/Inflearn)
 - [강의 문제 풀이](https://github.com/97Fekim/Algorithm/blob/master/Inflearn%20Algorithm%20Basic.md)
 - [문제 유형별 키워드](https://velog.io/@16fekim/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Java%EB%A1%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A4%80%EB%B9%84)
 ## 마구잡이 정리 노트

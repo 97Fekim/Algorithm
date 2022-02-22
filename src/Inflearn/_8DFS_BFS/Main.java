@@ -4,46 +4,69 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /* 2. 바둑이 승차 */
-public class Main {
+/*public class Main {
 
-    public static void DFS(int L, int sum, int[] arr){
+    static int[] arr;
+    static int target;
+    static int max = Integer.MIN_VALUE;
+    static void DFS(int L, int sum){
+        if(sum > target){
+            return ;
+        }
+        else{
+            max = Math.max(sum,max);
+            if(L < arr.length) {
+                DFS(L+1, sum);
+                DFS(L+1, sum+arr[L]);
+            }
+        }
 
     }
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        target = sc.nextInt();
+        int n = sc.nextInt();
+        arr = new int[n];
+        for(int i=0; i<n; ++i)
+            arr[i] = sc.nextInt();
 
+        DFS(0,0);
+        System.out.println(max);
     }
-}
-
+}*/
 /* 1. 합이 같은 부분집합(인강) */
 /*public class Main {
 
+    static int n, target;
+    static int[] arr;
     static String answer = "NO";
-    static int total=0, n;
-    static boolean flag = false;
-    public static void DFS(int L, int sum, int[] arr){
-        if(flag)
+    static boolean find = false;
+    static void DFS(int L, int sum){
+        if(find){
             return ;
-        if(L==n){
-            if(total - sum == sum) {
-                answer = "YES";
-                flag = true;
-            }
+        }
+        if(sum == target - sum) {
+            answer = "YES";
+            find = true;
+        }
+        else if(sum >= target - sum){
+            return ;
         }
         else{
-            DFS(L+1, sum+arr[L], arr);  // 사용한다.
-            DFS(L+1, sum, arr);              // 사용 안한다.
+            if(L < arr.length) {
+                DFS(L + 1, sum);
+                DFS(L + 1, sum + arr[L]);
+            }
         }
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        int[] arr = new int[n];
+        arr = new int[n];
         for(int i=0; i<n; ++i)
             arr[i] = sc.nextInt();
-        for(int i : arr)
-            total += i;
-
-        DFS(0, 0, arr);
+        target = Arrays.stream(arr).sum();
+        DFS(0,0);
         System.out.println(answer);
     }
 }*/

@@ -106,7 +106,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        m = sc.nextInt();
+        m = sc.nextInt();[
         ch = new int[n+1];
         graph = new ArrayList<ArrayList<Integer>>();
         for(int i=0; i<=n; ++i){

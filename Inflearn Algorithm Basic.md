@@ -33,7 +33,7 @@
 - 특정문자일 경우에만 lt를 증가시키거나 rt를 감소시키는 로직으로 구현.<br>
 - <code>Character.isAlphabetic(CH)</code> 메소드 활용 (특정 문자가 알파벳임을 확인)<br>
 - char[] 를 String으로 변환하려면 반드시 <code>String str = String.valueOf(char[])</code> 을 활용해라.<br>
-</details> 
+</details>
  
 <details>
 <summary> <strong>6. 중복 문자 제거</strong> </summary>
@@ -403,6 +403,34 @@
 
 ### 7) DFS, BFS 활용
 <details>
-<summary> <strong>1. 합이 같은 부분집합 </strong> </summary>
-- 무난한 DFS 문제<br>
+<summary> <strong>1. 합이 같은 부분집합(DFS) </strong> </summary>
+- DFS 문제<br>
+- 다음노드를 결과에 적용 할지, 안할지를 else문에 넣는 로직이다.<br>
+- <code>DFS(L + 1, sum);</code><br>
+- <code>DFS(L + 1, sum + arr[L]);</code><br>
+- 위와 같은 구조이다.<br> 
+</details>
+
+<details>
+<summary> <strong>2. 바둑이 승차(DFS) </strong> </summary>
+- DFS 문제<br>
+- 부분집합 문제와 유사한 로직<br>
+</details>
+
+<details>
+<summary> <strong>3. 최대점수 구하기(DFS) </strong> </summary>
+- DFS 문제<br>
+- 부분집합 문제와 마찬가지로, L은 계속 증가시키며 재귀호출하되 다음 노드를 결과에 반영할지 안할지를 나눠서 탐색해 나간다.<br>
+</details>
+
+<details>
+<summary> <strong>4. 중복순열 구하기(DFS) </strong> </summary>
+- 배열을 사용해 각 자리를 레벨로 가정하고 재귀호출한다.<br>
+</details>
+
+<details>
+<summary> <strong>5. 동전교환(DFS/BFS, DFS의 호출시간 줄이기) </strong> </summary>
+- 최소의 무언가를 구하는 문제이므로, BFS를 쓰는편이 낫다.<br>
+- DFS로 구현할 때는 끝 노드들을 모두 탐색하며 최소 길이를 저장해나가는데, 이때 이미 구한 길이보다는 더 깊이 들어가지 않겠다는 if문을 걸어서 시간복잡도를 줄인다.<br>
+- 배열 원소의 순서에 따라서 짧은 길이가 더 먼저 발견될 가능성이 높다. 따라서 배열을 내림차순 정리하여 탐색하면 시간복잡도를 대폭 줄일 수 있다.<br> 
 </details>

@@ -1,9 +1,118 @@
 package BAEKJOON.Basic2;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.awt.font.GraphicAttribute;
+import java.lang.reflect.Array;
+import java.util.*;
 
+public class Main {
+    static boolean[] ch;
+    static int answer = 0;
+    static List<Integer>[] graph;
+
+    public static void DFS(int s, int depth){
+        if(depth==5) {
+            answer = 1;
+            return ;
+        }
+        ch[s] = true;
+        for(int nv : graph[s]){
+            if(!ch[nv]){
+                DFS(nv, depth+1);
+            }
+        }
+        ch[s] = false;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        graph = new ArrayList[n];
+        for(int i=0; i<n; ++i){
+            graph[i] = new ArrayList<>();
+        }
+
+        for(int i=0; i<m; ++i){
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            graph[x].add(y);
+            graph[y].add(x);
+        }
+
+        for(int i=0; i<n; ++i){
+            ch = new boolean[n];
+            DFS(i, 1);
+        }
+        System.out.println(answer);
+    }
+}
+
+/* 1260 DFS와 BFS */
+/*
+public class Main {
+
+    static int[] ch;
+    static ArrayList<ArrayList<Integer>> graph;
+    public static void DFS(int s){
+        for(int nv : graph.get(s)){
+            if(ch[nv] == 0){
+                ch[nv] = 1;
+                System.out.print(nv+" ");
+                DFS(nv);
+            }
+        }
+    }
+    public static void BFS(int s){
+        Queue<ArrayList<Integer>> q = new LinkedList<>();
+        q.offer(graph.get(s));
+        while(!q.isEmpty()){
+            int len = q.size();
+            ArrayList<Integer> v = q.poll();
+            for(int nv : v){
+                if(ch[nv] == 0){
+                    ch[nv] = 1;
+                    System.out.print(nv + " ");
+                    q.offer(graph.get(nv));
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int s = sc.nextInt();
+        ch = new int[n+1];
+
+        graph = new ArrayList<>();
+        for(int i=0; i<=n; ++i){
+            graph.add(new ArrayList<Integer>());
+        }
+
+        for(int i=0; i<m; ++i){
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            graph.get(x).add(y);
+            graph.get(y).add(x);
+        }
+
+        for(ArrayList<Integer> i : graph)
+            Collections.sort(i);
+        ch[s] = 1;
+        System.out.print(s+" ");
+        DFS(s);
+
+        System.out.println();
+
+        ch = new int[n+1];
+
+        ch[s] = 1;
+        System.out.print(s+" ");
+        BFS(s);
+
+    }
+}
+*/
 /* 13549 숨바꼭질 3 */
 /*public class Main {
 

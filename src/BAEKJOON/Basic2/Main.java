@@ -2,16 +2,157 @@ package BAEKJOON.Basic2;
 
 import java.awt.font.GraphicAttribute;
 import java.lang.reflect.Array;
+import java.util.*;
 
+/* 7576 토마토(3차원) */
+/*import java.util.*;
 public class Main {
 
-    public static void main(String[] args) {
-
-
-
+    static class Point{
+        int hei;
+        int wid;
+        int z;
+        public Point(int z ,int hei, int wid) {
+            this.z = z;
+            this.hei = hei;
+            this.wid = wid;
+        }
     }
 
-}
+    static int w,h,z;
+    static int[][][] graph;
+    static boolean[][][] ch;
+    static int[] dx = {-1,0,0,1,0,0};
+    static int[] dy = {0,1,-1,0,0,0};
+    static int[] dz = {0,0,0,0,-1,1};
+    static ArrayList<Point> init;
+    static int bfs(){
+        int L = 0;
+        Queue<Point> q = new LinkedList<>();
+        for(Point p : init) {
+            ch[p.z][p.hei][p.wid] = true;
+            q.offer(p);
+        }
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i=0; i<len; ++i){
+                Point v = q.poll();
+                for(int j=0; j<dx.length; ++j){
+                    int vhei = v.hei + dy[j];
+                    int vwid = v.wid + dx[j];
+                    int vz = v.z + dz[j];
+                    if(vhei >= 0 && vwid >= 0 && vz >= 0
+                    && vhei < h && vwid < w && vz < z
+                    && !ch[vz][vhei][vwid] && graph[vz][vhei][vwid]==0){
+                        ch[vz][vhei][vwid] = true;
+                        graph[vz][vhei][vwid] = 1;
+                        q.offer(new Point(vz, vhei, vwid));
+                    }
+                }
+            }
+            L++;
+        }
+        return L;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        w = sc.nextInt();
+        h = sc.nextInt();
+        z = sc.nextInt();
+        graph = new int[z][h][w];
+        ch = new boolean[z][h][w];
+        for(int k = 0; k < z; ++k)
+            for (int i = 0; i < h; ++i)
+               for (int j = 0; j < w; ++j)
+                    graph[k][i][j] = sc.nextInt();
+
+        init = new ArrayList<>();
+
+        for(int k = 0; k < z; ++k)
+            for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < w; ++j) {
+                    if(graph[k][i][j] == 1)
+                        init.add(new Point(k,i,j));
+                }
+            }
+
+        int answer = bfs()-1;
+        boolean done = true;
+        for(int k = 0; k < z; ++k)
+            for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < w; ++j) {
+                    if(graph[k][i][j] == 0)
+                        done = false;
+                }
+            }
+
+        if(done)
+            System.out.println(answer);
+        else
+            System.out.println(-1);
+    }
+}*/
+/* 7562 나이트의 이동 */
+/*public class Main {
+
+    static class Point{
+        int hei;
+        int wid;
+        public Point(int hei, int wid) {
+            this.hei = hei;
+            this.wid = wid;
+        }
+    }
+
+    static int m;
+    static boolean[][] ch;
+    static int[] dx = {-2,-1,1,2,2,1,-1,-2};
+    static int[] dy = {1,2,2,1,-1,-2,-2,-1};
+
+    static int bfs(int s_x,int s_y,int e_x,int e_y){
+        int L = 0;
+        Queue<Point> q = new LinkedList<>();
+        ch[s_y][s_x] = true;
+        q.offer(new Point(s_y, s_x));
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i=0; i<len; ++i){
+                Point v = q.poll();
+                if(v.wid == e_x && v.hei == e_y)
+                    return L;
+                for(int j=0; j<dx.length; ++j){
+                    int nv_x = v.wid + dx[j];
+                    int nv_y = v.hei + dy[j];
+                    if(nv_x >= 0 && nv_y >= 0
+                        && nv_x < m && nv_y < m
+                        && !ch[nv_y][nv_x]){
+                        ch[nv_y][nv_x] = true;
+                        q.offer(new Point(nv_y, nv_x));
+                    }
+                }
+            }
+            L++;
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        while(n-->0) {
+            m = sc.nextInt();
+            ch = new boolean[m][m];
+            int s_x = sc.nextInt();
+            int s_y = sc.nextInt();
+            int e_x = sc.nextInt();
+            int e_y = sc.nextInt();
+
+            System.out.println(bfs(s_x, s_y, e_x, e_y));
+        }
+    }
+}*/
 /* 7576 토마토 */
 /*import java.util.*;
 public class Main {

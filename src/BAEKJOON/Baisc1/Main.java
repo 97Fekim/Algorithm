@@ -3,23 +3,29 @@ package BAEKJOON.Baisc1;
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        String str = sc.nextLine();
-
-        System.out.println(str);
-
-        System.out.println(str.charAt(0));
-        System.out.println(str.charAt(1));
-        System.out.println(str.charAt(2));
-        System.out.println(str.charAt(3));
-        System.out.println(str.charAt(4));
-
-
+        String input = sc.nextLine();
+        char[] str = input.toCharArray();
+        for(char c : str){
+            if(Character.isAlphabetic(c)) {
+                // 대문자이면 'A' ~ 'Z' = 65 ~ 90
+                if(Character.isUpperCase(c)){
+                    if(c > 77)
+                        c = (char)(c-13);
+                    else
+                        c = (char)(c+13);
+                }   // 소문자이면 'a' ~ 'z' = 97 ~ 122
+                else{
+                    if(c > 109)
+                        c = (char)(c-13);
+                    else
+                        c = (char)(c+13);
+                }
+            }
+            System.out.print(c);
         }
-
+    }
 }
 
 /* 17087 숨바꼭질 6 */

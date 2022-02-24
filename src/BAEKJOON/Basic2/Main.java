@@ -1,9 +1,119 @@
 package BAEKJOON.Basic2;
 
-import java.awt.font.GraphicAttribute;
 import java.lang.reflect.Array;
 import java.util.*;
+/* 15649 N과 M */
+/*public class Main {
 
+    static int n,m;
+    static boolean[] ch;
+    static int[] res;
+    public static void dfs(int L){
+        if(L == m){
+            for(int i:res)
+                if(i != 0)
+                    System.out.print(i+" ");
+            System.out.println();
+            return ;
+        }
+        else{
+            for(int i=1; i<=n; ++i){
+                if(!ch[i]){
+                    ch[i] = true;
+                    res[L+1] = i;
+                    dfs(L+1);
+                    ch[i] = false;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        ch = new boolean[n+1];
+        res = new int[m+1];
+        dfs(0);
+    }
+}*/
+/* 1182 부분수열의 합 (쓴다/안쓴다) */
+/*public class Main {
+
+    static int n,cnt = 0;
+    static void dfs(int L, int[] arr, int sum,int target){
+        if(L == n){
+            if(sum == target)
+                cnt++;
+            else
+                return ;
+        }
+        else{
+            dfs(L+1, arr, sum, target);
+            dfs(L+1, arr, sum+arr[L], target);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        int target = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; ++i){
+            arr[i] = sc.nextInt();
+        }
+        dfs(0,arr,0,target);
+        if(target == 0)
+            System.out.println(cnt-1);
+        else
+            System.out.println(cnt);
+    }
+}*/
+/* 11725 트리의 부모 찾기 */
+/*public class Main{
+
+    static int[] parent;
+    static ArrayList<ArrayList<Integer>> graph;
+
+    static int bfs(){
+        Queue<Integer> q = new LinkedList<>();
+        parent[1] = 1;
+        q.offer(1);
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i=0; i<len; ++i){
+                int v = q.poll();
+                for(int nv : graph.get(v)){
+                    if(parent[nv] == 0){
+                        parent[nv] = v;
+                        q.offer(nv);
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        graph = new ArrayList<ArrayList<Integer>>();
+        int n = sc.nextInt();
+
+        for(int i=0; i<=n; ++i)
+            graph.add(new ArrayList<Integer>());
+
+        for(int i=0; i<n-1; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            graph.get(a).add(b);
+            graph.get(b).add(a);
+        }
+        parent = new int[n+1];
+        bfs();
+        for(int i=2; i<=n; ++i) {
+            System.out.println(parent[i]);
+        }
+    }
+}*/
 /* 7576 토마토(3차원) */
 /*import java.util.*;
 public class Main {

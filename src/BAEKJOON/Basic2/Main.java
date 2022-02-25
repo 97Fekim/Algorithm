@@ -2,27 +2,36 @@ package BAEKJOON.Basic2;
 
 import java.lang.reflect.Array;
 import java.util.*;
-/* 15649 N과 M */
+
+
+/* 15652 N과 M (4) */
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+    }
+}
+/* 15649 N과 M (1) */
 /*public class Main {
 
     static int n,m;
     static boolean[] ch;
     static int[] res;
+    static StringBuilder sb = new StringBuilder();
     public static void dfs(int L){
         if(L == m){
             for(int i:res)
                 if(i != 0)
-                    System.out.print(i+" ");
-            System.out.println();
+                    sb.append(i).append(' ');
+            sb.append('\n');
             return ;
         }
         else{
             for(int i=1; i<=n; ++i){
                 if(!ch[i]){
-                    ch[i] = true;
-                    res[L+1] = i;
-                    dfs(L+1);
-                    ch[i] = false;
+                ch[i] = true;
+                res[L+1] = i;
+                dfs(L+1);
                 }
             }
         }
@@ -35,6 +44,43 @@ import java.util.*;
         ch = new boolean[n+1];
         res = new int[m+1];
         dfs(0);
+        System.out.println(sb);
+    }
+}*/
+/* 15651 N과 M (3) */
+/*public class Main {
+
+    static int n,m;
+    static boolean[] ch;
+    static int[] res;
+    static StringBuilder sb = new StringBuilder();
+    public static void dfs(int L){
+        if(L == m){
+            for(int i:res)
+                if(i != 0)
+                    sb.append(i).append(' ');
+            sb.append('\n');
+            return ;
+        }
+        else{
+            for(int i=1; i<=n; ++i){
+               // if(!ch[i]){
+                    //ch[i] = true;
+                    res[L+1] = i;
+                    dfs(L+1);
+               // }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        ch = new boolean[n+1];
+        res = new int[m+1];
+        dfs(0);
+        System.out.println(sb);
     }
 }*/
 /* 1182 부분수열의 합 (쓴다/안쓴다) */

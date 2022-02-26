@@ -2,6 +2,8 @@ package Inflearn._8DFS_BFS;
 
 import java.util.*;
 
+/* 6. 순열 구하기 */
+
 /* 5-1. 동전교환 (★ DFS 시간복잡도 줄이기 ★)  */
 /*public class Main {
     static int target;

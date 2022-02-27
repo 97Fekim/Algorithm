@@ -449,3 +449,38 @@
 - 두번째 식은 피보나치 수열과 동일한 구조이며, n==r 인 경우나, r==1 인 경우에 각각 n,1 을 리턴하도록 재귀를 구현한다<br>
 - 이때 큰 수를 입력받으면 쓸모없는 연산이 많아지므로, 시간복잡도를 줄이기 위해 메모이제이션을 활용한다<br>
 </details>
+
+<details>
+<summary> <strong>8. 수열 추측하기 </strong> </summary>
+- 파스칼의 삼각형 문제<br>
+- 파스칼의 삼각형 계수가 조합의 규칙을 따르므로, 조합을 계산하여 배열에 넣어둔다.<br>
+- 조합의 배열을 이용해 수열을 찾는다.<br>
+</details>
+
+<details>
+<summary> <strong>9. 조합 구하기 </strong> </summary>
+- 조합은 중복되지 않게, n개 중 r개를 뽑는것<br>
+- DFS 안에서는 for문이 돌고, 재귀호출을 할때마다 for문의 첫 인덱스를 한칸씩 앞으로만 옮겨주면 된다<br>
+</details>
+
+<details>
+<summary> <strong>10. 미로 탐색 </strong> </summary>
+- 백준문제 풀이와 동일.<br>
+</details>
+
+<details>
+<summary> <strong>11. 미로의 최단거리 통로 </strong> </summary>
+- 백준문제 풀이와 다른점은, 이 문제에서는 BFS의 한 사이클마다 L을 증가시켜 L 을 반환하는 것이 아니라 거리를 저장하는 dis 배열을 추가하여 마지막에 dis 배열의 목표 index에서의 값을 찾는다.<br>
+</details>
+
+<details>
+<summary> <strong>12. 토마토 </strong> </summary>
+- 
+</details>
+
+<details>
+<summary> <strong>13. 섬나라 아일랜드 </strong> </summary>
+- 
+</details>
+
+

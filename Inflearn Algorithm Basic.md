@@ -483,4 +483,26 @@
 - 
 </details>
 
+### 8) Greedy Algorithm
+<details>
+<summary> <strong>1. 씨름선수 </strong> </summary>
+- 먼저 키 순으로 퀵정렬 시킨다.<br>
+- 키가 가장 큰 친구부터 몸무게를 비교하면서 max값을 갱신, 결과를 count한다.<br>
+</details>
+
+<details>
+<summary> <strong>2. 회의실 배정 </strong> </summary>
+- 회의가 빨리 끝나는 순서부터 계산을 하면 최대로 할 것이다 : Greedy Algorithm<br>
+- 반례에 주의한다. 회의가 끝나는 시간이 같은 경우, 시작 시간을 오름차순으로 정리해야함을 주의<br>
+</details>
+
+<details>
+<summary> <strong>3. 결혼식 </strong> </summary>
+- 시작 시간, 종료 시간을 그저 일렬로 세워놓고,<br>
+- 시작을 만나면 cnt증가<br>
+- 종료를 만나면 cnt감소<br>
+- 시작과 종료가 같이 있으면, 종료부터 적용<br> 
+</details>
+
+
 

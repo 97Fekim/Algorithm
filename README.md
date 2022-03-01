@@ -19,7 +19,7 @@
 - 배열의 중복을 제거해야 하는 문제라면 <strong>HashMap 이나 HashSet</strong> 이용하기
 - 최소공배수와 관련된 문제라면 <strong>GCD(Greate Common Devisior)</strong> 이용하기
 - 불필요하게 반복 호출되는 재귀 (예를들면 피보나치, 조합, 등)는 <strong>메모이제이션</strong>을 통해 시간복잡도를 줄일 수 있다.
-- 2차원, 3차원 배열의 탐색 문제는 <strong>거리 정보를 담은 dx, dy 배열</strong> 이용하기
+- 2차원, 3차원 배열로 주어진 그래프의 탐색 문제는 <strong>거리 정보를 담은 dx, dy 배열</strong> 이용하기
 - BFS, DFS 구현시 check 배열의 범위를 초과해 발생하는 NullPointerException 주의. 
 - 여러 개의 순서쌍이 주어지는 문제라면, 한 종류를 정렬 후 <strong>그리디 알고리즘</strong>으로 풀 수 있을지 고려하기
 - 배열의 최솟값이나 최댓값을 이용해야 하는데 시간 복잡도를 O(nlogn)으로 줄여야 한다면 <strong>PrioriryQueue</strong> 이용하기

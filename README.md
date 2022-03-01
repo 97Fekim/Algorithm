@@ -23,4 +23,5 @@
 - BFS, DFS 구현시 check 배열의 범위를 초과해 발생하는 NullPointerException 주의. 
 - 여러 개의 순서쌍이 주어지는 문제라면, 한 종류를 정렬 후 <strong>그리디 알고리즘</strong>으로 풀 수 있을지 고려하기
 - 배열의 최솟값이나 최댓값을 이용해야 하는데 시간 복잡도를 O(nlogn)으로 줄여야 한다면 <strong>PrioriryQueue</strong> 이용하기
+- 가중치 그래프의 최단거리를 구할때 <strong>다익스트라 알고리즘</strong> 고려하기
 - 서로소인 집합인지 아닌지 확인해야 한다면 <strong>Union & Find</strong> 알고리즘 이용하기

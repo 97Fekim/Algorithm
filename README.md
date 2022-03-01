@@ -16,3 +16,5 @@
 - 배열에서 특정 구간씩 다룰때, <strong>슬라이딩 윈도우</strong> 고려하기
 - 배열에서 범위가 어느정도 정해진 정답을 구해야 할때, <strong>결정 알고리즘</strong> 고려하기
 - BFS, DFS 구현시 check 배열의 범위를 초과해 발생하는 NullPointerException 주의. 
+- 여러 개의 순서쌍이 주어지는 문제라면, 한 종류를 정렬 후 <strong>그리디 알고리즘</strong>으로 풀 수 있을지 고려하기
+- 

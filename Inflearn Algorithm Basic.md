@@ -504,5 +504,11 @@
 - 시작과 종료가 같이 있으면, 종료부터 적용<br> 
 </details>
 
+<details>
+<summary> <strong>4. 최대수입 스케쥴(우선순위 큐) </strong> </summary>
+- 이 문제는 1일차 2일차 3일차 별로 각 <strong>일차마다 가능한 스케쥴중 가장 높은 가격의 강의를 선택</strong>하여 answer에 더하는 그리디 문제이다.<br>
+- 우선순위큐는 그냥 생성시, 작은 값을 우선으로 poll()<br>
+- Collections.reverseOrder()로 생성시, 큰 값을 우선으로 poll()<br>
+</details>
 
 

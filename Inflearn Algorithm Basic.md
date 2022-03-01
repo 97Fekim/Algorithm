@@ -520,4 +520,9 @@
 - 자세한 구현은 코드를 보자<br> >
 </details>
 
+ <details>
+<summary> <strong>6. 친구인가(Union & Find) </strong> </summary>
+- Find 함수와 Union 메소드를 각각 만들어 문제를 해결한다.<br>
+- 자세한 구현은 코드를 보자<br>
+</details>
 

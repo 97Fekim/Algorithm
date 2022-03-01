@@ -511,4 +511,9 @@
 - Collections.reverseOrder()로 생성시, 큰 값을 우선으로 poll()<br>
 </details>
 
+<details>
+<summary> <strong>5. 다익스트라 알고리즘 </strong> </summary>
+- 다익스트라 알고리즘을 사용하기 위해서는, 간선의 가중치가 음수면 안된다.<br>
+</details>
+
 

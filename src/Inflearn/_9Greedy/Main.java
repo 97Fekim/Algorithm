@@ -1,17 +1,106 @@
 package Inflearn._9Greedy;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-/* 다익스트라 */
-public class Main {
-
+/* 7-2. 원더랜드(프림 : 우선순위큐) */
+public class Main{
+    static class Edge implements Comparable<Edge>{
+        public int vex;
+        public int cost;
+        public Edge(int vex, int cost) {
+            this.vex = vex;
+            this.cost = cost;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.cost - o.cost;
+        }
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        ArrayList<ArrayList<Edge>> graph = new ArrayList<ArrayList<Edge>>();
+        for(int i=0; i<=n; ++i){
+            graph.add(new ArrayList<Edge>());
+        }
+        int[] ch = new int[n+1];
+        for(int i=0; i<m; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            graph.get(a).add(new Edge(b,c));
+            graph.get(b).add(new Edge(a,c));
+        }
+        int answer = 0;
+        PriorityQueue<Edge> pQ = new PriorityQueue<>();
+        pQ.offer(new Edge(1,0));
+        while(!pQ.isEmpty()){
+            Edge tmp = pQ.poll();
+            int ev = tmp.vex;
+            if(ch[ev] == 0) {
+                ch[ev] = 1;
+                answer += tmp.cost;
+                for(Edge ob : graph.get(ev)){
+                    if(ch[ob.vex]==0)
+                        pQ.offer(new Edge(ob.vex, ob.cost));
+                }
+            }
+        }
     }
 }
 
+/* 7-1. 원더랜드(크루스칼 : Union&Find)  */
+/*public class Main {
+
+    static class Graph implements Comparable<Graph>{
+        public int start;
+        public int end;
+        public int cost;
+        public Graph(int start, int end, int cost) {
+            this.start = start;
+            this.end = end;
+            this.cost = cost;
+        }
+        @Override
+        public int compareTo(Graph o) {
+            return this.cost - o.cost;
+        }
+    }
+
+    static int[] unf;
+    static int find(int v){
+        if(v == unf[v])
+            return v;
+        else
+            return unf[v] = find(unf[v]);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Graph> graph = new ArrayList<>();
+        int n = sc.nextInt();   // 정점의 개수
+        int m = sc.nextInt();   // 간선의 개수
+        unf = new int[n+1];
+        for(int i=1; i<=n; ++i)
+            unf[i] = i;
+        int answer = 0;
+
+        for(int i=0; i<m; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            graph.add(new Graph(a,b,c));
+        }
+        Collections.sort(graph);
+        for(Graph g : graph) {
+            if (find(g.start) != find(g.end)) {
+                unf[find(g.start)] = find(g.end);
+                answer += g.cost;
+            }
+        }
+        System.out.println(answer);
+    }
+}*/
 /* 6-2. 친구인가(Disjoint-Set : Union & Find) */
 /*public class Main {
     static int[] unf;   // 집합을 표현하는 배열
@@ -49,7 +138,6 @@ public class Main {
             System.out.println("NO");
     }
 }*/
-
 /* 6-1. 친구인가(DFS) */
 /*public class Main {
     static ArrayList<ArrayList<Integer>> graph;
@@ -89,7 +177,6 @@ public class Main {
         System.out.println(answer);
     }
 }*/
-
 /* 5. 다익스트라 알고리즘
 * n개의 정점을 n번 순회해야 하기때문에 n^2 인 것처럼 보이지만,
 * 다익스트라 알고리즘은 우선순위큐(logn)를 사용하기 때문에,

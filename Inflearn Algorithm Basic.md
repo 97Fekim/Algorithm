@@ -534,3 +534,7 @@
 - 노드가 같은 집합에 있는지 확인(유니온파인드 이용)한 후, 다른 집합이라면 연결 한다.<br>
 </details>
 
+<details>
+<summary> <strong>8. 원더랜드(프림 : 우선순위큐)</strong> </summary>
+- 
+</details>

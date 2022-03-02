@@ -1,6 +1,16 @@
 package Inflearn._9Greedy;
 
+import java.lang.reflect.Array;
 import java.util.*;
+
+/* 다익스트라 */
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+    }
+}
 
 /* 6-2. 친구인가(Disjoint-Set : Union & Find) */
 /*public class Main {

@@ -434,3 +434,95 @@
 - DFS로 구현할 때는 끝 노드들을 모두 탐색하며 최소 길이를 저장해나가는데, 이때 이미 구한 길이보다는 더 깊이 들어가지 않겠다는 if문을 걸어서 시간복잡도를 줄인다.<br>
 - 배열 원소의 순서에 따라서 짧은 길이가 더 먼저 발견될 가능성이 높다. 따라서 배열을 내림차순 정리하여 탐색하면 시간복잡도를 대폭 줄일 수 있다.<br> 
 </details>
+
+<details>
+<summary> <strong>6. 순열 구하기 </strong> </summary>
+- ch배열을 사용하는 DFS로 쉽게 구현<br>
+- <code>들어갈때 ch를 true, 나올때 ch를 false</code> 에 유의하자<br>
+</details>
+
+<details>
+<summary> <strong>7. 조합수 구하기 </strong> </summary>
+- 조합(nCr) 을 구하는 문제<br>
+- <code>nCr = n!/(n-r)!r!</code> 으로 구할수도 있지만,<br>
+- <code>nCr = n-1Cr-1 + n-1Cr</code> 으로도 구할 수 있다.<br>
+- 두번째 식은 피보나치 수열과 동일한 구조이며, n==r 인 경우나, r==1 인 경우에 각각 n,1 을 리턴하도록 재귀를 구현한다<br>
+- 이때 큰 수를 입력받으면 쓸모없는 연산이 많아지므로, 시간복잡도를 줄이기 위해 메모이제이션을 활용한다<br>
+</details>
+
+<details>
+<summary> <strong>8. 수열 추측하기 </strong> </summary>
+- 파스칼의 삼각형 문제<br>
+- 파스칼의 삼각형 계수가 조합의 규칙을 따르므로, 조합을 계산하여 배열에 넣어둔다.<br>
+- 조합의 배열을 이용해 수열을 찾는다.<br>
+</details>
+
+<details>
+<summary> <strong>9. 조합 구하기 </strong> </summary>
+- 조합은 중복되지 않게, n개 중 r개를 뽑는것<br>
+- DFS 안에서는 for문이 돌고, 재귀호출을 할때마다 for문의 첫 인덱스를 한칸씩 앞으로만 옮겨주면 된다<br>
+</details>
+
+<details>
+<summary> <strong>10. 미로 탐색 </strong> </summary>
+- 백준문제 풀이와 동일.<br>
+</details>
+
+<details>
+<summary> <strong>11. 미로의 최단거리 통로 </strong> </summary>
+- 백준문제 풀이와 다른점은, 이 문제에서는 BFS의 한 사이클마다 L을 증가시켜 L 을 반환하는 것이 아니라 거리를 저장하는 dis 배열을 추가하여 마지막에 dis 배열의 목표 index에서의 값을 찾는다.<br>
+</details>
+
+<details>
+<summary> <strong>12. 토마토 </strong> </summary>
+- 
+</details>
+
+<details>
+<summary> <strong>13. 섬나라 아일랜드 </strong> </summary>
+- 
+</details>
+
+### 8) Greedy Algorithm
+<details>
+<summary> <strong>1. 씨름선수 </strong> </summary>
+- 먼저 키 순으로 퀵정렬 시킨다.<br>
+- 키가 가장 큰 친구부터 몸무게를 비교하면서 max값을 갱신, 결과를 count한다.<br>
+</details>
+
+<details>
+<summary> <strong>2. 회의실 배정 </strong> </summary>
+- 회의가 빨리 끝나는 순서부터 계산을 하면 최대로 할 것이다 : Greedy Algorithm<br>
+- 반례에 주의한다. 회의가 끝나는 시간이 같은 경우, 시작 시간을 오름차순으로 정리해야함을 주의<br>
+</details>
+
+<details>
+<summary> <strong>3. 결혼식 </strong> </summary>
+- 시작 시간, 종료 시간을 그저 일렬로 세워놓고,<br>
+- 시작을 만나면 cnt증가<br>
+- 종료를 만나면 cnt감소<br>
+- 시작과 종료가 같이 있으면, 종료부터 적용<br> 
+</details>
+
+<details>
+<summary> <strong>4. 최대수입 스케쥴(우선순위 큐) </strong> </summary>
+- 이 문제는 1일차 2일차 3일차 별로 각 <strong>일차마다 가능한 스케쥴중 가장 높은 가격의 강의를 선택</strong>하여 answer에 더하는 그리디 문제이다.<br>
+- 우선순위큐는 그냥 생성시, 작은 값을 우선으로 poll()<br>
+- Collections.reverseOrder()로 생성시, 큰 값을 우선으로 poll()<br>
+</details>
+
+<details>
+<summary> <strong>5. 다익스트라 알고리즘 </strong> </summary>
+- 다익스트라 알고리즘을 사용하기 위해서는, 간선의 가중치가 음수면 안된다.<br>
+- 우선순위큐는 이진트리로 이루어져 있기 때문에, logn의 시간복잡도로 최대 최솟값을 꺼낼 수 있다.<br>
+- 따라서 다익스트라 알고리즘은 우선순위 큐에 정점과 가중치 정보를 넣고, 가중치 정보를 우선순위로 poll하여 최솟값을 판단하기 때문에 다익스트라 알고리즘의 시간 복잡도는 n^2이 아닌, nlogn이 된다.<br>
+- <code>Arrays.fill(arr, n) 을 활용하면, for문을 사용하지 않고 arr를 모두 n 값으로 채울 수 있다.<br>
+- 자세한 구현은 코드를 보자<br> >
+</details>
+
+ <details>
+<summary> <strong>6. 친구인가(Union & Find) </strong> </summary>
+- Find 함수와 Union 메소드를 각각 만들어 문제를 해결한다.<br>
+- 자세한 구현은 코드를 보자<br>
+</details>
+

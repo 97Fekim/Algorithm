@@ -516,11 +516,11 @@
 - 다익스트라 알고리즘을 사용하기 위해서는, 간선의 가중치가 음수면 안된다.<br>
 - 우선순위큐는 이진트리로 이루어져 있기 때문에, logn의 시간복잡도로 최대 최솟값을 꺼낼 수 있다.<br>
 - 따라서 다익스트라 알고리즘은 우선순위 큐에 정점과 가중치 정보를 넣고, 가중치 정보를 우선순위로 poll하여 최솟값을 판단하기 때문에 다익스트라 알고리즘의 시간 복잡도는 n^2이 아닌, nlogn이 된다.<br>
-- <code>Arrays.fill(arr, n) 을 활용하면, for문을 사용하지 않고 arr를 모두 n 값으로 채울 수 있다.<br>
+ - <code>Arrays.fill(arr, n)</code> 을 활용하면, for문을 사용하지 않고 arr를 모두 n 값으로 채울 수 있다.<br>
 - 자세한 구현은 코드를 보자<br> >
 </details>
 
- <details>
+<details>
 <summary> <strong>6. 친구인가(Union & Find) </strong> </summary>
 - Find 함수와 Union 메소드를 각각 만들어 문제를 해결한다.<br>
 - 자세한 구현은 코드를 보자<br>

@@ -3,14 +3,41 @@ package BAEKJOON.Basic2;
 import java.lang.reflect.Array;
 import java.util.*;
 
-
-/* 15652 N과 M (4) */
 public class Main {
+
+    static int[] arr;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        int target = sc.nextInt();
+        int n = sc.nextInt();
+
+
     }
 }
+
+/* 1476 날짜 계산 */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int cnt = 0;
+        int e = 0, s=0, m=0;
+        int t_e = sc.nextInt();
+        int t_s = sc.nextInt();
+        int t_m = sc.nextInt();
+        while(e!= t_e || s != t_s || m!=t_m){
+            if(++e>15)
+                e=1;
+            if(++s>28)
+                s=1;
+            if(++m>19)
+                m=1;
+            cnt++;
+        }
+        System.out.println(cnt);
+    }
+}*/
 /* 15649 N과 M (1) */
 /*public class Main {
 
@@ -678,6 +705,50 @@ public class Main {
     }
 }
 */
+/* 1697 숨바꼭질 */
+/*public class Main {
+
+    static int[] distance = {1,-1,2};
+    static int[] ch;
+    static Queue<Integer> q;
+    public static int BFS(int s, int e){
+        q.offer(s);
+        int L = 0;
+        while(!q.isEmpty()){
+            int len = q.size();
+            for(int i = 0; i< len; ++i){
+                int v = q.poll();
+                if(v == e)
+                    return L;
+                for(int j=0; j< distance.length; ++j){
+                    int nv;
+                    if(j==2)
+                        nv = distance[j]*v;
+                    else
+                        nv = v + distance[j];
+
+                    if(nv == e)
+                        return L+1;
+                    if(nv >= 0 && nv <100001 && ch[nv]==0){
+                        ch[nv] = 1;
+                        q.offer(nv);
+                    }
+                }
+            }
+            L++;
+        }
+        return 0;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int s = sc.nextInt();
+        int e = sc.nextInt();
+        ch = new int[100001];
+        q = new LinkedList<>();
+
+        System.out.println(BFS(s,e));
+    }
+}*/
 /* 13549 숨바꼭질 3 */
 /*public class Main {
 
@@ -721,6 +792,60 @@ public class Main {
         time = new int[100001];
         System.out.println(BFS(s,e));
 
+    }
+}*/
+/* 13913 숨바꼭질 4 */
+/*public class Main {
+
+    static int[] ch;
+    static int[] parent;
+    static int[] dis = {-1, 1};
+    public static int BFS(int s, int e){
+        int L=0;
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(s);
+        while(!q.isEmpty()) {
+            int len = q.size();
+            for(int i=0; i<len; ++i){
+                int v = q.poll();
+                if(v == e)
+                    return L;
+                for(int j=0; j<3; ++j){
+                    int nv;
+                    if(j==2)
+                        nv = 2 * v;
+                    else
+                        nv = v + dis[j];
+                    if(nv >= 0 && nv <= 100000 && ch[nv]==0){
+                        parent[nv] = v;
+                        ch[nv] = 1;
+                        q.offer(nv);
+                    }
+                }
+            }
+            L++;
+        }
+        return 0;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int s = sc.nextInt();
+        int e = sc.nextInt();
+        ch = new int[100001];
+        parent = new int[100001];
+        ch[s] = 1;
+        System.out.println(BFS(s,e));
+
+        Stack<Integer> stack = new Stack<>();
+        int index = e;
+        stack.push(index);
+
+        while(index != s){
+            stack.push(parent[index]);
+            index = parent[index];
+        }
+        while(!stack.isEmpty())
+            System.out.print(stack.pop()+" ");
     }
 }*/
 /* 14226 이모티콘 */
@@ -777,60 +902,6 @@ public class Main {
         int target = sc.nextInt();
         System.out.println(BFS(target));
 
-    }
-}*/
-/* 1697 숨바꼭질 */
-/*public class Main {
-
-    static int[] ch;
-    static int[] parent;
-    static int[] dis = {-1, 1};
-    public static int BFS(int s, int e){
-        int L=0;
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(s);
-        while(!q.isEmpty()) {
-            int len = q.size();
-            for(int i=0; i<len; ++i){
-                int v = q.poll();
-                if(v == e)
-                    return L;
-                for(int j=0; j<3; ++j){
-                    int nv;
-                    if(j==2)
-                        nv = 2 * v;
-                    else
-                        nv = v + dis[j];
-                    if(nv >= 0 && nv <= 100000 && ch[nv]==0){
-                        parent[nv] = v;
-                        ch[nv] = 1;
-                        q.offer(nv);
-                    }
-                }
-            }
-            L++;
-        }
-        return 0;
-    }
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int s = sc.nextInt();
-        int e = sc.nextInt();
-        ch = new int[100001];
-        parent = new int[100001];
-        ch[s] = 1;
-        System.out.println(BFS(s,e));
-
-        Stack<Integer> stack = new Stack<>();
-        int index = e;
-        stack.push(index);
-
-        while(index != s){
-            stack.push(parent[index]);
-            index = parent[index];
-        }
-        while(!stack.isEmpty())
-            System.out.print(stack.pop()+" ");
     }
 }*/
 /* 9095 123더하기 */

@@ -3,17 +3,78 @@ package BAEKJOON.Basic2;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/* 1238 파티 (다익스트라) */
 public class Main {
 
-    static int[] arr;
+    static class Edge implements Comparable<Edge>{
+        int vex;
+        int cost;
+        public Edge(int vex, int cost) {
+            this.vex = vex;
+            this.cost = cost;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.cost - o.cost;
+        }
+    }
 
+    static int[] toparty;
+    static int[] tohome;
+    static ArrayList<ArrayList<Edge>> graph_foward;
+    static ArrayList<ArrayList<Edge>> graph_backward;
+    public static void dijkstra(int v, int[] dis, ArrayList<ArrayList<Edge>> graph){
+        PriorityQueue<Edge> pQ = new PriorityQueue<Edge>();
+        dis[v] = 0;
+        pQ.offer(new Edge(v,0));
+        while(!pQ.isEmpty()){
+            Edge tmp = pQ.poll();
+            int now = tmp.vex;
+            int nowCost = tmp.cost;
+            if(dis[now] < nowCost) continue;
+            for(Edge ob : graph.get(now)){
+                if(dis[ob.vex] > ob.cost + nowCost) {
+                    dis[ob.vex] = ob.cost + nowCost;
+                    pQ.offer(new Edge(ob.vex, ob.cost+nowCost));
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int target = sc.nextInt();
         int n = sc.nextInt();
+        int m = sc.nextInt();
+        int x = sc.nextInt();
 
+        toparty = new int[n+1];
+        tohome = new int[n+1];
 
+        Arrays.fill(toparty, Integer.MAX_VALUE);
+        Arrays.fill(tohome, Integer.MAX_VALUE);
+
+        graph_foward = new ArrayList<ArrayList<Edge>>();
+        graph_backward = new ArrayList<ArrayList<Edge>>();
+
+        for(int i=0; i<=m; ++i) {
+            graph_foward.add(new ArrayList<Edge>());
+            graph_backward.add(new ArrayList<Edge>());
+        }
+        for(int i=0; i<m; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            graph_foward.get(a).add(new Edge(b,c));
+            graph_backward.get(b).add(new Edge(a,c));
+        }
+
+        dijkstra(x, toparty, graph_backward);
+        dijkstra(x, tohome, graph_foward);
+
+        int[] total = new int[n+1];
+        for(int i=1; i<=n; ++i)
+            total[i] = toparty[i] + tohome[i];
+        System.out.println(Arrays.stream(total).max().getAsInt());
     }
 }
 

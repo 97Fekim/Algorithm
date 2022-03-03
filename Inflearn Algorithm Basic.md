@@ -553,3 +553,8 @@
 <summary> <strong>2. 돌다리 건너리</strong> </summary>
 - 계단오르기와 이하동문,, 피보나치처럼 dy 배열에 누적해서 n+1번째를 구한다<br>
 </details>
+
+<details>
+<summary> <strong>3. 최대부분증가수열</strong> </summary>
+- 배열의 앞부분부터 최대 증가수열의 갯수를 채워나가는 DP문제<br<
+</details>

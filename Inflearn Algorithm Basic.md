@@ -548,3 +548,8 @@
 - dy[5] = dy[3] + dy[4]<br>
 - 피보나치와 유사한 형태<br>
 </details>
+
+<details>
+<summary> <strong>2. 돌다리 건너리</strong> </summary>
+- 계단오르기와 이하동문,, 피보나치처럼 dy 배열에 누적해서 n+1번째를 구한다<br>
+</details>

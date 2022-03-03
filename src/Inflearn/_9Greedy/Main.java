@@ -3,7 +3,7 @@ package Inflearn._9Greedy;
 import java.util.*;
 
 /* 7-2. 원더랜드(프림 : 우선순위큐) */
-public class Main{
+/*public class Main{
     static class Edge implements Comparable<Edge>{
         public int vex;
         public int cost;
@@ -18,6 +18,7 @@ public class Main{
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        int answer = 0;
         int n = sc.nextInt();
         int m = sc.nextInt();
         ArrayList<ArrayList<Edge>> graph = new ArrayList<ArrayList<Edge>>();
@@ -32,24 +33,23 @@ public class Main{
             graph.get(a).add(new Edge(b,c));
             graph.get(b).add(new Edge(a,c));
         }
-        int answer = 0;
-        PriorityQueue<Edge> pQ = new PriorityQueue<>();
-        pQ.offer(new Edge(1,0));
-        while(!pQ.isEmpty()){
-            Edge tmp = pQ.poll();
-            int ev = tmp.vex;
-            if(ch[ev] == 0) {
-                ch[ev] = 1;
+        PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
+        pq.offer(new Edge(1,0));
+        while(!pq.isEmpty()){
+            Edge tmp = pq.poll();
+            int nv = tmp.vex;
+            if(ch[nv] == 0) {
+                ch[nv] = 1;
                 answer += tmp.cost;
-                for(Edge ob : graph.get(ev)){
-                    if(ch[ob.vex]==0)
-                        pQ.offer(new Edge(ob.vex, ob.cost));
-                }
+            }
+            for(Edge ob : graph.get(nv)){
+                if(ch[ob.vex] == 0)
+                    pq.offer(ob);
             }
         }
+        System.out.println(answer);
     }
-}
-
+}*/
 /* 7-1. 원더랜드(크루스칼 : Union&Find)  */
 /*public class Main {
 

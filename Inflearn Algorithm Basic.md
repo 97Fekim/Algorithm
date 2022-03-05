@@ -566,10 +566,15 @@
 </details>
 
 <details>
-<summary> <strong>5. 동전 교환</strong> </summary>
+<summary> <strong>5. 동전 교환(냅색 알고리즘)</strong> </summary>
 - 냅색 알고리즘 문제<br>
 - target의 크기만큼 배열을 만들어 해결한다.<br>
 </details>
 
+<details>
+<summary> <strong>6. 최대점수 구하기(냅색 알고리즘)</strong> </summary>
+- 타깃이 20분이라면, dy = int[20] 배열을 만든다.<br>
+- dy[j]는 j 분동안 얻을 수 있는 최대 점수를 뜻한다.<br>
+</details>
 
 

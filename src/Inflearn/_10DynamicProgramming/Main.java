@@ -1,10 +1,97 @@
 package Inflearn._10DynamicProgramming;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-/* 3. 최대부분증가수열(LIS) */
+/* 6. 최대점수 구하기(냅색 알고리즘) */
 public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] dy = new int[m+1];
+        for(int i=0; i<n; ++i){
+            int ps = sc.nextInt();  // 풀면 얻는 점수
+            int pt = sc.nextInt();  // 푸는데 걸리는 시간
+            for(int j=m; j>=pt; j--){
+                dy[j] = Math.max(dy[j], dy[j-pt]+ps);
+            }
+        }
+        System.out.println(dy[m]);
+    }
+}
+
+/* 5. 동전교환(냅색 알고리즘) */
+/*public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] coins = new int[n];
+
+        for(int i=0; i<n; ++i)
+            coins[i] = sc.nextInt();
+
+        int target = sc.nextInt();
+
+        int[] dy = new int[target+1];
+        Arrays.fill(dy, Integer.MAX_VALUE);
+        dy[0] = 0;
+
+        for(int i=0; i<coins.length; ++i){
+            for(int j = coins[i]; j<dy.length; j++)
+                dy[j] = Math.min(dy[j], dy[j-coins[i]]+1);
+        }
+
+        System.out.println(dy[target]);
+    }
+}*/
+/* 4. 가장 높은 탑 쌓기(LIS 응용) */
+/*public class Main {
+    static class Brick implements Comparable<Brick>{
+        public int area;
+        public int hei;
+        public int wei;
+        public Brick(int area, int hei, int wei) {
+            this.area = area;
+            this.hei = hei;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Brick o) {
+            return this.area - o.area;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        ArrayList<Brick> list = new ArrayList<>();
+        int[] result = new int[n];
+
+        for(int i=0; i<n; ++i){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            list.add(new Brick(a,b,c));
+        }
+        Collections.sort(list);
+
+        result[0] = list.get(0).hei;
+        for(int i=1; i<n; ++i){
+            int max = 0;
+            for(int j=0; j<=i-1; ++j){
+                if(list.get(i).wei > list.get(j).wei)
+                    max = Math.max(max, result[j]);
+            }
+            result[i] = max + list.get(i).hei;
+        }
+
+        int max = Arrays.stream(result).max().getAsInt();
+        System.out.println(max);
+    }
+}*/
+/* 3. 최대부분증가수열(LIS) */
+/*public class Main {
     static int[] dy;
     static int solution(int[] arr){
         int answer = 0;
@@ -30,8 +117,7 @@ public class Main {
         }
         System.out.println(solution(arr));
     }
-}
-
+}*/
 /* 2. 돌다리 건너기 */
 /*public class Main {
 

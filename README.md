@@ -25,4 +25,4 @@
 - 배열의 최솟값이나 최댓값을 이용해야 하는데 시간 복잡도를 O(nlogn)으로 줄여야 한다면 <strong>PrioriryQueue</strong> 이용하기
 - 가중치 그래프의 최단거리를 구할때 <strong>다익스트라 알고리즘</strong> 고려하기
 - 서로소인 집합인지 아닌지 확인해야 한다면 <strong>Union & Find</strong> 알고리즘 이용하기
-- 최소한의 간선 갯수, 가중치로 모든 노드가 연결되게 만들어야 한다면 <strong>크루스칼</strong>알고리즘 사용하기
+- 최소한의 간선 갯수, 가중치로 모든 노드가 연결되게 만들어야 한다면 <strong>크루스칼</strong>이나 <strong>프림</strong>알고리즘 사용하기

@@ -556,7 +556,7 @@
 
 <details>
 <summary> <strong>3. 최대부분증가수열</strong> </summary>
-- 배열의 앞부분부터 최대 증가수열의 갯수를 채워나가는 DP문제<br
+- 배열의 앞부분부터 최대 증가수열의 갯수를 채워나가는 DP문제<br>
 </details>
 
 <details>

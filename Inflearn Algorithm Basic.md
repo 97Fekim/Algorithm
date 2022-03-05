@@ -565,3 +565,11 @@
 - 무게나 높이 하나를 오름차순으로 정렬한 후, 다른 하나를 비교하며 dy[]배열에 최대 높이를 넣는다.<br>
 </details>
 
+<details>
+<summary> <strong>5. 동전 교환</strong> </summary>
+- 냅색 알고리즘 문제<br>
+- target의 크기만큼 배열을 만들어 해결한다.<br>
+</details>
+
+
+

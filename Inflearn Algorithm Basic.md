@@ -556,7 +556,7 @@
 
 <details>
 <summary> <strong>3. 최대부분증가수열</strong> </summary>
-- 배열의 앞부분부터 최대 증가수열의 갯수를 채워나가는 DP문제<br<
+- 배열의 앞부분부터 최대 증가수열의 갯수를 채워나가는 DP문제<br
 </details>
 
 <details>
@@ -575,6 +575,7 @@
 <summary> <strong>6. 최대점수 구하기(냅색 알고리즘)</strong> </summary>
 - 타깃이 20분이라면, dy = int[20] 배열을 만든다.<br>
 - dy[j]는 j 분동안 얻을 수 있는 최대 점수를 뜻한다.<br>
+- 사용할 수 있는 동전이 무제한인 동전 교환 문제와는 다르게, 한 문제는 한 번만 풀 수 있으므로, 뒤에서부터 배열의 값을 update해야 한다.<br>
 </details>
 
 

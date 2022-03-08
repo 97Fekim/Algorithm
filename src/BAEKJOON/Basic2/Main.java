@@ -1,9 +1,41 @@
 package BAEKJOON.Basic2;
 
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.util.*;
 
-/* 1238 파티 (다익스트라) */
+
+
+/* 15988 1,2,3 더하기 */
+/*public class Main {
+
+    static long dp(int n){
+        long[] arr = new long[n+1];
+        arr[1] = 1;
+            if(n==1)
+                return arr[1];
+        arr[2] = 2;
+            if(n==2)
+                return arr[2];
+        arr[3] = 4;
+            if(n==3)
+                return arr[3];
+        for(int i=4; i<=n; ++i){
+            arr[i] = arr[i-1] + arr[i-2] + arr[i-3];
+            if(arr[i] >= 1000000009)
+                arr[i] = arr[i] % 1000000009;
+        }
+        return arr[n];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        while(n-->0){
+            System.out.println(dp(sc.nextInt()));
+        }
+    }
+}*/
 /*public class Main {
 
     static class Edge implements Comparable<Edge>{

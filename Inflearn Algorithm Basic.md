@@ -516,13 +516,66 @@
 - 다익스트라 알고리즘을 사용하기 위해서는, 간선의 가중치가 음수면 안된다.<br>
 - 우선순위큐는 이진트리로 이루어져 있기 때문에, logn의 시간복잡도로 최대 최솟값을 꺼낼 수 있다.<br>
 - 따라서 다익스트라 알고리즘은 우선순위 큐에 정점과 가중치 정보를 넣고, 가중치 정보를 우선순위로 poll하여 최솟값을 판단하기 때문에 다익스트라 알고리즘의 시간 복잡도는 n^2이 아닌, nlogn이 된다.<br>
-- <code>Arrays.fill(arr, n) 을 활용하면, for문을 사용하지 않고 arr를 모두 n 값으로 채울 수 있다.<br>
+ - <code>Arrays.fill(arr, n)</code> 을 활용하면, for문을 사용하지 않고 arr를 모두 n 값으로 채울 수 있다.<br>
 - 자세한 구현은 코드를 보자<br> >
 </details>
 
- <details>
+<details>
 <summary> <strong>6. 친구인가(Union & Find) </strong> </summary>
 - Find 함수와 Union 메소드를 각각 만들어 문제를 해결한다.<br>
 - 자세한 구현은 코드를 보자<br>
 </details>
+ 
+<details>
+<summary> <strong>7. 원더랜드(크루스칼 : Union&Find)</strong> </summary>
+- 노드들의 최소 경로 만을 남기면 그래프에서 트리 구조로 바뀐다.<br>
+- 그래프를 최소의 비용으로 트리를 만들면, 이를 최소신장트리라고 하는데 최소신장트리를 만드는 알고리즘중 하나가 크루스칼 알고리즘이다<br>
+- 먼저 가중치를 기준으로 오름차순 정렬한다.<br>
+- 노드가 같은 집합에 있는지 확인(유니온파인드 이용)한 후, 다른 집합이라면 연결 한다.<br>
+</details>
+
+<details>
+<summary> <strong>8. 원더랜드(프림 : 우선순위큐)</strong> </summary>
+- 우선순위큐를 이용해서 최소신장트리를 만드는 알고리즘이다.<br>
+- 인접리스트에 무방향 그래프의 정점,간선 정보를 저장한다.<br>
+- 방문하지 않은 노드만 가중치가 가장 낮은 간선으로 연결한다(우선순위 큐이므로 시간복잡도 O(logn))
+</details>
+
+### 9)동적계획법
+<details>
+<summary> <strong>1. 계단오르기</strong> </summary>
+- 5번째 계단으로 가는 방법은 3,4번째 계단을 통해 가는 방법뿐이다.<br>
+- dy[5] = dy[3] + dy[4]<br>
+- 피보나치와 유사한 형태<br>
+</details>
+
+<details>
+<summary> <strong>2. 돌다리 건너리</strong> </summary>
+- 계단오르기와 이하동문,, 피보나치처럼 dy 배열에 누적해서 n+1번째를 구한다<br>
+</details>
+
+<details>
+<summary> <strong>3. 최대부분증가수열</strong> </summary>
+- 배열의 앞부분부터 최대 증가수열의 갯수를 채워나가는 DP문제<br>
+</details>
+
+<details>
+<summary> <strong>4. 가장 높은 탑 쌓기</strong> </summary>
+- 무게와 높이가 모두 작아야만 탑을 쌓을 수 있다.<br>
+- 무게나 높이 하나를 오름차순으로 정렬한 후, 다른 하나를 비교하며 dy[]배열에 최대 높이를 넣는다.<br>
+</details>
+
+<details>
+<summary> <strong>5. 동전 교환(냅색 알고리즘)</strong> </summary>
+- 냅색 알고리즘 문제<br>
+- target의 크기만큼 배열을 만들어 해결한다.<br>
+</details>
+
+<details>
+<summary> <strong>6. 최대점수 구하기(냅색 알고리즘)</strong> </summary>
+- 타깃이 20분이라면, dy = int[20] 배열을 만든다.<br>
+- dy[j]는 j 분동안 얻을 수 있는 최대 점수를 뜻한다.<br>
+- 사용할 수 있는 동전이 무제한인 동전 교환 문제와는 다르게, 한 문제는 한 번만 풀 수 있으므로, 뒤에서부터 배열의 값을 update해야 한다.<br>
+</details>
+
 

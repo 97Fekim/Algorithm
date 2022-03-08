@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 /* 1238 파티 (다익스트라) */
-public class Main {
+/*public class Main {
 
     static class Edge implements Comparable<Edge>{
         int vex;
@@ -76,8 +76,7 @@ public class Main {
             total[i] = toparty[i] + tohome[i];
         System.out.println(Arrays.stream(total).max().getAsInt());
     }
-}
-
+}*/
 /* 1476 날짜 계산 */
 /*public class Main {
     public static void main(String[] args) {

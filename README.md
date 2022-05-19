@@ -5,7 +5,7 @@
 ## LeetCode 풀이
 - [문제풀이](https://velog.io/@16fekim?tag=leetcode)
 ## Cos Pro 1급 대비 문제풀이
-- 
+- [키워드 정리](https://github.com/97Fekim/Algorithm/blob/master/CosPro)
 ## [자바(Java) 알고리즘 문제풀이 : 코딩테스트 대비] ,인프런
 - [코드로 이동](https://github.com/97Fekim/Algorithm/tree/master/src/Inflearn)
 - [강의 문제 풀이](https://github.com/97Fekim/Algorithm/blob/master/Inflearn%20Algorithm%20Basic.md)

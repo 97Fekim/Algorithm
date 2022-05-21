@@ -260,8 +260,8 @@ public class Main {
                 if(count == 1)
                     answer.append(str.charAt(i));
                 else{
-                    answer.append(count);
                     answer.append(str.charAt(i));
+                    answer.append(count);
                     count = 1;
                 }
             }

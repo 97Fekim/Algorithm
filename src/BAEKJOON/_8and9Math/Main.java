@@ -2,9 +2,33 @@ package BAEKJOON._8and9Math;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.io.IOException;
+
+/* BigDecimal */
+public class Main {
+    public static void main(String[] args) {
+
+        BigDecimal num1 = new BigDecimal("350.25");
+        BigDecimal num2 = new BigDecimal("-275.35");
+
+        System.out.println("+ 연산 결과 = " + num1.add(num2));
+        System.out.println("- 연산 결과 = " + num1.subtract(num2));
+        System.out.println("* 연산 결과 = " + num1.multiply(num2));
+        System.out.println("/ 연산 결과 = " + num1.divide(num2, 34, BigDecimal.ROUND_CEILING));
+        System.out.println("% 연산 결과 = " + num1.remainder(num2));
+        System.out.println("최댓값 연산 결과 = " + num1.max(num2));
+        System.out.println("최솟값 연산 결과 = " + num1.min(num2));
+        System.out.println("절댓값 연산 결과 = " + num2.abs());
+        System.out.println("반올림 연산 결과 = " + num1.setScale(0, RoundingMode.HALF_EVEN));
+
+
+
+    }
+}
 
 /* 1002 터렛 */
 /*public class Main {

@@ -3,6 +3,9 @@ package BAEKJOON.playground;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -10,29 +13,84 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        List<Integer> list = null;
+        int src = 0;
+        int sum;
 
-        int maxI = 0;
-        int maxJ = 0;
-        int max = 0;
-        int curVal = 0;
+        while (true) {
+            src = Integer.parseInt(br.readLine());
+            if(src == -1) {
+                break;
+            }
+            list = new ArrayList<>();
+            sum = 0;
 
-        for(int i=0; i<9; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-            for(int j=0; j<9; j++) {
-                curVal = Integer.parseInt(st.nextToken());
-                if(curVal > max) {
-                    max = curVal;
-                    maxI = i;
-                    maxJ = j;
+            for(int i=1; i<=src/2; ++i) {
+                if(src % i == 0) {
+                    list.add(i);
+                    sum += i;
                 }
             }
+            if (sum == src) {
+                System.out.print(src + " = ");
+                Integer[] array = list.toArray(new Integer[list.size()]);
+                for(int j=0; j<array.length; ++j) {
+                    if(j != array.length-1) {
+                        System.out.print(array[j] + " + ");
+                    } else {
+                        System.out.print(array[j]);
+                    }
+                }
+                System.out.println();
+            } else {
+                System.out.println(src + " is NOT perfect.");
+            }
+
         }
 
-        System.out.println(max);
-        System.out.print((maxI+1) + " " + (maxJ+1));
-
     }
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int count = Integer.parseInt(br.readLine());
+        int total = 0;
+        int[] exchange = new int[4];
+        Arrays.fill(exchange, 0);
+
+        for(int i=0; i<count; i++) {
+
+            total = Integer.parseInt(br.readLine());
+
+            while(total > 0) {
+                if (total >= 25) {
+                    exchange[0]++;
+                    total -= 25;
+                } else if (total >= 10) {
+                    exchange[1]++;
+                    total -= 10;
+                } else if (total >= 5) {
+                    exchange[2]++;
+                    total -= 5;
+                } else {
+                    exchange[3]++;
+                    total -= 1;
+                }
+            }
+
+            for(int j=0; j<exchange.length; j++) {
+                System.out.print(exchange[j] + " ");
+            }
+
+            if(i != count-1) {
+                System.out.println();
+            }
+
+            Arrays.fill(exchange, 0);
+        }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
 

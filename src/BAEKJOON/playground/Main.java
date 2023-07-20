@@ -3,52 +3,83 @@ package BAEKJOON.playground;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        List<Integer> list = null;
-        int src = 0;
-        int sum;
+        //int sum = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int sum = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(br.readLine());
+        int creator;
+        int origin;
+        boolean isCretorExist = false;
 
-        while (true) {
-            src = Integer.parseInt(br.readLine());
-            if(src == -1) {
+        for(int i=0; i<N; ++i) {
+            creator = i;
+            origin = i;
+
+            while(origin > 0) {
+
+                creator += origin%10;
+                origin /= 10;
+            }
+
+            if(creator == N) {
+                System.out.println(i);
+                isCretorExist = true;
                 break;
             }
-            list = new ArrayList<>();
-            sum = 0;
+        }
 
-            for(int i=1; i<=src/2; ++i) {
-                if(src % i == 0) {
-                    list.add(i);
-                    sum += i;
-                }
+        if (!isCretorExist) {
+            System.out.println(0);
+        }
+
+    }
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int cnt = Integer.parseInt(br.readLine());
+
+        int curX = 0;
+        int curY = 0;
+
+        int maxX = Integer.MIN_VALUE;
+        int minX = Integer.MAX_VALUE;
+
+        int maxY = Integer.MIN_VALUE;
+        int minY = Integer.MAX_VALUE;
+
+        for(int i=0; i<cnt; i++) {
+
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+            curX = Integer.parseInt(st.nextToken());
+            curY = Integer.parseInt(st.nextToken());
+
+            if (maxX < curX) {
+                maxX = curX;
             }
-            if (sum == src) {
-                System.out.print(src + " = ");
-                Integer[] array = list.toArray(new Integer[list.size()]);
-                for(int j=0; j<array.length; ++j) {
-                    if(j != array.length-1) {
-                        System.out.print(array[j] + " + ");
-                    } else {
-                        System.out.print(array[j]);
-                    }
-                }
-                System.out.println();
-            } else {
-                System.out.println(src + " is NOT perfect.");
+            if (curX < minX) {
+                minX = curX;
+            }
+
+            if (maxY < curY) {
+                maxY = curY;
+            }
+            if (curY < minY) {
+                minY = curY;
             }
 
         }
 
-    }
+        System.out.println((maxX-minX)*(maxY-minY));
+
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
 

@@ -1,13 +1,182 @@
 package BAEKJOON.playground;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        Set<Integer> setA_origin = new HashSet<>();
+        Set<Integer> setA_copy = new HashSet<>();
+        Set<Integer> setB_origin = new HashSet<>();
+
+        st = new StringTokenizer(br.readLine(), " ");
+        int cur;
+
+        for(int i=1; i<=N; ++i) {
+            cur = Integer.parseInt(st.nextToken());
+            setA_origin.add(cur);
+            setA_copy.add(cur);
+        }
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for(int i=1; i<=M; ++i) {
+            cur = Integer.parseInt(st.nextToken());
+            setB_origin.add(cur);
+        }
+
+        int total = 0;
+        setA_copy.removeAll(setB_origin);
+        total += setA_copy.size();
+
+        setB_origin.removeAll(setA_origin);
+        total += setB_origin.size();
+
+        System.out.println(total);
+
+    }
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        Map<String, Integer> sToImap = new HashMap<>();
+        Map<Integer, String> iToSmap = new HashMap<>();
+
+        String cur;
+
+        for(int i=1; i<=N; ++i) {
+            cur = br.readLine();
+            sToImap.put(cur, i);
+            iToSmap.put(i, cur);
+        }
+
+        for(int i=1; i<=M; ++i) {
+            cur = br.readLine();
+            try {
+                System.out.println(iToSmap.get(Integer.parseInt(cur)));
+            } catch (NumberFormatException e) {
+                System.out.println(sToImap.get(cur));
+            }
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        Map<String, Boolean> map = new TreeMap<>(Collections.reverseOrder());
+
+        String name;
+        String active;
+
+        for(int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+            name = st.nextToken();
+            active = st.nextToken();
+
+            if(!map.containsKey(name) && active.equals("enter")) {
+                map.put(name, Boolean.TRUE);
+            }
+
+            if(map.containsKey(name) && active.equals("leave")) {
+                map.remove(name);
+            }
+        }
+
+        for(String key : map.keySet()) {
+            System.out.println(key);
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int sum = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int sum = Integer.parseInt(st.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        Map<String, Integer> map = new HashMap<>();
+
+        for(int i=0; i<N; ++i) {
+            map.put(br.readLine(), 1);
+        }
+
+        String str;
+        int sum = 0;
+
+        for(int i=0; i<M; ++i) {
+            str = br.readLine();
+            sum += map.get(str) == null ? 0 : map.get(str);
+        }
+
+        System.out.println(sum);
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int sum = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int sum = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        int N = Integer.parseInt(br.readLine());
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        for(int i=0; i<N; ++i) {
+            map.put(Integer.parseInt(st.nextToken()), 1);
+        }
+
+        N = Integer.parseInt(br.readLine());
+
+        st = new StringTokenizer(br.readLine(), " ");
+
+        int isExist = 0;
+        int tmp;
+
+        for(int i=0; i<N; ++i) {
+            tmp = Integer.parseInt(st.nextToken());
+            isExist = map.get(tmp) == null ? 0 : map.get(tmp);
+
+            System.out.print(isExist + " ");
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //int sum = Integer.parseInt(br.readLine());
         //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
@@ -38,7 +207,7 @@ public class Main {
             System.out.println(0);
         }
 
-    }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
 

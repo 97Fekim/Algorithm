@@ -6,12 +6,88 @@ import sun.misc.GC;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.StringTokenizer;
 import java.util.*;
 
 public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        int cnt = 0;
+        for(int i=1; i*i<=N; ++i) {
+            cnt++;
+        }
+
+        System.out.println(cnt);
+    }
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int cnt = Integer.parseInt(br.readLine());
+        for(int i=0; i<cnt; ++i) {
+
+            int N = Integer.parseInt(br.readLine());
+
+            boolean[] primes = new boolean[N+1];
+            Arrays.fill(primes, false);
+
+            List<Integer> list = new ArrayList<>();
+
+            for(int j=2; j<=N; ++j) {
+                if(!primes[j]) {
+                    list.add(j);
+                    for(int k=j; k<=N; k+=j) {
+                        primes[k] = true;
+                    }
+                }
+            }
+
+            Integer resultArray[] = list.toArray(new Integer[list.size()]);
+
+            int resultCount= 0;
+            int start = 0;
+            int end = resultArray.length-1;
+            int sum = 0;
+
+            while (start <= end) {
+
+                sum = resultArray[start] + resultArray[end];
+
+                if(sum == N) {
+                    resultCount++;
+                }
+
+                if (sum <= N) {
+                    start++;
+                } else {
+                    end--;
+                }
+
+            }
+
+            if(i < cnt-1) {
+                System.out.println(resultCount);
+            } else {
+                System.out.print(resultCount);
+            }
+
+
+        }
+
+    }*/
+
 
 /*    public static void main(String[] args) throws IOException {
 

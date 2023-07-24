@@ -3,42 +3,70 @@ package BAEKJOON.playground;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        //int sum = Integer.parseInt(br.readLine());
+        //int N = Integer.parseInt(br.readLine());
         //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         //int sum = Integer.parseInt(st.nextToken());
-        int N = Integer.parseInt(br.readLine());
-        int creator;
-        int origin;
-        boolean isCretorExist = false;
-
-        for(int i=0; i<N; ++i) {
-            creator = i;
-            origin = i;
-
-            while(origin > 0) {
-
-                creator += origin%10;
-                origin /= 10;
-            }
-
-            if(creator == N) {
-                System.out.println(i);
-                isCretorExist = true;
-                break;
-            }
-        }
-
-        if (!isCretorExist) {
-            System.out.println(0);
-        }
 
     }
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int sum = Integer.parseInt(st.nextToken());
+        int cnt = 0;
+        int min = Integer.MAX_VALUE;
+
+        for(int i=0; i<=N; ++i) {
+            for(int j=0; j<=N; ++j) {
+
+                if(i*5 + 3*j == N) {
+                    min = Math.min(min, i+j);
+                }
+
+            }
+        }
+
+        if (min == Integer.MAX_VALUE) {
+            System.out.println(-1);
+        } else {
+            System.out.println(min);
+        }
+
+    }*/
+
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int sum = Integer.parseInt(st.nextToken());
+
+        int cnt = 0;
+        long i = 0;
+
+        while(true) {
+            if(Long.toString(i).contains("666")) {
+                cnt++;
+            }
+
+            if(cnt == N) {
+                System.out.println(i);
+                break;
+            }
+
+            i++;
+        }
+
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
 

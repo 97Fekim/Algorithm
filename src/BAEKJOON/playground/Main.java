@@ -19,39 +19,68 @@ public class Main {
         //int N = Integer.parseInt(st.nextToken());
         //String str = br.readLine();
 
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-
-        Set<Integer> setA_origin = new HashSet<>();
-        Set<Integer> setA_copy = new HashSet<>();
-        Set<Integer> setB_origin = new HashSet<>();
-
-        st = new StringTokenizer(br.readLine(), " ");
-        int cur;
-
-        for(int i=1; i<=N; ++i) {
-            cur = Integer.parseInt(st.nextToken());
-            setA_origin.add(cur);
-            setA_copy.add(cur);
-        }
-
-        st = new StringTokenizer(br.readLine(), " ");
-        for(int i=1; i<=M; ++i) {
-            cur = Integer.parseInt(st.nextToken());
-            setB_origin.add(cur);
-        }
-
-        int total = 0;
-        setA_copy.removeAll(setB_origin);
-        total += setA_copy.size();
-
-        setB_origin.removeAll(setA_origin);
-        total += setB_origin.size();
-
-        System.out.println(total);
-
     }
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int firstUp = 0;
+        int firstDown = 0;
+        int secondUp = 0;
+        int secondDown = 0;
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        firstUp = Integer.parseInt(st.nextToken());
+        firstDown = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine(), " ");
+        secondUp = Integer.parseInt(st.nextToken());
+        secondDown = Integer.parseInt(st.nextToken());
+
+        int resultUp = firstUp*secondDown + secondUp*firstDown;
+        int resultDown = firstDown * secondDown;
+
+        for(int i=resultUp; i>=1; i--) {
+            if(resultUp % i == 0 && resultDown % i == 0) {
+                resultUp /= i;
+                resultDown /= i;
+
+            }
+        }
+
+        System.out.println(resultUp + " " + resultDown);
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        long N = Integer.parseInt(st.nextToken());
+        long M = Integer.parseInt(st.nextToken());
+        long GCD = 1;
+
+        for(long i=2; i<=Math.min(N, M); ++i) {
+
+            if(N%i==0 && M%i==0) {
+                GCD = i;
+            }
+
+        }
+
+        System.out.println(N*M/GCD);
+
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -1,17 +1,64 @@
 package BAEKJOON.playground;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import sun.misc.GC;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int cnt = Integer.parseInt(br.readLine());
+
+        long cur = 0;
+
+        for(int i=0; i<cnt; ++i) {
+
+            long N = Long.parseLong(br.readLine());
+
+            if(N == 0 || N == 1 || N == 2) {
+                System.out.println(2);
+                continue;
+            }
+
+            cur = N;
+
+            while(true) {
+
+                boolean flag = true;
+                for(long j=2; j<=Math.sqrt(cur); ++j) {
+                    if(cur%j == 0) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(flag) {
+                    System.out.println(cur);
+                    break;
+                } else {
+                    cur++;
+                }
+
+            }
+
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //int N = Integer.parseInt(br.readLine());
@@ -19,7 +66,41 @@ public class Main {
         //int N = Integer.parseInt(st.nextToken());
         //String str = br.readLine();
 
+        int cnt = Integer.parseInt(br.readLine());
+        int[] nums = new int[cnt-1];
+        int GCD = 1;
+
+        int before = Integer.parseInt(br.readLine());
+        int min = before;
+        int max = 0;
+
+        for(int i=0; i<cnt-1; ++i) {
+            nums[i] = before;
+            before = Integer.parseInt(br.readLine());
+            nums[i] = before - nums[i];
+
+            if(i == cnt-2) {
+                max = before;
+            }
+        }
+
+        GCD = getGCD(nums[0], nums[1]);
+
+        for(int i=2; i<nums.length; ++i) {
+            GCD = getGCD(GCD, nums[i]);
+        }
+
+        System.out.println( (max - min)/GCD - (nums.length+1) +1 );
+
     }
+
+    public static int getGCD(int a, int b) {
+        if(a%b == 0) {
+            return b;
+        } else {
+            return getGCD(b, a%b);
+        }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
 

@@ -18,6 +18,72 @@ public class Main {
         //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         //int N = Integer.parseInt(st.nextToken());
         //String str = br.readLine();
+
+        int N = Integer.parseInt(br.readLine());
+
+        for(int i=0; i<N; ++i) {
+
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+            long r = Long.parseLong(st.nextToken());
+            long n = Long.parseLong(st.nextToken());
+
+            if(r==n){
+                System.out.println(1);
+                continue;
+            }
+
+            long maxCuof = Math.max(n-r, r);
+            long minCuof = Math.min(n-r, r);
+
+            long up = 1;
+            long down = 1;
+
+            for(long j=maxCuof+1; j<=n; ++j) {
+                up *= j;
+            }
+
+            for(long j=1; j<=minCuof; ++j) {
+                down *= j;
+            }
+
+            System.out.println(up/down);
+
+
+        }
+
+    }
+
+/*    public static int factorial(int n) {
+        if(n==0) {
+            return 1;
+        } else {
+            return n*factorial(n-1);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+
+        System.out.println(factorial(N) / (factorial(N - K) * factorial(K)));
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
         int N = Integer.parseInt(br.readLine());
         int cnt = 0;
         for(int i=1; i*i<=N; ++i) {
@@ -25,7 +91,7 @@ public class Main {
         }
 
         System.out.println(cnt);
-    }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
 

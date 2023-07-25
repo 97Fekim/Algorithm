@@ -8,10 +8,125 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Main {
 
+    static Map<String, Queue<String>> map;
+
+    static int sum = 0;
+
+    public static void putToMap(String first, String second) {
+        if(!map.containsKey(first)) {
+            Queue<String> tmp = new LinkedList<>();
+            tmp.add(second);
+            map.put(first, tmp);
+        } else {
+            Queue<String> tmp = map.get(first);
+            tmp.add(second);
+            map.put(first, tmp);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int cnt = Integer.parseInt(br.readLine());
+
+        map = new HashMap<>();
+
+        for(int i=0; i<cnt; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            String first = st.nextToken();
+            String second = st.nextToken();
+
+            if (first.equals("ChongChong")) {
+                putToMap(first, second);
+            } else if (second.equals("ChongChong")) {
+                putToMap(second, first);
+            } else {
+                putToMap(first, second);
+            }
+
+        }
+
+        System.out.println(map.toString());
+
+    }
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int cnt = Integer.parseInt(br.readLine());
+        Set<String> set = new HashSet<>();
+        int result = 0;
+
+        for(int i=0; i<cnt; ++i) {
+            String input = br.readLine();
+
+            if (input.equals("ENTER")) {
+                set.clear();
+            } else {
+                if(!set.contains(input)) {
+                    result++;
+                    set.add(input);
+                }
+            }
+        }
+
+        System.out.println(result);
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int cnt = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        long[] array = new long[cnt];
+
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<cnt; ++i) {
+            list.add(Long.parseLong(st.nextToken()));
+        }
+
+        long N = list.stream().mapToLong(x->x).max().orElseThrow(NoSuchElementException::new);
+
+        while (true) {
+
+            boolean isOK = true;
+
+            for (Long l : list) {
+                if (N % l != 0L || !list.contains(N/l)) {
+                    isOK = false;
+                }
+            }
+
+            if (isOK) {
+                System.out.println(N);
+                break;
+            }
+
+            N++;
+        }
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //int N = Integer.parseInt(br.readLine());
@@ -52,7 +167,7 @@ public class Main {
 
         }
 
-    }
+    }*/
 
 /*    public static int factorial(int n) {
         if(n==0) {

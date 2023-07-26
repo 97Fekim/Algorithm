@@ -3,30 +3,15 @@ package BAEKJOON.playground;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import sun.misc.GC;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class Main {
 
-    static Map<String, Queue<String>> map;
-
-    static int sum = 0;
-
-    public static void putToMap(String first, String second) {
-        if(!map.containsKey(first)) {
-            Queue<String> tmp = new LinkedList<>();
-            tmp.add(second);
-            map.put(first, tmp);
-        } else {
-            Queue<String> tmp = map.get(first);
-            tmp.add(second);
-            map.put(first, tmp);
-        }
+    static class Paper {
+        int pos;
+        int high;
     }
 
     public static void main(String[] args) throws IOException {
@@ -35,28 +20,272 @@ public class Main {
         //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         //int N = Integer.parseInt(st.nextToken());
         //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        for(int i=0; i<N; ++i) {
+
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int cnt = Integer.parseInt(st.nextToken());
+            int targetPos = Integer.parseInt(st.nextToken());
+            Queue<Paper> q = new LinkedList<>();
+            st = new StringTokenizer(br.readLine(), " ");
+
+            for(int j=0; j<cnt; ++j) {
+                Paper paper = new Paper();
+                paper.pos = j;
+                paper.high = Integer.parseInt(st.nextToken());
+                q.offer(paper);
+            }
+
+            int result = 0;
+
+            while(!q.isEmpty()) {
+
+//                for(Paper p : q) {
+//                    System.out.println(p.pos + " " + p.high);
+//                }
+
+                boolean isPass = false;
+                int curHigh = q.peek().high;    // 1
+                int curPos = q.peek().pos;
+
+                for(Paper p : q) {
+                    if (curPos != p.pos && curHigh < p.high) {     //
+                        isPass = true;
+                    }
+                }
+
+                if (isPass) {
+                    q.offer(q.poll());
+                } else {
+                    if(q.peek().pos == targetPos) {
+                        result++;
+                        break;
+                    } else {
+                        q.poll();
+                        result++;
+                    }
+                }
+
+            }
+
+            System.out.println(result);
+
+        }
+
+    }
+
+    // #1874
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        Stack<Integer> stack = new Stack<>();
+        List<Character> result = new ArrayList<>();
+
+        int top = 1;
+        boolean isErr = false;
+
+        for(int i=0; i<N; ++i) {
+
+            int current = Integer.parseInt(br.readLine());
+
+            for(int j=top; j<=current; ++j) {
+                stack.push(j);
+                result.add('+');
+                top++;
+            }
+
+            if(stack.peek() == current) {
+                stack.pop();
+                result.add('-');
+            } else {
+                isErr = true;
+                break;
+            }
+
+        }
+
+        if (isErr) {
+            System.out.println("NO");
+        } else {
+            for(Character c : result) {
+                System.out.println(c);
+            }
+        }
+
+    }*/
+
+    /*static class Word {
+        String name;
+        int count;
+        int length;
+
+        String getName() {
+            return name;
+        }
+
+        int getCount() {
+            return count;
+        }
+
+        int getLength() {
+            return length;
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int cnt = Integer.parseInt(st.nextToken());
+        int cutOffLen = Integer.parseInt(st.nextToken());
+        Map<String, Integer> map = new HashMap<>();
+
+        for(int i=0; i<cnt; ++i) {
+            String word = br.readLine();
+            if(word.length() < cutOffLen) {
+                continue;
+            }
+            map.put(word, map.getOrDefault(word, 0)+1);
+        }
+        br.close();
+
+        List<Word> list = new ArrayList<>();
+        for(String w : map.keySet()) {
+            Word word = new Word();
+            word.name = w;
+            word.length = w.length();
+            word.count = map.get(w);
+            list.add(word);
+        }
+
+        list.sort(Comparator.comparing(Word::getCount,Comparator.reverseOrder())
+                .thenComparing(Word::getLength, Comparator.reverseOrder())
+                .thenComparing(Word::getName));
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        for(Word w : list) {
+            bw.write(w.getName()+'\n');
+        }
+
+        bw.flush();
+        bw.close();
+    }*/
+
+    // #2108
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int N = Integer.parseInt(br.readLine());
+        long[] nums = new long[N];
+
+        for(int i=0; i<N; ++i) {
+            nums[i] = Long.parseLong(br.readLine());
+        }
+
+        // 1.산술평균
+        long sum = 0;
+        for(int i=0; i<N; ++i) {
+            sum+=nums[i];
+        }
+        long avg = Math.round((double)sum / (double)N);
+
+        // 2.중앙값
+        Arrays.sort(nums);
+        long middle =  nums[N/2];
+
+        // 3.최빈값
+        Map<Long, Long> map = new HashMap<>();
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<N; ++i) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0L)+1L);
+        }
+
+        long max = -1;
+        for(Long l : map.keySet()) {
+            if(map.get(l) > max) {
+                max = map.get(l);
+            }
+        }
+
+        for(Long l : map.keySet()) {
+            if(map.get(l) == max) {
+                list.add(l);
+            }
+        }
+
+        long mod = 0;
+
+        if(list.size() == 1) {
+            mod = list.get(0);
+        } else {
+            // 내림차순 정렬해서, list.size-2
+            Long[] tmp = new Long[list.size()];
+            list.toArray(tmp);
+            Arrays.sort(tmp, Collections.reverseOrder());
+            mod = tmp[list.size()-2];
+        }
+
+        // 4.범위
+        long right = Arrays.stream(nums).max().getAsLong();
+        long left = Arrays.stream(nums).min().getAsLong();
+        long range = right - left;
+
+        if(N==1) {
+            System.out.println(nums[0]);
+            System.out.println(nums[0]);
+            System.out.println(nums[0]);
+            System.out.println(0);
+        } else {
+            System.out.println(avg);
+            System.out.println(middle);
+            System.out.println(mod);
+            System.out.print(range);
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
         int cnt = Integer.parseInt(br.readLine());
 
-        map = new HashMap<>();
+        Set<String> set = new HashSet<>();
+        set.add("ChongChong");
 
         for(int i=0; i<cnt; ++i) {
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             String first = st.nextToken();
             String second = st.nextToken();
 
-            if (first.equals("ChongChong")) {
-                putToMap(first, second);
-            } else if (second.equals("ChongChong")) {
-                putToMap(second, first);
-            } else {
-                putToMap(first, second);
+            if (set.contains(first) || set.contains(second)) {
+                set.add(first);
+                set.add(second);
             }
-
         }
 
-        System.out.println(map.toString());
+        System.out.println(set.size());
 
-    }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
 

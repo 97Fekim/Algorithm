@@ -9,6 +9,133 @@ import java.util.*;
 
 public class Main {
 
+    static BufferedWriter bw;
+    static int[] arr, answer;
+
+    static void dfs(int start, int len, int depth) throws IOException {
+
+        if (depth == len) {
+            for(int i : answer) {
+                bw.write(i + " ");
+            }
+            bw.write('\n');
+            return ;
+        }
+        for(int i=start; i<arr.length; ++i) {
+            answer[depth] = arr[i];
+            dfs(i, len, depth+1);
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        br.close();
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        arr = new int[N];
+        answer = new int[M];
+
+        for(int i=0; i<N; ++i) {
+            arr[i] = i+1;
+        }
+
+        dfs(0, M, 0);
+
+        bw.flush();
+        bw.close();
+
+    }
+
+    // #2447
+/*    static char[][] stars;
+
+    static void recursiveStar(int x, int y, int size) {
+
+        if (size == 1) {
+            return;
+        } else {
+
+            int chunk = size/3;
+
+            for(int i=x; i<x+size; ++i) {
+                for(int j=y; j<y+size; ++j) {
+                    if(i >= x+chunk && j >= y+chunk
+                            && i < x+size-chunk && j < y+size-chunk) {
+                        stars[i][j] = ' ';
+                    }
+                }
+            }
+
+            recursiveStar(x,y,chunk);
+            recursiveStar(x,y+chunk,chunk);
+            recursiveStar(x,y+2*chunk,chunk);
+            recursiveStar(x+chunk,y,chunk);
+            recursiveStar(x+chunk,y+2*chunk,chunk);
+            recursiveStar(x+2*chunk,y,chunk);
+            recursiveStar(x+2*chunk,y+chunk,chunk);
+            recursiveStar(x+2*chunk,y+2*chunk,chunk);
+
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int N = Integer.parseInt(br.readLine());
+        br.close();
+        stars = new char[N][N];
+
+        for(int i=0; i<N; ++i) {
+            for(int j=0; j<N; ++j) {
+                stars[i][j] = '*';
+            }
+        }
+
+        recursiveStar(0, 0, N);
+
+        // stars 출력
+        for(int i=0; i<N; ++i) {
+            for(int j=0; j<N; ++j) {
+                bw.write(stars[i][j]);
+            }
+            bw.write('\n');
+        }
+
+        bw.flush();
+        bw.close();
+
+    }*/
+
+    // #4779
+/*    static StringBuilder canto(String in) {
+        if(in.length()==3) {
+            return new StringBuilder("- -");
+        }
+
+        int div = in.length() / 3;
+        StringBuilder middle = new StringBuilder();
+        for(int i=0; i<div; ++i) {middle.append(' ');}
+
+        StringBuilder post = canto(in.substring(0, div));
+
+        return new StringBuilder().append(post).append(middle).append(post);
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //int N = Integer.parseInt(br.readLine());
@@ -16,7 +143,76 @@ public class Main {
         //int N = Integer.parseInt(st.nextToken());
         //String str = br.readLine();
 
+        while(true) {
+
+            String next = br.readLine();
+
+            if(next == null || next.isEmpty()) {
+                break;
+            }
+
+            int N = Integer.parseInt(next);
+            StringBuilder str = new StringBuilder();
+
+            for (int j = 0; j < (int) Math.pow(3, N); ++j) {
+                str.append('.');
+            }
+
+            if (N == 0) {
+                System.out.println("-");
+            } else {
+                System.out.println(canto(str.toString()));
+            }
+        }
+    }*/
+
+/*    static int cnt;
+
+    static int recursion(char[] s, int l, int r){
+        cnt++;
+        if(l >= r) return 1;
+        else if(s[l] != s[r]) return 0;
+        else return recursion(s, l+1, r-1);
     }
+
+    static int isPalindrome(char[] s){
+        return recursion(s, 0, s.length-1);
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        for(int i=0; i<N; ++i) {
+            cnt = 0;
+            String str = br.readLine();
+
+            System.out.println(isPalindrome(str.toCharArray()) + " " + cnt);
+        }
+    }*/
+
+ /*   static long factorial(int N) {
+        if (N==0) {
+            return 1;
+        } else {
+            return N*factorial(N-1);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        System.out.println(factorial(N));
+
+    }*/
 
  /*   static class Paper {
         int pos;

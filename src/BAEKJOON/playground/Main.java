@@ -9,7 +9,122 @@ import java.util.*;
 
 public class Main {
 
-    static BufferedWriter bw;
+    static int[][] arr;
+
+    static void dfs(int x, int y) {
+
+        if (x == 8 && y == 8) {
+            for (int a=0; a<9; ++a) {
+                for (int b=0; b<9; ++b) {
+                    System.out.print(arr[a][b] + " ");
+                }
+                System.out.println();
+            }
+            return ;
+        } else {
+            for (int i=0; i<9; ++i) {
+                for (int j=0; j<9; ++j) {
+
+                    if(arr[i][j] == 0) {
+
+                        for(int k=1; k<=9; ++k) {
+                            if (isPossible(i,j,k)) {
+                                arr[i][j] = k;
+                                dfs(i,j);
+                            }
+                        }
+                        arr[i][j] = 0;
+                        return ;
+                    }
+
+                    if(x==8 && y==8) {
+                        for (int a=0; a<9; ++a) {
+                            for (int b=0; b<9; ++b) {
+                                System.out.print(arr[a][b] + " ");
+                            }
+                            System.out.println();
+                        }
+                        return ;
+                    }
+//                    for(int k=1; k<=9; ++k) {
+//                        if (arr[i][j] == 0 && isPossible(i,j,k)) {
+//                            arr[i][j] = k;
+//                            dfs(i,j);
+//                            arr[i][j] = 0;
+//                        }
+//                    }
+//
+//                    if (arr[i][j] == 0) {
+//                        return ;
+//                    }
+
+                }
+            }
+        }
+    }
+
+    static boolean isPossible(int x, int y, int k) {
+
+        boolean isPossible = true;
+
+        for (int i=0; i<9; ++i) {
+            if(arr[x][i] == k) {
+                isPossible = false;
+            }
+        }
+
+        for (int i=0; i<9; ++i) {
+            if(arr[i][y] == k) {
+                isPossible = false;
+            }
+        }
+
+        int i_start;
+        int i_end;
+        int j_start;
+        int j_end;
+
+        if (x <= 2) {i_start = 0; i_end = 2;}
+        else if (x >=3 && x<=5) {i_start = 3; i_end = 5;}
+        else {i_start = 6; i_end =8;}
+
+        if (y <= 2) {j_start = 0; j_end = 2;}
+        else if (y >=3 && y<=5) {j_start = 3; j_end = 5;}
+        else {j_start = 6; j_end =8;}
+
+        for (int i=i_start; i<=i_end; ++i) {
+            for (int j=j_start; j<=j_end; ++j) {
+                if (arr[i][j] == k) {
+                    isPossible = false;
+                }
+            }
+        }
+
+        return isPossible;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        arr = new int[9][9];
+
+        for (int i=0; i<9; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<9; ++j) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        dfs(0, 0);
+
+    }
+
+/*    static BufferedWriter bw;
     static int[] arr, answer;
 
     static void dfs(int start, int len, int depth) throws IOException {
@@ -53,7 +168,7 @@ public class Main {
         bw.flush();
         bw.close();
 
-    }
+    }*/
 
     // #2447
 /*    static char[][] stars;

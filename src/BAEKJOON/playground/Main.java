@@ -9,58 +9,40 @@ import java.util.*;
 
 public class Main {
 
-    static int[][] arr;
+    // #2580 스도쿠 TODO
+/*    static int[][] arr;
 
     static void dfs(int x, int y) {
 
-        if (x == 8 && y == 8) {
+        if (x == 9) {
             for (int a=0; a<9; ++a) {
                 for (int b=0; b<9; ++b) {
                     System.out.print(arr[a][b] + " ");
                 }
                 System.out.println();
             }
+            System.exit(0);
+        }
+
+        if (y==9) {
+            dfs(x+1, 0);
             return ;
-        } else {
-            for (int i=0; i<9; ++i) {
-                for (int j=0; j<9; ++j) {
+        }
 
-                    if(arr[i][j] == 0) {
+        if (arr[x][y] == 0) {
 
-                        for(int k=1; k<=9; ++k) {
-                            if (isPossible(i,j,k)) {
-                                arr[i][j] = k;
-                                dfs(i,j);
-                            }
-                        }
-                        arr[i][j] = 0;
-                        return ;
-                    }
-
-                    if(x==8 && y==8) {
-                        for (int a=0; a<9; ++a) {
-                            for (int b=0; b<9; ++b) {
-                                System.out.print(arr[a][b] + " ");
-                            }
-                            System.out.println();
-                        }
-                        return ;
-                    }
-//                    for(int k=1; k<=9; ++k) {
-//                        if (arr[i][j] == 0 && isPossible(i,j,k)) {
-//                            arr[i][j] = k;
-//                            dfs(i,j);
-//                            arr[i][j] = 0;
-//                        }
-//                    }
-//
-//                    if (arr[i][j] == 0) {
-//                        return ;
-//                    }
-
+            for (int i=1; i<=9; ++i) {
+                if (isPossible(x, y, i)) {
+                    arr[x][y] = i;
+                    dfs(x, y+1);
                 }
             }
+            arr[x][y] = 0;
+            return;
         }
+
+        dfs(x, y+1);
+
     }
 
     static boolean isPossible(int x, int y, int k) {
@@ -122,7 +104,7 @@ public class Main {
 
         dfs(0, 0);
 
-    }
+    }*/
 
 /*    static BufferedWriter bw;
     static int[] arr, answer;

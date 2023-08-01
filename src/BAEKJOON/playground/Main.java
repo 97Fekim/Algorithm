@@ -9,6 +9,33 @@ import java.util.*;
 
 public class Main {
 
+    // #9663 N-Queen
+    8X8 체스판에 8개의 퀸
+
+    arr[0] = {0 1 2 3 4 5 6 7}
+    arr[1] = {0 1 2 3 4 5 6 7}
+    arr[2] = {0 1 2 3 4 5 6 7}
+    arr[3] = {0 1 2 3 4 5 6 7}
+    arr[4] = {0 1 2 3 4 5 6 7}
+    arr[5] = {0 1 2 3 4 5 6 7}
+    arr[6] = {0 1 2 3 4 5 6 7}
+    arr[7] = {0 1 2 3 4 5 6 7}
+
+    dfs (int x) {
+        if (x==9) {
+            cnt++;
+            return ;
+        } else {
+            for (int i=0; i<8; ++i) {
+                if (isPossible(x, i) {
+                    arr[x] = i;
+                    dfs(x+1);
+                }
+            }
+            return ;
+        }
+
+
     // #2580 스도쿠 TODO
 /*    static int[][] arr;
 

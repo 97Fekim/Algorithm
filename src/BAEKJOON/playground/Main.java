@@ -10,29 +10,66 @@ import java.util.*;
 public class Main {
 
     // #14889
-        answer
-        4
-        0 1 2 3
-        4 0 5 6
-        7 1 0 2
-        3 4 5 0
+    static BufferedWriter bw;
+    static int N;
+    static int[][] stats;
+    static boolean[] ch;
+    static int min = Integer.MAX_VALUE;
+    static int cnt=0;
 
-        0
+//        풀이
+//        1,2,3,4
+//        1,2 / 3,4  2+4/2+5 > 1
+//        1,3 / 2,4  3+3/6+4 > 3
+//        1,4 / 2,3  3+3/5+1 > 0
 
-        풀이
-        1,2,3,4
+//        가코딩
+    static void dfs(int depth, int start) throws IOException {
+        if (depth == N/2) {
+            // 능력치의 min을 구한다.
+//            for(int i=0; i<N; ++i) {
+//                bw.write(ch[i] + " ");
+//            }
+//            bw.write('\n');
+            cnt++;
+        } else {
+            for(int i=start; i<N; ++i) {
+                if(!ch[i]) {
+                    ch[i] = true;
+                    dfs(depth+1, i+1);
+                    ch[i] = false;
+                }
+            }
+        }
+    }
+//        1)if (depth가 N/2가 되면) { 능력치min 구한 후 return}
+//        2)else {depth를 증가시키면서 dfs(depth+1)}
 
-        1,2 / 3,4  2+4/2+5 > 1
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        N = Integer.parseInt(br.readLine());
+        stats = new int[N][N];
+        ch = new boolean[N];
+        for(int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for(int j=0; j<N; ++j) {
+                stats[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
 
-        1,3 / 2,4  3+3/6+4 > 3
+        dfs(0, 0);
+        System.out.println(cnt);
+//        bw.flush();
+//        bw.close();
+//        System.out.println(min);
 
-        1,4 / 2,3  3+3/5+1 > 0
-
-
-        가코딩
-
-        1)if (depth가 N/2가 되면) { 능력치min 구한 후 return}
-        2)else {depth를 증가시키면서 dfs(depth+1)}
+    }
 
     // #14888 연산자 끼워넣기
 /*    static int[] arr;

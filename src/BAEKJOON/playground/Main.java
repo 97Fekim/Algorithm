@@ -9,31 +9,164 @@ import java.util.*;
 
 public class Main {
 
-    // #9663 N-Queen
-    8X8 체스판에 8개의 퀸
+    // #14889
+        answer
+        4
+        0 1 2 3
+        4 0 5 6
+        7 1 0 2
+        3 4 5 0
 
-    arr[0] = {0 1 2 3 4 5 6 7}
-    arr[1] = {0 1 2 3 4 5 6 7}
-    arr[2] = {0 1 2 3 4 5 6 7}
-    arr[3] = {0 1 2 3 4 5 6 7}
-    arr[4] = {0 1 2 3 4 5 6 7}
-    arr[5] = {0 1 2 3 4 5 6 7}
-    arr[6] = {0 1 2 3 4 5 6 7}
-    arr[7] = {0 1 2 3 4 5 6 7}
+        0
 
-    dfs (int x) {
-        if (x==9) {
-            cnt++;
-            return ;
+        풀이
+        1,2,3,4
+
+        1,2 / 3,4  2+4/2+5 > 1
+
+        1,3 / 2,4  3+3/6+4 > 3
+
+        1,4 / 2,3  3+3/5+1 > 0
+
+
+        가코딩
+
+        1)if (depth가 N/2가 되면) { 능력치min 구한 후 return}
+        2)else {depth를 증가시키면서 dfs(depth+1)}
+
+    // #14888 연산자 끼워넣기
+/*    static int[] arr;
+    static char[] opers;
+    static char[] realOpers;
+    static boolean[] ch;
+    static int max = Integer.MIN_VALUE;
+    static int min = Integer.MAX_VALUE;
+
+    static void dfs(int depth) {
+
+        if (depth == opers.length) {
+            int cur = arr[0];
+
+            for(int i=1; i<arr.length; ++i) {
+                switch (realOpers[i-1]) {
+                    case '+' : { cur += arr[i]; break;}
+                    case '-' : { cur -= arr[i]; break;}
+                    case '*' : { cur *= arr[i]; break;}
+                    case '/' : { cur /= arr[i]; break;}
+                }
+            }
+            //System.out.println(cur);
+            max = Math.max(max, cur);
+            min = Math.min(min, cur);
         } else {
-            for (int i=0; i<8; ++i) {
-                if (isPossible(x, i) {
-                    arr[x] = i;
+            for (int i=0; i< opers.length; ++i) {
+                if(!ch[i]) {
+                    ch[i] = true;
+                    realOpers[depth] = opers[i];
+                    dfs(depth+1);
+                    realOpers[depth] = ' ';
+                    ch[i] = false;
+                }
+            }
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        arr = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        st = new StringTokenizer(br.readLine(), " ");
+        int[] fourOper = new int[4];
+        for(int i=0; i<4; ++i) {
+            fourOper[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int totalOperCnt = Arrays.stream(fourOper).sum();
+        opers = new char[totalOperCnt];
+        realOpers = new char[totalOperCnt];
+        ch = new boolean[totalOperCnt];
+        Arrays.fill(ch, false);
+
+        int k=0;
+        for(int i=0; i<4; ++i) {
+            for(int j=0; j<fourOper[i]; ++j) {
+                if(i==0) {
+                    opers[k] = '+';
+                } else if (i==1) {
+                    opers[k] = '-';
+                } else if (i==2) {
+                    opers[k] = '*';
+                } else {
+                    opers[k] = '/';
+                }
+                k++;
+            }
+        }
+
+        dfs(0);
+
+        System.out.println(max);
+        System.out.println(min);
+
+    }*/
+
+    // #9663 N-Queen TODO
+/*    static int cnt = 0;
+    static int N;
+    static int[] arr;
+
+    static void dfs (int x) {
+        if (x==N) {
+            cnt++;
+        } else {
+            for (int i=0; i<N; ++i) {
+                arr[x] = i;
+                if (isPossible(x, i)) {
+
                     dfs(x+1);
                 }
             }
-            return ;
         }
+    }
+
+    static boolean isPossible(int row, int col) {
+
+        boolean isPossible = true;
+
+        for (int i=0; i<row; ++i) {
+            if (arr[i] == col) {
+                isPossible = false;
+            }
+
+            if (Math.abs(i-row) == Math.abs(arr[i] - col)) {
+                isPossible = false;
+            }
+        }
+        return isPossible;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        N = Integer.parseInt(br.readLine());
+        arr = new int[N];
+        System.out.println(cnt);
+
+    }*/
 
 
     // #2580 스도쿠 TODO

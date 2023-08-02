@@ -9,29 +9,117 @@ import java.util.*;
 
 public class Main {
 
+    // #9184
+/*    static int[][][] mem;
+
+    static int dfs(int a, int b, int c) {
+
+        if (a <= 0 || b <= 0 || c <= 0) {
+            return 1;
+        }
+        
+        // 메모이제이션
+        if (mem[a][b][c] != 0) {
+            return mem[a][b][c];
+        }
+
+        if (a > 20 || b > 20 || c > 20) {
+            return mem[20][20][20] = dfs(20, 20, 20);
+        }
+        if (a < b && b < c) {
+            return mem[a][b][c] = dfs(a, b, c-1) + dfs(a, b-1, c-1) - dfs(a, b-1, c);
+        }
+        return mem[a][b][c] = dfs(a-1, b, c) + dfs(a-1, b-1, c) + dfs(a-1, b, c-1) - dfs(a-1, b-1, c-1);
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        mem = new int[51][51][51];
+        mem[0][0][0] = 1;
+
+        while (true) {
+            String in = br.readLine();
+
+            StringTokenizer st = new StringTokenizer(in, " ");
+
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            if(a == -1 && b == -1 && c == -1) {
+                break;
+            }
+
+            System.out.printf("w(%d, %d, %d) = %d\n", a,b,c,dfs(a,b,c));
+        }
+
+    }*/
+
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int N = Integer.parseInt(br.readLine());
+
+        int recur = 0;
+
+        int a0 = 1;
+        int a1 = 1;
+
+        for (int i=3; i<=N; ++i) {
+            recur = a0 + a1;
+            a0 = a1;
+            a1 = recur;
+        }
+
+        System.out.println(recur + " " + (N-2));
+
+    }*/
+
     // #14889
-    static BufferedWriter bw;
+/*    static BufferedWriter bw;
     static int N;
     static int[][] stats;
     static boolean[] ch;
+    static int[] left;
+    static int[] right;
     static int min = Integer.MAX_VALUE;
-    static int cnt=0;
 
-//        풀이
-//        1,2,3,4
-//        1,2 / 3,4  2+4/2+5 > 1
-//        1,3 / 2,4  3+3/6+4 > 3
-//        1,4 / 2,3  3+3/5+1 > 0
-
-//        가코딩
     static void dfs(int depth, int start) throws IOException {
         if (depth == N/2) {
-            // 능력치의 min을 구한다.
-//            for(int i=0; i<N; ++i) {
-//                bw.write(ch[i] + " ");
-//            }
-//            bw.write('\n');
-            cnt++;
+            left = new int[N/2];
+            right = new int[N/2];
+            int l = 0;
+            int r = 0;
+            for(int i=0; i<N; ++i) {
+                if(ch[i]) {
+                    left[l] = i;
+                    l++;
+                } else {
+                    right[r] = i;
+                    r++;
+                }
+            }
+            int lSum = 0;
+            int rSum = 0;
+            for(int i=0; i<N/2; ++i) {
+                for(int j=i; j<N/2; ++j) {
+                    lSum += stats[left[i]][left[j]] + stats[left[j]][left[i]];
+                    rSum += stats[right[i]][right[j]] + stats[right[j]][right[i]];
+                }
+            }
+            min = Math.min(min, Math.abs(lSum-rSum));
+
         } else {
             for(int i=start; i<N; ++i) {
                 if(!ch[i]) {
@@ -42,8 +130,6 @@ public class Main {
             }
         }
     }
-//        1)if (depth가 N/2가 되면) { 능력치min 구한 후 return}
-//        2)else {depth를 증가시키면서 dfs(depth+1)}
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -64,12 +150,9 @@ public class Main {
         }
 
         dfs(0, 0);
-        System.out.println(cnt);
-//        bw.flush();
-//        bw.close();
-//        System.out.println(min);
+        System.out.println(min);
 
-    }
+    }*/
 
     // #14888 연산자 끼워넣기
 /*    static int[] arr;

@@ -9,6 +9,141 @@ import java.util.*;
 
 public class Main {
 
+    // #1912
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        boolean isAllNegative = true;
+        int max = Integer.MIN_VALUE;
+        for(int i=0; i<N; ++i) {
+            if (arr[i] >= 0) {
+                isAllNegative = false;
+            }
+            max = Math.max(max, arr[i]);
+        }
+
+        int sum = arr[0];
+        List<Integer> maxs = new ArrayList<>();
+
+        for(int i=1; i<N; ++i) {
+            if (arr[i] < 0) {
+                maxs.add(sum);
+            }
+            if (sum < 0) {
+                sum = 0;
+            }
+            sum += arr[i];
+        }
+
+        maxs.add(sum);
+
+        Collections.sort(maxs);
+
+        if (isAllNegative) {
+            System.out.println(max);
+        } else {
+            System.out.println(maxs.get(maxs.size()-1));
+        }
+    }*/
+
+    // #9461
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int cnt = Integer.parseInt(br.readLine());
+
+        for (int j=0; j<cnt; ++j) {
+            int N = Integer.parseInt(br.readLine());
+
+            long[] arr = new long[N+1];
+
+            if (N==1) {
+                System.out.println(1);
+                continue;
+            } else if (N==2) {
+                System.out.println(1);
+                continue;
+            } else if (N==3) {
+                System.out.println(1);
+                continue;
+            } else if (N==4) {
+                System.out.println(2);
+                continue;
+            } else if (N==5) {
+                System.out.println(2);
+                continue;
+            }
+
+            arr[1] = 1;
+            arr[2] = 1;
+            arr[3] = 1;
+            arr[4] = 2;
+            arr[5] = 2;
+
+            for(int i=6; i<=N; ++i) {
+                arr[i] = arr[i-1] + arr[i-5];
+            }
+
+            System.out.println(arr[N]);
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+
+        int N = Integer.parseInt(br.readLine());
+
+        int a0 = 1;
+        int a1 = 2;
+        int cur = 0;
+
+        for (int i=3; i<=N; ++i) {
+            cur = a0 + a1;
+            a0 = a1;
+            a1 = cur;
+
+            if (a0 > 15746 && a1 > 15746) {
+                a0 %= 15746;
+                a1 %= 15746;
+
+            }
+
+        }
+
+        if (N==1) {
+            System.out.println(a0);
+        } else if (N==2) {
+            System.out.println(a1);
+        } else {
+            System.out.println(cur % 15746);
+        }
+
+    }*/
+
     // #9184
 /*    static int[][][] mem;
 

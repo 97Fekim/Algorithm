@@ -5,6 +5,42 @@ import java.util.Arrays;
 
 public class Main {
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N+1];
+        int[] dp1 = new int[N+1];
+        int[] dp2 = new int[N+1];
+
+        for(int i=1; i<=N; ++i) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        dp1[0] = 0;
+        dp2[0] = 0;
+        dp1[1] = arr[1];
+        dp2[1] = arr[1];
+
+        for(int i=2; i<=N; ++i) {
+
+            dp1[i] = dp2[i-1] + arr[i];
+
+            int max = -1;
+            for(int j=0; j<=i-2; ++j) {
+                max = Math.max(max, Math.max(dp1[j], dp2[j]));
+            }
+            dp2[i] = max + arr[i];
+
+        }
+        System.out.println(Math.max(Arrays.stream(dp1).max().getAsInt(), Arrays.stream(dp2).max().getAsInt()));
+
+    }
+
 
     // #2156
 /*    public static void main(String[] args) throws IOException {

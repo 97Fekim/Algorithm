@@ -1,15 +1,194 @@
 package BAEKJOON.playground;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import sun.misc.GC;
-
 import java.io.*;
 import java.util.Arrays;
-import java.util.*;
 
 public class Main {
 
+
+    // #2156
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        long[][] dp = new long[N+1][10];
+
+        Arrays.fill(dp[1], 1);
+        dp[1][0] = 0;
+
+        for(int i=2; i<=N; ++i) {
+            for(int j=0; j<=9; ++j) {
+                if(j==0) {
+                    dp[i][j] = dp[i-1][1] % 1000000000L;
+                } else if (j==9) {
+                    dp[i][j] = dp[i-1][8] % 1000000000L;
+                } else {
+                    dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1])% 1000000000L;
+                }
+            }
+        }
+
+        System.out.println(Arrays.stream(dp[N]).sum() % 1000000000L);
+
+    }*/
+
+/*    static int[] mem;
+
+    static int dfs(int cur) {
+        if (cur == 1) {
+            return 0;
+        } else {
+            if (mem[cur] > 0) {
+                return mem[cur];
+            }
+
+            int cond1 = Integer.MAX_VALUE;
+            int cond2 = Integer.MAX_VALUE;
+            int cond3 = Integer.MAX_VALUE;
+            if(cur%2 == 0) {
+                cond2 = dfs(cur/2);
+                mem[cur/2] = cond2;
+            }
+            if(cur%3==0) {
+                cond3 = dfs(cur/3);
+                mem[cur/3] = cond3;
+            }
+
+            if (mem[cur-1] > 0) {
+                cond1 = mem[cur-1];
+            } else {
+                cond1 = dfs(cur-1);
+                mem[cur-1] = cond1;
+            }
+
+            cond1 = Math.min(cond1, cond2);
+            return mem[cur] = Math.min(cond1, cond3) + 1;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        mem = new int[N + 1];
+        System.out.println(dfs(N));
+
+    }*/
+
+
+    // #1463
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        int dp[] = new int[N+1];
+
+        dp[1] = 0;
+
+        for(int i=2; i<=N; ++i) {
+
+            int cond1 = Integer.MAX_VALUE;
+            int cond2 = Integer.MAX_VALUE;
+            int cond3 = Integer.MAX_VALUE;
+
+            cond1 = dp[i - 1];
+            if (i % 2 == 0) {
+                cond2 = dp[i / 2];
+            }
+            if (i % 3 == 0) {
+                cond3 = dp[i / 3];
+            }
+
+            dp[i] = Math.min(cond1, cond2);
+            dp[i] = Math.min(dp[i], cond3) + 1;
+        }
+
+        System.out.println(dp[N]);
+
+    }*/
+
+    // #2579
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N+1];
+        int[] dp1 = new int[N+1];
+        int[] dp2 = new int[N+1];
+
+        for (int i=1; i<=N; ++i) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        dp1[0] = 0;
+        dp2[0] = 0;
+        dp1[1] = arr[1];
+        dp2[1] = arr[1];
+
+        for (int i=2; i<=N; ++i) {
+            dp1[i] = dp2[i-1] + arr[i];
+            dp2[i] = Math.max(dp1[i-2], dp2[i-2]) + arr[i];
+        }
+
+        System.out.println(Math.max(dp1[N], dp2[N]));
+
+    }*/
+
+    // #1932
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        int[][] arr = new int[N][N];
+        int[][] dp = new int[N][N];
+
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<i+1; ++j) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        dp[0][0] = arr[0][0];
+
+        for (int i=1; i<N; ++i) {
+            for(int j=0; j<=i; ++j) {
+                if (j==0) {
+                    dp[i][j] = dp[i-1][j] + arr[i][j];
+                }
+                else if (j==i) {
+                    dp[i][j] = dp[i-1][j-1] + arr[i][j];
+                }
+                else {
+                    dp[i][j] = Math.max(dp[i-1][j-1],dp[i-1][j]) + arr[i][j];
+                }
+            }
+        }
+
+        System.out.println(Arrays.stream(dp[N-1]).max().getAsInt());
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //int N = Integer.parseInt(br.readLine());
@@ -42,7 +221,7 @@ public class Main {
 
         System.out.println(Math.min(Math.min(dp[N-1][0], dp[N-1][1]), dp[N-1][2]));
 
-    }
+    }*/
 
 
     // #1912

@@ -1,11 +1,151 @@
 package BAEKJOON.playground;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    // #12015
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        List<Integer> list = new ArrayList<>();
+        list.add(-1);
+
+        for(int i=0; i<N; ++i) {
+
+            int cur = Integer.parseInt(st.nextToken());
+
+            if (cur > list.get(list.size()-1)) {
+                list.add(cur);
+            } else {
+                int left = 0;
+                int right = list.size()-1;
+                while (left < right) {
+                    int middle = (left + right) / 2;
+
+                    if(list.get(middle) < cur) {
+                        left = middle+1;
+                    } else {
+                        right = middle;
+                    }
+                }
+                list.set(right, cur);
+            }
+        }
+
+        System.out.println(list.size()-1);
+    }*/
+
+    // #11722
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+        int[] dp = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        dp[0] = 1;
+
+        for(int i=1; i<N; ++i) {
+            for (int j=0; j<=i-1; ++j) {
+                if (arr[j] > arr[i]) {
+                    dp[i] = Math.max(dp[i], dp[j]);
+                }
+            }
+            dp[i]++;
+        }
+
+        System.out.println(Arrays.stream(dp).max().getAsInt());
+    }*/
+
+    // #11055
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N];
+        int[] dp = new int[N];
+        int[] sum = new int[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        dp[0] = 1;
+        sum[0] = arr[0];
+
+        for(int i=1; i<N; ++i) {
+            for (int j=0; j<=i-1; ++j) {
+                if (arr[j] < arr[i] && sum[j] > sum[i]) {
+                    dp[i] = dp[j];
+                    sum[i] = sum[j];
+                }
+            }
+            sum[i]+=arr[i];
+            dp[i]++;
+        }
+
+        System.out.println(Arrays.stream(sum).max().getAsInt());
+
+    }*/
+
+        // #11053
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N];
+        int[] dp = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        dp[0] = 1;
+
+        for(int i=1; i<N; ++i) {
+            for (int j=0; j<=i-1; ++j) {
+                if (arr[j] < arr[i]) {
+                    dp[i] = Math.max(dp[i], dp[j]);
+                }
+            }
+            dp[i]++;
+        }
+
+        System.out.println(Arrays.stream(dp).max().getAsInt());
+    }*/
+
+    // #2156
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //int N = Integer.parseInt(br.readLine());
@@ -39,7 +179,7 @@ public class Main {
         }
         System.out.println(Math.max(Arrays.stream(dp1).max().getAsInt(), Arrays.stream(dp2).max().getAsInt()));
 
-    }
+    }*/
 
 
     // #2156

@@ -8,6 +8,42 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    // #11054
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+        int[] dp1 = new int[N];
+        int[] dp2 = new int[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        dp1[0] = 1;
+        dp2[0] = 1;
+
+        for(int i=1; i<N; ++i) {
+            for (int j=0; j<=i-1; ++j) {
+                if (arr[j] < arr[i]) {
+                    dp1[i] = Math.max(dp1[i], dp1[j]);
+                }
+                if (arr[j] > arr[i]) {
+                    dp2[i] = Math.max(dp2[i], Math.max(dp1[j], dp2[j]));
+                }
+            }
+            dp1[i]++;
+            dp2[i]++;
+        }
+        System.out.println(Math.max(Arrays.stream(dp1).max().getAsInt(), Arrays.stream(dp2).max().getAsInt()));
+    }*/
+
     // #12015
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

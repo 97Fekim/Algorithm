@@ -8,6 +8,83 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        String str1 = br.readLine();
+        String str2 = br.readLine();
+
+        int[] dp = new int[str1.length()];
+
+        for (int i=0; i<str1.length(); ++i) {
+            if(!str2.contains(str1.substring(i,i+1))){
+                dp[i] = 0;
+            } else {
+                int max = 0;
+
+                for (int j=0; j<=i-1; ++j) {
+                    if(str2.substring(j).contains(str1.substring(i, i+1))) {
+                        max = Math.max(max, dp[j]);
+                    }
+                }
+                max += 1;
+                dp[i] = max;
+            }
+        }
+
+        for(int i=0; i<str1.length(); ++i) {
+            System.out.println("dp["+i+"] : " + dp[i]);
+        }
+
+    }
+
+    // #2565
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[501];
+        int[] dp = new int[501];
+
+        for(int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+            int idx = Integer.parseInt(st.nextToken());
+            int val = Integer.parseInt(st.nextToken());
+
+            arr[idx] = val;
+        }
+
+        for (int i=1; i<=N; ++i) {
+            if (arr[i] != 0) {
+                dp[i] = 1;
+                break;
+            }
+        }
+        for (int i=2; i<=500; ++i) {
+            if (arr[i] != 0) {
+                int max = 0;
+                for (int j=1; j<=i-1; ++j) {
+                    if (arr[j] < arr[i]) {
+                        max = Math.max(max, dp[j]);
+                    }
+                }
+                dp[i] = max + 1;
+            }
+        }
+        System.out.println(N - Arrays.stream(dp).max().getAsInt());
+
+    }*/
+
     // #12015
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

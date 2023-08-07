@@ -1,14 +1,21 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 
-    // #11054
+    static class Bag {
+        int wei;
+        int val;
+        int getWei() {
+            return wei;
+        }
+        int getVal() {
+            return val;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -16,32 +23,96 @@ public class Main {
         //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         //int N = Integer.parseInt(st.nextToken());
         //String str = br.readLine();
-        String str1 = br.readLine();
-        String str2 = br.readLine();
 
-        int[] dp = new int[str1.length()];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        List<Bag> list = new ArrayList<>();
 
-        for (int i=0; i<str1.length(); ++i) {
-            if(!str2.contains(str1.substring(i,i+1))){
-                dp[i] = 0;
-            } else {
-                int max = 0;
+        for (int i=0; i<N; ++i) {
+            Bag bag = new Bag();
+            st = new StringTokenizer(br.readLine(), " ");
+            bag.wei = Integer.parseInt(st.nextToken());
+            bag.val = Integer.parseInt(st.nextToken());
+            list.add(bag);
+        }
 
-                for (int j=0; j<=i-1; ++j) {
-                    if(str2.substring(j).contains(str1.substring(i, i+1))) {
-                        max = Math.max(max, dp[j]);
+        list.sort(Comparator.comparing(Bag::getWei).reversed());
+
+        Bag[] arr = new Bag[list.size()];
+        list.toArray(arr);
+
+        int[] dp = new int[arr.length];
+        int[] rest = new int[arr.length];
+
+        if (arr[0].wei > K) {
+            dp[0] = 0;
+        } else {
+            dp[0] = arr[0].val;
+            rest[0] = K-arr[0].wei;
+        }
+
+        for (int i=1; i<arr.length; ++i) {
+            int space = K - arr[i].wei;
+
+            if (space < 0) {
+                continue;
+            }
+
+            int max = -1;
+            int curRest = 0;
+            for (int j=0; j<=i-1; ++j) {
+                if (arr[j].wei <= space && arr[i].wei >= rest[j]) {
+                    if (max > dp[j]) {
+                        max = dp[j];
+                        curRest = rest[j];
                     }
                 }
-                max += 1;
-                dp[i] = max;
+            }
+            if (max != -1) {
+                dp[i] = max + arr[i].val;
+                rest[i] -= arr[i].wei;
+            } else {
+                dp[i] = arr[i].val;
+                rest[i] -= arr[i].wei;
             }
         }
 
-        for(int i=0; i<str1.length(); ++i) {
-            System.out.println("dp["+i+"] : " + dp[i]);
+        for (int i=0; i<dp.length; ++i) {
+            System.out.println(i + " " + dp[i]);
         }
+        System.out.println(Arrays.stream(dp).max().getAsInt());
 
     }
+
+
+
+    // #11054
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        char[] str1 = br.readLine().toCharArray();
+        char[] str2 = br.readLine().toCharArray();
+
+        int[][] dp = new int[str1.length+1][str2.length+1];
+
+        for (int i=1; i<=str1.length; ++i) {
+            for (int j=1; j<=str2.length; ++j) {
+                if (str1[i-1] == str2[j-1]) {
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+
+        System.out.println(dp[str1.length][str2.length]);
+
+    }*/
 
     // #2565
 /*    public static void main(String[] args) throws IOException {

@@ -5,17 +5,7 @@ import java.util.*;
 
 public class Main {
 
-    static class Bag {
-        int wei;
-        int val;
-        int getWei() {
-            return wei;
-        }
-        int getVal() {
-            return val;
-        }
-    }
-
+    // #12865  - 냅색 1차원배열을 이용한 풀이
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -23,69 +13,67 @@ public class Main {
         //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         //int N = Integer.parseInt(st.nextToken());
         //String str = br.readLine();
-
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-        List<Bag> list = new ArrayList<>();
+        int[][] items = new int[N+1][2];
 
-        for (int i=0; i<N; ++i) {
-            Bag bag = new Bag();
+        for (int i = 1; i<=N; i++) {
             st = new StringTokenizer(br.readLine(), " ");
-            bag.wei = Integer.parseInt(st.nextToken());
-            bag.val = Integer.parseInt(st.nextToken());
-            list.add(bag);
+            items[i][0] = Integer.parseInt(st.nextToken());
+            items[i][1] = Integer.parseInt(st.nextToken());
         }
 
-        list.sort(Comparator.comparing(Bag::getWei).reversed());
+        int[] dp = new int[K+1];
 
-        Bag[] arr = new Bag[list.size()];
-        list.toArray(arr);
-
-        int[] dp = new int[arr.length];
-        int[] rest = new int[arr.length];
-
-        if (arr[0].wei > K) {
-            dp[0] = 0;
-        } else {
-            dp[0] = arr[0].val;
-            rest[0] = K-arr[0].wei;
-        }
-
-        for (int i=1; i<arr.length; ++i) {
-            int space = K - arr[i].wei;
-
-            if (space < 0) {
-                continue;
-            }
-
-            int max = -1;
-            int curRest = 0;
-            for (int j=0; j<=i-1; ++j) {
-                if (arr[j].wei <= space && arr[i].wei >= rest[j]) {
-                    if (max > dp[j]) {
-                        max = dp[j];
-                        curRest = rest[j];
-                    }
+        for (int i=1; i<=N; ++i) {
+            int curWei = items[i][0];
+            int curVal = items[i][1];
+            for (int j=K; j>=1; --j) {
+                if (j>=curWei  &&  curVal + dp[j-curWei] > dp[j]) {
+                    dp[j] = curVal + dp[j-curWei];
                 }
             }
-            if (max != -1) {
-                dp[i] = max + arr[i].val;
-                rest[i] -= arr[i].wei;
-            } else {
-                dp[i] = arr[i].val;
-                rest[i] -= arr[i].wei;
+        }
+
+        System.out.println(dp[K]);
+    }
+
+    // #12865  - 냅색 2차원배열을 이용한 풀이
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        int[][] items = new int[N+1][2];
+
+        for (int i = 1; i<=N; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            items[i][0] = Integer.parseInt(st.nextToken());
+            items[i][1] = Integer.parseInt(st.nextToken());
+        }
+
+        int[][] dp = new int[N+1][K+1];
+
+        for (int i=1; i<=N; ++i) {
+
+            for (int j=1; j<=K; ++j) {
+                if (j < items[i][0]) {  // 가방에 현재 아이템을 담지 못하는 경우
+                    dp[i][j] = dp[i-1][j];
+                } else {  // 가방에 현재 아이템을 담을 수 있는 경우
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-items[i][0]] + items[i][1]);
+                }
             }
         }
 
-        for (int i=0; i<dp.length; ++i) {
-            System.out.println(i + " " + dp[i]);
-        }
-        System.out.println(Arrays.stream(dp).max().getAsInt());
+        System.out.println(dp[N][K]);
 
-    }
-
-
+    }*/
 
     // #11054
 /*    public static void main(String[] args) throws IOException {
@@ -356,7 +344,6 @@ public class Main {
     }*/
 
 
-    // #2156
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

@@ -1,5 +1,7 @@
 # Algorithm
 🗝<br>
+## 오답노트
+- [오답노트로 이동](https://github.com/97Fekim/Algorithm/blob/master/%EC%98%A4%EB%8B%B5%EB%85%B8%ED%8A%B8.md)
 ## BOJ 풀이
 - [코드로 이동](https://github.com/97Fekim/Algorithm/tree/master/src/BAEKJOON)
 ## LeetCode 풀이

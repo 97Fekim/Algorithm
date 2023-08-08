@@ -323,6 +323,8 @@ public class Main {
             arr[i] = Integer.parseInt(br.readLine());
         }
 
+        // dp1 : 직전 + 자신을 마심  >> dp[i-1]는 직전을 안마신애여야 함(dp[i] = dp2[i-1] + 지금)
+        // dp2 : 직전x 자신만 마심   >> dp[i-2]까지의 모든 애들중 하나랑, 자신을 마시면됨 ( dp[i] = Math.max(dp1[~i-2], dp2[~i-2] + 현재)
         dp1[0] = 0;
         dp2[0] = 0;
         dp1[1] = arr[1];

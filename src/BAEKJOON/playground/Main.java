@@ -5,8 +5,300 @@ import java.util.*;
 
 public class Main {
 
+    //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    //int N = Integer.parseInt(br.readLine());
+    //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+    //int N = Integer.parseInt(st.nextToken());
+    //String str = br.readLine();
+
+    // #25682 체스판 다시칠하기 2
+   /* public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+
+        char[][] chess = new char[N+1][M+1];
+        int[][] blackSum = new int[N+1][M+1];
+        int[][] whiteSum = new int[N+1][M+1];
+
+        for(int i=1; i<=N; ++i) {
+            String str = br.readLine();
+            for(int j=1; j<=M; ++j) {
+                chess[i][j] = str.charAt(j-1);
+            }
+        }
+
+        // 첫번째가 B인 체스판의 누적합
+        char cuOf = 'B';
+        int rowSum;
+        for(int i=1; i<=N; ++i) {
+            rowSum=0;
+            for(int j=1; j<=M; ++j) {
+                if (chess[i][j] == cuOf) {
+                    blackSum[i][j] = blackSum[i-1][j] + rowSum;
+                } else {
+                    rowSum++;
+                    blackSum[i][j] = blackSum[i-1][j] + rowSum;
+                }
+                if(cuOf == 'W') cuOf = 'B';
+                else cuOf = 'W';
+
+            }
+            if (M % 2 == 0) {
+                if(cuOf == 'W') cuOf = 'B';
+                else cuOf = 'W';
+            }
+        }
+
+        // 첫번째가 W인 체스판의 누적합
+        cuOf = 'W';
+        for(int i=1; i<=N; ++i) {
+            rowSum=0;
+            for(int j=1; j<=M; ++j) {
+                if (chess[i][j] == cuOf) {
+                    whiteSum[i][j] = whiteSum[i-1][j] + rowSum;
+                } else {
+                    rowSum++;
+                    whiteSum[i][j] = whiteSum[i-1][j] + rowSum;
+                }
+                if(cuOf == 'W') cuOf = 'B';
+                else cuOf = 'W';
+
+            }
+            if (M % 2 == 0) {
+                if(cuOf == 'W') cuOf = 'B';
+                else cuOf = 'W';
+            }
+        }
+
+        int min = Integer.MAX_VALUE;
+
+        for(int i=N; i>=K; --i) {
+            for(int j=M; j>=K; --j) {
+                min = Math.min(min, blackSum[i][j] - blackSum[i][j-K] -blackSum[i-K][j] +blackSum[i-K][j-K]);
+                min = Math.min(min, whiteSum[i][j] - whiteSum[i][j-K] -whiteSum[i-K][j] +whiteSum[i-K][j-K]);
+            }
+        }
+
+        System.out.println(min);
+        
+    }*/
+
+    // 체스판 다시 칠하기
+    /*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        char[][] chess = new char[N][M];
+
+        for(int i=0; i<N; ++i) {
+            String str = br.readLine();
+            for (int j = 0; j <M; ++j) {
+                chess[i][j] = str.charAt(j);
+            }
+        }
+
+        int min = 64;
+
+        for(int i=0; i<=N-8; ++i) {
+            for(int j=0; j<=M-8; ++j) {
+
+                char cuOf = 'W';
+                for(int k=0; k<2; ++k) {
+                    int sum = 0;
+                    for (int a = i; a < i+8; a++) {
+                        for (int b = j; b < j+8; b++) {
+                            if(chess[a][b] != cuOf) {
+                                sum++;
+                            }
+                            if(cuOf=='W') cuOf = 'B';
+                            else cuOf = 'W';
+                        }
+                        if(cuOf=='W') cuOf = 'B';
+                        else cuOf = 'W';
+                    }
+                    min = Math.min(min, sum);
+                    cuOf = 'B';
+                }
+
+            }
+        }
+
+        System.out.println(min);
+
+    }*/
+
+
+    // #11660
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[][] sum = new int[N+1][N+1];
+
+        for(int i=1; i<=N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int rowSum = 0;
+            for (int j = 1; j <= N; j++) {
+                rowSum += Integer.parseInt(st.nextToken());
+                sum[i][j] = sum[i-1][j] + rowSum;
+            }
+        }
+
+        for(int i=0; i<M; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int x2 = Integer.parseInt(st.nextToken());
+            int y2 = Integer.parseInt(st.nextToken());
+            int x1 = Integer.parseInt(st.nextToken());
+            int y1 = Integer.parseInt(st.nextToken());
+            int answer = sum[x1][y1] - sum[x2-1][y1] - sum[x1][y2-1] + sum[x2-1][y2-1];
+            bw.write(String.valueOf(answer));
+            bw.write('\n');
+        }
+
+        bw.flush();
+        bw.close();
+
+    }*/
+
+
+    // #10986 나머지 합
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] count = new int[M];
+        int sum = 0;
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            sum = (sum+Integer.parseInt(st.nextToken()))%M;
+            count[sum]++;
+        }
+
+        long answer = count[0];
+        for(int i=0; i< count.length; ++i) {
+            answer += (long)count[i] * (count[i]-1) / 2;
+        }
+        System.out.println(answer);
+
+    }*/
+
+
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String str = br.readLine();
+        int N = Integer.parseInt(br.readLine());
+        List<Integer[]> list = new ArrayList<>();
+
+        Integer[] first = new Integer[26];
+        for(int j=0; j<26; ++j) {
+            first[j] = 0;
+        }
+        list.add(first);
+
+        char[] arr = str.toCharArray();
+        for(int i=1; i<=arr.length; ++i) {
+            Integer[] cur = list.get(i-1).clone();
+            cur[(int)arr[i-1]-97]++;
+            list.add(cur);
+        }
+
+        StringTokenizer st;
+        for(int i=0; i<N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int c = st.nextToken().charAt(0);
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+
+            bw.write(String.valueOf(list.get(end+1)[(int)c-97]-list.get(start)[(int)c-97]));
+            bw.write('\n');
+        }
+
+        bw.flush();
+        bw.close();
+    }*/
+
+    // #16139
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        int[] arr = new int[N];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        List<Integer> sums = new ArrayList<>();
+        for (int i=N-1; i>=K-1; --i) {
+            int sum = 0;
+            for(int j=i; j>=i-K+1; --j) {
+                sum+=arr[j];
+            }
+            sums.add(sum);
+        }
+
+        System.out.println(Collections.max(sums));
+
+    }*/
+
+    // #11659
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        //int N = Integer.parseInt(br.readLine());
+        //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        //int N = Integer.parseInt(st.nextToken());
+        //String str = br.readLine();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] sum = new int[N+1];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for(int i=1; i<=N; ++i) {
+            sum[i] = sum[i-1] + Integer.parseInt(st.nextToken());
+        }
+
+        for(int i=0; i<M; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            System.out.println(sum[end] - sum[start-1]);
+        }
+
+    }*/
+
     // #12865  - 냅색 1차원배열을 이용한 풀이
-    public static void main(String[] args) throws IOException {
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //int N = Integer.parseInt(br.readLine());
@@ -37,7 +329,7 @@ public class Main {
         }
 
         System.out.println(dp[K]);
-    }
+    }*/
 
     // #12865  - 냅색 2차원배열을 이용한 풀이
 /*    public static void main(String[] args) throws IOException {

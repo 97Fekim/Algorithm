@@ -1,6 +1,7 @@
 package BAEKJOON.playground;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,117 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    static class Conf {
+    // #13305 주유소
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        BigDecimal[] dis = new BigDecimal[N];
+        BigDecimal[] price = new BigDecimal[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i=1; i<N; ++i) {
+            dis[i] = BigDecimal.valueOf(Long.parseLong(st.nextToken()));
+        }
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            price[i] = BigDecimal.valueOf(Long.parseLong(st.nextToken()));
+        }
+
+        BigDecimal answer = BigDecimal.ZERO;
+        BigDecimal curPrice = price[0];
+        BigDecimal curDis = BigDecimal.ZERO;
+        for(int i=1; i<price.length; ++i) {
+            if (i == price.length - 1) {
+                answer = answer.add(curPrice.multiply(curDis.add(dis[i])));
+            } else {
+                if(price[i].compareTo(curPrice) < 0) {
+                    answer = answer.add(curPrice.multiply(curDis.add(dis[i])));
+                    curPrice = price[i];
+                    curDis = BigDecimal.ZERO;
+                } else {
+                    curDis = curDis.add(dis[i]);
+                }
+            }
+        }
+
+        System.out.println(answer);
+
+    }*/
+
+    // #1541 잃어버린 괄호 - 그리디  (리팩토링버전)
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
+
+        String[] strs = str.split("-");
+
+        int answer = 0;
+        for(int i=0; i<strs.length; ++i) {
+            String[] nums = strs[i].split("\\+");
+            int sum = 0;
+            for(int j=0; j<nums.length; ++j) {
+                sum += Integer.parseInt(nums[j]);
+            }
+            if(i==0) {
+                answer += sum;
+            } else {
+                answer -= sum;
+            }
+        }
+        System.out.println(answer);
+    }*/
+
+    // #1541 잃어버린 괄호 - 그리디
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
+        int[] arr = new int[51];
+        char[] oper = new char[51];
+
+        int i = 0;
+        int j=1;
+        int sum=0;
+        for(int x=0; x<str.length(); ++x) {
+
+            if (Character.isDigit(str.charAt(x))) {
+                sum *= 10;
+                sum += Character.getNumericValue(str.charAt(x));
+            } else {
+                arr[i] = sum;
+                sum = 0;
+                i+=2;
+                oper[j] = str.charAt(x);
+                j+=2;
+            }
+
+        }
+
+        arr[j-1] = sum;
+
+        int answer = arr[0];
+        boolean isPositive = true;
+        for(int x=2; x<51; ++x) {
+            if(!isPositive && oper[x-1]=='-') {
+                isPositive = true;
+            }
+
+            if(isPositive && oper[x-1]=='-') {
+                isPositive = false;
+            }
+
+            if(isPositive) {
+                answer += arr[x];
+            } else {
+                answer-=arr[x];
+            }
+        }
+
+        System.out.println(answer);
+    }*/
+
+    // #1931
+/*    static class Conf {
         int start;
         int end;
         int getStart() {
@@ -29,7 +140,6 @@ public class Main {
 
     }
 
-    // #1931
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
@@ -63,7 +173,7 @@ public class Main {
 
         System.out.println(answer);
 
-    }
+    }*/
 
     // #11047
 /*    public static void main(String[] args) throws IOException {

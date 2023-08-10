@@ -2,6 +2,7 @@ package BAEKJOON.playground;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -11,6 +12,151 @@ public class Main {
     //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
+
+    static class Conf {
+        int start;
+        int end;
+        int getStart() {
+            return start;
+        }
+        int getEnd() {
+            return end;
+        }
+
+        public String toString() {
+            return "start : " + start + ", end : " + end;
+        }
+
+    }
+
+    // #1931
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int N = Integer.parseInt(br.readLine());
+
+        List<Conf> list = new ArrayList<>();
+        for (int i=0; i<N; ++i) {
+            Conf conf = new Conf();
+            st = new StringTokenizer(br.readLine(), " ");
+            conf.start = Integer.parseInt(st.nextToken());
+            conf.end = Integer.parseInt(st.nextToken());
+            list.add(conf);
+        }
+
+        Collections.sort(list, Comparator
+                .comparing(Conf::getEnd)
+                .thenComparing(Conf::getStart));
+        Conf[] arr = new Conf[list.size()];
+        list.toArray(arr);
+
+        int answer = 1;
+        int end = arr[0].end;
+
+        for(int i=1; i<N; ++i) {
+            if (arr[i].getStart() >= end) {
+                end = arr[i].getEnd();
+                answer++;
+            }
+        }
+
+        System.out.println(answer);
+
+    }
+
+    // #11047
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        int[] arr = new int[N];
+
+        int count = 0;
+
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        for(int i=N-1; i>=0; --i) {
+            count += K/arr[i];
+            K %= arr[i];
+        }
+
+        System.out.println(count);
+
+    }*/
+
+    // #9663 백트래킹
+/*    static int answer = 0;
+    static int[] arr;
+    static int N;
+
+    static void dfs(int i) {
+
+        if(i >= N) {
+            answer++;
+        } else {
+
+            for(int j=0; j<N; ++j) {
+                arr[i] = j;
+                if (isPossible(i)) {
+                    dfs(i+1);
+                }
+            }
+        }
+    }
+
+    static boolean isPossible(int row) {
+        boolean isPosb = true;
+        for(int i=0; i<row; ++i) {
+            if(arr[i] == arr[row] || Math.abs(i-row) == Math.abs(arr[i]-arr[row])) {
+                isPosb = false;
+            }
+        }
+        return isPosb;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        N = Integer.parseInt(br.readLine());
+        arr = new int[N];
+        dfs(0);
+
+        System.out.println(answer);
+
+    }*/
+
+    // #10986
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        // M=3 >> 나머지는 0,1,2
+        int[] mod = new int[M];
+        mod[0] = 1;
+
+        int before = 0;
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            before = (before + Integer.parseInt(st.nextToken()))%M;
+            mod[before]++;
+        }
+
+        long answer = 0;
+        for(int i : mod) {
+            answer += (long)i * ((long)i-1) / 2;
+        }
+
+        System.out.println(answer);
+
+    }*/
 
     // #25682 체스판 다시칠하기 2
    /* public static void main(String[] args) throws IOException {

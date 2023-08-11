@@ -1,11 +1,137 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
+
+    //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    //int N = Integer.parseInt(br.readLine());
+    //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+    //int N = Integer.parseInt(st.nextToken());
+    //String str = br.readLine();
+
+    public static void main(String[] args) throws IOException {
+
+    }
+
+/*    static int[][] arr;
+    static StringBuilder answer;
+
+    static void dfs(int x, int y, int n) {
+
+        boolean isSame = true;
+        int first = arr[x][y];
+        for(int i=x; i<x+n; ++i) {
+            for (int j=y; j<y+n; ++j) {
+                if(arr[i][j] != first) {
+                    isSame = false;
+                }
+            }
+        }
+
+        if (isSame) {
+            if (first == 1) {
+                answer.append("1");
+            } else {
+                answer.append("0");
+            }
+        } else {
+            answer.append("(");
+            dfs(x, y, n/2);
+            dfs(x, y+n/2, n/2);
+            dfs(x+n/2, y, n/2);
+            dfs(x+n/2, y+n/2, n/2);
+            answer.append(")");
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        answer = new StringBuilder("");
+
+        arr = new int[N][N];
+        for(int i=0; i<N; ++i) {
+            char[] str = br.readLine().toCharArray();
+            for (int j = 0; j < N; j++) {
+                arr[i][j] = Character.getNumericValue(str[j]);
+            }
+        }
+
+        int first = arr[0][0];
+        boolean isAllSame = true;
+        for(int i=0; i<N; ++i) {
+            for (int j = 0; j < N; j++) {
+                if (first != arr[i][j]) {
+                    isAllSame = false;
+                }
+            }
+        }
+
+        if(isAllSame) {
+            System.out.println(first);
+        } else {
+            dfs(0,0,N);
+            System.out.println(answer);
+        }
+
+    }*/
+    
+    // #2630 색종이 만들기
+/*    static int[][] arr;
+    static int whiteTotal = 0;
+    static int blueTotal = 0;
+
+    static void dfs(int a, int b, int n) {
+
+        boolean isSame = true;
+        int first = arr[a][b];
+        for(int i=a; i<a+n; ++i) {
+            for(int j=b; j<b+n; ++j) {
+                if(arr[i][j] != first) {
+                    isSame = false;
+                }
+            }
+        }
+
+        if(isSame) {
+            if(first == 0) {
+                whiteTotal++;
+            } else {
+                blueTotal++;
+            }
+        } else {
+            dfs(a, b, n/2);
+            dfs(a+n/2, b, n/2);
+            dfs(a, b+n/2, n/2);
+            dfs(a+n/2, b+n/2, n/2);
+        }
+
+    }
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        arr = new int[N][N];
+
+        for(int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j = 0; j < N; j++) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        dfs(0, 0, N);
+
+        System.out.println(whiteTotal);
+        System.out.println(blueTotal);
+
+    }*/
 
     //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

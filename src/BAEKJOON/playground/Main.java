@@ -13,8 +13,287 @@ public class Main {
     //String str = br.readLine();
 
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
 
     }
+
+    // #11444 피보나치 수 6 TODO
+/*    static long[][] fiboMat;
+    static long[][] cur;
+
+    static long[][] divide(long n) {
+        if (n==1) {
+            return fiboMat;
+        }
+
+        cur = divide(n/2);
+
+        if (n%2 == 0) {
+            return multMat(cur, cur);
+        } else {
+            return multMat(multMat(cur, cur), fiboMat);
+        }
+
+    }
+
+    static long[][] multMat(long[][] mat1, long[][] mat2) {
+        long[][] mat3 = new long[mat1.length][mat2.length];
+
+        for(int i=0; i<mat1.length; ++i) {
+            for(int j=0; j<mat2[0].length; ++j) {
+                long sum = 0L;
+                for(int k=0; k<mat1.length; ++k) {
+                    sum += mat1[i][k]*mat2[k][j];
+                }
+                mat3[i][j] = sum % 1000000007L;
+            }
+        }
+        return mat3;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        long n = Long.parseLong(br.readLine());
+        if(n==1) {
+            System.out.println(1);
+            System.exit(0);
+        } else if(n==2) {
+            System.out.println(1);
+            System.exit(0);
+        }
+
+        fiboMat = new long[2][2];
+        fiboMat[0][0] = 1;
+        fiboMat[0][1] = 1;
+        fiboMat[1][0] = 1;
+        fiboMat[1][1] = 0;
+
+        long[][] f0f1 = new long[2][1];
+        f0f1[0][0] = 1;
+        f0f1[1][0] = 0;
+
+        long[][] answer = multMat(divide(n-1), f0f1);
+
+        System.out.println(answer[0][0]);
+
+    }*/
+
+    // #10830 행렬 제곱
+    /*    static long[][] org;
+    static long[][] cur;
+
+    static long[][] dfs(long B) {
+        if (B==1L) {
+            return org;
+        }
+        cur = dfs(B/2L);
+
+        if (B%2L == 0L) {
+            return multMat(cur, cur);
+        } else {
+            return multMat(multMat(cur,cur), org);
+        }
+    }
+
+    static long[][] multMat(long[][] mat1, long[][] mat2) {
+        long[][] mat3 = new long[mat1.length][mat2.length];
+
+        for(int i=0; i<mat1.length; ++i) {
+            for(int j=0; j<mat1.length; ++j) {
+                long sum = 0L;
+                for(int k=0; k<mat1.length; ++k) {
+                    sum += mat1[i][k]*mat2[k][j];
+                }
+                mat3[i][j] = sum % 1000L;
+            }
+        }
+        return mat3;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        long B = Long.parseLong(st.nextToken());
+        org = new long[N][N];
+
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j = 0; j < N; j++) {
+                org[i][j] = Integer.parseInt(st.nextToken())%1000L;
+            }
+        }
+
+        long[][] answer = dfs(B);
+
+        for (int i = 0; i <N ; i++) {
+            for (int j = 0; j <N ; j++) {
+                System.out.print(answer[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int[][] mat1 = new int[N][M];
+        for(int i=0; i<N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for(int j=0; j<M; ++j) {
+                mat1[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+        st = new StringTokenizer(br.readLine(), " ");
+        M = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        int[][] mat2 = new int[M][K];
+        for(int i=0; i<M; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for(int j=0; j<K; ++j) {
+                mat2[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int[][] answer = new int[N][K];
+
+        for(int i=0; i<N; ++i) {
+            for(int j=0; j<K; ++j) {
+                int sum = 0;
+                for(int k=0; k<M; ++k) {
+                    sum += mat1[i][k]*mat2[k][j];
+                }
+                answer[i][j] = sum;
+            }
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < K; j++) {
+                System.out.print(answer[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }*/
+
+    // #1629 곱셈
+/*    static int A;
+    static int C;
+    static long[] mem;
+
+    static long dfs(int B) {
+        // 메모이제이션
+        if(B<101L && mem[B] != 0) {
+            return mem[B];
+        }
+
+        // B가 100,000보다 크면
+        //  >> 분할한다. (Recursive)
+        if (B > 100L) {
+            if(B%2 == 0) return (dfs(B/2) * dfs(B/2))%C;
+            else return (dfs(B/2+1)%C * dfs(B/2))%C;
+        }
+        // B가 100,000보다 작으면
+        //  >> 계산한다. (Base)
+        else {
+            return mem[B] = getRt(B);
+        }
+        
+    }
+
+    static long getRt(int B) {
+        // 시작 = A^1%C
+        long before = A%C;
+        for(int i=1; i<B; ++i) {
+            before = A*before%C;
+        }
+        return before;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        C = Integer.parseInt(st.nextToken());
+        mem = new long[101];
+
+        if(B==1) {
+            System.out.println(A%C);
+            System.exit(0);
+        }
+
+        System.out.println(dfs(B));
+
+    }*/
+
+    // #1780 종이의 개수
+/*    static int[][] arr;
+    static int mOne=0, zero=0, one=0;
+
+    static void dfs(int x, int y, int N) {
+
+        int first = arr[x][y];
+        boolean isSame = true;
+        for(int i=x; i<x+N; ++i) {
+            for(int j=y; j<y+N; ++j) {
+                if (arr[i][j] != first) {
+                    isSame = false;
+                }
+            }
+        }
+
+        if (isSame) {
+            switch (first) {
+                case -1 :
+                    mOne++;
+                    break;
+                case 0 :
+                    zero++;
+                    break;
+                case 1 :
+                    one++;
+                    break;
+            }
+        } else {
+            dfs(x,y,N/3);
+            dfs(x,y+N/3,N/3);
+            dfs(x,y+2*N/3,N/3);
+            dfs(x+N/3,y,N/3);
+            dfs(x+N/3,y+N/3,N/3);
+            dfs(x+N/3,y+2*N/3,N/3);
+            dfs(x+2*N/3,y,N/3);
+            dfs(x+2*N/3,y+N/3,N/3);
+            dfs(x+2*N/3,y+2*N/3,N/3);
+        }
+
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        arr = new int[N][N];
+
+        for(int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j = 0; j < N; ++j) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+        dfs(0, 0, N);
+        System.out.print(mOne+"\n"+zero+"\n"+one);
+    }*/
 
 /*    static int[][] arr;
     static StringBuilder answer;

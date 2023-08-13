@@ -12,11 +12,123 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    public static void main(String[] args) throws IOException {
+    // #2110 공유기 설치
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int C = Integer.parseInt(st.nextToken());
 
+        int[] arr = new int[N];
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+        Arrays.sort(arr);
+        int max = Arrays.stream(arr).max().getAsInt();
 
-    }
+        int left = 1;
+        int right = max;
+
+        int answer = 0;
+        while (left <= right) {
+            int middle = (left+right)/2;
+
+            int count = 1;
+            int beforeLoc = arr[0];
+            for(int i=1; i<N; ++i) {
+                if(arr[i] - beforeLoc >= middle) {
+                    count++;
+                    beforeLoc = arr[i];
+                }
+            }
+
+            if(count >= C) {
+                answer = middle;
+                left = middle + 1;
+            } else {
+                right = middle - 1;
+            }
+        }
+        System.out.println(answer);
+
+    }*/
+
+    // #2805
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] arr = new int[N];
+        int max = -1;
+        st = new StringTokenizer(br.readLine(), " ");
+        for(int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+            max = Math.max(max, arr[i]);
+        }
+        int left = 0;
+        int right = max;
+        long answer = 0;
+        while(left <= right) {
+            int middle = (left+right)/2;
+
+            long hei = 0;
+            for (int i=0; i<N; ++i) {
+                if (arr[i] > middle) {
+                    hei += arr[i] - middle;
+                }
+            }
+
+            if (M > hei) {
+                right = middle - 1;
+            } else {
+                answer = middle;
+                left = middle + 1;
+            }
+        }
+
+        System.out.println(answer);
+
+    }*/
+
+    // #1654 랜선 자르기
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int K = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        long[] arr = new long[K];
+        for(int i=0; i<K; ++i) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        long max = Arrays.stream(arr).max().getAsLong();
+
+        long left = 1;
+        long right = max;
+
+        List<Long> list = new ArrayList<>();
+
+        while(left <= right) {
+            long middle = (left + right) / 2;
+            long answer = 0;
+
+            for(int i=0; i<K; ++i) {
+                answer += arr[i] / middle;
+            }
+
+            if(answer >= N) {
+                left = middle+1;
+                list.add(middle);
+            } else if (answer < N) {
+                right = middle-1;
+            }
+        }
+
+        System.out.println(Collections.max(list));
+
+    }*/
 
     // #11444 피보나치 수 6 TODO
 /*    static long[][] fiboMat;

@@ -5,6 +5,60 @@ import java.util.*;
 
 public class Main {
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int[][] party = new int[M][50];
+        Set<Integer> set = new HashSet<>();
+
+        st = new StringTokenizer(br.readLine(), " ");
+        int n = Integer.parseInt(st.nextToken());
+        for(int i=0; i<n; ++i) {
+            set.add(Integer.parseInt(st.nextToken()));
+        }
+
+        for(int i=0; i<M; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            n = Integer.parseInt(st.nextToken());
+            for(int j=0; j<n; ++j) {
+                party[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        for (int a = 0; a < 50; a++) {
+            for(int i=0; i<M; ++i) {
+                for(int j=0; j<50; ++j) {
+                    if(party[i][j]!=0 && set.contains(party[i][j])) {
+                        for(int k=0; k<50; ++k) {
+                            if (party[i][k]!=0) {
+                                set.add(party[i][k]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        int cnt = 0;
+        for(int i=0; i<M; ++i) {
+            boolean isPossible = true;
+            for (int j = 0; j < n; ++j) {
+                if(set.contains(party[i][j])) {
+                    isPossible = false;
+                    break;
+                }
+            }
+            if(isPossible) {
+                cnt++;
+            }
+        }
+
+        System.out.println(cnt);
+
+    }
     //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     //int N = Integer.parseInt(br.readLine());

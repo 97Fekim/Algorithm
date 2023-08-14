@@ -5,7 +5,20 @@ import java.util.*;
 
 public class Main {
 
+    //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    //int N = Integer.parseInt(br.readLine());
+    //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+    //int N = Integer.parseInt(st.nextToken());
+    //String str = br.readLine();
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+    // #1043 거짓말
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
@@ -58,13 +71,7 @@ public class Main {
 
         System.out.println(cnt);
 
-    }
-    //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    //int N = Integer.parseInt(br.readLine());
-    //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-    //int N = Integer.parseInt(st.nextToken());
-    //String str = br.readLine();
+    }*/
 
     // #2110 공유기 설치
 /*    public static void main(String[] args) throws IOException {

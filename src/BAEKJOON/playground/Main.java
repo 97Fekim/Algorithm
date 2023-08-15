@@ -12,6 +12,141 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int r = Integer.parseInt(inputs[1]);
+        int c = Integer.parseInt(inputs[2]);
+
+        int size = N-1;
+
+        int answer = 0;
+        while (size >= 0) {
+            if (r >= Math.pow(2, size)) {
+                answer += 2 * Math.pow(size+1, Math.pow(2, size));
+            }
+            if (c >= Math.pow(2, size)) {
+                answer += Math.pow(size+1, Math.pow(2, size));
+            }
+            System.out.println("size = " + size);
+            System.out.println("r = " + r);
+            System.out.println("c = " + c);
+            System.out.println("answer = " + answer);
+
+            r %= Math.pow(2, size);
+            c %= Math.pow(2, size);
+
+            size--;
+
+        }
+
+        System.out.println(answer);
+
+    }
+    
+    // #1012 유기농 배추
+/*    static int[] dx = {-1,0,1,0};
+    static int[] dy = {0,-1,0,1};
+    static int[][] arr;
+    static boolean[][] visited;
+    static int answer = 0;
+
+    static class Point {
+        int x;
+        int y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    static void bfs(int x, int y) {
+        Queue<Point> q = new LinkedList<>();
+        q.offer(new Point(x, y));
+
+        while(!q.isEmpty()) {
+            Point cur = q.poll();
+
+            // 이미 방문했던 곳은 PASS
+            if (visited[cur.x][cur.y]) { // || arr[cur.x][cur.y]==0) {
+                continue;
+            }
+            visited[cur.x][cur.y] = true; // 현재좌표를 방문했음을 체크
+
+            for(int i=0; i<4; ++i) {
+                int nextX = cur.x + dx[i];    
+                int nextY = cur.y + dy[i];    
+                if (nextX >= 0 && nextY >= 0         // cur.x + dx[x] >= 0 이어야함
+                        && nextX < arr.length        // cur.y + dy[y] >= 0 이어야함
+                        && nextY < arr[0].length     // cur.x + dx[x] < N 이어야함 
+                        && !visited[nextX][nextY]    // cur.y + dy[y] < M 이어야함
+                        && arr[nextX][nextY] == 1) {
+                    //visited[nextX][nextY] = true;
+                    q.offer(new Point(nextX, nextY));
+                }
+            }
+        }
+        answer ++;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int problemCnt = Integer.parseInt(br.readLine());
+
+        for (int i=0; i<problemCnt; ++i) {
+            String[] inputs = br.readLine().split(" ");
+            int N = Integer.parseInt(inputs[0]);
+            int M = Integer.parseInt(inputs[1]);
+            int pointCnt = Integer.parseInt(inputs[2]);
+
+            arr = new int[N][M];
+            visited = new boolean[N][M];
+            answer = 0;
+
+            for (int j=0; j<pointCnt; ++j) {
+                String[] points = br.readLine().split(" ");
+                int x = Integer.parseInt(points[0]);
+                int y = Integer.parseInt(points[1]);
+                arr[x][y] = 1;
+            }
+
+            for(int a=0; a<N; ++a) {
+                for (int b=0; b<M; ++b) {
+                    if(!visited[a][b] && arr[a][b] == 1) {
+                        bfs(a, b);
+                    }
+                }
+            }
+            System.out.println(answer);
+        }
+
+    }*/
+
+    // #1003 피보나치 함수
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[] arr = new int[41];
+        arr[0] = 0;
+        arr[1] = 1;
+        for (int i=2; i<=40; ++i) {
+            arr[i] = arr[i-2] + arr[i-1];
+        }
+
+        int N = Integer.parseInt(br.readLine());
+        for(int i=0; i<N; ++i) {
+            int n = Integer.parseInt(br.readLine());
+            if (n==0) {
+                System.out.println(1 + " " + 0);
+                continue;
+            }
+            System.out.println(arr[n-1] + " " + arr[n]);
+        }
+
+    }*/
+
     // #1167 트리의 지름 - BFS
 /*    static List<Node>[] list;
     static boolean[] visited;

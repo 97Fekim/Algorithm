@@ -12,12 +12,247 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    // #1167 트리의 지름 - BFS
+/*    static List<Node>[] list;
+    static boolean[] visited;
+    static int[] dist;
+    static int maxCost = -1;
+    static int maxPos = 0;
+
+    static class Node {
+        int pos;
+        int cost;
+        Node(){
+
+        };
+        Node(int pos, int cost) {
+            this.pos = pos;
+            this.cost = cost;
+        }
+    }
+
+    static void bfs(int pos, int cost) {
+        Queue<Node> q = new LinkedList<>();
+        q.offer(new Node(pos, cost));
+        dist[pos] = cost;
+
+        while(!q.isEmpty()) {
+            Node cur = q.poll();
+
+            if (visited[cur.pos]) {
+                continue;
+            }
+            visited[cur.pos] = true;
+
+            for(Node node : list[cur.pos]) {
+                if (!visited[node.pos]) {
+                    q.offer(node);
+                    dist[node.pos] = dist[cur.pos] + node.cost;
+                    maxCost = Math.max(maxCost, dist[node.pos]);
+                }
+            }
+        }
+
+        for(int i=1; i<dist.length; ++i) {
+            if (dist[i] == maxCost) {
+                maxPos = i;
+            }
+        }
 
     }
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        list = new ArrayList[N + 1];
+        visited = new boolean[N + 1];
+        dist = new int[N+1];
+
+        for (int i = 1; i <= N; ++i) {
+            list[i] = new ArrayList<>();
+        }
+
+        for (int i = 1; i <= N; ++i) {
+            String input[] = br.readLine().split(" ");
+
+            for (int j = 1; j <= input.length - 3; j += 2) {
+                Node node = new Node();
+                node.pos = Integer.parseInt(input[j]);
+                node.cost = Integer.parseInt(input[j + 1]);
+                list[Integer.parseInt(input[0])].add(node);
+            }
+
+        }
+
+        bfs(1, 0);
+
+        visited = new boolean[N+1];
+        dist = new int[N+1];
+        maxCost = -1;
+
+        bfs(maxPos, 0);
+
+        System.out.println(maxCost);
+
+    }*/
+
+    // #1167 트리의 지름 - DFS
+/*    static List<Node>[] list;
+    static boolean[] visited;
+    static int maxCost = -1;
+    static int maxPos = 0;
+
+    static class Node {
+        int pos;
+        int cost;
+    }
+
+    static void dfs(int pos, int cost) {
+
+        if (cost > maxCost) {
+            maxPos = pos;
+            maxCost = cost;
+        }
+
+        for (Node node : list[pos]) {
+            if (!visited[node.pos]) {
+                visited[pos] = true;
+                dfs(node.pos, cost+node.cost);
+            }
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        list = new ArrayList[N+1];
+        visited = new boolean[N+1];
+
+        for (int i=1; i<=N; ++i) {
+            list[i] = new ArrayList<>();
+        }
+
+        for (int i=1; i<=N; ++i) {
+            String input[] = br.readLine().split(" ");
+
+            for(int j=1; j<=input.length-3; j+=2) {
+                Node node = new Node();
+                node.pos = Integer.parseInt(input[j]);
+                node.cost = Integer.parseInt(input[j+1]);
+                list[Integer.parseInt(input[0])].add(node);
+            }
+
+        }
+
+        for (int i=1; i<=N; ++i) {
+            System.out.println(list[i].toString());
+
+        }
+
+        dfs(1, 0);
+
+        visited = new boolean[N+1];
+
+        dfs(maxPos, 0);
+
+        System.out.println(maxCost);
+
+    }*/
+
     // #1043 거짓말
+/*    static int[] parent;
+
+    static int find(int x){
+        if(parent[x]==x) return x;
+        parent[x]=find(parent[x]);
+        return parent[x];
+    }
+
+    static void union(int a, int b){
+        int parentB=find(b);
+        parent[parentB]=a;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        ArrayList<Integer>[] arr = new ArrayList[M+1];
+
+        for(int i=1; i<=M; ++i) {
+            arr[i] = new ArrayList<>();
+        }
+
+        parent = new int[N+1];
+        for(int i=1; i<=N; ++i) {
+            parent[i] = i;
+        }
+
+        boolean[] knowTruth = new boolean[N+1];
+
+
+        st = new StringTokenizer(br.readLine(), " ");
+        int n = Integer.parseInt(st.nextToken());
+        for(int i=1; i<=n; ++i) {
+            knowTruth[Integer.parseInt(st.nextToken())] = true;
+        }
+
+        // 입력 저장 및 Union
+        for(int i=1; i<=M; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            n = Integer.parseInt(st.nextToken());
+
+            int before = 0;
+            for(int j=1; j<=n; ++j) {
+                int cur = Integer.parseInt(st.nextToken());
+                arr[i].add(cur);
+
+                if(j==1) {
+                    before = cur;
+                } else {
+                    if (find(before) != find(cur)) {
+                        union(before, cur);
+                    }
+                    before = cur;
+                }
+            }
+
+        }
+
+        // 진실을 아는사람인지/모르는사람인지 체크하여 채우기
+        for(int i=1; i<= N; ++i) {
+            int parentNow = find(i);
+            for(int j=1; j<= N; ++j) {
+                if(parentNow == find(j) && knowTruth[j]) {
+                    knowTruth[i] = true;
+                }
+            }
+        }
+
+        // 진실을 아는사람이 한명도 없는 파티만 세기
+        int answer = 0;
+        for(int i=1; i<arr.length; ++i) {
+            boolean isNotKnow = true;
+            for(Integer it : arr[i]) {
+                if (knowTruth[it]) {
+                    isNotKnow = false;
+                }
+            }
+            if (isNotKnow) {
+                answer ++;
+            }
+        }
+
+        System.out.println(answer);
+    }*/
+
+
+    // #1043 거짓말 - Set 이용한 풀이
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");

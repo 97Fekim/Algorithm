@@ -12,7 +12,8 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    public static void main(String[] args) throws IOException {
+    // #1076 Z
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String[] inputs = br.readLine().split(" ");
@@ -45,7 +46,7 @@ public class Main {
 
         System.out.println(answer);
 
-    }
+    }*/
     
     // #1012 유기농 배추
 /*    static int[] dx = {-1,0,1,0};

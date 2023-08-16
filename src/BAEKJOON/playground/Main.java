@@ -19,26 +19,27 @@ public class Main {
         int N = Integer.parseInt(inputs[0]);
         int r = Integer.parseInt(inputs[1]);
         int c = Integer.parseInt(inputs[2]);
-
-        int size = N-1;
-
         int answer = 0;
-        while (size >= 0) {
-            if (r >= Math.pow(2, size)) {
-                answer += 2 * Math.pow(size+1, Math.pow(2, size));
-            }
-            if (c >= Math.pow(2, size)) {
-                answer += Math.pow(size+1, Math.pow(2, size));
-            }
-            System.out.println("size = " + size);
-            System.out.println("r = " + r);
-            System.out.println("c = " + c);
-            System.out.println("answer = " + answer);
+        // N= 10>9
+        N--;
 
-            r %= Math.pow(2, size);
-            c %= Math.pow(2, size);
+        while (N>=0) {
 
-            size--;
+            // size = 2^9 = 512
+            int size = (int)Math.pow(2, N);
+            int beAdd = (int)Math.pow(size, 2);
+
+            if (r >= size) {
+                answer += 2*beAdd;
+            }
+            if (c >= size) {
+                answer += beAdd;
+            }
+
+            r %= size;
+            c %= size;
+
+            N--;
 
         }
 

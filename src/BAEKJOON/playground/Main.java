@@ -12,6 +12,31 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    // #1107 리모콘
+/*    +, -, n1, n2, n3, n4, n5, n6, n7..
+
+    dp[i][j] = j번째 버튼을 i번째로 눌렀을때, 정답과의 최소 차이.
+
+
+            5457
+            3
+            6 7 8
+            +,-,0,1,2,3,4,5,9
+
+    dp[1][j] = j번째 버튼을 첫번째에 눌렀을때 정답과의 최소 차이.(abs)
+            + : 101 : 5356
+            - : 99  : 5358
+            0 : 0   : 5457
+            1 : 1   : 5456
+            2 : 2   : 5455
+            3 : 3   : 5454
+            4 : 4   : 5453
+            5 : 5   : 5452
+            9 : 9   : 5448
+
+    dp[2][j] = j번째 버튼을 두번째에 눌렀을때 정답과의 최소 차이.(abs)*/
+
+
     // #1074 Z
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

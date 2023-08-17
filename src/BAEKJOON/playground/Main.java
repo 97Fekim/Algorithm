@@ -12,29 +12,148 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    static boolean[] visited;
+    static ArrayList<Integer>[] arr;
+    static int minDis = Integer.MAX_VALUE;
+
+    static void dfs(int cur, int target, int depth) {
+
+        if (cur == target) {
+            minDis = Math.min(minDis, depth);
+        } else {
+            for (Integer i : arr[cur]) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    dfs(i, target, depth+1);
+                    visited[i] = false;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        // ----------------------------여기서부터 입력-----------------------------
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int M = Integer.parseInt(inputs[1]);
+
+        // 초기화
+        visited = new boolean[N+1];
+        arr = new ArrayList[N+1];
+        for(int i=0; i<=N; ++i) {
+            arr[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<M; ++i) {
+            inputs = br.readLine().split(" ");
+            int a = Integer.parseInt(inputs[0]);
+            int b = Integer.parseInt(inputs[1]);
+            arr[a].add(b);
+            arr[b].add(a);
+        }
+        // ----------------------------여기까진 입력-----------------------------
+
+        int minTot = Integer.MAX_VALUE;
+        int maxNode = -1;
+        for (int i=1; i<=N; ++i) {
+            int sumDis = 0;
+            for (int j=1; j<=N; ++j) {
+                minDis = Integer.MAX_VALUE;
+
+                visited[i] = true;
+                dfs(i, j, 0);   // cur, target, depth
+                sumDis += minDis;
+
+                visited = new boolean[N+1];
+            }
+
+            if (sumDis < minTot) {
+                minTot = sumDis;
+                maxNode = i;
+            }
+        }
+        System.out.println(maxNode);
+    }
+
     // #1107 리모콘
-/*    +, -, n1, n2, n3, n4, n5, n6, n7..
+/*    static class Channel{
+        int curChannel;
+        int clickedCnt;
+        Channel(int curChannel, int clickedCnt) {
+            this.curChannel = curChannel;
+            this.clickedCnt = clickedCnt;
+        }
+    }
 
-    dp[i][j] = j번째 버튼을 i번째로 눌렀을때, 정답과의 최소 차이.
+    static ArrayList<Channel> list;
+    static StringBuilder sb;
+    static Integer[] arr;
+    static int len=0;
 
+    static void dfs(int depth) {
+        if (depth > 6) {
+            return;
+        }
 
-            5457
-            3
-            6 7 8
-            +,-,0,1,2,3,4,5,9
+        list.add(new Channel(Integer.parseInt(sb.toString()), depth));
 
-    dp[1][j] = j번째 버튼을 첫번째에 눌렀을때 정답과의 최소 차이.(abs)
-            + : 101 : 5356
-            - : 99  : 5358
-            0 : 0   : 5457
-            1 : 1   : 5456
-            2 : 2   : 5455
-            3 : 3   : 5454
-            4 : 4   : 5453
-            5 : 5   : 5452
-            9 : 9   : 5448
+        for (int i=0; i<arr.length; ++i) {
+            sb.append(arr[i]);
+            dfs(depth+1);
+            sb.deleteCharAt(sb.length()-1);
+        }
 
-    dp[2][j] = j번째 버튼을 두번째에 눌렀을때 정답과의 최소 차이.(abs)*/
+    }
+
+    public static void main(String[] args) throws IOException {
+        
+        // ==========================여기부터 입력===========================
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        len = String.valueOf(N).length();
+
+        int cnt = Integer.parseInt(br.readLine());
+        list = new ArrayList<>();
+        arr = new Integer[10-cnt];
+        List<Integer> tmp = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+
+        if (cnt != 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for(int i=0; i<cnt; ++i) {
+                set.add(Integer.parseInt(st.nextToken()));
+            }
+        }
+        for (int i=0; i<10; ++i) {
+            if (!set.contains(i)) {
+                tmp.add(i);
+            }
+        }
+        tmp.toArray(arr);
+        // ==========================여기까지 입력===========================
+
+        sb = new StringBuilder("");
+        for (int i=0; i<arr.length; ++i) {
+
+            sb.append(arr[i]);
+            dfs(1);
+            sb.deleteCharAt(sb.length()-1);  // length? length-1?
+
+        }
+
+        int min = Integer.MAX_VALUE;
+        for (Channel c : list) {
+            int cur = Math.abs(N - c.curChannel) + c.clickedCnt;
+            min = Math.min(cur, min);
+        }
+
+        System.out.println(Math.min(Math.abs(100-N), min));
+
+    }*/
 
 
     // #1074 Z

@@ -12,7 +12,89 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    static boolean[] visited;
+    // 5430 AC
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int cnt = Integer.parseInt(br.readLine());
+
+        for (int i=0; i<cnt; ++i) {
+            char[] cmd = br.readLine().toCharArray();
+            int len = Integer.parseInt(br.readLine());
+            Deque<Integer> dq = new LinkedList<>();
+
+            String tmp = br.readLine();
+            String[] inputs = tmp.substring(1,tmp.length()-1).split(",");
+            if (len > 0) {
+                for(int j=0; j<inputs.length; ++j) {
+                    dq.add(Integer.parseInt(inputs[j]));
+                }
+            }
+
+            boolean isError = false;
+            String pos = "left";
+
+            for (char c : cmd) {
+                // 제거할 정수가 없다면 에러처리
+                if (c == 'D' && dq.size()==0) {
+                    isError = true;
+                    break;
+                }
+
+                if (c == 'R') {
+                    pos = pos.equals("left") ? "right" : "left";
+                }
+
+                if (c == 'D') {
+                    if (pos.equals("left")) {  // 왼쪽에서 제거
+                        dq.poll();
+                    } else {    // 오른쪽에서 제거
+                        dq.pollLast();
+                    }
+                }
+
+            }
+
+            if (isError) {
+                bw.write("error\n");
+            } else {
+                if (dq.size()==0) {
+                    bw.write("[]\n");
+                } else {
+                    if (pos.equals("left")) {
+                        bw.write("[");
+                        int dqLen = dq.size();
+                        for (int j=0; j<dqLen; ++j) {
+                            if (j == dqLen-1) {
+                                bw.write(String.valueOf(dq.poll()));
+                            } else {
+                                bw.write(String.valueOf(dq.poll())+",");
+                            }
+                        }
+                        bw.write("]\n");
+                    } else {
+                        bw.write("[");
+                        int dqLen = dq.size();
+                        for (int j=0; j<dqLen; ++j) {
+                            if (j == dqLen-1) {
+                                bw.write(String.valueOf(dq.pollLast()));
+                            } else {
+                                bw.write(String.valueOf(dq.pollLast())+",");
+                            }
+                        }
+                        bw.write("]\n");
+                    }
+                }
+            }
+        }
+
+        bw.flush();
+        bw.close();
+
+    }*/
+
+/*    static boolean[] visited;
     static ArrayList<Integer>[] arr;
     static int minDis = Integer.MAX_VALUE;
 
@@ -76,7 +158,7 @@ public class Main {
             }
         }
         System.out.println(maxNode);
-    }
+    }*/
 
     // #1107 리모콘
 /*    static class Channel{

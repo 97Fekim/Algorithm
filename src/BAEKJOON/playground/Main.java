@@ -12,10 +12,152 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    public static void main(String[] args) throws IOException {
+    // #11726 2xn 타일링
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
 
-    }
+        if (N==1) {
+            System.out.println(1);
+            System.exit(0);
+        }
+
+        if (N==1) {
+            System.out.println(2);
+            System.exit(0);
+        }
+
+        int[] arr = new int[N+1];
+        arr[1] = 1;
+        arr[2] = 2;
+        for (int i=3; i<=N; ++i) {
+            arr[i] = (arr[i-1] + arr[i-2]) % 10007;
+        }
+
+        System.out.println(arr[N]);
+
+    }*/
+
+    // 11723 집합 - 비트마스킹을 활용한 풀이
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int cnt = Integer.parseInt(br.readLine());
+        boolean[] set = new boolean[21];
+
+        for (int i=0; i<cnt; ++i) {
+            String inputs[] = br.readLine().split(" ");
+
+            String cmd = inputs[0];
+
+            int value = 0;
+            if (inputs.length > 1) {
+                value = Integer.parseInt(inputs[1]);
+            }
+
+            switch (cmd) {
+                case "add": {
+                    set[value] = true;
+                    break;
+                }
+                case "remove": {
+                    set[value] = false;
+                    break;
+                }
+                case "check": {
+                    if(set[value]) {
+                        bw.write("1\n");
+                    } else {
+                        bw.write("0\n");
+                    }
+                    break;
+                }
+                case "toggle": {
+                    if (set[value]) {
+                        set[value] = false;
+                    } else {
+                        set[value] = true;
+                    }
+                    break;
+                }
+                case "all": {
+                    Arrays.fill(set, true);
+                    break;
+                }
+                case "empty": {
+                    set = new boolean[21];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+        bw.flush();
+        bw.close();
+    }*/
+
+    // 11723 집합 - Set을 활용한 풀이
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int cnt = Integer.parseInt(br.readLine());
+        Set<Character> set = new HashSet<>();
+
+        for (int i=0; i<cnt; ++i) {
+            String inputs[] = br.readLine().split(" ");
+
+            String cmd = inputs[0];
+
+            char value = 'a';
+            if (inputs.length > 1) {
+                value = (char)Integer.parseInt(inputs[1]);
+            }
+
+            switch (cmd) {
+                case "add": {
+                    set.add(value);
+                    break;
+                }
+                case "remove": {
+                    set.remove(value);
+                    break;
+                }
+                case "check": {
+                    if(set.contains(value)) {
+                        bw.write("1\n");
+                    } else {
+                        bw.write("0\n");
+                    }
+                    break;
+                }
+                case "toggle": {
+                    if (set.contains(value)) {
+                        set.remove(value);
+                    } else {
+                        set.add(value);
+                    }
+                    break;
+                }
+                case "all": {
+                    set.clear();
+                    for (int j=1; j<=20; ++j) {
+                        set.add((char)j);
+                    }
+                    break;
+                }
+                case "empty": {
+                    set.clear();
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+        bw.flush();
+        bw.close();
+    }*/
 
     // #9375 패션왕 신해빈
 /*    public static void main(String[] args) throws IOException {

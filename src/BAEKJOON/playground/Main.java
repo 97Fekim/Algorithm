@@ -12,38 +12,35 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    // #9375 패션왕 신해빈
-//    headgear = {hat, turban}	arr[0]=2
-//    eyewear = {sunglasses}		arr[1]=1
-//    pants = {skirt, jeans}		arr[2]=2
-//    socks = {black, white}		arr[3]=2
-//
-//    1가지만 입는 경우의 수 = 1개뽑아서 곱한거 + 1개뽑아서 곱한거 + 1개뽑아서 곱한거 ...
-//    2가지만 입는 경우의 수 = 2개뽑아서 곱한거 + 2개뽑아서 곱한거 + 2개뽑아서 곱한거 ...
-//    3가지만 입는 경우의 수 = 3개뽑아서 곱한거 + 3개뽑아서 곱한거 + 3개뽑아서 곱한거 ...
-//    4가지만 입는 경우의 수 = 4개뽑아서 곱한거 + 4개뽑아서 곱한거 + 4개뽑아서 곱한거 ...
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int cnt = Integer.parseInt(br.readLine());
-
-        int n = Integer.parseInt(br.readLine());
-        Map<String, Integer> map = new HashMap<>();
-        for (int i=0; i<n; ++i) {
-            String kind = br.readLine().split(" ")[0];
-            map.put(kind, map.getOrDefault(kind, 0) + 1);
-        }
-
-        int[] arr = new int[map.size()];
-        int i = 0;
-        for (String key : map.keySet()) {
-            arr[i] = map.get(key);
-            i++;
-        }
-
-
 
     }
+
+    // #9375 패션왕 신해빈
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int cnt = Integer.parseInt(br.readLine());
+
+        for (int k=0; k<cnt; ++k) {
+            int n = Integer.parseInt(br.readLine());
+            Map<String, Integer> map = new HashMap<>();
+            for (int i=0; i<n; ++i) {
+                String kind = br.readLine().split(" ")[1];
+                map.put(kind, map.getOrDefault(kind, 0) + 1);
+            }
+
+            int answer = 1;
+            for (String key : map.keySet()) {
+                answer *= (map.get(key)+1);
+            }
+            answer -= 1;
+
+            System.out.println(answer);
+
+        }
+    }*/
 
     // 5430 AC
 /*    public static void main(String[] args) throws IOException {

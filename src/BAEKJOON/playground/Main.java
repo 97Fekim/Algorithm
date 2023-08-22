@@ -12,58 +12,93 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    // #17626 Four Squares
+    // #21736 헌내기는 친구가 필요해
+/*    static int N;
+    static int M;
+    static char[][] arr;
+    static boolean[][] visited;
+    static int[] dx = {-1,0,1,0};
+    static int[] dy = {0,1,0,-1};
+    static int answer = 0;
+
+    static void dfs(int x, int y) {
+
+        if (arr[x][y] == 'X') {
+            return ;
+        }
+        if (arr[x][y] == 'P') {
+            answer ++;
+        }
+        for (int i=0; i<4; ++i) {
+            int next_x = x + dx[i];
+            int next_y = y + dy[i];
+
+            if (next_x >= 0 && next_y >= 0 &&
+                next_x < N && next_y < M &&
+                !visited[next_x][next_y]) {
+
+                visited[next_x][next_y] = true;
+                dfs(next_x, next_y);
+            }
+
+        }
+
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+
+        N = Integer.parseInt(inputs[0]);
+        M = Integer.parseInt(inputs[1]);
+        arr = new char[N][M];
+        visited = new boolean[N][M];
+
+        int start_i = 0;
+        int start_j = 0;
+
+        for(int i=0; i<N; ++i) {
+            String in = br.readLine();
+            for(int j=0; j<M; ++j) {
+                arr[i][j] = in.charAt(j);
+                if(arr[i][j] == 'I') {
+                    start_i = i;
+                    start_j = j;
+                }
+            }
+        }
+
+        dfs(start_i, start_j);
+
+        System.out.println(answer == 0 ? "TT" : answer);
+    }*/
+
+    // #17626 Four Squares
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-//        1 > 1
-//        2 > 4
-//        3 > 5
-//        4 > 16
-//        5 > 25
-//        6 > 36
-//        7 > 49
-//        8 > 64
-//        9 > 81
-//                .
-//        .
-//
-//        223 > 49729
-//
-//
-//        15663의 답은??
-//
-//        첨엔 125부터... 그담엔 124부터... 그담엔 1부터
-//                (int i=0; (int)sqrt(n)-i > 0; ++i)
-//
-//        value -= sqrt(15663)^2
-//        cnt++  (if cnt>4 continue)
-//	>>>>
-//        value = 38
-//        cnt=1
-//
-//        value -= sqrt(38)^2
-//        cnt++  (if cnt>4 continue)
-//	>>>>
-//        value = 2
-//        cnt=2
-//
-//        value -= sqrt(2)^2
-//        cnt++  (if cnt>4 continue)
-//	>>>>
-//        value = 1
-//        cnt=3
-//
-//        value -= sqrt(1)^2
-//        cnt++  (if cnt>4 continue)
-//	>>>>
-//        value = 0
-//        cnt = 4
-//
-//        value==0 then end;
+        int n = Integer.parseInt(br.readLine());
+        int[] dp = new int[n+1];
+        dp[1] = 1;
+        for (int i=2; i<=n; ++i) {
+            int min = Integer.MAX_VALUE;
 
-    }
+            if (Math.pow((int)Math.sqrt(i), 2) == i) {
+                dp[i] = 1;
+                continue;
+            }
+
+            for (int j=1; j<=Math.sqrt(i); ++j) {
+                min = Math.min(min, dp[(int)Math.pow(j,2)] + dp[i-(int)Math.pow(j,2)]);
+            }
+
+            dp[i] = min;
+        }
+
+        System.out.println(dp[n]);
+
+    }*/
 
  /*   public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -12,6 +12,105 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+//        1 > 1
+//        2 > 4
+//        3 > 5
+//        4 > 16
+//        5 > 25
+//        6 > 36
+//        7 > 49
+//        8 > 64
+//        9 > 81
+//                .
+//        .
+//
+//        223 > 49729
+//
+//
+//        15663의 답은??
+//
+//        첨엔 125부터... 그담엔 124부터... 그담엔 1부터
+//                (int i=0; (int)sqrt(n)-i > 0; ++i)
+//
+//        value -= sqrt(15663)^2
+//        cnt++  (if cnt>4 continue)
+//	>>>>
+//        value = 38
+//        cnt=1
+//
+//        value -= sqrt(38)^2
+//        cnt++  (if cnt>4 continue)
+//	>>>>
+//        value = 2
+//        cnt=2
+//
+//        value -= sqrt(2)^2
+//        cnt++  (if cnt>4 continue)
+//	>>>>
+//        value = 1
+//        cnt=3
+//
+//        value -= sqrt(1)^2
+//        cnt++  (if cnt>4 continue)
+//	>>>>
+//        value = 0
+//        cnt = 4
+//
+//        value==0 then end;
+
+    }
+
+ /*   public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int M = Integer.parseInt(inputs[1]);
+
+        Map<String, String> map = new HashMap<>();
+        for (int i=0; i<N; ++i) {
+            inputs = br.readLine().split(" ");
+            map.put(inputs[0], inputs[1]);
+        }
+
+        for (int i=0; i<M; ++i) {
+            bw.write(map.get(br.readLine())+"\n");
+        }
+
+        bw.flush();
+        bw.close();
+    }*/
+
+    // #11727 2×n 타일링 2
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        if (N==1) {
+            System.out.println(1);
+            System.exit(0);
+        }
+
+        if (N==1) {
+            System.out.println(3);
+            System.exit(0);
+        }
+
+        int[] arr = new int[N+1];
+        arr[1] = 1;
+        arr[2] = 3;
+        for (int i=3; i<=N; ++i) {
+            arr[i] = (arr[i-1] + 2*arr[i-2]) % 10007;
+        }
+
+        System.out.println(arr[N]);
+    }*/
+
     // #11726 2xn 타일링
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

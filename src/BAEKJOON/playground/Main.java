@@ -12,6 +12,7 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    // #17626 Four Squares
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

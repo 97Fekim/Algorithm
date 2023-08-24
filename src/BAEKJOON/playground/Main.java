@@ -12,6 +12,102 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+/*    static class Point {
+        int pos;
+        int value;
+        int answer;
+        public int getPos() {
+            return pos;
+        }
+        public int getValue() {
+            return value;
+        }
+        public int getAnswer() {
+            return answer;
+        }
+    }
+
+    // #18870 좌표 압축
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        List<Point> list = new ArrayList<>();
+        for (int i=1; i<=N; ++i) {
+            Point p = new Point();
+            p.pos = i;
+            p.value = Integer.parseInt(st.nextToken());
+            p.answer = 0;
+            list.add(p);
+        }
+
+        Collections.sort(list, Comparator.comparing(Point::getValue));
+
+        for (int i=1; i<list.size(); ++i) {
+            list.get(i).answer = list.get(i-1).answer;
+            if (list.get(i-1).value < list.get(i).value) {
+                list.get(i).answer++;
+            }
+        }
+
+        Collections.sort(list, Comparator.comparing(Point::getPos));
+
+        for (int i=0; i<list.size(); ++i) {
+            if (i == list.size()-1) {
+                bw.write(String.valueOf(list.get(i).answer));
+            } else {
+                bw.write(list.get(i).answer + " ");
+            }
+        }
+
+        bw.flush();
+        bw.close();
+    }*/
+
+    // #20529 가장 가까운 세 사람의 심리적 거리
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int cnt = Integer.parseInt(br.readLine());
+        for (int i=0; i<cnt; ++i) {
+
+            int n = Integer.parseInt(br.readLine());
+            String[] inputs = br.readLine().split(" ");
+
+            if (n >= 33) {
+                System.out.println(0);
+                continue;
+            }
+
+            int min = Integer.MAX_VALUE;
+            for (int j=0; j<inputs.length-2; ++j) {
+                String A = inputs[j];
+                for (int k=j+1; k<inputs.length-1; ++k) {
+                    String B = inputs[k];
+                    for (int l=k+1; l<inputs.length; ++l) {
+                        String C = inputs[l];
+                        int cur = 0;
+                        for (int m=0; m<4; ++m) {
+                            if (A.charAt(m) != B.charAt(m)) {
+                                cur++;
+                            }
+                            if (A.charAt(m) != C.charAt(m)) {
+                                cur++;
+                            }
+                            if (B.charAt(m) != C.charAt(m)) {
+                                cur++;
+                            }
+                        }
+                        min = Math.min(min, cur);
+                    }
+                }
+            }
+            System.out.println(min);
+
+        }
+    }*/
+
     // #21736 헌내기는 친구가 필요해
 /*    static int N;
     static int M;

@@ -12,6 +12,118 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    // #16928 뱀과 사다리 게임
+/*    static int[] arr;
+    static int[] answer;
+    static boolean[] visited;
+
+    static void bfs() {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(1);
+
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+            for (int i=1; i<=6 && cur+i<=100; ++i) {
+                int next = arr[cur+i];
+                if (!visited[next] && next <= 100) {
+                    visited[next] = true;
+                    answer[next] = answer[cur] + 1;
+                    q.offer(next);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int M = Integer.parseInt(inputs[1]);
+        arr = new int[101];
+        answer = new int[101];
+        visited = new boolean[101];
+        for (int i=1; i<=100; ++i) {
+            arr[i] = i;
+        }
+        while (N+M --> 0) {
+            inputs = br.readLine().split(" ");
+            arr[Integer.parseInt(inputs[0])] = Integer.parseInt(inputs[1]);
+        }
+
+        bfs();
+
+        System.out.println(answer[100]);
+
+    }*/
+
+/*    static int[][] graph;
+    static boolean[] visited;
+
+    static boolean bfs(int pos, int target) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(pos);
+        boolean isFirst = true;
+
+        while(!q.isEmpty()) {
+            int cur = q.poll();
+
+            // 첫방문 이후에만 경로여부를 판단함.
+            // Ex) A -> A 가는 경로가 무조건 있다고 판단하면 안되므로.
+            if (!isFirst && cur == target) {
+                return true;
+            }
+
+            // 이미 방문했던 노드라면 PASS
+            if (visited[cur]) {
+                continue;
+            }
+            // 처음 방문하는 노드라면 방문했음을 Check
+            visited[cur] = true;
+
+            isFirst = false; // 첫방문 이후임을 표시
+            for (int i=0; i<graph.length; ++i) {
+                if (graph[cur][i] == 1) {
+                    q.offer(i);
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        graph = new int[N][N];
+        visited = new boolean[N];
+
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<N; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int[][] answer = new int[N][N];
+        for (int i=0; i<N; ++i) {
+            for (int j=0; j<N; ++j) {
+                visited = new boolean[N];
+                boolean isPossible = bfs(i, j);
+                if (isPossible) {
+                    answer[i][j] = 1;
+                } else {
+                    answer[i][j] = 0;
+                }
+            }
+        }
+
+        for (int i=0; i<N; ++i) {
+            for (int j=0; j<N; ++j) {
+                System.out.print(answer[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }*/
+
 /*    static class Point {
         int pos;
         int value;

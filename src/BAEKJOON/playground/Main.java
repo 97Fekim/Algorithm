@@ -12,6 +12,118 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    static int A;
+    static int B;
+
+    static ArrayList<Boolean[]> bfs() {
+        Queue<ArrayList<Boolean[]>> q = new LinkedList<>();
+        ArrayList<Boolean[]> l = new ArrayList<>();
+        Boolean[] bArr1 = {false, false};
+        l.add(bArr1);
+        q.offer(l);
+
+        l = new ArrayList<>();
+        Boolean[] bArr2 = {false, true};
+        l.add(bArr2);
+        q.offer(l);
+
+        l = new ArrayList<>();
+        Boolean[] bArr3 = {true, false};
+        l.add(bArr3);
+        q.offer(l);
+
+        l = new ArrayList<>();
+        Boolean[] bArr4 = {true, true};
+        l.add(bArr4);
+        q.offer(l);
+        // D : 00
+        // S : 01
+        // L : 10
+        // R : 11
+
+        while (!q.isEmpty()) {
+            ArrayList<Boolean[]> cmds = q.poll();
+            if(get_calculated_result(cmds)) {
+                return cmds;
+            } else {
+                ArrayList<Boolean[]> l1 = (ArrayList<Boolean[]>)cmds.clone();
+                Boolean[] bArr5 = {false, false};
+                l1.add(bArr5);
+                q.offer(l1);
+
+                ArrayList<Boolean[]> l2 = (ArrayList<Boolean[]>)cmds.clone();
+                Boolean[] bArr6 = {false, true};
+                l2.add(bArr6);
+                q.offer(l2);
+
+                ArrayList<Boolean[]> l3 = (ArrayList<Boolean[]>)cmds.clone();
+                Boolean[] bArr7 = {true, false};
+                l3.add(bArr7);
+                q.offer(l3);
+
+                ArrayList<Boolean[]> l4 = (ArrayList<Boolean[]>)cmds.clone();
+                Boolean[] bArr8 = {true, true};
+                l4.add(bArr8);
+                q.offer(l4);
+            }
+
+        }
+
+        return null;
+    }
+
+    static boolean get_calculated_result(ArrayList<Boolean[]> cmds) {
+        int n = A;
+        for (int i=0; i<cmds.size(); ++i) {
+            Boolean[] cmd = cmds.get(i);
+            if (!cmd[0] && !cmd[1]) {
+                n = (2 * n) % 10000;
+            } else if (!cmd[0] && cmd[1]) {
+                if (n == 0) {
+                    n = 9999;
+                } else {
+                    n -= 1;
+                }
+            } else if (cmd[0] && !cmd[1]) {
+                n = (n % 1000) * 10 + n / 1000;
+            } else if (cmd[0] && cmd[1]) {
+                n = (n % 10) * 1000 + n / 10;
+            }
+        }
+
+        if (n == B) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int cnt = Integer.parseInt(br.readLine());
+
+        for (int i=0; i<cnt; ++i) {
+
+            String inputs[] = br.readLine().split(" ");
+            A = Integer.parseInt(inputs[0]);
+            B = Integer.parseInt(inputs[1]);
+            ArrayList<Boolean[]> answer = bfs();
+            for (Boolean[] bArr : answer) {
+                if (!bArr[0] && !bArr[1]) {
+                    System.out.print("D");
+                } else if (!bArr[0] && bArr[1]) {
+                    System.out.print("S");
+                } else if (bArr[0] && !bArr[1]) {
+                    System.out.print("L");
+                } else {
+                    System.out.print("R");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     // #14500 테트로미노
 /*    static int[][] graph;
     static boolean[][] visited;

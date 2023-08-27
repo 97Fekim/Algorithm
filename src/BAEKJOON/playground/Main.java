@@ -12,6 +12,178 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    // #14500 테트로미노
+/*    static int[][] graph;
+    static boolean[][] visited;
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, -1, 0, 1};
+    static int max;
+
+    static void dfs(int x, int y, int depth, int sum) {
+        if (depth == 4) {
+            max = Math.max(max, sum);
+            return ;
+        } else {
+            for (int i=0; i<4; ++i) {
+                int next_x = x + dx[i];
+                int next_y = y + dy[i];
+
+                if (next_x >= 0 && next_x < graph.length &&
+                    next_y >= 0 && next_y < graph[0].length &&
+                    !visited[next_x][next_y]) {
+
+                    visited[next_x][next_y] = true;
+                    dfs(next_x, next_y, depth + 1, sum + graph[next_x][next_y]);
+                    visited[next_x][next_y] = false;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int M = Integer.parseInt(inputs[1]);
+        graph = new int[N][M];
+        visited = new boolean[N][M];
+
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<M; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int answer = -1;
+        for (int i=0; i<N; ++i) {
+            for (int j=0; j<M; ++j) {
+                max = -1;
+                if (j-1 >= 0 && i-1 >= 0 && j+1 < M) {  // 좌(j-1), 상(i-1), 우(j+1)
+                    max = Math.max(max, graph[i][j] + graph[i][j-1] + graph[i-1][j] + graph[i][j+1]);
+                }
+                if (i-1 >= 0 && j+1 < M && i+1 < N) {  // 상(i-1), 우(j+1), 하(i+1)
+                    max = Math.max(max, graph[i][j] + graph[i-1][j] + graph[i][j+1] + graph[i+1][j]);
+                }
+                if (j+1 < M && i+1 < N && j-1 >= 0) {  // 우(j+1), 하(i+1), 좌(j-1)
+                    max = Math.max(max, graph[i][j] + graph[i][j+1] + graph[i+1][j] + graph[i][j-1]);
+                }
+                if (i+1 < N && j-1 >= 0 && i-1 >= 0) {  // 하(i+1), 좌(j-1), 상(i-1)
+                    max = Math.max(max, graph[i][j] + graph[i+1][j] + graph[i][j-1] + graph[i-1][j]);
+                }
+
+                visited[i][j] = true;
+                dfs(i, j, 1, graph[i][j]);
+                visited[i][j] = false;
+
+                answer = Math.max(answer, max);
+
+            }
+        }
+        System.out.println(answer);
+
+    }*/
+
+    // #10026 적록색약
+/*    static class Point {
+        int x;
+        int y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    static char[][] RGB;
+    static char[][] YB;
+    static boolean[][] RGB_visited;
+    static boolean[][] YB_visited;
+    static int[] dx = {-1,0,1,0};
+    static int[] dy = {0,-1,0,1};
+
+    static void bfs_RGB(int x, int y) {
+        Queue<Point> q = new LinkedList<>();
+        q.offer(new Point(x, y));
+        RGB_visited[x][y] = true;
+
+        while(!q.isEmpty()) {
+            Point cur = q.poll();
+            for (int i=0; i<4; ++i) {
+                int next_x = cur.x+dx[i];
+                int next_y = cur.y+dy[i];
+                if (next_x >= 0 && next_y >= 0 &&
+                    next_x < RGB.length && next_y < RGB[0].length &&
+                    !RGB_visited[next_x][next_y] &&
+                    RGB[cur.x][cur.y] == RGB[next_x][next_y]) {
+
+                    RGB_visited[next_x][next_y] = true;
+                    q.offer(new Point(next_x, next_y));
+                }
+            }
+        }
+    }
+
+    static void bfs_YB(int x, int y) {
+        Queue<Point> q = new LinkedList<>();
+        q.offer(new Point(x, y));
+        YB_visited[x][y] = true;
+
+        while(!q.isEmpty()) {
+            Point cur = q.poll();
+            for (int i=0; i<4; ++i) {
+                int next_x = cur.x+dx[i];
+                int next_y = cur.y+dy[i];
+                if (next_x >= 0 && next_y >= 0 &&
+                        next_x < YB.length && next_y < YB[0].length &&
+                        !YB_visited[next_x][next_y] &&
+                        YB[cur.x][cur.y] == YB[next_x][next_y]) {
+
+                    YB_visited[next_x][next_y] = true;
+                    q.offer(new Point(next_x, next_y));
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        RGB = new char[N][N];
+        YB = new char[N][N];
+        RGB_visited = new boolean[N][N];
+        YB_visited = new boolean[N][N];
+
+        for (int i=0; i<N; ++i) {
+            String input = br.readLine();
+            for (int j=0; j<N; ++j) {
+                RGB[i][j] = input.charAt(j);
+                YB[i][j] = input.charAt(j)=='B' ? 'B' : 'Y';
+            }
+        }
+
+        int RGB_answer = 0;
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                if (!RGB_visited[i][j]) {
+                    bfs_RGB(i, j);
+                    RGB_answer++;
+                }
+            }
+        }
+        int YB_answer = 0;
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                if (!YB_visited[i][j]) {
+                    bfs_YB(i, j);
+                    YB_answer++;
+                }
+            }
+        }
+
+        System.out.println(RGB_answer + " " + YB_answer);
+
+    }*/
+
     // #16928 뱀과 사다리 게임
 /*    static int[] arr;
     static int[] answer;

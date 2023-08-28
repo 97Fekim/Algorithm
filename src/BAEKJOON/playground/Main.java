@@ -12,117 +12,169 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    static int A;
-    static int B;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int cnt = Integer.parseInt(br.readLine());
 
-    static ArrayList<Boolean[]> bfs() {
-        Queue<ArrayList<Boolean[]>> q = new LinkedList<>();
-        ArrayList<Boolean[]> l = new ArrayList<>();
-        Boolean[] bArr1 = {false, false};
-        l.add(bArr1);
-        q.offer(l);
+        while (cnt --> 0) {
+            PriorityQueue<Long> positivePQ = new PriorityQueue<>(Collections.reverseOrder());
+            PriorityQueue<Long> negativePQ = new PriorityQueue<>();
+            int curPQsize = 0;
 
-        l = new ArrayList<>();
-        Boolean[] bArr2 = {false, true};
-        l.add(bArr2);
-        q.offer(l);
+            int cmdCnt = Integer.parseInt(br.readLine());
+            while (cmdCnt --> 0) {
+                String[] inputs = br.readLine().split(" ");
+                String cmd = inputs[0];
+                long value = Integer.parseInt(inputs[1]);
 
-        l = new ArrayList<>();
-        Boolean[] bArr3 = {true, false};
-        l.add(bArr3);
-        q.offer(l);
+                switch (cmd) {
+                    case "I": {
+                        positivePQ.offer(value);
+                        negativePQ.offer(value);
+                        curPQsize++;
+                        break;
+                    } case "D": {
+                        if (curPQsize == 0) {
+                            break;
+                        }
+                        if (value == 1L) {
+                            positivePQ.poll();
+                            curPQsize--;
+                        } else if (value == -1L) {
+                            negativePQ.poll();
+                            curPQsize--;
+                        }
+                        break;
+                    }
+                }
 
-        l = new ArrayList<>();
-        Boolean[] bArr4 = {true, true};
-        l.add(bArr4);
-        q.offer(l);
-        // D : 00
-        // S : 01
-        // L : 10
-        // R : 11
+                if (curPQsize == 0) {
+                    positivePQ.clear();
+                    negativePQ.clear();
+                }
 
-        while (!q.isEmpty()) {
-            ArrayList<Boolean[]> cmds = q.poll();
-            if(get_calculated_result(cmds)) {
-                return cmds;
+            }
+            if (curPQsize == 0) {
+                bw.write("EMPTY\n");
             } else {
-                ArrayList<Boolean[]> l1 = (ArrayList<Boolean[]>)cmds.clone();
-                Boolean[] bArr5 = {false, false};
-                l1.add(bArr5);
-                q.offer(l1);
-
-                ArrayList<Boolean[]> l2 = (ArrayList<Boolean[]>)cmds.clone();
-                Boolean[] bArr6 = {false, true};
-                l2.add(bArr6);
-                q.offer(l2);
-
-                ArrayList<Boolean[]> l3 = (ArrayList<Boolean[]>)cmds.clone();
-                Boolean[] bArr7 = {true, false};
-                l3.add(bArr7);
-                q.offer(l3);
-
-                ArrayList<Boolean[]> l4 = (ArrayList<Boolean[]>)cmds.clone();
-                Boolean[] bArr8 = {true, true};
-                l4.add(bArr8);
-                q.offer(l4);
+                bw.write(positivePQ.peek() + " " + negativePQ.peek()+"\n");
             }
 
         }
+        bw.flush();
+        bw.close();
 
-        return null;
     }
 
-    static boolean get_calculated_result(ArrayList<Boolean[]> cmds) {
-        int n = A;
-        for (int i=0; i<cmds.size(); ++i) {
-            Boolean[] cmd = cmds.get(i);
-            if (!cmd[0] && !cmd[1]) {
-                n = (2 * n) % 10000;
-            } else if (!cmd[0] && cmd[1]) {
-                if (n == 0) {
-                    n = 9999;
-                } else {
-                    n -= 1;
-                }
-            } else if (cmd[0] && !cmd[1]) {
-                n = (n % 1000) * 10 + n / 1000;
-            } else if (cmd[0] && cmd[1]) {
-                n = (n % 10) * 1000 + n / 10;
+    //
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        char[] arr = br.readLine().toCharArray();
+        long answer = 0L;
+        for (int i=0; i<N; ++i) {
+            long ai = (int)arr[i] - 96;
+            for (int j=1; j<=i; ++j) {
+                ai = ai * 31L % 1234567891L;
+            }
+            answer += ai;
+            answer %= 1234567891L;
+        }
+        System.out.println(answer);
+        // a = 97
+        // z = 122
+
+    }*/
+
+    // 9019 DSLR
+/*    static boolean[] visited;
+
+    static String bfs(int input, int output) {
+        Queue<Register> q = new LinkedList<>();
+        q.offer(new Register(input, ""));
+        visited[input] = true;
+
+        while (!q.isEmpty()) {
+            Register cur = q.poll();
+            if (cur.result == output) {
+                return cur.cmds;
+            }
+
+            int after_D = cur.process_D();
+            if (!visited[after_D]) {
+                visited[after_D] = true;
+                q.offer(new Register(after_D, cur.cmds+"D"));
+            }
+
+            int after_S = cur.process_S();
+            if (!visited[after_S]) {
+                visited[after_S] = true;
+                q.offer(new Register(after_S, cur.cmds+"S"));
+            }
+
+            int after_L = cur.process_L();
+            if (!visited[after_L]) {
+                visited[after_L] = true;
+                q.offer(new Register(after_L, cur.cmds+"L"));
+            }
+
+            int after_R = cur.process_R();
+            if (!visited[after_R]) {
+                visited[after_R] = true;
+                q.offer(new Register(after_R, cur.cmds+"R"));
+            }
+
+        }
+        return "";
+    }
+
+    static class Register {
+        int result;
+        String cmds;
+
+        Register(int result, String cmds) {
+            this.result = result;
+            this.cmds = cmds;
+        }
+
+        int process_D() {
+            return (2 * this.result) % 10000;
+        }
+
+        int process_S() {
+            if (this.result == 0) {
+                return 9999;
+            } else {
+                return this.result - 1;
             }
         }
 
-        if (n == B) {
-            return true;
-        } else {
-            return false;
+        int process_L() {
+            return this.result % 1000 * 10 + this.result / 1000;
+        }
+
+        int process_R() {
+            return this.result / 10 + this.result % 10 * 1000;
         }
 
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int cnt = Integer.parseInt(br.readLine());
 
         for (int i=0; i<cnt; ++i) {
-
             String inputs[] = br.readLine().split(" ");
-            A = Integer.parseInt(inputs[0]);
-            B = Integer.parseInt(inputs[1]);
-            ArrayList<Boolean[]> answer = bfs();
-            for (Boolean[] bArr : answer) {
-                if (!bArr[0] && !bArr[1]) {
-                    System.out.print("D");
-                } else if (!bArr[0] && bArr[1]) {
-                    System.out.print("S");
-                } else if (bArr[0] && !bArr[1]) {
-                    System.out.print("L");
-                } else {
-                    System.out.print("R");
-                }
-            }
-            System.out.println();
+            int input = Integer.parseInt(inputs[0]);
+            int output = Integer.parseInt(inputs[1]);
+            visited = new boolean[10000];
+            bw.write(bfs(input, output)+"\n");
         }
-    }
+        bw.flush();
+        bw.close();
+    }*/
 
     // #14500 테트로미노
 /*    static int[][] graph;

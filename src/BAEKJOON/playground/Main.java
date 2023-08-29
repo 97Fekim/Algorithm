@@ -18,47 +18,40 @@ public class Main {
         int cnt = Integer.parseInt(br.readLine());
 
         while (cnt --> 0) {
-            PriorityQueue<Long> positivePQ = new PriorityQueue<>(Collections.reverseOrder());
-            PriorityQueue<Long> negativePQ = new PriorityQueue<>();
-            int curPQsize = 0;
+            TreeMap<Integer, Integer> treeMap = new TreeMap<>();
 
             int cmdCnt = Integer.parseInt(br.readLine());
             while (cmdCnt --> 0) {
                 String[] inputs = br.readLine().split(" ");
                 String cmd = inputs[0];
-                long value = Integer.parseInt(inputs[1]);
+                int value = Integer.parseInt(inputs[1]);
 
                 switch (cmd) {
                     case "I": {
-                        positivePQ.offer(value);
-                        negativePQ.offer(value);
-                        curPQsize++;
+                        treeMap.put(value, treeMap.getOrDefault(value, 0) + 1);
                         break;
                     } case "D": {
-                        if (curPQsize == 0) {
+                        if (treeMap.size() == 0) {
+                            break;
+                        } else {
+                            int key = value == -1 ? treeMap.firstKey() : treeMap.lastKey();
+
+                            if (treeMap.get(key) == 1) {
+                                treeMap.remove(key);
+                            } else {
+                                treeMap.put(key, treeMap.get(key) - 1);
+                            }
                             break;
                         }
-                        if (value == 1L) {
-                            positivePQ.poll();
-                            curPQsize--;
-                        } else if (value == -1L) {
-                            negativePQ.poll();
-                            curPQsize--;
-                        }
-                        break;
                     }
                 }
 
-                if (curPQsize == 0) {
-                    positivePQ.clear();
-                    negativePQ.clear();
-                }
-
             }
-            if (curPQsize == 0) {
+
+            if (treeMap.size() == 0) {
                 bw.write("EMPTY\n");
             } else {
-                bw.write(positivePQ.peek() + " " + negativePQ.peek()+"\n");
+                bw.write(String.valueOf(treeMap.lastKey() + " " + String.valueOf(treeMap.firstKey()))+"\n");
             }
 
         }

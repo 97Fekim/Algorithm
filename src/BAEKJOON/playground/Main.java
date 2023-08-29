@@ -14,6 +14,68 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int M = Integer.parseInt(inputs[1]);
+        int B = Integer.parseInt(inputs[2]);
+
+        int[][] arr = new int[N][M];
+
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<M; ++j) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int minCnt = Integer.MAX_VALUE;
+        int answerHeight = 0;
+        for (int a=0; a<=256; ++a) {
+            boolean isPossible = true;
+            int cuofHeight = a;
+            int marginBlock = B;
+            int cnt = 0;
+
+            // 깎는 작업만 수행
+            for (int i=0; i<N; ++i) {
+                for (int j=0; j<M; ++j) {
+                    if (arr[i][j] > cuofHeight) {  // 땅을 깎아야 하는 경우
+                        cnt += 2 * (arr[i][j] - cuofHeight);  // 블록 한개에 2초 걸림
+                        marginBlock += arr[i][j] - cuofHeight;  // 깎은 블록 만큼 여유블록에 추가
+                    }
+                }
+            }
+
+            // 블록을 놓는 작업을 수행
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < M; ++j) {
+                    if (arr[i][j] < cuofHeight) {  // 땅에 블록을 놓아야 하는 경우
+                        if (marginBlock < cuofHeight - arr[i][j]) {  // 땅에 블록을 놓아야 하는데, 여유 블록이 없음
+                            isPossible = false;
+                        } else {
+                            marginBlock -= cuofHeight - arr[i][j];  // 블록을 사용한다.
+                            cnt += cuofHeight - arr[i][j];  // 블록 한개에 1초 걸림
+                        }
+                    }
+                }
+            }
+
+            if (!isPossible) {
+                continue;
+            } else {
+                if (cnt <= minCnt) {
+                    minCnt = cnt;
+                    answerHeight = cuofHeight;
+                }
+            }
+        }
+
+        System.out.println(minCnt + " " + answerHeight);
+
+    }
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int cnt = Integer.parseInt(br.readLine());
 
@@ -58,7 +120,7 @@ public class Main {
         bw.flush();
         bw.close();
 
-    }
+    }*/
 
     //
 /*    public static void main(String[] args) throws IOException {

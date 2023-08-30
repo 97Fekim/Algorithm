@@ -14,6 +14,47 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int cnt = Integer.parseInt(br.readLine());
+        while (cnt --> 0) {
+            int n = Integer.parseInt(br.readLine());
+            int[][] arr = new int[2][n];
+            String[] inputs1 = br.readLine().split(" ");
+            String[] inputs2 = br.readLine().split(" ");
+            for (int i=0; i<n; ++i) {
+                arr[0][i] = Integer.parseInt(inputs1[i]);
+                arr[1][i] = Integer.parseInt(inputs2[i]);
+            }
+
+            int[] select_top_dp = new int[n];
+            int[] select_bottom_dp = new int[n];
+            int[] select_nothing_dp = new int[n];
+
+            select_top_dp[0] = arr[0][0];
+            select_bottom_dp[0] = arr[1][0];
+            select_nothing_dp[0] = 0;
+
+            for (int i=1; i<n; ++i) {
+                select_top_dp[i] = Math.max(select_bottom_dp[i-1], select_nothing_dp[i-1]) + arr[0][i];
+                select_bottom_dp[i] = Math.max(select_top_dp[i-1], select_nothing_dp[i-1]) + arr[1][i];
+                select_nothing_dp[i] = Math.max(select_top_dp[i-1], select_bottom_dp[i-1]);
+            }
+
+            int answer = Math.max(select_top_dp[n-1], select_bottom_dp[n-1]);
+            answer = Math.max(answer, select_nothing_dp[n-1]);
+            bw.write(answer+"\n");
+
+        }
+
+        bw.flush();
+        bw.close();
+
+    }
+
+    // 마인크래프트
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] inputs = br.readLine().split(" ");
         int N = Integer.parseInt(inputs[0]);
         int M = Integer.parseInt(inputs[1]);
@@ -72,7 +113,7 @@ public class Main {
 
         System.out.println(minCnt + " " + answerHeight);
 
-    }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

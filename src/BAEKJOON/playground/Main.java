@@ -12,7 +12,90 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    static int[] arr;
+    static int[] cur_arr;
+    static boolean[] visited;
+    static ArrayList<Value> answer_list;
+
+    static class Value {
+        int[] arr;
+        int n;
+        public Value(int[] arr) {
+            this.arr = new int[arr.length];
+            for (int i=0; i<this.arr.length; ++i) {
+                this.arr[i] = arr[i];
+            }
+        }
+
+        // ArrayList 의 isContains() 를 사용하려면
+        // 클래스 내에 equals 를 구현해야 함
+        @Override
+        public boolean equals(Object o) {
+            Value v = (Value) o;
+            for (int i=0; i<this.arr.length; ++i) {
+                if (this.arr[i] != v.arr[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    static void dfs(int depth, int target) {
+        if (depth == target) {
+            Value v = new Value(cur_arr);
+            if (!answer_list.contains(v)) {
+                answer_list.add(v);
+            }
+        } else {
+            for (int i=0; i<arr.length; ++i) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    cur_arr[depth] = arr[i];
+                    dfs(depth+1, target);
+
+                    visited[i] = false;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int M = Integer.parseInt(inputs[1]);
+
+        arr = new int[N];
+        cur_arr = new int[M];
+        visited = new boolean[N];
+        answer_list = new ArrayList<>();
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        dfs(0, M);
+
+        for (Value v : answer_list) {
+            for (int i : v.arr) {
+                bw.write(i + " ");
+            }
+            bw.write("\n");
+        }
+
+        bw.flush();
+        bw.close();
+
+    }
+
+    // 스티커
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
@@ -50,7 +133,7 @@ public class Main {
         bw.flush();
         bw.close();
 
-    }
+    }*/
 
     // 마인크래프트
 /*    public static void main(String[] args) throws IOException {

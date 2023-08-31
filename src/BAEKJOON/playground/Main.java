@@ -12,7 +12,51 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
-    static int[] arr;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int bus_cnt = Integer.parseInt(br.readLine());
+
+        int[][] arr = new int[N][N];
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (i != j) {
+                    arr[i][j] = 1000000000;
+                }
+            }
+        }
+
+        while (bus_cnt --> 0) {
+            String[] inputs = br.readLine().split(" ");
+            int a = Integer.parseInt(inputs[0]) - 1;
+            int b = Integer.parseInt(inputs[1]) - 1;
+            int dis = Integer.parseInt(inputs[2]);
+
+            // 처음 배열을 초기화한다.
+            arr[a][b] = Math.min(arr[a][b], dis);
+
+        }
+
+        for (int k = 0; k < N; k++) {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; ++j) {
+                    arr[i][j] = Math.min(arr[i][j], arr[i][k] + arr[k][j]);
+                }
+            }
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                int answer = arr[i][j] != 1000000000 ? arr[i][j] : 0;
+                System.out.print(answer + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+/*    static int[] arr;
     static int[] cur_arr;
     static boolean[] visited;
     static ArrayList<Value> answer_list;
@@ -92,7 +136,7 @@ public class Main {
         bw.flush();
         bw.close();
 
-    }
+    }*/
 
     // 스티커
 /*    public static void main(String[] args) throws IOException {

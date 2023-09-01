@@ -12,7 +12,69 @@ public class Main {
     //int N = Integer.parseInt(st.nextToken());
     //String str = br.readLine();
 
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, -1, 0, 1};
+    static int[][] graph;
+    static boolean[][] visited;
+    static int N, M;
+    static int answer ;
+    static int cur_block = 0;
+    static int cur_dis = 1;
+
+    static void dfs(int row, int col) {
+        if (cur_block > 1) {
+            return ;
+        }
+        if (cur_dis > answer) {
+            return ;
+        }
+        if (row == N-1 && col == M-1) {
+            answer = Math.min(answer, cur_dis);
+            return ;
+        }
+
+        for (int i=0; i<4; ++i) {
+            int next_row = row + dx[i];
+            int next_col = col + dy[i];
+            if (next_row >= 0 && next_col >= 0 &&   // 왼쪽, 위 로 나가지 않도록 체크
+            next_row < N && next_col < M &&         // 오른쪽, 아래 로 나가지 않도록 체크
+            !visited[next_row][next_col]) {      // 방문하지 않은 곳만 방문하도록 체크
+                boolean is_block_next = graph[next_row][next_col] == 1;
+
+                visited[next_row][next_col] = true;
+                cur_dis ++;
+                cur_block += is_block_next ? 1 : 0;
+                dfs(next_row, next_col);
+                cur_block -= is_block_next ? 1 : 0;
+                cur_dis --;
+                visited[next_row][next_col] = false;
+            }
+        }
+
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+        N = Integer.parseInt(inputs[0]);
+        M = Integer.parseInt(inputs[1]);
+        graph = new int[N][M];
+        visited = new boolean[N][M];
+        answer = Math.max(N, M) * (Math.max(M, N)/2 + 1) + Math.max(M, N)/2;
+
+        for (int i=0; i<N; ++i) {
+            String input = br.readLine();
+            for (int j=0; j<M; ++j) {
+                graph[i][j] = input.charAt(j) == '1' ? 1 : 0;
+            }
+        }
+
+        dfs(0, 0);
+        System.out.println(answer != Math.max(N, M) * (Math.max(M, N)/2 + 1) + Math.max(M, N)/2 ? answer : -1);
+        //System.out.println(answer != Integer.MAX_VALUE ? answer : -1);
+    }
+
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         int bus_cnt = Integer.parseInt(br.readLine());
@@ -54,7 +116,7 @@ public class Main {
             System.out.println();
         }
 
-    }
+    }*/
 
 /*    static int[] arr;
     static int[] cur_arr;

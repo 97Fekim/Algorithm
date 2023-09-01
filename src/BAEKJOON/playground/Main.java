@@ -1,53 +1,35 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    //int N = Integer.parseInt(br.readLine());
-    //StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-    //int N = Integer.parseInt(st.nextToken());
-    //String str = br.readLine();
-
-    static int[] dx = {-1, 0, 1, 0};
-    static int[] dy = {0, -1, 0, 1};
-    static int[][] graph;
-    static boolean[][] visited;
-    static int N, M;
-    static int answer ;
-    static int cur_block = 0;
-    static int cur_dis = 1;
-
-    static void dfs(int row, int col) {
-        if (cur_block > 1) {
-            return ;
+    static class Conn {
+        int pos;
+        int dis;
+        Conn(int pos, int dis) {
+            this.pos = pos;
+            this.dis = dis;
         }
-        if (cur_dis > answer) {
-            return ;
-        }
-        if (row == N-1 && col == M-1) {
-            answer = Math.min(answer, cur_dis);
-            return ;
+    }
+    static ArrayList<Conn>[] list;
+    static boolean[] visited;
+    static int max = -1;
+    static int max_pos = 0;
+
+    static void dfs(int cur_pos, int cur_val) {
+        if (cur_val > max) {
+            max = cur_val;
+            max_pos = cur_pos;
         }
 
-        for (int i=0; i<4; ++i) {
-            int next_row = row + dx[i];
-            int next_col = col + dy[i];
-            if (next_row >= 0 && next_col >= 0 &&   // 왼쪽, 위 로 나가지 않도록 체크
-            next_row < N && next_col < M &&         // 오른쪽, 아래 로 나가지 않도록 체크
-            !visited[next_row][next_col]) {      // 방문하지 않은 곳만 방문하도록 체크
-                boolean is_block_next = graph[next_row][next_col] == 1;
-
-                visited[next_row][next_col] = true;
-                cur_dis ++;
-                cur_block += is_block_next ? 1 : 0;
-                dfs(next_row, next_col);
-                cur_block -= is_block_next ? 1 : 0;
-                cur_dis --;
-                visited[next_row][next_col] = false;
+        for(Conn nConn : list[cur_pos]) {
+            if (!visited[nConn.pos]) {
+                visited[nConn.pos] = true;
+                dfs(nConn.pos, cur_val + nConn.dis);
+                visited[nConn.pos] = false;
             }
         }
 
@@ -55,12 +37,120 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        list = new ArrayList[N+1];
+        visited = new boolean[N+1];
+
+        for (int i=1; i<=N; ++i) {
+            ArrayList<Conn> l = new ArrayList<>();
+            list[i] = l;
+        }
+        for (int i=1; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+            list[a].add(new Conn(b, c));
+            list[b].add(new Conn(a, c));
+        }
+
+        visited[1] = true;
+        dfs(1, 0);
+        visited[1] = false;
+
+        visited[max_pos] = true;
+        dfs(max_pos, 0);
+        visited[max_pos] = false;
+
+        System.out.println(max);
+
+    }
+
+
+/*    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, -1, 0, 1};
+    static int[][] graph;
+    static boolean[][][] visited;
+    static int N, M;
+    static int answer = Integer.MAX_VALUE;
+
+    static class Node {
+        int row;
+        int col;
+        int dis;
+        boolean broke;
+        Node(int row, int col, int dis, boolean broke) {
+            this.row = row;
+            this.col = col;
+            this.dis = dis;
+            this.broke = broke;
+        }
+    }
+
+    static void bfs() {
+        Queue<Node> q = new LinkedList<>();
+        q.offer(new Node(0, 0, 1, false));
+        visited[0][0][0] = true;
+
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+            if (cur.row == N-1 && cur.col == M-1) {
+                answer = Math.min(answer, cur.dis);
+                continue;
+            }
+
+            for (int i=0; i<4; ++i) {
+                int next_row = cur.row + dx[i];
+                int next_col = cur.col + dy[i];
+
+                // 다음 노드가 방문이 불가능한 노드라면 PASS
+                if (next_row < 0 || next_col < 0 || next_row >= N || next_col >= M) {
+                    continue;
+                }
+
+                int next_val = graph[next_row][next_col];
+
+                *//** 0인 곳을 방문할 때
+                 *   - visited[0][][] : 벽돌을 한번도 부수지 않은 애가 방문
+                 *   - visited[1][][] : 벽돌을 이미 한번 부순 애가 방문 *//*
+
+                *//** 1인 곳을 방문할 때
+                 *   - visited[0][][] : 벽돌을 한번도 부수지 않은 해가 방문 *//*
+                if (next_val == 1) {
+                    if (cur.broke) {
+                        continue;
+                    } else {
+                        if (!visited[0][next_row][next_col]) {
+                            visited[0][next_row][next_col] = true;
+                            q.offer(new Node(next_row, next_col, cur.dis+1, true));
+                        }
+                    }
+                } else {
+                    if (cur.broke) {
+                        if (!visited[1][next_row][next_col]) {
+                            visited[1][next_row][next_col] = true;
+                            q.offer(new Node(next_row, next_col, cur.dis+1, true));
+                        }
+                    } else {
+                        if (!visited[0][next_row][next_col]) {
+                            visited[0][next_row][next_col] = true;
+                            q.offer(new Node(next_row, next_col, cur.dis+1, false));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] inputs = br.readLine().split(" ");
         N = Integer.parseInt(inputs[0]);
         M = Integer.parseInt(inputs[1]);
         graph = new int[N][M];
-        visited = new boolean[N][M];
-        answer = Math.max(N, M) * (Math.max(M, N)/2 + 1) + Math.max(M, N)/2;
+
+        visited = new boolean[2][N][M];
 
         for (int i=0; i<N; ++i) {
             String input = br.readLine();
@@ -69,10 +159,11 @@ public class Main {
             }
         }
 
-        dfs(0, 0);
-        System.out.println(answer != Math.max(N, M) * (Math.max(M, N)/2 + 1) + Math.max(M, N)/2 ? answer : -1);
-        //System.out.println(answer != Integer.MAX_VALUE ? answer : -1);
-    }
+        bfs();
+
+        System.out.println(answer != Integer.MAX_VALUE ? answer : -1);
+
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

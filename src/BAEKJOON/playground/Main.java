@@ -1,12 +1,294 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 
-    static class Conn {
+    static int N, M;
+    static ArrayList<Node>[] graph;
+    static int[] dis;
+
+    static class Node {
+        int pos;
+        int dis;
+        Node(int pos, int dis) {
+            this.pos = pos;
+            this.dis = dis;
+        }
+    }
+
+    static void djk(int start) {
+        dis[start] = 0;
+
+        for (int i=1; i<N; ++i) {
+            for (int cur=1; cur<=N; ++cur) {
+                for (Node next : graph[cur]) {
+                    if (dis[next.pos] > dis[cur] + next.dis) {
+                        dis[next.pos] = dis[cur] + next.dis;
+                    }
+                }
+            }
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
+        graph = new ArrayList[N+1];
+        dis = new int[N+1];
+        Arrays.fill(dis, 1000000000);
+
+        for (int i=1; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<M; ++i) {
+            String[] inputs = br.readLine().split(" ");
+            int a = Integer.parseInt(inputs[0]);
+            int b = Integer.parseInt(inputs[1]);
+            int c = Integer.parseInt(inputs[2]);
+            graph[a].add(new Node(b, c));
+        }
+
+        String[] inputs = br.readLine().split(" ");
+        int start = Integer.parseInt(inputs[0]);
+        int end = Integer.parseInt(inputs[1]);
+
+        djk(start);
+
+        System.out.println(dis[end]);
+
+    }
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] inputs = br.readLine().split(" ");
+        int start = Integer.parseInt(inputs[0]);
+        int target = Integer.parseInt(inputs[1]);
+
+        int cnt = 0;
+        while (target > 0) {
+            if (target == start) {
+                System.out.println(cnt+1);
+                System.exit(0);
+            }
+
+            String str = String.valueOf(target);
+            if (str.charAt(str.length()-1) == '1') {
+                target = (int)Math.ceil(target / 10);
+                cnt++;
+            } else {
+                if (target % 2 == 0) {
+                    target /= 2;
+                    cnt++;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        System.out.println(-1);
+
+    }*/
+
+/*    static int N, M;
+    static StringBuilder sb;
+    static Integer[] arr;
+    static int[] answer;
+    static boolean[] visited;
+
+    static void find(int start, int depth) {
+        if (depth == M) {
+            for (int res : answer) {
+                sb.append(res + " ");
+            }
+            sb.append("\n");
+        } else {
+            for (int i=start; i<arr.length; ++i) {
+                if (!visited[i]) {
+                    answer[depth] = arr[i];
+                    find(i, depth+1);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        sb = new StringBuilder();
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        Set<Integer> set = new TreeSet<>();
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            set.add(Integer.parseInt(st.nextToken()));
+        }
+
+        arr = new Integer[set.size()];
+        visited = new boolean[set.size()];
+        answer = new int[M];
+
+        set.toArray(arr);
+
+        find(0,0);
+
+        System.out.print(sb);
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        char[] arr = br.readLine().toCharArray();
+
+        Stack<Character> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i=0; i<arr.length; ++i) {
+
+            char c = arr[i];
+
+            if (Character.isAlphabetic(c)) {  // 문자가 숫자일 경우.
+                sb.append(c);
+            } else {  // 문자가 수식일 경우.
+
+                if (c == '(') {
+                    stack.push(c);
+                } else if (c == ')') {
+                    while (!stack.isEmpty() && stack.peek() != '(') {
+                        sb.append(stack.pop());
+                    }
+                    if (!stack.isEmpty()) {
+                        stack.pop();
+                    }
+                } else {  // { +, -, *, / } 인 경우
+                    while (!stack.isEmpty() && getPriority(c) <= getPriority(stack.peek())) {
+                        sb.append(stack.pop());
+                    }
+                    stack.push(c);
+                }
+            }
+        }
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+        System.out.println(sb);
+    }
+
+    static int getPriority(char c) {
+        if (c == '*' || c == '/') return 2;
+        else if (c == '+' || c == '-') return 1;
+        else return 0;
+    }*/
+
+/*    static int N;
+    static int M;
+    static int W;
+    static int[] dis;
+    static ArrayList<Node>[] graph;
+
+    static class Node {
+        int pos;
+        int dis;
+        Node(int pos, int dis) {
+            this.pos = pos;
+            this.dis = dis;
+        }
+    }
+
+    static boolean bf() {
+        dis[1] = 0;
+        *//* 1) 다익스트라 수행
+        *   loop1 : [노드의 갯수-1] 회 반복한다.
+        *    loop2 : 모든 노드를 순회한다.
+        *     loop3 : 각 노드마다 연결된 노드들을 순회한다.
+        * *//*
+        for (int i=1; i<N; ++i) {
+            for (int j=1; j< graph.length; ++j) {
+                for (Node next : graph[j]) {
+
+                    *//** [현재노드까지의 최소거리] + [현재노드 -> 다음노드 거리]  <  [다음노드까지의 최소거리]
+                     *    >> [다음노드까지의 최소거리]  =  [현재노드까지의 최소거리] + [현재노드 -> 다음노드 거리]
+                     *   *//*
+                    if (dis[j] + next.dis < dis[next.pos]) {
+                        dis[next.pos] = dis[j] + next.dis;
+                    }
+
+                }
+            }
+        }
+
+        *//* 2) 음수 사이클이 있는지 체크
+        *   loop1 : 모든 노드를 순회한다.
+        *    loop2 : 각 노드마다 연결된 노드들을 순회한다.
+        * *//*
+        for (int i=1; i< graph.length; ++i) {
+            for (Node next : graph[i]) {
+
+                *//** [현재노드까지의 최소거리] + [현재노드 -> 다음노드 거리]  <  [다음노드까지의 최소거리]
+                 *    >> 참이다?
+                 *     >> 다익스트라로 모두 갱신을 완료했는데도,
+                 *     >> 또 갱신할 수 있다는 건 음수 사이클이 있다는 뜻임
+                 *   *//*
+                if (dis[i] + next.dis < dis[next.pos]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int cnt = Integer.parseInt(br.readLine());
+        while (cnt --> 0) {
+            String[] inputs = br.readLine().split(" ");
+            N = Integer.parseInt(inputs[0]);
+            M = Integer.parseInt(inputs[1]);
+            W = Integer.parseInt(inputs[2]);
+
+            dis = new int[N+1];
+            Arrays.fill(dis, 987654321);
+            graph = new ArrayList[N+1];
+
+            for (int i=0; i<N+1; ++i) {
+                graph[i] = new ArrayList<>();
+            }
+
+            for (int i=0; i<M; ++i) {
+                inputs = br.readLine().split(" ");
+                int a = Integer.parseInt(inputs[0]);
+                int b = Integer.parseInt(inputs[1]);
+                int c = Integer.parseInt(inputs[2]);
+                graph[a].add(new Node(b, c));
+                graph[b].add(new Node(a, c));
+            }
+
+            for (int i=0; i<W; ++i) {
+                inputs = br.readLine().split(" ");
+                int a = Integer.parseInt(inputs[0]);
+                int b = Integer.parseInt(inputs[1]);
+                int c = Integer.parseInt(inputs[2]);
+                graph[a].add(new Node(b, -c));
+            }
+
+            boolean isPossible = bf();
+            System.out.println(isPossible ? "YES" : "NO");
+
+        }
+
+    }*/
+
+    // 트리의 지름 리벤지
+/*    static class Conn {
         int pos;
         int dis;
         Conn(int pos, int dis) {
@@ -64,8 +346,7 @@ public class Main {
 
         System.out.println(max);
 
-    }
-
+    }*/
 
 /*    static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, -1, 0, 1};

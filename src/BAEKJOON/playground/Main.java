@@ -5,7 +5,327 @@ import java.util.*;
 
 public class Main {
 
-    static int N, M;
+
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] inputs = br.readLine().split(" ");
+        int R = Integer.parseInt(inputs[0]);
+        int C = Integer.parseInt(inputs[1]);
+        int T = Integer.parseInt(inputs[2]);
+
+        int[][] arr = new int[R][C];
+        int[] d_row = {-1, 0, 1, 0};
+        int[] d_col = {0, -1, 0, 1};
+        int clean2_row = 0;
+        int clean2_col = 0;
+
+        for (int i=0; i<R; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<C; ++j) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+                if (arr[i][j] == -1) {
+                    arr[i][j] = Integer.MIN_VALUE;
+                    clean2_row = i;
+                    clean2_col = j;
+                }
+            }
+        }
+        int clean1_row = clean2_row-1;
+        int clean1_col = clean2_col;
+
+        while (T --> 0) {
+            // 마스킹 배열 생성
+            int[][] mask = new int[R][C];
+            for (int i = 0; i < R; ++i) {
+                for (int j = 0; j < C; ++j) {
+                    int cur = arr[i][j];
+                    if (cur == Integer.MIN_VALUE) continue;
+
+                    int remain = 0;
+
+                    int token = (int) Math.ceil(arr[i][j] / 5);  // 나눠줄 토큰
+                    for (int k = 0; k < 4; ++k) {
+                        int target_row = i + d_row[k];
+                        int target_col = j + d_col[k];
+                        if (target_row >= 0 && target_col >= 0 &&
+                                target_row < R && target_col < C &&
+                                arr[target_row][target_col] != Integer.MIN_VALUE) {
+                            mask[target_row][target_col] += token;
+                            remain -= token;
+                        }
+                    }
+                    mask[i][j] += remain;
+                }
+            }
+            // 마스킹 배열 적용
+            for (int i = 0; i < R; ++i) {
+                for (int j = 0; j < C; ++j) {
+                    arr[i][j] += mask[i][j];
+                }
+            }
+
+            // 청소기1 가동
+            for (int row = clean1_row - 2; row >= 0; row--) {
+                arr[row + 1][0] = arr[row][0];
+            }
+            for (int col = 1; col <= C-1; ++col) {
+                arr[0][col - 1] = arr[0][col];
+            }
+            for (int row = 1; row <= clean1_row; row++) {
+                arr[row-1][C-1] = arr[row][C-1];
+            }
+            for (int col = C-2; col >= 1; col--) {
+                arr[clean1_row][col+1] = arr[clean1_row][col];
+            }
+            arr[clean1_row][1] = 0;
+
+            // 청소기2 가동
+            for (int row = R-1; row <= clean2_row-2; --row) {
+                arr[row-1][0] = arr[row][0];
+            }
+            for (int col = 1; col <= C-1; ++col) {
+                arr[R-1][col-1] = arr[R-1][col];
+            }
+            for (int row = R-2; row >= clean2_row; --row) {
+                arr[row+1][C-1] = arr[row][C-1];
+            }
+            for (int col = C-2; col >= 1; --col) {
+                arr[clean2_row][col+1] = arr[clean2_row][col];
+            }
+            arr[clean2_row][1] = 0;
+            
+            // T
+            for (int i = 0; i < R; ++i) {
+                for (int j = 0; j < C; ++j) {
+                    System.out.print(arr[i][j] + " ");
+                }
+                System.out.println();
+
+            }
+        }
+        int answer = 0;
+        for (int i = 0; i < R; ++i) {
+            for (int j = 0; j < C; ++j) {
+                answer += arr[i][j] != Integer.MIN_VALUE ? arr[i][j] : 0;
+            }
+        }
+        System.out.println(answer);
+    }
+
+/*    static int[] d_row = {1, 0, 1}; // 하, 우, 우하
+    static int[] d_col = {0, 1, 1}; // 하, 우, 우하
+    static int[][] graph;
+
+    static int bfs() {
+        int answer = 0;
+        Queue<Edge> q = new LinkedList<>();
+
+        if (graph[0][2] != 1)  {
+            q.offer(new Edge(0, 2, "right"));
+        }
+        if (graph[0][2] != 1 && graph[1][1] != 1 && graph[1][2] != 1) {
+            q.offer(new Edge(1, 2, "cross"));
+        }
+
+        while (!q.isEmpty()) {
+            Edge cur = q.poll();
+            System.out.println(q.size());
+            // 마지막에 도달함.
+            if (cur.row == graph.length-1 && cur.col == graph[0].length - 1) {
+                answer++;
+                continue;
+            }
+
+            for (int i=0; i<3; ++i) {
+                int next_row = cur.row + d_row[i];
+                int next_col = cur.col + d_col[i];
+
+                if (i == 0) {   // 하
+                    if (cur.status.equals("right")) continue;
+
+                    if (next_row < graph.length && next_col < graph[0].length &&
+                            graph[next_row][next_col] != 1) {
+                        q.offer(new Edge(next_row, next_col, "down"));
+                    }
+
+                } else if (i == 1) {  // 우
+                    if (cur.status.equals("down")) continue;
+
+                    if (next_row < graph.length && next_col < graph[0].length &&
+                            graph[next_row][next_col] != 1) {
+                        q.offer(new Edge(next_row, next_col, "right"));
+                    }
+
+                } else {  // 우하
+
+                    if (next_row < graph.length && next_col < graph[0].length &&
+                            graph[next_row][cur.col] != 1 &&
+                            graph[cur.row][next_col] != 1 &&
+                            graph[next_row][next_col] != 1 ) {
+                        q.offer(new Edge(next_row, next_col, "cross"));
+                    }
+
+                }
+
+            }
+
+        }
+
+        return answer;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        graph = new int[N][N];
+
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<N; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        if (graph[N-1][N-1] == 1) {
+            System.out.println(0);
+        } else {
+            System.out.println(bfs());
+        }
+    }
+
+    static class Edge {
+        int row;
+        int col;
+        String status;
+        Edge(int row, int col, String status) {
+            this.row = row;
+            this.col = col;
+            this.status = status;
+        }
+    }*/
+
+
+
+    // #15686 치킨 배달
+/*    static int N,M;
+    static int answer = Integer.MAX_VALUE;
+    static boolean[] visited;
+    static ArrayList<Node> home_nodes;
+    static ArrayList<Node> ck_nodes;
+    static ArrayList<Node> valid_ck_nodes;
+
+    static class Node {
+        int row;
+        int col;
+        Node(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    static void bt(int start, int depth) {
+        if (depth == M) {
+            answer = Math.min(answer, getCksDis());
+        } else {
+            for (int i=start; i<ck_nodes.size(); ++i) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    Node next = ck_nodes.get(i);
+                    valid_ck_nodes.add(new Node(next.row, next.col));
+                    bt(i+1, depth+1);
+                    valid_ck_nodes.remove(valid_ck_nodes.size()-1);
+                    visited[i] = false;
+                }
+            }
+
+        }
+    }
+
+    static int getCksDis() {
+        int dis_sum = 0;
+        for (int i=0; i<home_nodes.size(); ++i) {
+            int dis_min = Integer.MAX_VALUE;
+            for (int j=0; j< valid_ck_nodes.size(); ++j) {
+                Node home = home_nodes.get(i);
+                Node ck = valid_ck_nodes.get(j);
+                int dis = Math.abs(home.row - ck.row) + Math.abs(home.col - ck.col);
+                dis_min = Math.min(dis_min, dis);
+            }
+            dis_sum += dis_min;
+        }
+        return dis_sum;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        home_nodes = new ArrayList<>(); // 집 모든 위치
+        ck_nodes = new ArrayList<>();  // 치킨집 모든 위치
+
+        for (int i=0; i<N; ++i) {
+            String[] inputs = br.readLine().split(" ");
+            for (int j=0; j<N; ++j) {
+                int value = Integer.parseInt(inputs[j]);
+                if (value == 1) {
+                    home_nodes.add(new Node(i, j));
+                } else if (value == 2) {
+                    ck_nodes.add(new Node(i, j));
+                }
+            }
+        }
+
+        visited = new boolean[ck_nodes.size()];
+        valid_ck_nodes = new ArrayList<>();
+
+        bt(0, 0);
+
+        System.out.println(answer);
+
+    }*/
+
+    // #2096 내려가기
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        int[][] dp_max = new int[N+1][3];
+        int[][] dp_min = new int[N+1][3];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        dp_max[1][0] = dp_min[1][0] = Integer.parseInt(st.nextToken());
+        dp_max[1][1] = dp_min[1][1] = Integer.parseInt(st.nextToken());
+        dp_max[1][2] = dp_min[1][2] = Integer.parseInt(st.nextToken());
+
+        for (int i=2; i<=N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int first = Integer.parseInt(st.nextToken());
+            int second = Integer.parseInt(st.nextToken());
+            int third = Integer.parseInt(st.nextToken());
+
+            dp_max[i][0] = Math.max(dp_max[i-1][0], dp_max[i-1][1]) + first;
+            dp_max[i][1] = Math.max(Math.max(dp_max[i-1][0], dp_max[i-1][1]), dp_max[i-1][2]) + second;
+            dp_max[i][2] = Math.max(dp_max[i-1][1], dp_max[i-1][2]) + third;
+
+            dp_min[i][0] = Math.min(dp_min[i-1][0], dp_min[i-1][1]) + first;
+            dp_min[i][1] = Math.min(Math.min(dp_min[i-1][0], dp_min[i-1][1]), dp_min[i-1][2]) + second;
+            dp_min[i][2] = Math.min(dp_min[i-1][1], dp_min[i-1][2]) + third;
+
+        }
+
+        int max = Math.max(Math.max(dp_max[N][0], dp_max[N][1]), dp_max[N][2]);
+        int min = Math.min(Math.min(dp_min[N][0], dp_min[N][1]), dp_min[N][2]);
+        System.out.println(max + " " + min);
+
+    }*/
+
+/*    static int N, M;
     static ArrayList<Node>[] graph;
     static int[] dis;
 
@@ -61,7 +381,7 @@ public class Main {
 
         System.out.println(dis[end]);
 
-    }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

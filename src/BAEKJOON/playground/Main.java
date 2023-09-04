@@ -5,6 +5,175 @@ import java.util.*;
 
 public class Main {
 
+
+
+
+    // #1916 최소비용 구하기 - 우선순위 큐를 이용한 다익스트라 풀이
+/*    static int N, M;
+    static ArrayList<Node>[] graph;
+    static int[] dis;
+    static boolean[] visited;
+
+    static class Node implements Comparable<Node> {
+        int pos;
+        int dis;
+        Node(int pos, int dis) {
+            this.pos = pos;
+            this.dis = dis;
+        }
+
+        @Override
+        public int compareTo(Node o) {
+            return this.dis - o.dis;
+        }
+    }
+
+    static void djk(int start) {
+        dis = new int[N+1];
+        Arrays.fill(dis, 1000000000);
+        dis[start] = 0;
+
+        visited = new boolean[N+1];
+        Queue<Node> q = new PriorityQueue<>();
+        q.offer(new Node(start, 0));
+
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+            if (visited[cur.pos]) {
+                continue;
+            }
+            visited[cur.pos] = true;
+
+            for (int i = 0; i < graph[cur.pos].size(); ++i) {
+                Node next = graph[cur.pos].get(i);
+                if (dis[cur.pos] + next.dis < dis[next.pos]) {
+                    dis[next.pos] = dis[cur.pos] + next.dis;
+                    q.offer(new Node(next.pos, dis[next.pos]));
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
+        graph = new ArrayList[N+1];
+
+        for (int i=1; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<M; ++i) {
+            String[] inputs = br.readLine().split(" ");
+            int a = Integer.parseInt(inputs[0]);
+            int b = Integer.parseInt(inputs[1]);
+            int c = Integer.parseInt(inputs[2]);
+            graph[a].add(new Node(b, c));
+        }
+
+        String[] inputs = br.readLine().split(" ");
+        int start = Integer.parseInt(inputs[0]);
+        int end = Integer.parseInt(inputs[1]);
+
+        djk(start);
+
+        System.out.println(dis[end]);
+
+    }*/
+
+    // #1504 특정한 최단 경로 - 우선순위 큐를 이용한 다익스트라 풀이
+/*    static int N,M;
+    static ArrayList<Edge>[] graph;
+    static int[] dis;
+    static boolean[] visited;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        graph = new ArrayList[N+1];
+        for (int i=1; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<M; ++i) {
+            String[] inputs = br.readLine().split(" ");
+            int a = Integer.parseInt(inputs[0]);
+            int b = Integer.parseInt(inputs[1]);
+            int c = Integer.parseInt(inputs[2]);
+
+            graph[a].add(new Edge(b, c));
+            graph[b].add(new Edge(a, c));
+        }
+
+        st = new StringTokenizer(br.readLine(), " ");
+        int v1 = Integer.parseInt(st.nextToken());
+        int v2 = Integer.parseInt(st.nextToken());
+
+        int s_to_v1 = djk(1, v1);
+        int v1_to_v2 = djk(v1, v2);
+        int v2_to_end = djk(v2, N);
+
+        int s_to_v2 = djk(1, v2);
+        int v2_to_v1 = djk(v2, v1);
+        int v1_to_end = djk(v1, N);
+
+        int answer = Math.min(s_to_v1 + v1_to_v2 + v2_to_end,
+                s_to_v2 + v2_to_v1 + v1_to_end);
+
+        System.out.println(answer >= 200000000 ? -1 : answer);
+
+    }
+
+    // start -> end 로 가는 최단 경로를 반환한다.
+    static int djk(int start, int end) {
+        dis = new int[N+1];
+        Arrays.fill(dis, 200000000);
+        visited = new boolean[N+1];
+
+        Queue<Edge> q = new PriorityQueue<>();
+        q.offer(new Edge(start, 0));
+        dis[start] = 0;
+
+        while (!q.isEmpty()) {
+            Edge cur = q.poll();
+
+            if (visited[cur.v]) {
+                continue;
+            }
+            visited[cur.v] = true;
+
+            for (int i=0; i<graph[cur.v].size(); ++i) {
+                Edge next = graph[cur.v].get(i);
+
+                if (dis[cur.v] + next.wei < dis[next.v]) {
+                    dis[next.v] = dis[cur.v] + next.wei;
+                    q.offer(new Edge(next.v, dis[next.v]));
+                }
+
+            }
+        }
+
+        return dis[end];
+    }
+
+    static class Edge implements Comparable<Edge> {
+        int v;
+        int wei;
+        Edge(int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }*/
+
+
     // #?? - 구사과의 미세먼지 청소기
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

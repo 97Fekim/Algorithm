@@ -5,9 +5,8 @@ import java.util.*;
 
 public class Main {
 
-
-
-    public static void main(String[] args) throws IOException {
+    // #?? - 구사과의 미세먼지 청소기
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String[] inputs = br.readLine().split(" ");
@@ -82,7 +81,7 @@ public class Main {
             arr[clean1_row][1] = 0;
 
             // 청소기2 가동
-            for (int row = R-1; row <= clean2_row-2; --row) {
+            for (int row = clean2_row+2; row <= R-1; ++row) {
                 arr[row-1][0] = arr[row][0];
             }
             for (int col = 1; col <= C-1; ++col) {
@@ -95,15 +94,16 @@ public class Main {
                 arr[clean2_row][col+1] = arr[clean2_row][col];
             }
             arr[clean2_row][1] = 0;
-            
-            // T
-            for (int i = 0; i < R; ++i) {
-                for (int j = 0; j < C; ++j) {
-                    System.out.print(arr[i][j] + " ");
-                }
-                System.out.println();
 
-            }
+//            // T
+//            for (int i = 0; i < R; ++i) {
+//                for (int j = 0; j < C; ++j) {
+//                    System.out.print(arr[i][j] + " ");
+//                }
+//                System.out.println();
+//
+//            }
+
         }
         int answer = 0;
         for (int i = 0; i < R; ++i) {
@@ -112,7 +112,7 @@ public class Main {
             }
         }
         System.out.println(answer);
-    }
+    }*/
 
 /*    static int[] d_row = {1, 0, 1}; // 하, 우, 우하
     static int[] d_col = {0, 1, 1}; // 하, 우, 우하

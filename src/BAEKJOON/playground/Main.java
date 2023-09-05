@@ -6,6 +6,58 @@ import java.util.*;
 public class Main {
 
 
+    // (q.contains == true)
+    //   >> 해당 경로는 탐색이 끝났다.
+    //   >> 지금까지 탐색한 sum 값를 answer의 후보로 해달라.
+    static int N,M;
+    static int[] d_row = {-1, 0, 1, 0};
+    static int[] d_col = {0, -1, 0, 1};
+    static char[][] graph;
+    static boolean[][] visited;
+    static Set<Character> set;
+    static int max = -1;
+    static int cur = 0;
+
+    static void dfs(int row, int col) {
+        cur++;
+        max = Math.max(max, cur);
+        System.out.println("cur row,col = " + row + ", " + col);
+        for (int i=0; i<4; ++i) {
+            int next_row = row + d_row[i];
+            int next_col = col + d_col[i];
+
+            if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < M &&
+            !visited[next_row][next_col] &&
+            !set.contains(graph[next_row][next_col])) {
+                set.add(graph[next_row][next_col]);
+                dfs(next_row, next_col);
+                set.remove(graph[next_row][next_col]);
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+        N = Integer.parseInt(inputs[0]);
+        M = Integer.parseInt(inputs[1]);
+        visited = new boolean[N][M];
+        graph = new char[N][M];
+        for (int i=0; i<N; ++i) {
+            graph[i] = br.readLine().toCharArray();
+        }
+
+        set = new HashSet<>();
+        set.add(graph[0][0]);
+
+        visited[0][0] = true;
+        dfs(0, 0);
+
+        System.out.println(max);
+
+    }
 
 
     // #1916 최소비용 구하기 - 우선순위 큐를 이용한 다익스트라 풀이

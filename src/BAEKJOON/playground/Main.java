@@ -5,32 +5,110 @@ import java.util.*;
 
 public class Main {
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int[][] arr = new int[N][N];
+        int sh_i = 0;
+        int sh_j = 0;
+        int sh_size = 2;
+        int sh_eaten = 0;
+        int answer = 0;
 
-    // (q.contains == true)
-    //   >> 해당 경로는 탐색이 끝났다.
-    //   >> 지금까지 탐색한 sum 값를 answer의 후보로 해달라.
-    static int N,M;
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<N; ++j) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+                if (arr[i][j] == 9) {
+                    sh_i = i;
+                    sh_j = j;
+                }
+            }
+        }
+
+        while (true) {
+            boolean isEnd = true;
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    if (arr[i][j] != 0 && arr[i][j] != 9 && arr[i][j] < sh_size) {
+                        isEnd = false;
+                    }
+                }
+            }
+            if (isEnd) {
+                break;
+            }
+
+            int fs_i = sh_i;
+            int fs_j = sh_j;
+            int cur_min_dis = Integer.MAX_VALUE;
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    if (arr[i][j] != 0 && arr[i][j] != 9 && arr[i][j] < sh_size) {
+                        if (Math.abs(sh_i-i)+Math.abs(sh_j-j) < cur_min_dis) {
+                            cur_min_dis = Math.abs(sh_i-i)+Math.abs(sh_j-j);
+                            fs_i = i;
+                            fs_j = j;
+                        } else if (arr[i][j] == cur_min_dis) {
+                            if (i < fs_i) {
+                                fs_i = i;
+                                fs_j = j;
+                            } else if (i == fs_i && j < fs_j) {
+                                fs_i = i;
+                                fs_j = j;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            answer += Math.abs(fs_i - sh_i) + Math.abs(fs_j - sh_j);
+
+            arr[sh_i][sh_j] = 1000000;
+            arr[fs_i][fs_j] = 9;
+            sh_i = fs_i;
+            sh_j = fs_j;
+
+            sh_eaten++;
+            if (sh_eaten == sh_size) {
+                sh_size ++;
+                sh_eaten = 0;
+            }
+
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    System.out.print(arr[i][j] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println();
+
+        }
+
+        System.out.println(answer);
+
+    }
+
+    // #1987 알파벳
+/*    static int N,M;
     static int[] d_row = {-1, 0, 1, 0};
     static int[] d_col = {0, -1, 0, 1};
     static char[][] graph;
-    static boolean[][] visited;
     static Set<Character> set;
     static int max = -1;
-    static int cur = 0;
 
-    static void dfs(int row, int col) {
-        cur++;
-        max = Math.max(max, cur);
-        System.out.println("cur row,col = " + row + ", " + col);
+    static void dfs(int row, int col, int sum) {
+        max = Math.max(max, sum);
+
         for (int i=0; i<4; ++i) {
             int next_row = row + d_row[i];
             int next_col = col + d_col[i];
 
             if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < M &&
-            !visited[next_row][next_col] &&
             !set.contains(graph[next_row][next_col])) {
                 set.add(graph[next_row][next_col]);
-                dfs(next_row, next_col);
+                dfs(next_row, next_col, sum+1);
                 set.remove(graph[next_row][next_col]);
             }
 
@@ -43,7 +121,6 @@ public class Main {
         String[] inputs = br.readLine().split(" ");
         N = Integer.parseInt(inputs[0]);
         M = Integer.parseInt(inputs[1]);
-        visited = new boolean[N][M];
         graph = new char[N][M];
         for (int i=0; i<N; ++i) {
             graph[i] = br.readLine().toCharArray();
@@ -52,12 +129,11 @@ public class Main {
         set = new HashSet<>();
         set.add(graph[0][0]);
 
-        visited[0][0] = true;
-        dfs(0, 0);
+        dfs(0, 0, 1);
 
         System.out.println(max);
 
-    }
+    }*/
 
 
     // #1916 최소비용 구하기 - 우선순위 큐를 이용한 다익스트라 풀이

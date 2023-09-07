@@ -1,13 +1,155 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.nio.Buffer;
-import java.sql.Array;
 import java.util.*;
 
 public class Main {
 
-    static int n, m, r;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+/*    static class Edge implements Comparable<Edge>{
+        int v;
+        int wei;
+        Edge(int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int m = Integer.parseInt(br.readLine());
+        ArrayList<Edge>[] graph = new ArrayList[n+1];
+        for (int i=1; i<=n; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+        for (int i=0; i<m; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            graph[a].add(new Edge(b, c));
+        }
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int start = Integer.parseInt(st.nextToken());
+        int end = Integer.parseInt(st.nextToken());
+
+        // 다익스트라 수행
+        int[] dis = new int[n+1];
+        int[] before_v = new int[n+1];
+        boolean[] visited = new boolean[n+1];
+        PriorityQueue<Edge> q = new PriorityQueue<>();
+        Arrays.fill(dis, 987654321);
+        dis[start] = 0;
+        q.offer(new Edge(start, 0));
+
+        while (!q.isEmpty()) {
+            Edge cur = q.poll();
+
+            if (visited[cur.v]) {
+                continue;
+            }
+            visited[cur.v] = true;
+
+            for (Edge next : graph[cur.v]) {
+                if (dis[next.v] > dis[cur.v] + next.wei) {
+                    dis[next.v] = dis[cur.v] + next.wei;
+                    before_v[next.v] = cur.v;
+                    q.offer(new Edge(next.v, dis[next.v]));
+                }
+            }
+        }
+        System.out.println(dis[end]);
+
+        Stack<Integer> stack = new Stack<>();
+        while (true) {
+            if (end == start) {
+                stack.push(end);
+                break;
+            } else {
+                stack.push(end);
+                end = before_v[end];
+            }
+        }
+
+        System.out.println(stack.size());
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop()+ " ");
+        }
+
+    }*/
+
+
+/*    static BufferedWriter bw;
+    static int[] left_child;
+    static int[] right_child;
+
+    static void preOrder(int n, int cur_key) {
+        if (n < cur_key) { // 왼쪽에 삽입
+            if (left_child[cur_key] == 0) {
+                left_child[cur_key] = n;
+            } else {
+                preOrder(n, left_child[cur_key]);
+            }
+        } else {            // 오른쪽에 삽입
+            if (right_child[cur_key] == 0) {
+                right_child[cur_key] = n;
+            } else {
+                preOrder(n, right_child[cur_key]);
+            }
+        }
+    }
+
+    static void postOrder(int cur_key) throws IOException {
+
+        //left
+        if (left_child[cur_key] != 0) {
+            postOrder(left_child[cur_key]);
+        }
+        //right
+        if (right_child[cur_key] != 0) {
+            postOrder(right_child[cur_key]);
+        }
+        //출력
+        bw.write(cur_key+"\n");
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        left_child = new int[1000000];
+        right_child = new int[1000000];
+
+        int root_key = Integer.parseInt(br.readLine());
+
+        while (true) {
+            String in = br.readLine();
+            if (in == null || in.isEmpty()) {
+                break;
+            }
+            preOrder(Integer.parseInt(in), root_key);
+        }
+
+        postOrder(root_key);
+
+        bw.flush();
+        bw.close();
+    }*/
+
+    // #14938 서강그라운드
+/*    static int n, m, r;
     static int[] items;
     static ArrayList<Edge>[] graph;
     static boolean[] visited;
@@ -103,7 +245,7 @@ public class Main {
             return this.used_dis - o.used_dis;
         }
 
-    }
+    }*/
 
     // #14502 연구소
 /*    static int N,M;

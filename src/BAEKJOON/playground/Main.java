@@ -1,11 +1,228 @@
 package BAEKJOON.playground;
 
 import java.io.*;
+import java.nio.Buffer;
+import java.sql.Array;
 import java.util.*;
 
 public class Main {
 
+    static int n, m, r;
+    static int[] items;
+    static ArrayList<Edge>[] graph;
+    static boolean[] visited;
+
+    static int bfs(int start) {
+        visited = new boolean[n+1];
+        visited[start] = true;  // 처음 도착한 위치
+        PriorityQueue<Node> q = new PriorityQueue<>();
+        q.offer(new Node(start, 0));
+
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+
+            for (Edge next : graph[cur.pos]) {
+                if (!visited[next.v]) {
+                    if (cur.used_dis + next.wei <= m) {
+                        visited[next.v] = true;
+                        q.offer(new Node(next.v, cur.used_dis + next.wei));
+                    }
+                }
+            }
+        }
+
+//        for (int i=1; i<=n; ++i) {
+//            System.out.print(visited[i] + " ");
+//        }
+//        System.out.println();
+
+        int sum = 0;
+        for (int i=1; i<=n; ++i) {
+            if (visited[i]) {
+                sum += items[i];
+            }
+        }
+
+        return sum;
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+        n = Integer.parseInt(inputs[0]);
+        m = Integer.parseInt(inputs[1]);
+        r = Integer.parseInt(inputs[2]);
+
+        items = new int[n+1];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=1; i<=n; ++i) {
+            items[i] = Integer.parseInt(st.nextToken());
+        }
+
+        graph = new ArrayList[n+1];
+        for (int i=1; i<=n; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<r; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            graph[a].add(new Edge(b, c));
+            graph[b].add(new Edge(a, c));
+        }
+
+        int answer = -1;
+        for (int i=1; i<=n; ++i) {
+            answer = Math.max(answer, bfs(i));
+        }
+
+        System.out.println(answer);
+
+    }
+
+    static class Edge {
+        int v;
+        int wei;
+        Edge(int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+    }
+    static class Node implements Comparable<Node>{
+        int pos;
+        int used_dis;
+        Node(int pos, int used_dis) {
+            this.pos = pos;
+            this.used_dis = used_dis;
+        }
+        @Override
+        public int compareTo(Node o) {
+            return this.used_dis - o.used_dis;
+        }
+
+    }
+
+    // #14502 연구소
+/*    static int N,M;
+    static int[][] graph;
+    static int[][] cur_graph;
+    static boolean[][] visited_graph;
+    static ArrayList<Point> possible_walls;
+    static ArrayList<Point> valid_walls;
+    static boolean[] visited_walls;
+    static int[] d_row = {-1,0,1,0};
+    static int[] d_col = {0,-1,0,1};
+    static int answer = Integer.MIN_VALUE;
+
+
+    static void backTracking(int start, int depth) {
+        if (depth == 3) {
+            answer = Math.max(answer, getSaftyArea());
+        } else {
+            for (int i=start+1; i<possible_walls.size(); ++i) {
+                if (!visited_walls[i]) {
+                    int next_row = possible_walls.get(i).row;
+                    int next_col = possible_walls.get(i).col;
+                    valid_walls.add(new Point(next_row, next_col));
+                    visited_walls[i] = true;
+                    backTracking(i, depth+1);
+                    visited_walls[i] = false;
+                    valid_walls.remove(valid_walls.size()-1);
+                }
+            }
+        }
+    }
+
+    static int getSaftyArea() {
+        // 그래프 복사
+        cur_graph = new int[N][M];
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < M; ++j) {
+                cur_graph[i][j] = graph[i][j];
+            }
+        }
+
+        // 벽 쌓기
+        for (Point p : valid_walls) {
+            cur_graph[p.row][p.col] = 1;
+        }
+
+        visited_graph = new boolean[N][M];
+
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < M; ++j) {
+                if (!visited_graph[i][j] && cur_graph[i][j] == 2) {
+                    dfs(i, j);
+                }
+            }
+        }
+
+        int area = 0;
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < M; ++j) {
+                if (cur_graph[i][j] == 0) {
+                    area++;
+                }
+            }
+        }
+
+        return area;
+    }
+
+    static void dfs(int row, int col) {
+        for (int i=0; i<4; ++i) {
+            int next_row = row + d_row[i];
+            int next_col = col + d_col[i];
+            if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < M &&
+                    !visited_graph[next_row][next_col] && cur_graph[next_row][next_col] == 0) {
+                visited_graph[next_row][next_col] = true;
+                cur_graph[next_row][next_col] = 2;
+                dfs(next_row, next_col);
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] NM = br.readLine().split(" ");
+        N = Integer.parseInt(NM[0]);
+        M = Integer.parseInt(NM[1]);
+
+        graph = new int[N][M];
+        possible_walls = new ArrayList<>();
+        valid_walls = new ArrayList<>();
+
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<M; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+                if (graph[i][j] == 0) {
+                    possible_walls.add(new Point(i, j));
+                }
+            }
+        }
+        visited_walls = new boolean[possible_walls.size()];
+
+        backTracking(-1, 0);
+
+        System.out.println(answer);
+    }
+
+    static class Point {
+        int row;
+        int col;
+        Point(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }*/
+
+
+    // 아기 상어 ㅠㅠ
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         int[][] arr = new int[N][N];
@@ -49,7 +266,7 @@ public class Main {
                             cur_min_dis = Math.abs(sh_i-i)+Math.abs(sh_j-j);
                             fs_i = i;
                             fs_j = j;
-                        } else if (arr[i][j] == cur_min_dis) {
+                        } else if (Math.abs(sh_i-i)+Math.abs(sh_j-j) == cur_min_dis) {
                             if (i < fs_i) {
                                 fs_i = i;
                                 fs_j = j;
@@ -88,7 +305,7 @@ public class Main {
 
         System.out.println(answer);
 
-    }
+    }*/
 
     // #1987 알파벳
 /*    static int N,M;

@@ -7,8 +7,69 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        long[] xArr = new long[N+1];
+        long[] yArr = new long[N+1];
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            xArr[i] = Integer.parseInt(st.nextToken());
+            yArr[i] = Integer.parseInt(st.nextToken());
+        }
+        xArr[N] = xArr[0];
+        yArr[N] = yArr[0];
+        long x = 0;
+        long y = 0;
+        for (int i=1; i<=N; ++i) {
+            x += yArr[i-1] * xArr[i];
+            y += xArr[i-1] * yArr[i];
+        }
+
+        System.out.println(String.format("%.1f", Math.abs(x-y) / 2D));
 
     }
+
+
+    // 문자열 폭발
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        char[] line = br.readLine().toCharArray();
+        char[] regex = br.readLine().toCharArray();
+        int regex_size = regex.length;
+
+        Stack<Character> stack = new Stack<>();
+
+        for (int i=0; i<line.length; ++i) {
+            stack.push(line[i]);
+
+            if (stack.size() >= regex_size) {
+                boolean bomb = true;
+                for (int j=0; j<regex_size; ++j) {
+                    if (stack.get(stack.size()-1-j) != regex[regex_size-1-j]) {
+                        bomb = false;
+                    }
+                }
+
+                if (bomb) {
+                    for (int j=0; j<regex_size; ++j) {
+                        stack.pop();
+                    }
+                }
+            }
+        }
+
+        if (stack.isEmpty()) {
+            System.out.println("FRULA");
+        } else {
+            for (Character c : stack) {
+                bw.write(c);
+            }
+        }
+
+        bw.flush();
+        bw.close();
+
+    }*/
 
 /*    static class Edge implements Comparable<Edge>{
         int v;

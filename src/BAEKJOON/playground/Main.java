@@ -1,11 +1,251 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.*;
 
 public class Main {
 
+    static int[][] arr;
+
+    static void backTracking(int row, int col) {
+
+        if (row == 9) {
+            // 배열 출력하고 종료
+            for (int i=0; i<9; ++i) {
+                for (int j = 0; j < 9; ++j) {
+                    System.out.print(arr[i][j]);
+                }
+                System.out.println();
+            }
+            System.exit(0);
+        }
+
+        if (col == 9) {
+            backTracking(row+1, 0);
+            return ;
+        }
+
+        if (arr[row][col] == 0) {
+            for (int i=1; i<=9; ++i) {
+                if (isPossible(row, col, i)) {
+                    arr[row][col] = i;
+                    backTracking(row, col+1);
+                }
+            }
+
+            arr[row][col] = 0;
+            return ;
+        }
+
+        backTracking(row, col+1);
+
+    }
+
+    static boolean isPossible(int row, int col, int value) {
+        boolean isPosb = true;
+        for (int i=0; i<9; ++i) {
+            if (arr[row][i] == value) isPosb = false;
+            if (arr[i][col] == value) isPosb = false;
+        }
+
+        int start_row = 0;
+        int end_row = 0;
+        int start_col = 0;
+        int end_col = 0;
+
+        if (row >= 0 && row <= 2) {
+            start_row = 0;
+            end_row = 2;
+        } else if (row >= 3 && row <= 5) {
+            start_row = 3;
+            end_row = 5;
+        } else {
+            start_row = 6;
+            end_row = 8;
+        }
+
+        if (col >= 0 && col <= 2) {
+            start_col = 0;
+            end_col = 2;
+        } else if (col >= 3 && col <= 5) {
+            start_col = 3;
+            end_col = 5;
+        } else {
+            start_col = 6;
+            end_col = 8;
+        }
+
+        for (int i=start_row; i<=end_row; ++i) {
+            for (int j=start_col; j<=end_col; ++j) {
+                if (arr[i][j] == value) {
+                    isPosb = false;
+                }
+            }
+        }
+
+        return isPosb;
+
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        arr = new int[9][9];
+
+        for (int i=0; i<9; ++i) {
+            String in = br.readLine();
+            for (int j=0; j<9; ++j) {
+                arr[i][j] = Integer.parseInt(String.valueOf(in.charAt(j)));
+            }
+        }
+
+        backTracking(0, 0);
+
+    }
+
+    // #2467 용액
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int lt = 0;
+        int rt = N-1;
+        int min = arr[lt] + arr[rt];
+        int min_a = arr[lt];
+        int min_b = arr[rt];
+
+        while (lt < rt) {
+
+            //System.out.println("arr[lt], arr[rt] = " + arr[lt]+ ", " + arr[rt]);
+            if (Math.abs(arr[lt] + arr[rt]) <= Math.abs(min)) {
+                min = arr[lt] + arr[rt];
+                min_a = arr[lt];
+                min_b = arr[rt];
+            }
+
+            int lt_move = Math.abs(arr[lt+1] + arr[rt]);
+            int rt_move = Math.abs(arr[lt] + arr[rt-1]);
+
+            if (lt_move < rt_move) {
+                lt++;
+            } else {
+                rt--;
+            }
+        }
+
+        System.out.println(min_a + " " + min_b);
+
+    }*/
+
+    // #투포인터 부분합
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int S = Integer.parseInt(st.nextToken());
+
+        int[] arr = new int[N];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int lt = 0;
+        int rt = 0;
+
+        int cur_sum = arr[0];
+        int cur_len = 1;
+        int min_len = Integer.MAX_VALUE;
+
+        while (lt <= rt) {
+            //System.out.println("lt, rt, cur_len, cur_sum = " + lt + ", " + rt + ", " + cur_len + ", " + cur_sum);
+
+            if (cur_sum >= S) {  // lt를 오른쪽으로 보낼거임
+                min_len = Math.min(min_len, cur_len);
+
+                cur_len--;
+                cur_sum -= arr[lt];
+                lt++;
+
+            } else {  // rt를 오른쪽으로 보낼거임
+                rt++;
+                if (rt == N) {
+                    break;
+                }
+                cur_len ++;
+                cur_sum += arr[rt];
+            }
+        }
+
+        System.out.println(min_len != Integer.MAX_VALUE ? min_len : 0);
+
+    }*/
+
+    // #20040 사이클 게임
+/*    static int[] parent;
+
+    static int find(int a) {
+        if (parent[a] == a) {
+            return parent[a];
+        }
+        
+        // ★경로 압축 필수★
+        return parent[a] = find(parent[a]);
+    }
+
+    static boolean union(int a, int b) {
+        int parentA = find(a);
+        int parentB = find(b);
+        if (parentA == parentB) {
+            return false;
+        }
+
+        // 작은 수를 가지는 점을 무조건 루트 노드로 설정한다.
+        if (parentA > parentB) {
+            parent[parentA] = parentB;
+        } else {
+            parent[parentB] = parentA;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+
+        int n = Integer.parseInt(inputs[0]);
+        int m = Integer.parseInt(inputs[1]);
+
+        parent = new int[n];
+        for (int i=0; i<n; ++i) {
+            parent[i] = i;
+        }
+
+        for (int i=1; i<=m; ++i) {
+            inputs = br.readLine().split(" ");
+            int a = Integer.parseInt(inputs[0]);
+            int b = Integer.parseInt(inputs[1]);
+            if (!union(a, b)) {
+                System.out.println(i);
+                System.exit(0);
+            }
+        }
+
+        System.out.println(0);
+
+    }*/
+
+    // 다각형의 넓이
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         long[] xArr = new long[N+1];
@@ -26,8 +266,7 @@ public class Main {
 
         System.out.println(String.format("%.1f", Math.abs(x-y) / 2D));
 
-    }
-
+    }*/
 
     // 문자열 폭발
 /*    public static void main(String[] args) throws IOException {

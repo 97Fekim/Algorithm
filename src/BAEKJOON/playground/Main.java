@@ -1,11 +1,128 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.Arrays;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] inputs = br.readLine().split(" ");
+        int N = Integer.parseInt(inputs[0]);
+        int M = Integer.parseInt(inputs[1]);
+
+        int[] inDegree = new int[N+1];
+
+        ArrayList<Integer>[] graph = new ArrayList[N+1];
+        for (int i=1; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<M; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int small = Integer.parseInt(st.nextToken());
+            int large = Integer.parseInt(st.nextToken());
+
+            graph[small].add(large);
+            inDegree[large]++;
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for (int i=1; i<inDegree.length; ++i) {
+            if (inDegree[i] == 0) {
+                q.offer(i);
+            }
+        }
+
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+            bw.write(cur+" ");
+
+            for (Integer next : graph[cur]) {
+                inDegree[next]--;
+                if (inDegree[next] == 0) {
+                    q.offer(next);
+                }
+            }
+        }
+        bw.flush();
+        bw.close();
+
+    }
+
+    // #1197 최소 스패닝 트리
+/*    static ArrayList<Edge>[] graph;
+    static boolean[] visited;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int E = Integer.parseInt(st.nextToken());
+
+        graph = new ArrayList[N+1];
+        visited = new boolean[N+1];
+
+        for (int i=0; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<E; ++i) {
+            String[] inputs = br.readLine().split(" ");
+            int a = Integer.parseInt(inputs[0]);
+            int b = Integer.parseInt(inputs[1]);
+            long c = Integer.parseInt(inputs[2]);
+
+            graph[a].add(new Edge(b, c));
+            graph[b].add(new Edge(a, c));
+        }
+
+        long answer = 0;
+        PriorityQueue<Edge> q = new PriorityQueue<>();
+        q.offer(new Edge(1, 0));
+
+        while (!q.isEmpty()) {
+            Edge cur = q.poll();
+
+            // 안되면 이 부분을 !visited로 바꾸자
+            if (visited[cur.v]) {
+                continue;
+            }
+            answer += cur.wei;
+            visited[cur.v] = true;
+
+            for (Edge next : graph[cur.v]) {
+                q.offer(next);
+            }
+        }
+
+        System.out.println(answer);
+
+    }
+
+    static class Edge implements Comparable<Edge> {
+        int v;
+        long wei;
+        Edge(int v, long wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            if (this.wei > o.wei) {
+                return 1;
+            } else if (this.wei == o.wei) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+    }*/
+
+    // LCS 골드4
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         char[] str1 = br.readLine().toCharArray();
         char[] str2 = br.readLine().toCharArray();
@@ -36,7 +153,7 @@ public class Main {
         System.out.println(dp[str1.length][str2.length]);
         System.out.println(answer[str1.length][str2.length]);
 
-    }
+    }*/
 
     // #10942 펠린드롬?
 /*    public static void main(String[] args) throws IOException {

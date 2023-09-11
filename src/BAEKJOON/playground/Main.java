@@ -1,10 +1,71 @@
 package BAEKJOON.playground;
 
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    static int[][] arr;
+    // #10942 펠린드롬?
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N+1];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=1; i<=N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        boolean[][] dp = new boolean[N+1][N+1];  // dp[start][end] : stard 부터 end 까지가 펠린드롬인지 아닌지.
+
+        for (int i=1; i<=N; ++i) {
+            dp[i][i] = true;
+        }
+        for (int i=2; i<=N; ++i) {
+            if (arr[i] == arr[i-1]) {
+                dp[i-1][i] = true;
+            }
+        }
+
+        // i가 3일때 ==> 1,2,3을 비교해야 함.                                                     ==> j는 1부터     1(i-3+1) 까지     i==j 인지 확인 + (j+1)~(i-1)이 펠린드롬인지 확인.
+        // i가 4일때 ==> 1,2,3,4 / 2,3,4 를 비교해야 함.                                          ==> j는 1부터     2(i-3+1) 까지     i==j 인지 확인 + (j+1)~(i-1)이 펠린드롬인지 확인.
+        // i가 5일때 ==> 1,2,3,4,5 / 2,3,4,5 / 3,4,5 를 비교해야 함.                              ==> j는 1부터     3(i-3+1) 까지     i==j 인지 확인 + (j+1)~(i-1)이 펠린드롬인지 확인.
+        // i가 6일때 ==> 1,2,3,4,5,6 / 2,3,4,5,6 / 3,4,5,6 / 4,5,6 를 비교해야 함.                ==> j는 1부터     4(i-3+1) 까지     i==j 인지 확인 + (j+1)~(i-1)이 펠린드롬인지 확인.
+        // i가 7일때 ==> 1,2,3,4,5,6,7 / 2,3,4,5,6,7 / 3,4,5,6,7 / 4,5,6,7 / 5,6,7 를 비교해야 함.==> j는 1부터     5(i-3+1) 까지     i==j 인지 확인 + (j+1)~(i-1)이 펠린드롬인지 확인.
+        for (int i=3; i<=N; ++i) {
+            for (int j=1; j<=i-2; ++j) {
+                if (arr[i] == arr[j] && dp[j+1][i-1]) {
+                    dp[j][i] = true;
+                }
+            }
+        }
+
+        int m = Integer.parseInt(br.readLine());
+        while (m --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            if (dp[a][b]) {
+                bw.write("1\n");
+            } else {
+                bw.write("0\n");
+            }
+        }
+
+        bw.flush();
+        bw.close();
+
+//        for (int i=1; i<=N; ++i) {
+//            for (int j=1; j<=N; ++j) {
+//                System.out.print(dp[i][j] ? 'O' + " " : 'X' + " ");
+//            }
+//            System.out.println();
+//        }
+    }
+
+    // 스도쿠
+/*    static int[][] arr;
 
     static void backTracking(int row, int col) {
 
@@ -100,7 +161,7 @@ public class Main {
 
         backTracking(0, 0);
 
-    }
+    }*/
 
     // #2467 용액
 /*    public static void main(String[] args) throws IOException {

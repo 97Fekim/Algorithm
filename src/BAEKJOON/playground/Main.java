@@ -5,7 +5,117 @@ import java.util.*;
 
 public class Main {
 
+    static void recursion(int n, int depth) {
+        String preFix = "";
+        for (int i=0; i<depth; ++i) {
+            preFix += "____";
+        }
+        System.out.println(preFix+"\"재귀함수가 뭔가요?\"");
+
+        if (n == 0) {
+            System.out.println(preFix+"\"재귀함수는 자기 자신을 호출하는 함수라네\"");
+        } else {
+            System.out.println(preFix+"\"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.");
+            System.out.println(preFix+"마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.");
+            System.out.println(preFix+"그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어.\"");
+            recursion(n-1, depth+1);
+        }
+
+        System.out.println(preFix+"라고 답변하였지.");
+
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        System.out.println("어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.");
+        recursion(N, 0);
+    }
+
+    // 촌수 구하기
+/*    static boolean[] visited;
+    static ArrayList<Integer>[] graph;
+
+    static void dfs(int cur, int target, int depth) {
+        if (cur == target) {
+            System.out.println(depth);
+            System.exit(0);
+        } else {
+            for (Integer next : graph[cur]) {
+                if (!visited[next]) {
+                    visited[next] = true;
+                    dfs(next, target, depth+1);
+                    visited[next] = false;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int human1 = Integer.parseInt(st.nextToken());
+        int human2 = Integer.parseInt(st.nextToken());
+
+        graph = new ArrayList[N+1];
+        visited = new boolean[N+1];
+
+        for (int i=1; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        int m = Integer.parseInt(br.readLine());
+        while (m --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            graph[a].add(b);
+            graph[b].add(a);
+        }
+
+        visited[human1] = true;
+        dfs(human1, human2, 0);
+
+        System.out.println(-1);
+
+    }*/
+
+    // 색종이
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        boolean[][] paper = new boolean[101][101];
+
+        int N = Integer.parseInt(br.readLine());
+
+        while (N --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            for (int i=a; i<a+10; ++i) {
+                for (int j=b; j<b+10; ++j) {
+                    paper[i][j] = true;
+                }
+            }
+        }
+
+        int answer = 0;
+        for (int i=0; i<101; ++i) {
+            for (int j=0; j<101; ++j) {
+                answer += paper[i][j] ? 1 : 0;
+            }
+        }
+        System.out.println(answer);
+
+    }*/
+
+    // 위상정렬문제
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
@@ -50,7 +160,7 @@ public class Main {
         bw.flush();
         bw.close();
 
-    }
+    }*/
 
     // #1197 최소 스패닝 트리
 /*    static ArrayList<Edge>[] graph;

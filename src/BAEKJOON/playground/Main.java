@@ -5,7 +5,138 @@ import java.util.*;
 
 public class Main {
 
-    static void recursion(int n, int depth) {
+    static class App {
+        int memory;
+        int cost;
+        App(int memory, int cost) {
+            this.memory = memory;
+            this.cost = cost;
+        }
+        public int getMemory() {
+            return this.memory;
+        }
+        public int getCost() {
+            return this.cost;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        App[] arr = new App[N];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i] = new App(Integer.parseInt(st.nextToken()), 0);
+        }
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i].cost = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr, new Comparator<App>() {
+            @Override
+            public int compare(App o1, App o2) {
+                if (o1.memory == o2.memory) {
+                    return o1.cost - o2.cost;
+                } else {
+                    return o2.memory - o1.memory;
+                }
+            }
+        });
+
+        int lt = 0;
+        int rt = 0;
+        int memory_sum = arr[lt].memory;
+        int cost_sum = arr[lt].cost;
+        int cost_min = Integer.MAX_VALUE;
+
+        while (lt < arr.length && rt < arr.length) {
+            if (memory_sum >= M) {
+                cost_min = Math.min(cost_min, cost_sum);
+                memory_sum -= arr[lt].memory;
+                cost_sum -= arr[lt].cost;
+                lt++;
+            } else {
+                rt++;
+                if (rt < arr.length) {
+                    memory_sum += arr[rt].memory;
+                    cost_sum += arr[rt].cost;
+                }
+            }
+        }
+
+        System.out.println(cost_min);
+
+    }
+    // #2623 음악프로그램 - 위상정렬 (사이클 여부까지 판단)
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] inDegree = new int[N+1];
+        ArrayList<Integer>[] graph = new ArrayList[N+1];
+        for (int i=0; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        while (M --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int cnt = Integer.parseInt(st.nextToken());
+            int[] arr = new int[cnt];
+            for (int i=0; i<cnt; ++i) {
+                arr[i] = Integer.parseInt(st.nextToken());
+            }
+
+            for (int i=1; i<cnt; ++i) {
+                graph[arr[i-1]].add(arr[i]);
+                inDegree[arr[i]]++;
+            }
+        }
+
+        // 위상정렬 시작
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i=1; i<=N; ++i) {
+            if (inDegree[i] == 0) {
+                q.offer(i);
+            }
+        }
+
+        for (int i=1; i<=N; ++i) {
+
+            if (q.isEmpty()) {
+                System.out.println(0);
+                System.exit(0);
+            }
+
+            int cur = q.poll();
+            bw.write(cur+"\n");
+
+            for (int j=0; j<graph[cur].size(); ++j) {
+                int next = graph[cur].get(j);
+                inDegree[next]--;
+                if (inDegree[next] == 0) {
+                    q.offer(next);
+                }
+            }
+
+        }
+
+        bw.flush();
+        bw.close();
+
+    }*/
+
+/*    static void recursion(int n, int depth) {
         String preFix = "";
         for (int i=0; i<depth; ++i) {
             preFix += "____";
@@ -30,7 +161,7 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         System.out.println("어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.");
         recursion(N, 0);
-    }
+    }*/
 
     // 촌수 구하기
 /*    static boolean[] visited;

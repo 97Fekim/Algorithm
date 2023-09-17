@@ -5,74 +5,191 @@ import java.util.*;
 
 public class Main {
 
-    static class App {
-        int memory;
-        int cost;
-        App(int memory, int cost) {
-            this.memory = memory;
-            this.cost = cost;
-        }
-        public int getMemory() {
-            return this.memory;
-        }
-        public int getCost() {
-            return this.cost;
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
+    // #1021 회전하는 큐
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        App[] arr = new App[N];
-
-        st = new StringTokenizer(br.readLine(), " ");
-        for (int i=0; i<N; ++i) {
-            arr[i] = new App(Integer.parseInt(st.nextToken()), 0);
-        }
-        st = new StringTokenizer(br.readLine(), " ");
-        for (int i=0; i<N; ++i) {
-            arr[i].cost = Integer.parseInt(st.nextToken());
+        Deque<Integer> q = new LinkedList<>();
+        for (int i=1; i<=N; ++i) {
+            q.offer(i);
         }
 
-        Arrays.sort(arr, new Comparator<App>() {
-            @Override
-            public int compare(App o1, App o2) {
-                if (o1.memory == o2.memory) {
-                    return o1.cost - o2.cost;
-                } else {
-                    return o2.memory - o1.memory;
+        int answer = 0;
+
+        st = new StringTokenizer(br.readLine(), " ");
+        while (M --> 0) {
+            int value = Integer.parseInt(st.nextToken());
+
+            int pos = 0;
+            for (Integer i : q) {
+                pos++;
+                if (value == i) {
+                    break;
                 }
             }
-        });
 
-        int lt = 0;
-        int rt = 0;
-        int memory_sum = arr[lt].memory;
-        int cost_sum = arr[lt].cost;
-        int cost_min = Integer.MAX_VALUE;
+            // 타겟이 왼쪽에 있는 경우
+            if ((q.size() % 2 == 0 && pos <= q.size() / 2) ||          // 큐가 짝수개일땐 8 -> 4
+                    (q.size() % 2 == 1 && pos <= q.size() / 2 + 1) ) { // 큐가 홀수개일땐 9 -> 4
+                while (q.peekFirst() != value) {
+                    q.offerLast(q.pollFirst()); // 왼쪽에서 오른쪽으로 옮김
+                    answer++;
+                }
+                q.poll();
+            } else {  // 타겟이 오른쪽에 있는 경우
+                while (q.peekFirst() != value) {
+                    q.offerFirst(q.pollLast());
+                    answer++;
+                }
+                q.poll();
+            }
 
-        while (lt < arr.length && rt < arr.length) {
-            if (memory_sum >= M) {
-                cost_min = Math.min(cost_min, cost_sum);
-                memory_sum -= arr[lt].memory;
-                cost_sum -= arr[lt].cost;
-                lt++;
+        }
+        System.out.println(answer);
+
+    }*/
+
+    // #7579 앱
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] memories = new int[N];
+        int[] costs = new int[N];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            memories[i] = Integer.parseInt(st.nextToken());
+        }
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            costs[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int[][] dp = new int[N][10001];
+        
+        // 첫번째 앱의 dp배열을 생성
+        for (int i=0; i<=10000; ++i) {
+            if (costs[0] <= i) {
+                dp[0][i] = memories[0];
+            }
+        }
+
+        for (int i=1; i<N; ++i) {
+            for (int j=0; j<=10000; ++j) {
+
+                *//** 현재 앱의 코스트가 기준 코스트보다 작다?
+                 * >> 현재 앱을 포함시킬수도 있고, 안할수도 있다. *//*
+                if (costs[i] <= j) {
+
+                    dp[i][j] = Math.max(
+                            dp[i-1][j],    // 포함시키지 않은 경우 >> 이전 앱만으로 확보 가능한 메모리를 그대로 가져감
+                            memories[i] + dp[i-1][j-costs[i]] // 포함시키는 경우 >> 현재앱의 메모리 + 기준코스트에서 현재 앱의 코스트를 뺀 코스트로 확보 가능한 최대 메모리
+                    );
+
+                } else {  *//** 현재 앱의 코스트가 기준 코스트보다 크다?
+                              >> 포함할 수 없으므로, 이전앱만으로 확보 가능한 메모리를 그대로 가져간다. *//*
+                    dp[i][j] = dp[i-1][j];
+                }
+
+            }
+        }
+
+        int answer = Integer.MAX_VALUE;
+        for (int i=0; i<N; ++i) {
+            for (int j=0; j<10001; ++j) {
+                if (dp[i][j] >= M) {
+                    answer = Math.min(answer , j);
+                }
+            }
+        }
+
+        System.out.println(answer);
+    }*/
+
+    // 수의 합? 완전탐색
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] arr = new int[N];
+        st = new StringTokenizer(br.readLine());
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int answer = 0;
+        for (int i=0; i<N; ++i) {
+            int cur = arr[i];
+            if (cur == M) {
+                answer ++;
+                continue;
             } else {
-                rt++;
-                if (rt < arr.length) {
-                    memory_sum += arr[rt].memory;
-                    cost_sum += arr[rt].cost;
+                for (int j=i-1; j>=0; --j) {
+                    cur += arr[j];
+                    if (cur == M) {
+                        answer ++;
+                        continue;
+                    }
                 }
             }
         }
 
-        System.out.println(cost_min);
+        System.out.println(answer);
 
-    }
+    }*/
+
+    // 어린왕자
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+
+        while (T --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int start_x = Integer.parseInt(st.nextToken());
+            int start_y = Integer.parseInt(st.nextToken());
+            int end_x = Integer.parseInt(st.nextToken());
+            int end_y = Integer.parseInt(st.nextToken());
+
+            int cnt = Integer.parseInt(br.readLine());
+            int answer = 0;
+            while (cnt --> 0) {
+                st = new StringTokenizer(br.readLine(), " ");
+                int center_x = Integer.parseInt(st.nextToken());
+                int center_y = Integer.parseInt(st.nextToken());
+                int r = Integer.parseInt(st.nextToken());
+
+                double start_to_center =
+                        Math.sqrt(Math.pow(Math.abs(start_x - center_x), 2) + Math.pow(Math.abs(start_y - center_y), 2));
+                double end_to_center =
+                        Math.sqrt(Math.pow(Math.abs(end_x - center_x), 2) + Math.pow(Math.abs(end_y - center_y), 2));
+
+                if (start_to_center <= r && end_to_center <= r) {
+                    // 아무것도 안함
+                } else if (start_to_center <= r) {
+                    answer ++;
+                } else if (end_to_center <= r) {
+                    answer ++;
+                }
+            }
+            System.out.println(answer);
+
+        }
+
+    }*/
+
     // #2623 음악프로그램 - 위상정렬 (사이클 여부까지 판단)
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

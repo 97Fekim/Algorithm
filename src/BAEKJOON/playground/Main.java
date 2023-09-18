@@ -5,6 +5,72 @@ import java.util.*;
 
 public class Main {
 
+    // #1647 도시 분할 계획 - MST
+/*    static class Edge implements Comparable<Edge>{
+        int v;
+        int wei;
+        Edge (int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        ArrayList<Edge>[] graph = new ArrayList[N+1];
+        for (int i=0; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=0; i<M; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            graph[a].add(new Edge(b, c));
+            graph[b].add(new Edge(a, c));
+        }
+
+        boolean[] visited = new boolean[N+1];
+
+        int answer = 0;
+        int max = -1;
+        for (int i=1; i<=N; ++i) {
+
+            PriorityQueue<Edge> q = new PriorityQueue<>();
+            q.offer(new Edge(i, 0));
+
+            while (!q.isEmpty()) {
+
+                Edge cur = q.poll();
+                if (visited[cur.v]) {
+                    continue;
+                }
+                visited[cur.v] = true;
+                answer += cur.wei;
+                max = Math.max(max, cur.wei);
+
+                for (Edge next : graph[cur.v]) {
+                    q.offer(next);
+                }
+
+            }
+        }
+
+        System.out.println(answer - max);
+
+    }*/
+
     // #2473 세 용액
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

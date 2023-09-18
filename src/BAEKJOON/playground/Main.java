@@ -5,6 +5,94 @@ import java.util.*;
 
 public class Main {
 
+    // #2473 세 용액
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        long[] arr = new long[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i] = Long.parseLong(st.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        long answer = Long.MAX_VALUE;
+        long a0 = 0;
+        long a1 = 0;
+        long a2 = 0;
+
+        for (int i=0; i<N; ++i) {
+            int lt = i+1;
+            int rt = N-1;
+            while (lt < rt) {
+                if (Math.abs(arr[lt] + arr[i] + arr[rt]) < answer) {
+                    answer = Math.abs(arr[lt] + arr[i] + arr[rt]);
+                    a0 = arr[i];
+                    a1 = arr[lt];
+                    a2 = arr[rt];
+                }
+
+                long move_lt = arr[i] + arr[lt+1] + arr[rt];
+                long move_rt = arr[i] + arr[lt] + arr[rt-1];
+
+                if (Math.abs(move_lt) < Math.abs(move_rt)) {
+                    lt++;
+                } else {
+                    rt--;
+                }
+
+            }
+        }
+
+        System.out.println(a0 + " " + a1 + " " + a2);
+
+    }*/
+
+    // 평범한 배낭
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        int[] wei = new int[N];
+        int[] value = new int[N];
+
+        for (int i=0; i<N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            wei[i] = Integer.parseInt(st.nextToken());
+            value[i] = Integer.parseInt(st.nextToken());
+        }
+
+        // i = 물건의 순서 , j = 무게
+        int[][] dp = new int[N][K+1];
+
+        // 첫번째 물건에 대한 dp배열 생성
+        for (int i=0; i<=K; ++i) {
+            if (wei[0] <= i) {
+                dp[0][i] = value[0];
+            }
+        }
+
+        for (int i=1; i<N; ++i) {
+            for (int j=0; j<=K; ++j) {
+                // 현재 아이템을 가방에 포함시킬 수 있을때
+                if (wei[i] <= j) {
+                    dp[i][j] = Math.max(dp[i-1][j], value[i] + dp[i-1][j-wei[i]]);
+                } else {  // 현재 아이템을 가방에 포함시킬 수 없을때
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+
+        System.out.println(dp[N-1][K]);
+
+    }*/
+
     // #1021 회전하는 큐
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

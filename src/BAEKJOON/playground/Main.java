@@ -5,6 +5,154 @@ import java.util.*;
 
 public class Main {
 
+    // #4386 - 별자리 만들기
+/*    static class Edge implements Comparable<Edge> {
+        int v;
+        double wei;
+        Edge (int v, double wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            if (this.wei < o.wei) {
+                return -1;
+            } else if (this.wei == o.wei) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        double[][] point = new double[N+1][2];
+
+        for (int i=1; i<=N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            double a = Double.parseDouble(st.nextToken());
+            double b = Double.parseDouble(st.nextToken());
+            point[i][0] = a;
+            point[i][1] = b;
+        }
+
+        ArrayList<Edge>[] graph = new ArrayList[N+1];
+        for (int i=0; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i=1; i<=N; ++i) {
+            for (int j=1; j<=N && i!=j; ++j) {
+                double dis = Math.sqrt(Math.pow(Math.abs(point[i][0]-point[j][0]), 2)
+                        + Math.pow(Math.abs(point[i][1]-point[j][1]), 2));  // 루트 (a^2 + b^2)
+                graph[i].add(new Edge(j, dis));
+                graph[j].add(new Edge(i, dis));
+            }
+        }
+
+        boolean[] visited = new boolean[N+1];
+
+        PriorityQueue<Edge> q = new PriorityQueue<>();
+        q.offer(new Edge(1, 0));
+
+        double answer = 0.0d;
+        while (!q.isEmpty()) {
+            Edge cur = q.poll();
+
+            if (visited[cur.v]) {
+                continue;
+            }
+            visited[cur.v] = true;
+            answer += cur.wei;
+
+            for (Edge next : graph[cur.v]) {
+                q.offer(next);
+            }
+        }
+
+        System.out.println(String.format("%.2f", answer));
+
+    }*/
+
+    // RGB거리 2
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[][] arr = new int[N][N];
+        int answer = Integer.MAX_VALUE;
+
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<3; ++j) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int[][] dp = new int[N][N];
+
+        // 빨간색으로 먼저 칠했을때
+        dp[0][0] = arr[0][0];
+        dp[0][1] = 1001 * 1001;
+        dp[0][2] = 1001 * 1001;
+
+        for (int i=1; i<N; ++i) {
+            dp[i][0] = Math.min(dp[i-1][1], dp[i-1][2]) + arr[i][0];
+            dp[i][1] = Math.min(dp[i-1][0], dp[i-1][2]) + arr[i][1];
+            dp[i][2] = Math.min(dp[i-1][0], dp[i-1][1]) + arr[i][2];
+        }
+
+        for (int i=0; i<3; ++i) {
+            if (i != 0) {
+                answer = Math.min(answer, dp[N-1][i]);
+            }
+        }
+
+
+        dp = new int[N][N];
+
+        // 초록색으로 먼저 칠했을때
+        dp[0][0] = 1001 * 1001;
+        dp[0][1] = arr[0][1];
+        dp[0][2] = 1001 * 1001;
+
+        for (int i=1; i<N; ++i) {
+            dp[i][0] = Math.min(dp[i-1][1], dp[i-1][2]) + arr[i][0];
+            dp[i][1] = Math.min(dp[i-1][0], dp[i-1][2]) + arr[i][1];
+            dp[i][2] = Math.min(dp[i-1][0], dp[i-1][1]) + arr[i][2];
+        }
+
+        for (int i=0; i<3; ++i) {
+            if (i != 1) {
+                answer = Math.min(answer, dp[N-1][i]);
+            }
+        }
+
+        // 파란색으로 먼저 칠했을때
+        dp[0][0] = 1001 * 1001;
+        dp[0][1] = 1001 * 1001;
+        dp[0][2] = arr[0][2];
+
+        for (int i=1; i<N; ++i) {
+            dp[i][0] = Math.min(dp[i-1][1], dp[i-1][2]) + arr[i][0];
+            dp[i][1] = Math.min(dp[i-1][0], dp[i-1][2]) + arr[i][1];
+            dp[i][2] = Math.min(dp[i-1][0], dp[i-1][1]) + arr[i][2];
+        }
+
+        for (int i=0; i<3; ++i) {
+            if (i != 2) {
+                answer = Math.min(answer, dp[N-1][i]);
+            }
+        }
+
+        System.out.println(answer);
+
+    }*/
+
     // #1647 도시 분할 계획 - MST
 /*    static class Edge implements Comparable<Edge>{
         int v;

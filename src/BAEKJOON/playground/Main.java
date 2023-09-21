@@ -5,6 +5,154 @@ import java.util.*;
 
 public class Main {
 
+    // #1766 - 문제집 (위상정렬)
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] inDegree = new int[N+1];
+        ArrayList<Integer>[] graph = new ArrayList[N+1];
+        for (int i=0; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        while (M --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            inDegree[b]++;
+            graph[a].add(b);
+        }
+
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int i=1; i<inDegree.length; ++i) {
+            if (inDegree[i] == 0) {
+                q.offer(i);
+            }
+        }
+
+        for (int i=1; i<=N; ++i) {
+
+            int cur = q.poll();
+            System.out.print(cur + " ");
+
+            for (Integer next : graph[cur]) {
+
+                inDegree[next]--;
+                if (inDegree[next] == 0) {
+                    q.offer(next);
+                }
+            }
+        }
+
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+
+        int n = Integer.parseInt(br.readLine());
+        int[] arr1 = new int[n];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i=0; i<n; ++i) {
+            arr1[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int m = Integer.parseInt(br.readLine());
+        int[] arr2 = new int[m];
+        st = new StringTokenizer(br.readLine());
+        for (int i=0; i<m; ++i) {
+            arr2[i] = Integer.parseInt(st.nextToken());
+        }
+
+        long[] sum1 = new long[n*(n+1)/2];
+
+        int idx = 0;
+        for (int i=0; i<arr1.length; ++i) {  // 1개씩, 2개씩, 2개씩... 더하겠다.
+            for (int j=0; j<arr1.length-i; ++j) {
+                int sum = 0;
+                for (int k=j; k<=j+i; ++k) {
+                    sum += arr1[k];
+                }
+                sum1[idx] = sum;
+                idx++;
+            }
+        }
+
+
+        long[] sum2 = new long[m*(m+1)/2];
+
+        idx = 0;
+        for (int i=0; i<arr2.length; ++i) {  // 1개씩, 2개씩, 2개씩... 더하겠다.
+            for (int j=0; j<arr2.length-i; ++j) {
+                int sum = 0;
+                for (int k=j; k<=j+i; ++k) {
+                    sum += arr2[k];
+                }
+                sum2[idx] = sum;
+                idx++;
+            }
+        }
+
+        TreeSet<Long> tset1 = new TreeSet<>();
+        TreeSet<Long> tset2 = new TreeSet<>();
+
+        Map<Long, Long> map1 = new HashMap();
+        Map<Long, Long> map2 = new HashMap();
+
+        for (Long i : sum1) {
+            tset1.add(i);
+            map1.put(i, map1.getOrDefault(i, 0L)+1L);
+        }
+
+        for (Long i : sum2) {
+            tset2.add(i);
+            map2.put(i, map2.getOrDefault(i, 0L)+1L);
+        }
+
+        sum1 = new long[tset1.size()];
+        sum2 = new long[tset2.size()];
+
+        idx = 0;
+        for (Long i : tset1) {
+            sum1[idx] = i;
+            idx++;
+        }
+
+        idx = 0;
+        for (Long i : tset2) {
+            sum2[idx] = i;
+            idx++;
+        }
+
+        long answer = 0L;
+
+        int lt = 0;
+        int rt = sum2.length-1;
+
+        while (lt < sum1.length && rt > -1) {
+            long sum = sum1[lt] + sum2[rt];
+
+            if (sum == T) {
+                answer += map1.get(sum1[lt]) * map2.get(sum2[rt]);
+            }
+
+            if (sum > T) {
+                rt--;
+            } else {
+                lt++;
+            }
+
+        }
+
+        System.out.println(answer);
+
+    }*/
+
     // #16724 - 피리 부는 사나이
 /*    static class Point {
         int row;

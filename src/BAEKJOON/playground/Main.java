@@ -5,6 +5,146 @@ import java.util.*;
 
 public class Main {
 
+    // #16724 - 피리 부는 사나이
+/*    static class Point {
+        int row;
+        int col;
+        Point(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+        public boolean equals(Object o) {
+            Point obj = (Point) o;
+            return obj.row == this.row && obj.col == this.col;
+        }
+
+        @Override
+        public int hashCode() {
+            return (row+""+col).hashCode();
+        }
+    }
+    static Point[][] parent;
+    static Point find(Point p) {
+        if (parent[p.row][p.col].equals(p)) {
+            return parent[p.row][p.col];
+        }
+        return parent[p.row][p.col] = find(parent[p.row][p.col]);
+    }
+
+    static void union(Point a, Point b) {
+        Point parentB = find(b);
+        parent[parentB.row][parentB.col] = a;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        char[][] graph = new char[N][M];
+        parent = new Point[N][M];
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < M; ++j) {
+                parent[i][j] = new Point(i, j);
+            }
+        }
+
+        for (int i=0; i<N; ++i) {
+            graph[i] = br.readLine().toCharArray();
+        }
+
+        //for (int z=0; z<2; ++z) {
+
+        for (int i=0; i<N; ++i) {
+            for (int j=0; j<M; ++j) {
+                int next_row = i;
+                int next_col = j;
+                if (graph[i][j] == 'U') {
+                    next_row--;
+                } else if (graph[i][j] == 'D') {
+                    next_row++;
+                } else if (graph[i][j] == 'L') {
+                    next_col--;
+                } else if (graph[i][j] == 'R') {
+                    next_col++;
+                }
+
+                if (next_row >= 0 && next_row < N && next_col >= 0 && next_col < M) {
+
+                    if (find(new Point(i, j)) != find(new Point(next_row, next_col))) {
+                        union(new Point(i, j), new Point(next_row, next_col));
+                    }
+
+                }
+            }
+        }
+
+        //}
+
+        // 모든 노드의 부모를 최상위 노드로 바꿔준다.
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < M; ++j) {
+                find(new Point(i, j));
+            }
+        }
+
+        Set<Point> set = new HashSet<>();
+        for (int i=0; i<N; ++i) {
+            for (int j=0; j<M; ++j) {
+                set.add(new Point(parent[i][j].row,parent[i][j].col));
+            }
+        }
+        System.out.println(set.size());
+
+    }*/
+
+    // #27172 - 수 나누기 게임
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int min = Integer.MAX_VALUE;
+        int max = -1;
+
+        Set<Integer> set = new HashSet<>();
+        List<Integer> order = new ArrayList<>();
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            int n = Integer.parseInt(st.nextToken());
+            min = Math.min(min, n);
+            max = Math.max(max, n);
+            set.add(n);
+            order.add(n);
+        }
+
+        int[] arr = new int[max+1];
+
+        for (int i=min; i<=max; ++i) {
+
+            int n = i;
+
+            // set에 없는 정수라면 PASS한다.
+            if (!set.contains(n)) {
+                continue;
+            }
+
+            for (int j=n; j<=max; j += n) {
+                if (set.contains(j)) {
+                    arr[n]++;
+                    arr[j]--;
+                }
+            }
+
+        }
+
+        for (Integer i : order) {
+            System.out.print(arr[i]+" ");
+        }
+
+    }*/
+
     // #4386 - 별자리 만들기
 /*    static class Edge implements Comparable<Edge> {
         int v;

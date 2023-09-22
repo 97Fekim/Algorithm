@@ -5,6 +5,309 @@ import java.util.*;
 
 public class Main {
 
+    static class Edge implements Comparable<Edge> {
+        int v;
+        int wei;
+        Edge (int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        ArrayList<Edge>[] graph = new ArrayList[N+1];
+        for (int i=0; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        while (M --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            graph[a].add(new Edge(b, c));
+
+        }
+
+        // 벨만포드 수행
+        boolean is_minus_cycle = false;
+        int[] dis = new int[N+1];
+        dis[1] = 0;
+        Arrays.fill(dis, 1000000000);
+
+        for (int i=1; i<N; ++i) {
+            for (int j=1; j< graph.length; ++j) {
+                for (Edge next : graph[j]) {
+                    if (dis[j] + next.wei < dis[next.v]) {
+                        dis[next.v] = dis[j] + next.wei;
+                    }
+                }
+            }
+        }
+
+        for (int j=1; j< graph.length; ++j) {
+            for (Edge next : graph[j]) {
+                if (dis[j] + next.wei < dis[next.v]) {
+                    is_minus_cycle = true;
+                }
+            }
+        }
+
+        if (graph[1].size() != 0 && is_minus_cycle) {
+            System.out.println(-1);
+            System.exit(0);
+        }
+
+        //  다익스트라 수행
+        dis = new int[N+1];
+        Arrays.fill(dis, 1000000000);
+        dis[1] = 0;
+        PriorityQueue<Edge> q = new PriorityQueue<>();
+        boolean[] visited = new boolean[N+1];
+
+        q.offer(new Edge(1, 0));
+
+        while (!q.isEmpty()) {
+            Edge cur = q.poll();
+
+            if (visited[cur.v]) {
+                continue;
+            }
+            visited[cur.v] = true;
+
+            for (Edge next : graph[cur.v]) {
+                if (dis[cur.v] + next.wei < dis[next.v]) {
+                    dis[next.v] = dis[cur.v] + next.wei;
+                    q.offer(new Edge(next.v, dis[next.v]));
+                }
+            }
+        }
+
+        for (int i=2; i<=N; ++i) {
+            if (dis[i] == 1000000000) {
+                System.out.println(-1);
+            } else {
+                System.out.println(dis[i]);
+            }
+        }
+
+    }
+
+
+    // 용액 양산문제
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        int lt = 0;
+        int rt = arr.length-1;
+
+        int min = arr[lt] + arr[rt];
+        int min_lt = lt;
+        int min_rt = rt;
+
+        while (lt < rt) {
+            int sum = arr[lt] + arr[rt];
+
+            if (Math.abs(sum) < Math.abs(min)) {
+                min = sum;
+                min_lt = lt;
+                min_rt = rt;
+            }
+
+            if (sum > 0) {
+                rt--;
+            } else {
+                lt++;
+            }
+        }
+
+        System.out.println(arr[min_lt] + " " + arr[min_rt]);
+
+    }*/
+
+    // ACM크래프트 - 실패
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int T = Integer.parseInt(br.readLine());
+        while (T --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int N = Integer.parseInt(st.nextToken());
+            int K = Integer.parseInt(st.nextToken());
+
+            int[] times = new int[N+1];  // 10, 1, 100, 10
+
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int i=1; i<=N; ++i) {
+                times[i] = Integer.parseInt(st.nextToken());
+            }
+
+            ArrayList<Integer>[] graph = new ArrayList[N+1];
+            for (int i=0; i<=N; ++i) {
+                graph[i] = new ArrayList<>();
+            }
+            int[] inDegree = new int[N+1];
+
+            while (K --> 0) {
+                st = new StringTokenizer(br.readLine(), " ");
+                int a = Integer.parseInt(st.nextToken());
+                int b = Integer.parseInt(st.nextToken());
+
+                inDegree[b]++;
+                graph[a].add(b);
+            }
+
+            int W = Integer.parseInt(br.readLine());
+
+            int answer = Integer.MAX_VALUE;
+            for (int i=1; i<=N; ++i) {
+                // 진입차수가 0인 곳에서만 탐색을 할꺼기 때문
+                if (inDegree[i] != 0) {
+                    continue;
+                }
+
+                int[] inDegreeTmp = new int[N+1];
+                for (int j=0; j<=N; ++j) {
+                    inDegreeTmp[j] = inDegree[j];
+                }
+
+                int cur = i;
+
+                int[] curtimes = new int[1001];
+                Arrays.fill(curtimes, 0);
+
+                Queue<Integer> q = new LinkedList<>();
+                q.offer(cur);
+
+                int depth = 1;
+
+                boolean beAnswer = false;
+
+                lable:
+                while (!q.isEmpty()) {
+
+                    int len = q.size();
+                    while (len --> 0) {
+                        int cur_build = q.poll();
+                        if (cur_build == W) {
+                            curtimes[depth] = times[cur_build];
+                            beAnswer = true;
+                            break lable;
+                        }
+                        curtimes[depth] = Math.max(curtimes[depth], times[cur_build]);
+
+                        for (Integer next : graph[cur_build]) {
+                            inDegreeTmp[next]--;
+                            if (inDegreeTmp[next] == 0) {
+                                q.offer(next);
+                            }
+                        }
+                    }
+                    depth++;
+                }
+
+                if (beAnswer) {
+                    int sum = 0;
+                    for (int j=1; j<=depth; ++j) {
+                        sum += curtimes[j];
+                    }
+                    answer = Math.min(answer, sum);
+
+//                    for (Integer a : curtimes) {
+//                        System.out.print(a + " ");
+//                    }
+//                    System.out.println();
+//                    System.out.println("i = " + i + " ," + depth + " = " + depth);
+
+                }
+            }
+
+            System.out.println(answer);
+
+        }
+
+    }*/
+
+    // #10775 - 공항 (유니온파인드)
+/*    static int[] parent;
+
+    static int find(int a) {
+        if (a == parent[a]) {
+            return parent[a];
+        }
+        return parent[a] = find(parent[a]);
+    }
+
+    static void union(int a, int b) {
+
+        // * 작은 값을 루트노드로 설정하는 방법
+*//*        int parentA = find(a);
+        int parentB = find(b);
+
+        if (parentA > parentB) {
+            parent[parentA] = parent[parentB];
+        } else {
+            parent[parentB] = parent[parentA];
+        }*//*
+        
+        // * 일반적인 방법
+        int parentA = find(a);
+        int parentB = find(b);
+
+        if (parentA != parentB) {
+            parent[parentA] = parentB;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int G = Integer.parseInt(br.readLine());
+        int P = Integer.parseInt(br.readLine());
+
+        parent = new int[G+1];
+        for (int i=0; i<=G; ++i) {
+            parent[i] = i;
+        }
+
+        int answer = 0;
+        while (P --> 0) {
+            int a = find(Integer.parseInt(br.readLine()));
+
+            if (a == 0) {
+                break;
+            }
+
+            answer++;
+            union(a, a-1);
+        }
+
+        System.out.println(answer);
+
+    }*/
+
     // #1766 - 문제집 (위상정렬)
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

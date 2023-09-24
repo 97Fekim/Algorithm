@@ -5,7 +5,35 @@ import java.util.*;
 
 public class Main {
 
-    static class Edge implements Comparable<Edge> {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[][] graph = new int[N+1][M+1];
+        for (int i = 1; i <= N; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j = 1; j <= M; j++) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int[][] dp = new int[N+1][M+1];
+
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= M; j++) {
+                dp[i][j] = Math.max(Math.max(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1]) + graph[i][j];
+            }
+        }
+
+        System.out.println(dp[N][M]);
+
+    }
+
+    // #6497 - 전력난 (최소신장트리)
+/*    static class Edge implements Comparable<Edge> {
         int v;
         int wei;
         Edge (int v, int wei) {
@@ -21,6 +49,130 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        while (true) {
+
+            String[] inputs = br.readLine().split(" ");
+            int N = Integer.parseInt(inputs[0]);
+            int M = Integer.parseInt(inputs[1]);
+
+            // 0 0  이면 종료
+            if (N == 0 && M == 0) {
+                break;
+            }
+
+            ArrayList<Edge>[] graph = new ArrayList[N];
+            for (int i=0; i<N; ++i) {
+                graph[i] = new ArrayList<>();
+            }
+
+            int total = 0;
+            while (M --> 0) {
+                inputs = br.readLine().split(" ");
+                int a = Integer.parseInt(inputs[0]);
+                int b = Integer.parseInt(inputs[1]);
+                int c = Integer.parseInt(inputs[2]);
+
+                graph[a].add(new Edge(b, c));
+                graph[b].add(new Edge(a, c));
+
+                total += c;
+            }
+
+            // 프림 수행
+            int min_mst = 0;
+
+            boolean[] visited = new boolean[N];
+            PriorityQueue<Edge> q = new PriorityQueue<>();
+            q.offer(new Edge(0, 0));
+
+            while (!q.isEmpty()) {
+                Edge cur = q.poll();
+
+                if (visited[cur.v]) {
+                    continue;
+                }
+                visited[cur.v] = true;
+                min_mst += cur.wei;
+
+                for (Edge next : graph[cur.v]) {
+                    q.offer(next);
+                }
+            }
+
+            bw.write(total - min_mst+"\n");
+        }
+
+        bw.flush();
+        bw.close();
+
+    }*/
+
+
+    // #1956 - 운동 (플로이드 와샬)
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        long[][] graph = new long[N+1][N+1];
+
+        for (int i=1; i<=N; ++i) {
+            for (int j=1; j<=N; ++j) {
+                graph[i][j] = 10000000000L;
+            }
+        }
+
+        while (M --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            graph[a][b] = c;
+        }
+
+        for (int k=1; k<=N; ++k) {
+            for (int i=1; i<=N; ++i) {
+                for (int j=1; j<=N; ++j) {
+                    if (graph[i][k] + graph[k][j] < graph[i][j]) {
+                        graph[i][j] = graph[i][k] + graph[k][j];
+                    }
+                }
+            }
+        }
+
+        long min = 10000000000L;
+        for (int i=1; i<=N; ++i) {
+            min = Math.min(min, graph[i][i]);
+        }
+
+        System.out.println(min == 10000000000L ? -1 : min);
+
+    }*/
+
+    // 11657 - 타임머신
+/*    static class Edge implements Comparable<Edge> {
+        int v;
+        int wei;
+        Edge (int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
@@ -44,14 +196,14 @@ public class Main {
 
         // 벨만포드 수행
         boolean is_minus_cycle = false;
-        int[] dis = new int[N+1];
-        dis[1] = 0;
+        long[] dis = new long[N+1];
         Arrays.fill(dis, 1000000000);
+        dis[1] = 0;
 
         for (int i=1; i<N; ++i) {
             for (int j=1; j< graph.length; ++j) {
                 for (Edge next : graph[j]) {
-                    if (dis[j] + next.wei < dis[next.v]) {
+                    if (dis[j] != 1000000000 && dis[j] + next.wei < dis[next.v]) {
                         dis[next.v] = dis[j] + next.wei;
                     }
                 }
@@ -60,51 +212,31 @@ public class Main {
 
         for (int j=1; j< graph.length; ++j) {
             for (Edge next : graph[j]) {
-                if (dis[j] + next.wei < dis[next.v]) {
+                if (dis[j] != 1000000000 && dis[j] + next.wei < dis[next.v]) {
                     is_minus_cycle = true;
                 }
             }
         }
 
-        if (graph[1].size() != 0 && is_minus_cycle) {
+        //if (graph[1].size() != 0 && is_minus_cycle) {
+        if (is_minus_cycle) {
             System.out.println(-1);
             System.exit(0);
-        }
-
-        //  다익스트라 수행
-        dis = new int[N+1];
-        Arrays.fill(dis, 1000000000);
-        dis[1] = 0;
-        PriorityQueue<Edge> q = new PriorityQueue<>();
-        boolean[] visited = new boolean[N+1];
-
-        q.offer(new Edge(1, 0));
-
-        while (!q.isEmpty()) {
-            Edge cur = q.poll();
-
-            if (visited[cur.v]) {
-                continue;
-            }
-            visited[cur.v] = true;
-
-            for (Edge next : graph[cur.v]) {
-                if (dis[cur.v] + next.wei < dis[next.v]) {
-                    dis[next.v] = dis[cur.v] + next.wei;
-                    q.offer(new Edge(next.v, dis[next.v]));
+        } else {
+            for (int i=2; i<=N; ++i) {
+                if (dis[i] == 1000000000) {
+                    bw.write("-1\n");
+                    //System.out.println(-1);
+                } else {
+                    bw.write(dis[i]+"\n");
+                    //System.out.println(dis[i]);
                 }
             }
         }
+        bw.flush();
+        bw.close();
 
-        for (int i=2; i<=N; ++i) {
-            if (dis[i] == 1000000000) {
-                System.out.println(-1);
-            } else {
-                System.out.println(dis[i]);
-            }
-        }
-
-    }
+    }*/
 
 
     // 용액 양산문제

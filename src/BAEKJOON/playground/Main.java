@@ -5,7 +5,125 @@ import java.util.*;
 
 public class Main {
 
+    static int[][] graph;
+    static boolean[][] visited;
+    static int[] d_row = {-1, 0, 1, 0};
+    static int[] d_col = {0, -1, 0, 1};
+
+    static int dfs(int row, int col) {
+
+        int size = 1;
+
+        for (int i=0; i<4; ++i) {
+            int next_row = row + d_row[i];
+            int next_col = col + d_col[i];
+            if (next_row >= 0 && next_col >= 0 && next_row < graph.length && next_col < graph[0].length && !visited[next_row][next_col] && graph[next_row][next_col] == 1) {
+                visited[next_row][next_col] = true;
+                size += dfs(next_row, next_col);
+            }
+        }
+
+        return size;
+    }
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        graph = new int[N][M];
+        visited = new boolean[N][M];
+
+        for (int i=0; i<N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<M; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int cnt = 0;
+        int max = -1;
+        for (int i=0; i<N; ++i) {
+            for (int j = 0; j < M; ++j) {
+                if (!visited[i][j] && graph[i][j]==1) {
+                    cnt++;
+                    visited[i][j] = true;
+                    max = Math.max(max, dfs(i, j));
+                }
+            }
+        }
+
+        System.out.println(cnt);
+        System.out.println(max == -1 ? 0 : max);
+
+    }
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[] arr = new int[N+M];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=N; i<N+M; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        for (Integer i : arr) {
+            bw.write(i+" ");
+        }
+
+        bw.flush();
+        bw.close();
+    }*/
+
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr_a = new int[N];
+        Integer[] arr_b = new Integer[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr_a[i] = Integer.parseInt(st.nextToken());
+        }
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<N; ++i) {
+            arr_b[i] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr_a);
+        Arrays.sort(arr_b, Collections.reverseOrder());
+
+        int answer = 0;
+        for (int i=0; i<N; ++i) {
+            answer += arr_a[i] * arr_b[i];
+        }
+
+        System.out.println(answer);
+
+
+    }*/
+
+    // DP
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
@@ -30,7 +148,7 @@ public class Main {
 
         System.out.println(dp[N][M]);
 
-    }
+    }*/
 
     // #6497 - 전력난 (최소신장트리)
 /*    static class Edge implements Comparable<Edge> {

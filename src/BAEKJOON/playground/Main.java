@@ -11,6 +11,76 @@ public class Main {
     static int[] d_col = {0, -1, 0, 1};
 
     static int dfs(int row, int col) {
+        int size = 1;
+
+        for (int i=0; i<4; ++i) {
+            int next_row = row + d_row[i];
+            int next_col = col + d_col[i];
+            if (next_row >= 0 && next_col >= 0 &&
+                    next_row < graph.length && next_col < graph[0].length &&
+                    graph[next_row][next_col] == 0 &&
+                    !visited[next_row][next_col]) {
+
+                visited[next_row][next_col] = true;
+                size += dfs(next_row, next_col);
+            }
+        }
+
+        return size;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        graph = new int[M][N];
+        visited = new boolean[M][N];
+
+        while (K --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int m0 = Integer.parseInt(st.nextToken());
+            int n0 = Integer.parseInt(st.nextToken());
+
+            int m1 = Integer.parseInt(st.nextToken());
+            int n1 = Integer.parseInt(st.nextToken());
+
+            for (int i=n0; i<n1; ++i) {
+                for (int j=m0; j<m1; ++j) {
+                    graph[i][j] = 1;
+                }
+            }
+        }
+
+        List<Integer> answer = new ArrayList<>();
+        for (int i=0; i<M; ++i) {
+            for (int j=0; j<N; ++j) {
+                if (!visited[i][j] && graph[i][j]==0) {
+                    visited[i][j] = true;
+                    answer.add(dfs(i, j));
+                }
+            }
+        }
+
+        Collections.sort(answer);
+
+        System.out.println(answer.size());
+        for (Integer i : answer) {
+            System.out.print(i+" ");
+        }
+
+    }
+
+    // DFS로 넓이 구하기 (실버1)
+/*    static int[][] graph;
+    static boolean[][] visited;
+    static int[] d_row = {-1, 0, 1, 0};
+    static int[] d_col = {0, -1, 0, 1};
+
+    static int dfs(int row, int col) {
 
         int size = 1;
 
@@ -58,7 +128,7 @@ public class Main {
         System.out.println(cnt);
         System.out.println(max == -1 ? 0 : max);
 
-    }
+    }*/
 
 /*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

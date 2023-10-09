@@ -5,74 +5,468 @@ import java.util.*;
 
 public class Main {
 
-    static int[][] graph;
-    static boolean[][] visited;
-    static int[] d_row = {-1, 0, 1, 0};
-    static int[] d_col = {0, -1, 0, 1};
+    // #2056 작업 TODO 위상정렬, 자신에게 도착할때마다 자신의 작업시간을 최대로 갱신.
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    static int dfs(int row, int col) {
-        int size = 1;
+    }
 
-        for (int i=0; i<4; ++i) {
-            int next_row = row + d_row[i];
-            int next_col = col + d_col[i];
-            if (next_row >= 0 && next_col >= 0 &&
-                    next_row < graph.length && next_col < graph[0].length &&
-                    graph[next_row][next_col] == 0 &&
-                    !visited[next_row][next_col]) {
+    // #1922 네트워크 연결 - 최소신장트리
+/*    static class Edge implements Comparable<Edge> {
+        int v;
+        int wei;
+        Edge (int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }
 
-                visited[next_row][next_col] = true;
-                size += dfs(next_row, next_col);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        int M = Integer.parseInt(br.readLine());
+
+        ArrayList<Edge>[] graph = new ArrayList[N+1];
+        for (int i=0; i<=N; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+
+        while (M --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            graph[a].add(new Edge(b, c));
+            graph[b].add(new Edge(a, c));
+        }
+
+        boolean[] visited = new boolean[N+1];
+        PriorityQueue<Edge> q = new PriorityQueue<>();
+        q.offer(new Edge(1, 0));
+
+        long answer = 0L;
+        while (!q.isEmpty()) {
+            Edge cur = q.poll();
+
+            if (visited[cur.v]) {
+                continue;
+            }
+
+            visited[cur.v] = true;
+            answer += cur.wei;
+
+            for (Edge next : graph[cur.v]) {
+                q.offer(next);
             }
         }
 
-        return size;
+        System.out.println(answer);
+
+    }*/
+
+    // #1744 수 묶기 - 그리디
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        PriorityQueue<Integer> positiveQ = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> negativeQ = new PriorityQueue<>();
+
+        int answer = 0;
+        while (N --> 0) {
+            int in = Integer.parseInt(br.readLine());
+            if (in == 1) {
+                answer++;
+            } else if (in > 1) {  // 양수
+                positiveQ.offer(in);
+            } else { // 0 or 음수
+                negativeQ.offer(in);
+            }
+        }
+
+        while (positiveQ.size() >= 2) {
+            int a = positiveQ.poll();
+            int b = positiveQ.poll();
+            answer += a * b;
+        }
+
+        while (negativeQ.size() >= 2) {
+            int a = negativeQ.poll();
+            int b = negativeQ.poll();
+            answer += a * b;
+        }
+
+        while (!positiveQ.isEmpty()) {
+            answer += positiveQ.poll();
+        }
+        while (!negativeQ.isEmpty()) {
+            answer += negativeQ.poll();
+        }
+
+        System.out.println(answer);
+
+    }*/
+
+    // ? 그리디 우선순위큐 문제
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+
+        while (N --> 0) {
+            q.offer(Integer.parseInt(br.readLine()));
+        }
+
+        int answer = 0;
+        while (q.size() > 1) {
+            int a = q.poll();
+            int b = q.poll();
+            answer += a+b;
+            q.offer(a+b);
+        }
+
+        System.out.println(answer);
+
+    }*/
+    
+    // #1339 단어 수학 - 그리디 풀이
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // A:0, B:1, C:2 ...
+        int[] arr = new int[26];
+
+        int N = Integer.parseInt(br.readLine());
+        while (N --> 0) {
+            String input = br.readLine();
+            int pos = 1;
+            for (int i=input.length()-1; i>=0; --i) {
+                int idx = input.charAt(i)-'A';
+                int value = pos;
+                arr[idx] += value;
+                pos *= 10;
+            }
+        }
+
+        Arrays.sort(arr);
+
+        int answer = 0;
+        int idx = 25;
+        for (int i=9; i>=0; i--) {
+            answer += arr[idx--] * i;
+        }
+
+        System.out.println(answer);
+    }*/
+
+    // #1339 단어 수학 - 백트래킹 완전탐색 풀이
+/*    static int[] result;
+    static boolean[] visited;
+    static List<String> inputs;
+    static Map<Character, Integer> map;
+    static int max = -1;
+
+    static void backTracking(int depth) {
+        if (depth == result.length) {
+            // 계산한다.
+            int sum = 0;
+            for (String s : inputs) {
+
+                int pos = 1;
+                for (int i=s.length()-1; i>=0; i--) {
+                    sum += result[map.get(s.charAt(i))] * pos;
+                    pos *= 10;
+                }
+
+            }
+            max = Math.max(max, sum);
+        } else {
+            for (int i=0; i<10; ++i) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    result[depth] = i;
+                    backTracking(depth+1);
+                    visited[i] = false;
+                }
+            }
+
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        inputs = new ArrayList<>();
+        Set<Character> set = new HashSet<>();
+
+        for (int i=0; i<N; ++i) {
+            inputs.add(br.readLine());
+        }
+
+        for (String s : inputs) {
+            for (char c : s.toCharArray()) {
+                set.add(c);
+            }
+        }
+
+        result = new int[set.size()];
+        visited = new boolean[10];
+        map = new HashMap<>();
+
+        int idx = 0;
+        for (Character c : set) {
+            map.put(c, idx);
+            idx++;
+        }
+
+        // A만 있을때, result = {0}, {1}, ....
+        // A,B 있을때, result = {0,1}, {0,2}, {0,3} ... {8,9}
+        backTracking(0);
+
+        System.out.println(max);
+    }*/
+
+    // #1261 알고스팟 - BFS+우선순위 큐
+/*    static class Edge implements Comparable<Edge>{
+        int row;
+        int col;
+        int cnt;
+        Edge (int row, int col, int cnt) {
+            this.row = row;
+            this.col = col;
+            this.cnt = cnt;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.cnt - o.cnt;
+        }
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
         int M = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
 
-        graph = new int[M][N];
-        visited = new boolean[M][N];
+        int[][] graph = new int[N][M];
+        boolean[][] visited = new boolean[N][M];
 
-        while (K --> 0) {
-            st = new StringTokenizer(br.readLine(), " ");
-            int m0 = Integer.parseInt(st.nextToken());
-            int n0 = Integer.parseInt(st.nextToken());
+        for (int i=0; i<N; ++i) {
+            char[] inputs = br.readLine().toCharArray();
+            for (int j=0; j<M; ++j) {
+                graph[i][j] = Integer.parseInt(String.valueOf(inputs[j]));
+            }
+        }
 
-            int m1 = Integer.parseInt(st.nextToken());
-            int n1 = Integer.parseInt(st.nextToken());
+        int[] d_row = {-1, 0, 1, 0};
+        int[] d_col = {0, -1, 0, 1};
 
-            for (int i=n0; i<n1; ++i) {
-                for (int j=m0; j<m1; ++j) {
-                    graph[i][j] = 1;
+        PriorityQueue<Edge> q = new PriorityQueue<>();
+        q.offer(new Edge(0,0, 0));
+        visited[0][0] = true;
+
+        while(!q.isEmpty()) {
+            Edge cur = q.poll();
+
+            if (cur.row == N-1 && cur.col == M-1) {
+                System.out.println(cur.cnt);
+                System.exit(0);
+            }
+
+            for (int i=0; i<4; ++i) {
+                int next_row = cur.row + d_row[i];
+                int next_col = cur.col + d_col[i];
+
+                if (next_row < 0 || next_col < 0 || next_row >= N || next_col >= M) {
+                    continue;
+                } else {
+                    if (graph[next_row][next_col] == 0 && !visited[next_row][next_col]) {
+                        visited[next_row][next_col] = true;
+                        q.offer(new Edge(next_row, next_col, cur.cnt));
+                    }
+
+                    if (graph[next_row][next_col] == 1 && !visited[next_row][next_col]) {
+                        visited[next_row][next_col] = true;
+                        q.offer(new Edge(next_row, next_col, cur.cnt + 1));
+                    }
+                }
+            }
+
+        }
+
+
+    }*/
+
+    // #1261 알고스팟 - DP
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+
+        int[][] graph = new int[N+1][M+1];
+        int[][] dp = new int[N+2][M+2];
+
+        for (int i=1; i<=N; ++i) {
+            char[] inputs = br.readLine().toCharArray();
+            for (int j=1; j<=M; ++j) {
+                graph[i][j] = Integer.parseInt(String.valueOf(inputs[j-1]));
+            }
+        }
+
+        for (int i=0; i<=N+1; ++i) {
+            for (int j=0; j<=M+1; ++j) {
+                dp[i][j] = 50000;
+            }
+        }
+
+        dp[1][1] = 0;
+
+        int tmp = 1000;
+        while (tmp --> 0) {
+            for (int i=1; i<=N; ++i) {
+                for (int j=1; j<=M; ++j) {
+
+                    int min1 = Math.min(dp[i-1][j], dp[i][j-1]);
+                    int min2 = Math.min(dp[i][j], Math.min(dp[i+1][j], dp[i][j+1]));
+
+                    if (graph[i][j] == 0) {
+                        dp[i][j] = Math.min(min1, min2);
+                    } else {
+                        dp[i][j] = Math.min(min1, min2) + 1;
+                    }
+
                 }
             }
         }
 
-        List<Integer> answer = new ArrayList<>();
-        for (int i=0; i<M; ++i) {
-            for (int j=0; j<N; ++j) {
-                if (!visited[i][j] && graph[i][j]==0) {
-                    visited[i][j] = true;
-                    answer.add(dfs(i, j));
+        System.out.println(dp[N][M]);
+
+    }*/
+
+    // #1027 고층 건물
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        double[] arr = new double[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        for (int i=0; i<N; ++i) {
+            arr[i] = Double.parseDouble(st.nextToken());
+        }
+
+        int[] dis = new int[N];
+
+        for (int i=0; i<N; ++i) {
+
+            double cur = arr[i];
+
+            int cnt = 0;
+            // 왼쪽으로 탐색
+            for (int j=i-1; j>=0; j--) {
+                double target = arr[j];
+
+                double dydx = (target - cur) / (j - i);
+
+                boolean isPossible = true;
+                int idx = 0;
+                for (int k=j+1; k<=i-1; ++k) {
+                    idx++;
+                    if (arr[k] >= target + dydx * idx) {
+                        isPossible = false;
+                    }
+                }
+                if (isPossible) {
+                    cnt++;
+                }
+            }
+
+            for (int j=i+1; j<N; ++j) {
+                double target = arr[j];
+
+                double dydx = (cur - target) / (i - j);
+
+                boolean isPossible = true;
+                int idx = 0;
+                for (int k=i+1; k<=j-1; ++k) {
+                    idx++;
+                    if (arr[k] >= cur + dydx * idx) {
+                        isPossible = false;
+                    }
+                }
+                if (isPossible) {
+                    cnt++;
+                }
+            }
+
+            dis[i] = cnt;
+
+        }
+
+        int answer = Arrays.stream(dis).max().getAsInt();
+        System.out.println(answer);
+
+    }*/
+
+    // #10159 저울
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[][] graph = new int[N+1][N+1];
+        for (int i=1; i<=N; ++i) {
+            for (int j=1; j<=N; ++j) {
+                graph[i][j] = 100000000;
+            }
+        }
+
+        int M = Integer.parseInt(br.readLine());
+
+        while (M --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            graph[a][b] = 1;
+            graph[b][a] = -1;
+        }
+
+        for (int k=1; k<=N; ++k) {
+            for (int i=1; i<=N; ++i) {
+                for (int j=1; j<=N; ++j) {
+                    if (i==j || i==k || j==k) continue;
+
+                    if (graph[i][j]==100000000 && graph[i][k] == 1 && graph[k][j] == 1) {
+                        graph[i][j] = 1;
+                    }
+
+                    if (graph[i][j]==100000000 && graph[i][k] == -1 && graph[k][j] == -1) {
+                        graph[i][j] = -1;
+                    }
+
                 }
             }
         }
 
-        Collections.sort(answer);
-
-        System.out.println(answer.size());
-        for (Integer i : answer) {
-            System.out.print(i+" ");
+        for (int i=1; i<=N; ++i) {
+            int sum = N-1;
+            for (int j = 1; j <= N; ++j) {
+                if (graph[i][j] != 100000000 && i!= j) sum -= 1;
+            }
+            System.out.println(sum);
         }
 
-    }
+    }*/
 
     // DFS로 넓이 구하기 (실버1)
 /*    static int[][] graph;

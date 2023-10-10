@@ -5,9 +5,14 @@ import java.util.*;
 
 public class Main {
 
-    // #2056 작업 TODO 위상정렬, 자신에게 도착할때마다 자신의 작업시간을 최대로 갱신.
+    // #2458 키 순서 - 플로이드 와샬 ?왜
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
 
     }
 

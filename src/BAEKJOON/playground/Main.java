@@ -5,16 +5,133 @@ import java.util.*;
 
 public class Main {
 
-    // #2458 키 순서 - 플로이드 와샬 ?왜
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+    // #1759 암호 만들기 - 백트래킹
+/*    static BufferedWriter bw;
+    static int N, M;
+    static char[] org;
+    static List<Character> result;
+
+    static void backTracking(int cur) throws IOException {
+
+        if (result.size() == N) {
+            int mom = 0;
+            int child = 0;
+
+            for (char c : result) {
+                if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                    mom ++;
+                } else {
+                    child ++;
+                }
+            }
+
+            if (mom >= 1 && child >= 2) {
+                for (char c : result) {
+                    bw.write(String.valueOf(c));
+                }
+                bw.write("\n");
+            }
+
+        } else {
+
+            for (int i=cur; i<M; ++i) {
+                result.add(org[i]);
+                backTracking(i+1);
+                result.remove(result.size()-1);
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        org = new char[M];
+        result = new ArrayList<>();
+
+        String[] inputs = br.readLine().split(" ");
+        for (int i=0; i<M; ++i) {
+            org[i] = inputs[i].charAt(0);
+        }
+
+        Arrays.sort(org);
+
+        backTracking(0);
+
+        bw.flush();
+        bw.close();
+    }*/
+
+    // #2458 키 순서 - 플로이드 와샬 ?왜
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
+        int[][] graph = new int[N+1][N+1];
 
-    }
+        for (int i=1; i<=N; ++i) {
+            for (int j=1; j<=N; ++j) {
+                graph[i][j] = 100000000;
+            }
+        }
+
+        while (M --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            graph[a][b] = 1;
+            graph[b][a] = -1;
+        }
+
+        for (int k=1; k<=N; ++k) {
+            for (int i=1; i<=N; ++i) {
+                for (int j = 1; j <= N; ++j) {
+                    if (i == j) {
+                        continue;
+                    }
+                    if (i == k || j == k) {
+                        continue;
+                    }
+
+                    if (graph[i][j] == 100000000 && graph[i][k] == 1 && graph[k][j] == 1) {
+                        graph[i][j] = 1;
+                    }
+
+                    if (graph[i][j] == 100000000 && graph[i][k] == -1 && graph[k][j] == -1) {
+                        graph[i][j] = -1;
+                    }
+
+                }
+            }
+        }
+
+        int answer = N;
+        for (int i=1; i<=N; ++i) {
+            for (int j = 1; j <= N; ++j) {
+                if (i!=j && graph[i][j] == 100000000) {
+                    answer--;
+                    break;
+                }
+            }
+        }
+
+        System.out.println(answer);
+    }*/
 
     // #1922 네트워크 연결 - 최소신장트리
 /*    static class Edge implements Comparable<Edge> {

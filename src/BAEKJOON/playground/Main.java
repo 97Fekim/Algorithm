@@ -8,8 +8,73 @@ public class Main {
     // #3020 개똥벌레 - 이분탐색
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int H = Integer.parseInt(st.nextToken());
+
+        int[] up = new int[N/2];
+        int[] down = new int[N/2];
+
+        for (int i=0; i<N; ++i) {
+            if (i % 2 == 0) down[i/2] = Integer.parseInt(br.readLine());
+            else up[i/2] = Integer.parseInt(br.readLine());
+        }
+
+        Arrays.sort(up);
+        Arrays.sort(down);
+
+        int min = N;
+        int count = 0;
+        for (int i=1; i<=H; ++i) {
+
+            int walls = binarySearch(i, down) + binarySearch(H-i+1, up);
+
+            if (min == walls) {
+                count++;
+                continue;
+            }
+            if (min > walls) {
+                min = walls;
+                count = 1;
+            }
+
+//            if (walls < min) {
+//                min = walls;
+//                count = 1;
+//            } else if (walls == min) {
+//                count++;
+//            } else {
+//                continue;
+//            }
+
+        }
+
+        System.out.println(min + " " + count);
 
     }
+
+    static int binarySearch(int h, int arr[]) {
+
+        int lt = 0;
+        int rt = arr.length;
+
+        while (lt < rt) {
+
+            int mid = (lt + rt) / 2;
+
+            if (h <= arr[mid]) {
+                rt = mid;
+            } else {
+                lt = mid + 1;
+            }
+
+        }
+
+        return arr.length - rt;
+
+    }
+
 
     // #1759 암호 만들기 - 백트래킹
 /*    static BufferedWriter bw;

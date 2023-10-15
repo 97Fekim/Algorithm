@@ -5,8 +5,505 @@ import java.util.*;
 
 public class Main {
 
-    // #3020 개똥벌레 - 이분탐색
+    static class CCTV {
+        int row;
+        int col;
+        String status;
+
+        public CCTV(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        public CCTV(int row, int col, String status) {
+            this.row = row;
+            this.col = col;
+            this.status = status;
+        }
+    }
+
+    static int N, M;
+    static int[][] graph;
+    static int[][] wkGraph;
+    static ArrayList<CCTV> org;
+    static ArrayList<CCTV> result;
+    static boolean[] visited;
+    static int answer = Integer.MAX_VALUE;
+
+    static void backTracking(int depth) {
+        if (result.size() == org.size()) {
+            wkGraph = new int[N][M];
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < M; ++j) {
+                    wkGraph[i][j] = graph[i][j];
+                }
+            }
+
+            for (CCTV cur : result) {
+                int cur_value = graph[cur.row][cur.col];
+                if (cur_value == 1){
+                    String cmd = cur.status;
+                    if (cmd.equals("left")) {
+                        setLeftArea(cur.row, cur.col);
+                    } else if (cmd.equals("right")) {
+                        setRightArea(cur.row, cur.col);
+                    } else if (cmd.equals("up")) {
+                        setUpArea(cur.row, cur.col);
+                    } else if (cmd.equals("down")) {
+                        setDownArea(cur.row, cur.col);
+                    }
+                }
+                else if (cur_value == 2) {
+                    String cmd = cur.status;
+                    if (cmd.equals("horizonal")) {
+                        setLeftArea(cur.row, cur.col);
+                        setRightArea(cur.row, cur.col);
+                    } else if (cmd.equals("vertical")) {
+                        setUpArea(cur.row, cur.col);
+                        setDownArea(cur.row, cur.col);
+                    }
+                }
+                else if (cur_value == 3) {
+                    String cmd = cur.status;
+                    if (cmd.equals("up_right")) {
+                        setUpArea(cur.row, cur.col);
+                        setRightArea(cur.row, cur.col);
+                    } else if (cmd.equals("down_right")) {
+                        setDownArea(cur.row, cur.col);
+                        setRightArea(cur.row, cur.col);
+                    } else if (cmd.equals("down_left")) {
+                        setDownArea(cur.row, cur.col);
+                        setLeftArea(cur.row, cur.col);
+                    } else if (cmd.equals("up_left")) {
+                        setUpArea(cur.row, cur.col);
+                        setLeftArea(cur.row, cur.col);
+                    }
+                }
+                else if (cur_value == 4) {
+                    String cmd = cur.status;
+                    if (cmd.equals("left")) {
+                        setUpArea(cur.row, cur.col);
+                        setLeftArea(cur.row, cur.col);
+                        setDownArea(cur.row, cur.col);
+                    } else if (cmd.equals("right")) {
+                        setUpArea(cur.row, cur.col);
+                        setRightArea(cur.row, cur.col);
+                        setDownArea(cur.row, cur.col);
+                    } else if (cmd.equals("up")) {
+                        setLeftArea(cur.row, cur.col);
+                        setUpArea(cur.row, cur.col);
+                        setRightArea(cur.row, cur.col);
+                    } else if (cmd.equals("down")) {
+                        setLeftArea(cur.row, cur.col);
+                        setDownArea(cur.row, cur.col);
+                        setRightArea(cur.row, cur.col);
+                    }
+                }
+                else if (cur_value == 5) {
+                    setLeftArea(cur.row, cur.col);
+                    setDownArea(cur.row, cur.col);
+                    setRightArea(cur.row, cur.col);
+                    setUpArea(cur.row, cur.col);
+                }
+            }
+
+            int sum = 0;
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < M; ++j) {
+                    if (wkGraph[i][j] == 0) {
+                        sum++;
+                    }
+                }
+            }
+
+            answer = Math.min(answer, sum);
+
+        } else {
+            for (int i=depth; i< org.size(); ++i) {
+
+                CCTV cur = org.get(i);
+
+                int cur_value = graph[cur.row][cur.col];
+
+                if (cur_value == 1) {
+                    result.add(new CCTV(cur.row, cur.col, "left"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "right"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "up"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "down"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+                }
+                else if (cur_value == 2) {
+                    result.add(new CCTV(cur.row, cur.col, "horizonal"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "vertical"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+                }
+                else if (cur_value == 3) {
+                    result.add(new CCTV(cur.row, cur.col, "up_right"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "down_right"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "down_left"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "up_left"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+                }
+                else if (cur_value == 4) {
+                    result.add(new CCTV(cur.row, cur.col, "left"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "right"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "up"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+
+                    result.add(new CCTV(cur.row, cur.col, "down"));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+                }
+                else if (cur_value == 5) {
+                    result.add(new CCTV(cur.row, cur.col));
+                    backTracking(i+1);
+                    result.remove(result.size()-1);
+                }
+            }
+        }
+    }
+
+    // #15683 감시
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        graph = new int[N][M];
+        org = new ArrayList<>();
+        result = new ArrayList<>();
+
+        for (int i=0; i<N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<M; ++j) {
+                int a = Integer.parseInt(st.nextToken());
+                graph[i][j] = a;
+                if (a != 0 && a != 6) {
+                    org.add(new CCTV(i, j));
+                }
+            }
+        }
+
+        visited = new boolean[org.size()];
+
+        backTracking(0);
+
+        System.out.println(answer);
+
+    }
+
+    static void setLeftArea(int row, int col) {
+        for (int i=col-1; i>=0; i--) {
+            if (wkGraph[row][i] == 6) {
+                break;
+            }
+            wkGraph[row][i] = 9;
+
+        }
+    }
+
+    static void setRightArea(int row, int col) {
+        for (int i=col+1; i<M; ++i) {
+            if (wkGraph[row][i] == 6) {
+                break;
+            }
+
+            wkGraph[row][i] = 9;
+
+        }
+    }
+
+    static void setUpArea(int row, int col) {
+        for (int i=row-1; i>=0; i--) {
+            if (wkGraph[i][col] == 6) {
+                break;
+            }
+
+            wkGraph[i][col] = 9;
+
+        }
+    }
+
+    static void setDownArea(int row, int col) {
+        for (int i=row+1; i<N; ++i) {
+            if (wkGraph[i][col] == 6) {
+                break;
+            }
+
+            wkGraph[i][col] = 9;
+
+        }
+    }
+
+/*    static class Node {
+        int row;
+        int col;
+        int wei;
+        Node(int row, int col, int wei) {
+            this.row = row;
+            this.col = col;
+            this.wei = wei;
+        }
+    }
+
+    // #2665 미로만들기
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[] d_row = {-1, 0, 1, 0};
+        int[] d_col = {0, -1, 0, 1};
+        int[][] graph = new int[N][N];
+        int[][] visited = new int[N][N];
+
+        for (int i=0; i<N; ++i) {
+            Arrays.fill(visited[i], 2501);
+        }
+
+        for (int i=0; i<N; ++i) {
+            char[] inputs = br.readLine().toCharArray();
+            for (int j=0; j<N; ++j) {
+                graph[i][j] = Integer.parseInt(String.valueOf(inputs[j]));
+            }
+        }
+
+        Queue<Node> q = new LinkedList<>();
+        q.offer(new Node(0,0,0));
+
+        visited[0][0] = 0;
+
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+
+            for (int i=0; i<4; ++i) {
+                int next_row = cur.row + d_row[i];
+                int next_col = cur.col + d_col[i];
+
+                if (next_row < 0 || next_col < 0 || next_row >=N || next_col >=N) {
+                    continue;
+                }
+
+                // 방문한 적이 없다? (visited == 2501)
+                //   >> visited[next_row][next_col] = wei;
+                //   >> q.offer(new Node(next_row, next_col, wei);
+                // 방문한 적이 있다?
+                //   >> if (cur.wei < visited[next_row][next_col]) {
+                //   >>     q.offer(new Node(next_row, next_col, wei);
+                //   >> }
+                if (visited[next_row][next_col] == 2501) {
+                    if (graph[next_row][next_col] == 1) {  // 벽X ==> 그대로
+                        visited[next_row][next_col] = cur.wei;
+                        q.offer(new Node(next_row, next_col, cur.wei));
+                    } else {
+                        visited[next_row][next_col] = cur.wei+1;
+                        q.offer(new Node(next_row, next_col, cur.wei + 1));
+                    }
+                } else {
+                    if (graph[next_row][next_col] == 1) { // 벽X
+                        if (cur.wei < visited[next_row][next_col]) {
+                            visited[next_row][next_col] = cur.wei;
+                            q.offer(new Node(next_row, next_col, cur.wei));
+                        }
+                    } else {
+                        if (cur.wei + 1 < visited[next_row][next_col]) {
+                            visited[next_row][next_col] = cur.wei+1;
+                            q.offer(new Node(next_row, next_col, cur.wei + 1));
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int i=0; i<N; ++i) {
+            for (int j=0; j<N; ++j) {
+                System.out.print(visited[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+    }*/
+    
+/*    static int N, M;
+    static int[][] src_graph;
+    static int[][] dst_graph;
+    static int[][] visited;
+    static int[] d_row = {-1, 0, 1, 0};
+    static int[] d_col = {0, -1, 0, 1};
+
+    static void dfs(int row, int col, int value) {
+        int cur = src_graph[row][col];
+
+        for (int i=0; i<4; ++i) {
+            int next_row = row + d_row[i];
+            int next_col = col + d_col[i];
+            if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < M &&
+                    visited[next_row][next_col] == 0 &&
+                    src_graph[next_row][next_col] == cur) {
+
+                visited[next_row][next_col] = value;
+                dfs(next_row, next_col, value);
+            }
+        }
+    }
+
+    // #2636 치즈
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // visited[0] : 아직 체크하지 않음
+        // visited[1] : 바깥 공기영역임
+        // visited[2] : 치즈 영역임
+        // visited[3] : 치즈 내부 영역임
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        src_graph = new int[N][M];
+        dst_graph = new int[N][M];
+        visited = new int[N][M];
+
+        boolean isCheeseEmpty = true;
+        for (int i=0; i<N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<M; ++j) {
+                int a = Integer.parseInt(st.nextToken());
+                if (a == 1) {
+                    isCheeseEmpty = false;
+                }
+                src_graph[i][j] = a;
+            }
+        }
+        if (isCheeseEmpty) { // 처음부터 치즈가 없다면 종료
+            System.out.println(0);
+            System.out.println(0);
+            System.exit(0);
+        }
+
+        int answer = 0;
+        while (true) {
+            answer++;
+
+            visited = new int[N][M];
+            
+            // 바깥 공기영역을 체크
+            visited[0][0] = 1;
+            dfs(0,0,1);
+
+            // 치즈영역, 치즈내부영역을 체크
+            for (int i=0; i<N; ++i) {
+                for (int j=0; j<M; ++j) {
+                    if (visited[i][j] == 0 && src_graph[i][j] == 1) { // 치즈영역
+                        visited[i][j] = 2;
+                        dfs(i, j, 2);
+                    } else if (visited[i][j] == 0 && src_graph[i][j] == 0) { // 치즈내부영역
+                        visited[i][j] = 3;
+                        dfs(i, j, 3);
+                    }
+                }
+            }
+
+            dst_graph = new int[N][M];
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < M; ++j) {
+                    dst_graph[i][j] = src_graph[i][j];
+                }
+            }
+
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < M; ++j) {
+                    boolean isBreak = false;
+                    for (int k=0; k<4; ++k) {
+                        int next_row = i + d_row[k];
+                        int next_col = j + d_col[k];
+
+                        if (src_graph[i][j] == 1 && next_row >= 0 && next_col >= 0 &&
+                        next_row < N && next_col < M && src_graph[next_row][next_col] == 0 &&
+                        visited[next_row][next_col] == 1) {
+                            isBreak = true;
+                        }
+                    }
+                    if (isBreak) {
+                        dst_graph[i][j] = 0;
+                    }
+                }
+            }
+
+
+            boolean isEnd = true;
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < M; ++j) {
+                    if (dst_graph[i][j] == 1) {
+                        isEnd = false;
+                    }
+                }
+            }
+
+            // dst_graph 에 치즈가 없다? >> src_graph의 치즈의 갯수와 answer를 리턴
+            if (isEnd) {
+
+                int sum = 0;
+
+                for (int i=0; i<N; ++i) {
+                    for (int j = 0; j < M; ++j) {
+                        if (src_graph[i][j] == 1) {
+                            sum++;
+                        }
+                    }
+                }
+
+                System.out.println(answer);
+                System.out.println(sum);
+                System.exit(0);
+
+            } else { // dst_graph 에 아직 치즈가 있다? >> src_graph에 dst_graph를 깊은 복사한다.
+                for (int i=0; i<N; ++i) {
+                    for (int j = 0; j < M; ++j) {
+                        src_graph[i][j] = dst_graph[i][j];
+                    }
+                }
+            }
+
+        }
+
+
+    }*/
+    
+    // #3020 개똥벌레 - 이분탐색
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
@@ -73,7 +570,7 @@ public class Main {
 
         return arr.length - rt;
 
-    }
+    }*/
 
 
     // #1759 암호 만들기 - 백트래킹

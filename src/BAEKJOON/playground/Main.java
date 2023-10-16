@@ -5,7 +5,95 @@ import java.util.*;
 
 public class Main {
 
-    static class CCTV {
+    // #10282 해킹 - TODO 다익스트라 구하고, 다익스트라 배열 중 최대거리를 구한다? 어차피 그 최대거리를 가는동안 다른곳은 모두 도착을 했으니까?
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+    // #16562 친구비
+/*    static int[] parent;
+    static int[] costs;
+
+    static int find(int a) {
+        if (parent[a] == a) {
+            return parent[a];
+        }
+        return parent[a] = find(parent[a]);
+    }
+
+    static void union(int a, int b) {
+        int parentA = find(a);
+        int parentB = find(b);
+
+        if (parentA != parentB) {
+            parent[parentA] = parentB;
+//            if (parentA > parentB) {
+//                parent[parentA] = parentB;
+//            } else {
+//                parent[parentB] = parentA;
+//            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+
+        parent = new int[N+1];
+        costs = new int[N+1];
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i=1; i<=N; ++i) {
+            costs[i] = Integer.parseInt(st.nextToken());
+        }
+
+        for (int i=1; i<=N; ++i) {
+            parent[i] = i;
+        }
+        while (M --> 0) {
+            st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            union(a, b);
+        }
+
+        // 한번에 안되면, 여기에 i~N 돌면서 find 한번씩 하자.
+//        for (int i=1; i<=N; ++i) {
+//            find(i);
+//        }
+
+        Queue<Integer>[] qs = new PriorityQueue[N+1];
+        for (int i=0; i<=N; ++i) {
+            qs[i] = new PriorityQueue<>();
+        }
+
+        for (int i=1; i<=N; ++i) {
+            qs[find(i)].add(costs[i]);
+        }
+
+        int answer = 0;
+        for (int i=1; i<=N; ++i) {
+            if (!qs[i].isEmpty()) {
+                answer += qs[i].poll();
+            }
+        }
+
+        if (answer > k) {
+            System.out.println("Oh no");
+        } else {
+            System.out.println(answer);
+        }
+
+    }*/
+
+/*    static class CCTV {
         int row;
         int col;
         String status;
@@ -265,7 +353,7 @@ public class Main {
             wkGraph[i][col] = 9;
 
         }
-    }
+    }*/
 
 /*    static class Node {
         int row;

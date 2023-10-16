@@ -5,9 +5,88 @@ import java.util.*;
 
 public class Main {
 
+    static class Edge implements Comparable<Edge> {
+        int v;
+        int wei;
+        public Edge (int v, int wei) {
+            this.v = v;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }
+
     // #10282 해킹 - TODO 다익스트라 구하고, 다익스트라 배열 중 최대거리를 구한다? 어차피 그 최대거리를 가는동안 다른곳은 모두 도착을 했으니까?
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        while (N --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int n = Integer.parseInt(st.nextToken());
+            int d = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            int[] dis = new int[n+1];
+            boolean[] visited = new boolean[n+1];
+            ArrayList<Edge>[] graph = new ArrayList[n+1];
+            for (int i=0; i<=n; ++i) {
+                graph[i] = new ArrayList<>();
+            }
+
+            while (d --> 0) {
+                st = new StringTokenizer(br.readLine());
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
+                int z = Integer.parseInt(st.nextToken());
+
+                graph[y].add(new Edge(x, z));
+            }
+
+            PriorityQueue<Edge> q = new PriorityQueue<>();
+            q.offer(new Edge(c, 0));
+
+            Arrays.fill(dis, 100000001);
+            dis[c] = 0;
+
+            while (!q.isEmpty()) {
+                Edge cur = q.poll();
+
+                if (visited[cur.v]) {
+                    continue;
+                }
+                visited[cur.v] = true;
+
+                for (Edge next : graph[cur.v]) {
+                    if (dis[cur.v] + next.wei < dis[next.v]) {
+                        dis[next.v] = dis[cur.v] + next.wei;
+                        q.offer(new Edge(next.v, dis[next.v]));
+                    }
+                }
+            }
+
+            int cnt = 1;
+            int max = -1;
+            for(int i=1; i<=n; ++i) {
+                if (i != c && dis[i] != 100000001) {
+                    cnt++;
+                    max = Math.max(max, dis[i]);
+                }
+            }
+
+            if (max == -1) {
+                System.out.println(1 + " " + 0);
+                System.exit(0);
+            }
+
+            if (n == 1) {
+                System.out.println(1 + " " + graph[1].get(0).wei);
+            } else {
+                System.out.println(cnt + " " + max);
+            }
+
+        }
 
     }
 

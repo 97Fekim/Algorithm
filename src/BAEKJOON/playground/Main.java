@@ -5,6 +5,54 @@ import java.util.*;
 
 public class Main {
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+    // #1405 미친 로봇
+/*    static int N;
+    static int[] d_row = {0, 0, 1, -1};
+    static int[] d_col = {1, -1, 0, 0};
+    static double[] percents;
+    static boolean[][] visited;
+    static double answer = 0;
+
+    static void dfs(int row, int col, int depth, double percent) {
+        if (depth == N) {
+            answer += percent;
+        } else {
+            visited[row][col] = true;
+
+            for (int i=0; i<4; ++i) {
+                int next_row = row + d_row[i];
+                int next_col = col + d_col[i];
+                if (!visited[next_row][next_col]) {
+                    //visited[next_row][next_col] = true;
+                    dfs(next_row, next_col, depth+1, percent*percents[i]);
+                    visited[next_row][next_col] = false;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        percents = new double[4];
+        for (int i=0; i<4; ++i) {
+            percents[i] = Double.parseDouble(st.nextToken()) / 100d;
+        }
+
+        visited = new boolean[40][40];
+
+        dfs(20, 20, 0, 1.0d);
+
+        System.out.println(answer);
+
+    }*/
+
     // #16234 인구 이동
 /*    static int N, L, R;
     static int[][] graph;

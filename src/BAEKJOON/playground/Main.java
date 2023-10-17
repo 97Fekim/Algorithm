@@ -5,7 +5,253 @@ import java.util.*;
 
 public class Main {
 
-    static class Edge implements Comparable<Edge> {
+    // #16234 인구 이동
+/*    static int N, L, R;
+    static int[][] graph;
+    static int[][] visited;
+    static int[] d_row = {-1, 0, 1, 0};
+    static int[] d_col = {0, -1, 0, 1};
+    static Map<Integer, Integer> sum_map;
+    static Map<Integer, Integer> cnt_map;
+
+    static void dfs(int row, int col, int rabel) {
+        for (int i=0; i<4; ++i) {
+            int next_row = row + d_row[i];
+            int next_col = col + d_col[i];
+            if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < N
+                    && visited[next_row][next_col] == 0
+                    && Math.abs(graph[row][col] - graph[next_row][next_col]) <= R
+                    && Math.abs(graph[row][col] - graph[next_row][next_col]) >= L) {
+                visited[next_row][next_col] = rabel;
+                sum_map.put(rabel, sum_map.getOrDefault(rabel, 0) + graph[next_row][next_col]);
+                cnt_map.put(rabel, cnt_map.getOrDefault(rabel, 0) + 1);
+                dfs(next_row, next_col, rabel);
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        L = Integer.parseInt(st.nextToken());
+        R = Integer.parseInt(st.nextToken());
+
+        graph = new int[N][N];
+
+        for (int i=0; i<N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<N; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int days = 0;
+        while (true) {
+
+            sum_map = new HashMap<>();
+            cnt_map = new HashMap<>();
+            visited = new int[N][N];
+            int rabel = 1;
+
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    if (visited[i][j] == 0) {
+                        visited[i][j] = rabel;
+                        sum_map.put(rabel, sum_map.getOrDefault(rabel, 0) + graph[i][j]);
+                        cnt_map.put(rabel, cnt_map.getOrDefault(rabel, 0) + 1);
+                        dfs(i, j, rabel);
+                        rabel++;
+                    }
+                }
+            }
+
+            for (int i=0; i<N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    graph[i][j] = (int) Math.floor( (double)sum_map.get(visited[i][j]) / (double)cnt_map.get(visited[i][j]) );
+                }
+            }
+
+            if (rabel == N*N + 1) {
+                System.out.println(days);
+                System.exit(0);
+            } else {
+                days++;
+            }
+        }
+
+    }*/
+
+    // #15961 회전 초밥
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int N = Integer.parseInt(st.nextToken());
+        int d = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+
+        int[] arr = new int[N];
+
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        // 초깃값
+        for (int i=0; i<k; ++i) {
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+        }
+        map.put(c, map.getOrDefault(c, 0) + 1);
+
+        int max = map.size();
+
+        // 순회 시작
+        for (int i=1; i<N; ++i) {
+            int lt = i-1;
+            int rt = (i + k - 1) % N;
+
+            map.put(arr[lt], map.get(arr[lt]) - 1);
+            if (map.get(arr[lt]) == 0) {
+                map.remove(arr[lt]);
+            }
+
+            map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
+
+            max = Math.max(max, map.size());
+        }
+
+        System.out.println(max);
+
+    }*/
+
+    // #4803 트리
+/*    static class Edge {
+        int cur;
+        int before;
+        Edge (int cur, int before) {
+            this.cur = cur;
+            this.before = before;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int case_num = 0;
+        while (true) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int n = Integer.parseInt(st.nextToken());
+            int m = Integer.parseInt(st.nextToken());
+
+            if (n==0 && m==0) {
+                break;
+            }
+
+            case_num++;
+            ArrayList<Integer>[] graph = new ArrayList[n+1];
+            for (int i=0; i<=n; ++i) {
+                graph[i] = new ArrayList<>();
+            }
+
+            while (m --> 0) {
+                st = new StringTokenizer(br.readLine(), " ");
+                int a = Integer.parseInt(st.nextToken());
+                int b = Integer.parseInt(st.nextToken());
+                if (a == b) {
+                    continue;
+                }
+                if (!graph[a].contains(b)) {
+                    graph[a].add(b);
+                }
+                if (!graph[b].contains(a)) {
+                    graph[b].add(a);
+                }
+            }
+
+            boolean[] visited = new boolean[n+1];
+
+            int tree_cnt = 0;
+            for (int i=1; i<=n; ++i) {
+
+                if (visited[i]) {
+                    continue;
+                }
+
+                int node_cnt = 0;
+                int edge_cnt = 0;
+
+                Queue<Edge> q = new LinkedList<>();
+                q.offer(new Edge(i, 0));
+
+                while (!q.isEmpty()) {
+                    Edge cur = q.poll();
+
+                    if (visited[cur.cur]) {
+                        continue;
+                    }
+                    visited[cur.cur] = true;
+                    node_cnt++;
+
+                    for (int next : graph[cur.cur]) {
+                        q.offer(new Edge(next, cur.cur));
+
+                        if (cur.before != next) {
+                            edge_cnt++;
+                        }
+                    }
+                }
+
+                if (node_cnt == edge_cnt + 1) {
+                    tree_cnt ++;
+                }
+
+            }
+            if (tree_cnt == 0) {
+                System.out.println("Case "+case_num+": No trees.");
+            } else if (tree_cnt == 1) {
+                System.out.println("Case "+case_num+": There is one tree.");
+            } else {
+                System.out.println("Case "+case_num+": A forest of "+tree_cnt+" trees.");
+            }
+
+        }
+
+    }*/
+
+    // 줄세우기 - DP (LIS)
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        int[] dp = new int[N];
+
+        dp[0] = 1;
+
+        for (int i=1; i<N; ++i) {
+            int lis = 0;
+            for (int j=0; j<=i-1; ++j) {
+                if (arr[i] > arr[j]) {
+                    lis = Math.max(lis, dp[j]);
+                }
+            }
+            dp[i] = lis + 1;
+        }
+
+        int LIS = Arrays.stream(dp).max().getAsInt();
+
+        System.out.println(N - LIS);
+
+    }*/
+
+
+/*    static class Edge implements Comparable<Edge> {
         int v;
         int wei;
         public Edge (int v, int wei) {
@@ -47,7 +293,7 @@ public class Main {
             PriorityQueue<Edge> q = new PriorityQueue<>();
             q.offer(new Edge(c, 0));
 
-            Arrays.fill(dis, 100000001);
+            Arrays.fill(dis, 1000000001);
             dis[c] = 0;
 
             while (!q.isEmpty()) {
@@ -69,7 +315,7 @@ public class Main {
             int cnt = 1;
             int max = -1;
             for(int i=1; i<=n; ++i) {
-                if (i != c && dis[i] != 100000001) {
+                if (i != c && dis[i] != 1000000001) {
                     cnt++;
                     max = Math.max(max, dis[i]);
                 }
@@ -77,18 +323,18 @@ public class Main {
 
             if (max == -1) {
                 System.out.println(1 + " " + 0);
-                System.exit(0);
+                continue;
             }
 
             if (n == 1) {
-                System.out.println(1 + " " + graph[1].get(0).wei);
+                System.out.println(1 + " " + 0);
             } else {
                 System.out.println(cnt + " " + max);
             }
 
         }
 
-    }
+    }*/
 
     // #16562 친구비
 /*    static int[] parent;

@@ -1,14 +1,118 @@
 package BAEKJOON.playground;
 
-import com.sun.org.apache.xml.internal.utils.Trie;
-import netscape.security.UserTarget;
-
 import java.io.*;
 import java.util.*;
 
 public class Main {
 
-    static int N, M;
+    // #3055 탈출 - BFS
+ /*   static class Edge {
+        int row;
+        int col;
+        Edge (int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        char[][] graph = new char[N][M];
+        boolean[][] visited = new boolean[N][M];
+        int[] d_row = {-1, 0, 1, 0};
+        int[] d_col = {0, -1, 0, 1};
+
+        int start_row = 0;
+        int start_col = 0;
+
+        for(int i=0; i<N; ++i) {
+            char[] inputs = br.readLine().toCharArray();
+            for (int j=0; j<M; ++j) {
+                graph[i][j] = inputs[j];
+                if (graph[i][j] == 'S') {
+                    start_row = i;
+                    start_col = j;
+                }
+            }
+        }
+
+        Queue<Edge> q = new LinkedList<>();
+        q.offer(new Edge(start_row, start_col));
+
+        int depth = 0;
+        while (!q.isEmpty()) {
+
+            Queue<Edge> water = new LinkedList<>();
+            for(int i=0; i<N; ++i) {
+                for (int j = 0; j < M; ++j) {
+                    if (graph[i][j] == '*') {
+                        for (int k=0; k<4; ++k) {
+                            int next_row = i + d_row[k];
+                            int next_col = j + d_col[k];
+
+                            if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < M &&
+                                    graph[next_row][next_col] != 'X' && graph[next_row][next_col] != 'D') {
+                                water.offer(new Edge(next_row, next_col));
+                            }
+                        }
+                    }
+                }
+            }
+            for (Edge e : water) {
+                graph[e.row][e.col] = '*';
+            }
+
+//            for (Edge e : q) {
+//                System.out.print("["+ e.row+", "+e.col+"], ");
+//            }
+//            System.out.println();
+//            for(int i=0; i<N; ++i) {
+//                for (int j = 0; j < M; ++j) {
+//                    System.out.print(graph[i][j] + " ");
+//                }
+//                System.out.println();
+//            }
+//            System.out.println();
+
+
+            int len = q.size();
+            for (int i=0; i<len; ++i) {
+                Edge cur = q.poll();
+
+                if (visited[cur.row][cur.col]) {
+                    continue;
+                }
+                visited[cur.row][cur.col] = true;
+
+                if (graph[cur.row][cur.col] == 'D') {
+                    System.out.println(depth);
+                    System.exit(0);
+                }
+
+                for (int j=0; j<4; ++j) {
+                    int next_row = cur.row + d_row[j];
+                    int next_col = cur.col + d_col[j];
+                    if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < M
+                            && (graph[next_row][next_col] == '.' || graph[next_row][next_col] == 'D') ) {
+                        q.offer(new Edge(next_row, next_col));
+                    }
+                }
+
+            }
+
+            depth++;
+        }
+
+        System.out.println("KAKTUS");
+
+    }*/
+
+/*    static int N, M;
     static char[][] graph;
     static int[] d_row = {-1, 0, 1, 0};
     static int[] d_col = {0, -1, 0, 1};
@@ -25,18 +129,27 @@ public class Main {
                 if ((next_row1 < 0 || next_row1 >= N || next_col1 < 0 || next_col1 >= M) && (next_row2 < 0 || next_row2 >= N || next_col2 < 0 || next_col2 >= M)) {
                     continue;
                 }
-                // 한놈만 빠진다. max 갱신하고 return ;
-                else if ((next_row1 < 0 || next_row1 >= N || next_col1 < 0 || next_col1 >= M) || (next_row2 < 0 || next_row2 >= N || next_col2 < 0 || next_col2 >= M)) {
-                    System.out.println("row1, col1, row2, col2 = " + row1 + ", " + col1 + ", " + row2 + ", " +col2);
-                    min = Math.min(min, depth+1);
-                }
+
                 // 둘다 갈곳이 벽이다. continue
-                else if (graph[next_row1][next_col1] == '#' && graph[next_row2][next_col2] == '#') {
+                if (next_row1 >= 0 && next_col1 >= 0 && next_row1 < N && next_col1 < M
+                        && next_row2 >= 0 && next_col2 >= 0 && next_row2 < N && next_col2 < M
+                        && graph[next_row1][next_col1] == '#' && graph[next_row2][next_col2] == '#') {
                     continue;
+                }
+
+                // 한놈만 빠진다. max 갱신하고 return ;
+                if ((next_row1 < 0 || next_row1 >= N || next_col1 < 0 || next_col1 >= M) || (next_row2 < 0 || next_row2 >= N || next_col2 < 0 || next_col2 >= M)) {
+                    min = Math.min(min, depth+1);
                 }
                 // 둘다 갈곳이 있다. dfs
                 else {
-                    dfs(next_row1, next_col1, next_row2, next_col2, depth+1);
+                    if (graph[next_row1][next_col1] == '#') {
+                        dfs(row1, col1, next_row2, next_col2, depth+1);
+                    } else if (graph[next_row2][next_col2] == '#') {
+                        dfs(next_row1, next_col1, row2, col2, depth+1);
+                    } else {
+                        dfs(next_row1, next_col1, next_row2, next_col2, depth+1);
+                    }
                 }
             }
         }
@@ -72,8 +185,9 @@ public class Main {
 
         dfs(init_row1, init_col1, init_row2, init_col2, 0);
 
-        System.out.println(min);
-    }
+        System.out.println(min != 100000000 ? min : -1);
+
+    }*/
 
     // #5052 전화번호 목록 - 문자열,자료구조,트리,트라이
 /*    public static void main(String[] args) throws IOException {

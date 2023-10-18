@@ -1,14 +1,111 @@
 package BAEKJOON.playground;
 
+import com.sun.org.apache.xml.internal.utils.Trie;
+import netscape.security.UserTarget;
+
 import java.io.*;
 import java.util.*;
 
 public class Main {
 
+    static int N, M;
+    static char[][] graph;
+    static int[] d_row = {-1, 0, 1, 0};
+    static int[] d_col = {0, -1, 0, 1};
+    static int min = 100000000;
+
+    static void dfs(int row1, int col1, int row2, int col2, int depth) {
+        if (depth >= 10) {
+            return ;
+        } else {
+            for (int i=0; i<4; ++i) {
+                int next_row1 = row1 + d_row[i]; int next_col1 = col1 + d_col[i]; int next_row2 = row2 + d_row[i]; int next_col2 = col2 + d_col[i];
+
+                // 둘다 빠진다. continue
+                if ((next_row1 < 0 || next_row1 >= N || next_col1 < 0 || next_col1 >= M) && (next_row2 < 0 || next_row2 >= N || next_col2 < 0 || next_col2 >= M)) {
+                    continue;
+                }
+                // 한놈만 빠진다. max 갱신하고 return ;
+                else if ((next_row1 < 0 || next_row1 >= N || next_col1 < 0 || next_col1 >= M) || (next_row2 < 0 || next_row2 >= N || next_col2 < 0 || next_col2 >= M)) {
+                    System.out.println("row1, col1, row2, col2 = " + row1 + ", " + col1 + ", " + row2 + ", " +col2);
+                    min = Math.min(min, depth+1);
+                }
+                // 둘다 갈곳이 벽이다. continue
+                else if (graph[next_row1][next_col1] == '#' && graph[next_row2][next_col2] == '#') {
+                    continue;
+                }
+                // 둘다 갈곳이 있다. dfs
+                else {
+                    dfs(next_row1, next_col1, next_row2, next_col2, depth+1);
+                }
+            }
+        }
+    }
+
+    // #16197 두 동전
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        graph = new char[N][M];
+
+        Queue<Integer> init_point = new LinkedList<>();
+
+        for(int i=0; i<N; ++i) {
+            char[] inputs = br.readLine().toCharArray();
+            for (int j=0; j<M; ++j) {
+                graph[i][j] = inputs[j];
+                if (graph[i][j] == 'o') {
+                    init_point.offer(i);
+                    init_point.offer(j);
+                }
+            }
+        }
+
+        int init_row1 = init_point.poll();
+        int init_col1 = init_point.poll();
+        int init_row2 = init_point.poll();
+        int init_col2 = init_point.poll();
+
+        dfs(init_row1, init_col1, init_row2, init_col2, 0);
+
+        System.out.println(min);
     }
+
+    // #5052 전화번호 목록 - 문자열,자료구조,트리,트라이
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int T = Integer.parseInt(br.readLine());
+        while (T --> 0) {
+            int n = Integer.parseInt(br.readLine());
+            String[] arr = new String[n];
+            Set<String> set = new HashSet<>();
+
+            for (int i=0; i<n; ++i) {
+                String input = br.readLine();
+                arr[i] = input;
+                set.add(input);
+            }
+
+            boolean isConc = true;
+            for (int i=0; i<n; ++i) {
+                String cur = arr[i];
+                for (int j=0; j<cur.length(); ++j) {  // 목록의 두 전화번호가 같은 경우는 없으므로 j != cur.length()
+                    if (set.contains(cur.substring(0, j))) {
+                        isConc = false;
+                    }
+                }
+            }
+
+            System.out.println(isConc ? "YES" : "NO");
+
+        }
+
+    }*/
 
     // #1405 미친 로봇
 /*    static int N;

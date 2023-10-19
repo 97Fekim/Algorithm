@@ -1,9 +1,254 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+    // #4485 녹색 옷 입은 애가 젤다지? - 다익스트라
+/*    static class Edge implements Comparable<Edge> {
+        int row;
+        int col;
+        int wei;
+        Edge (int row, int col, int wei) {
+            this.row = row;
+            this.col = col;
+            this.wei = wei;
+        }
+        @Override
+        public int compareTo(Edge o) {
+            return this.wei - o.wei;
+        }
+    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int[] d_row = {-1, 0, 1, 0};
+        int[] d_col = {0, -1, 0, 1};
+
+        int case_cnt = 0;
+        while (true) {
+            int N = Integer.parseInt(br.readLine());
+            if (N == 0) {
+                break;
+            }
+            case_cnt++;
+
+            int[][] graph = new int[N][N];
+            boolean[][] visited = new boolean[N][N];
+            int[][] dis = new int[N][N];
+            for (int i=0; i<N; ++i) {
+                for (int j=0; j<N; ++j) {
+                    dis[i][j] = 100000000;
+                }
+            }
+
+            for (int i=0; i<N; ++i) {
+                StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+                for (int j = 0; j < N; ++j) {
+                    graph[i][j] = Integer.parseInt(st.nextToken());
+                }
+            }
+
+
+            // 다익스트라 시작
+            PriorityQueue<Edge> q = new PriorityQueue<>();
+            dis[0][0] = graph[0][0];
+            q.offer(new Edge(0, 0, graph[0][0]));
+
+            while (!q.isEmpty()) {
+                Edge cur = q.poll();
+                if (visited[cur.row][cur.col]) {
+                    continue;
+                }
+                visited[cur.row][cur.col] = true;
+
+                for (int i=0; i<4; ++i) {
+                    int next_row = cur.row + d_row[i];
+                    int next_col = cur.col + d_col[i];
+
+                    if (next_row >= 0 && next_col >= 0 && next_row < N && next_col < N
+                            && dis[cur.row][cur.col] + graph[next_row][next_col] < dis[next_row][next_col]) {
+                        dis[next_row][next_col] = dis[cur.row][cur.col] + graph[next_row][next_col];
+                        q.offer(new Edge(next_row, next_col, dis[next_row][next_col]));
+                    }
+                }
+            }
+
+            bw.write("Problem "+case_cnt+": "+dis[N-1][N-1]+"\n");
+
+//            for (int i=0; i<N; ++i) {
+//                for (int j = 0; j < N; ++j) {
+//                    System.out.print(dis[i][j]+" ");
+//                }
+//                System.out.println();
+//            }
+//            System.out.println();
+
+        }
+        bw.flush();
+        bw.close();
+
+    }*/
+
+    // #2661 좋은수열 - 백트래킹
+/*    static int N;
+    static int[] seq = {1, 2, 3};
+
+    static void backTracking(String result) {
+        if (result.length() == N) {
+            System.out.println(result);
+            System.exit(0);
+        } else {
+            for (int i=0; i<3; ++i) {
+                if (possible(result+seq[i])) {
+                    backTracking(result+seq[i]);
+                }
+            }
+        }
+    }
+
+    static boolean possible(String str) {
+        boolean isPossible = true;
+        for (int i=1; i<= str.length()/2; ++i) {
+            String first = str.substring(str.length() - i*2 ,str.length()-i);
+            String second = str.substring(str.length()-i ,str.length());
+            if (first.equals(second)) {
+                isPossible = false;
+            }
+        }
+        return isPossible;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+
+        backTracking("");
+    }*/
+
+    // #3190 뱀 - 덱, 구현
+/*    static class Point {
+        int row;
+        int col;
+        Point(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int K = Integer.parseInt(br.readLine());
+
+        char[][] graph = new char[N+1][N+1];
+
+        for (int i=1; i<=N; ++i) {
+            for (int j = 1; j <= N; ++j) {
+                graph[i][j] = 'O';
+            }
+        }
+
+        while (K --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            graph[a][b] = 'A';  // Apple
+        }
+
+        Map<Integer, Character> cmd_map = new HashMap<>();
+        int L = Integer.parseInt(br.readLine());
+        while (L --> 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            char c = st.nextToken().charAt(0);
+            cmd_map.put(a, c);
+        }
+
+
+        Deque<Point> snake_deq = new LinkedList<>();
+        char cur_cmd = 'R';
+        snake_deq.offerFirst(new Point(1,1));
+        graph[1][1] = 'S';
+        int depth = 0;
+
+        while (true) {
+
+            // 현재 좌표 = deq.peekFirst
+            Point cur_point = snake_deq.peekFirst();
+            // 현재 방향에 따라 다음칸으로 이동.
+            int next_row=0, next_col=0;
+            if (cur_cmd == 'R') {
+                next_row = cur_point.row;
+                next_col = cur_point.col+1;
+            }  else if (cur_cmd == 'D') {
+                next_row = cur_point.row+1;
+                next_col = cur_point.col;
+            }  else if (cur_cmd == 'L') {
+                next_row = cur_point.row;
+                next_col = cur_point.col-1;
+            }  else if (cur_cmd == 'U') {
+                next_row = cur_point.row-1;
+                next_col = cur_point.col;
+            }
+            //   다음칸이 밖이거나, 스네이크(S)이면 depth+1 출력하고 종료
+            if (next_row <= 0 || next_row > N || next_col <= 0 || next_col > N) {
+                System.out.println(depth+1);
+                System.exit(0);
+            }
+            if (graph[next_row][next_col] == 'S') {
+                System.out.println(depth+1);
+                System.exit(0);
+            }
+
+            //   다음칸이 사과냐 아니냐에 따라 Queue 조작
+            //      다음칸이 사과이면 graph[다음칸]을 S로 만들고, deq.offerFirst(다음좌표)
+            if (graph[next_row][next_col] == 'A') {
+                graph[next_row][next_col] = 'S';
+                snake_deq.offerFirst(new Point(next_row, next_col));
+            }
+            //      다음칸이 사과가 아니면 graph[다음칸]을 S로 만들고, deq.offerFirst(다음좌표); deq.pollLast(); pollLast한 좌표에 graph를 공백으로 초기화한다.
+            else {
+                graph[next_row][next_col] = 'S';
+                snake_deq.offerFirst(new Point(next_row, next_col));
+                Point before = snake_deq.pollLast();
+                graph[before.row][before.col] = 'O';
+            }
+
+            // 끝나고 방향 바꾸기
+            depth++;
+            if (cmd_map.get(depth) != null) {
+                if (cmd_map.get(depth) == 'L') {  // 왼쪽
+                    if (cur_cmd == 'R') cur_cmd = 'U';
+                    else if (cur_cmd == 'D') cur_cmd = 'R';
+                    else if (cur_cmd == 'L') cur_cmd = 'D';
+                    else if (cur_cmd == 'U') cur_cmd = 'L';
+                } else {  // 오른쪽
+                    if (cur_cmd == 'R') cur_cmd = 'D';
+                    else if (cur_cmd == 'D') cur_cmd = 'L';
+                    else if (cur_cmd == 'L') cur_cmd = 'U';
+                    else if (cur_cmd == 'U') cur_cmd = 'R';
+                }
+            }
+
+            for (int i=1; i<=N; ++i) {
+                for (int j=1; j<=N; ++j) {
+                    System.out.print(graph[i][j] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println();
+
+        }
+
+
+    }*/
 
     // #3055 탈출 - BFS
  /*   static class Edge {

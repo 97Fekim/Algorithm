@@ -1,14 +1,135 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
+
+    //Node 클래스 정보
+    // >> 현재위치, 다음위치, 분기여부boolean
+    //그래프의 저장
+    // >> ArrayList<Node>[33]
+    //각 노드의 점수 저장
+    // >> Map<Integer, Integer>
+    // >> 시작점은 0, 끝점은 -1
+    //각 말의 위치 저장
+    // >> Map<Character, Integer>
+    //백트래킹에 사용할 각 말
+    // >> char[4] = {a, b, c, d}
+    //명령 순서 정보
+    // >> int[10] move
+    //10개를 뽑은 이동대상정보
+    // >> char[10] moving
+    //
+    //명령대로 이동할때 이동하려는 대상의 위치(Map.get(moving[]))가 -1(끝점) 이면 return ;
+    //
+    //명령대로 이동할때 for (Node ) 요렇게 돌건데, 이때 idx가 첫번째이면 Node.분기여부가 true인쪽으로 이동
+    // >> 이동하는 방법은. 일단 노드를 고른담에 노드가 확정되면, "cur = Node.next,," 이런식으로 하면 되겠지
+    //
+    //이동이 끝나고, 각 말의 위치를 탐색해봄 근데 도착점 아니면서 똑같은게 있으면 return ;
+    // >> if (get(pos) == pos && get(pos) != -1) return ;
+    
+    // #17825 주사위 윷놀이
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+
+
     }
+
+    // #1941 소문난 칠공주 - 백트래킹, BFS
+/*    static class Node {
+        int row;
+        int col;
+
+        Node (int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        public boolean equals(Object oo) {
+            Node o = (Node) oo;
+            return o.row == this.row && o.col == this.col;
+        }
+
+        public int hashCode() {
+            return (row+""+col).hashCode();
+        }
+
+    }
+    static Node[] src = new Node[25];
+    static Node[] result = new Node[7];
+    static char[][] graph = new char[5][5];
+    static int[] d_row = {-1, 0, 1, 0};
+    static int[] d_col = {0, -1, 0, 1};
+    static int answer = 0;
+
+    static void backTracking(int depth, int init) {
+        if (depth == 7) {
+            // BFS를 수행한다.
+            Set<Node> set = new HashSet<>();
+            for (Node n : result) {
+                set.add(new Node(n.row, n.col));
+            }
+
+            Queue<Node> q = new LinkedList<>();
+            q.offer(result[0]);
+
+            int S = 0;
+            while (!q.isEmpty()) {
+                Node cur = q.poll();
+                if (!set.contains(new Node(cur.row, cur.col))) {
+                    continue;
+                }
+                set.remove(new Node(cur.row, cur.col));
+
+                if (graph[cur.row][cur.col] == 'S') {
+                    S++;
+                }
+
+                for (int i=0; i<4; ++i) {
+                    int next_row = cur.row + d_row[i];
+                    int next_col = cur.col + d_col[i];
+                    if (next_row >= 0 && next_row < 5 && next_col >= 0 && next_col < 5) {
+                        q.offer(new Node(next_row, next_col));
+                    }
+                }
+            }
+
+            if (set.isEmpty() && S >= 4) {
+                answer ++;
+            }
+
+        } else {
+
+            for (int i=init; i<25; ++i) {
+                result[depth] = new Node(src[i].row, src[i].col);
+                backTracking(depth+1, i+1);
+            }
+
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i=0; i<5; ++i) {
+            char[] inputs = br.readLine().toCharArray();
+            for (int j=0; j<5; ++j) {
+                graph[i][j] = inputs[j];
+            }
+        }
+
+        int idx = 0;
+        for (int i=0; i<5; ++i) {
+            for (int j = 0; j < 5; ++j) {
+                src[idx++] = new Node(i, j);
+            }
+        }
+
+        backTracking(0, 0);
+        System.out.println(answer);
+    }*/
 
     // #4485 녹색 옷 입은 애가 젤다지? - 다익스트라
 /*    static class Edge implements Comparable<Edge> {

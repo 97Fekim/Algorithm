@@ -5,37 +5,213 @@ import java.util.*;
 
 public class Main {
 
-    //Node 클래스 정보
-    // >> 현재위치, 다음위치, 분기여부boolean
-    //그래프의 저장
-    // >> ArrayList<Node>[33]
-    //각 노드의 점수 저장
-    // >> Map<Integer, Integer>
-    // >> 시작점은 0, 끝점은 -1
-    //각 말의 위치 저장
-    // >> Map<Character, Integer>
-    //백트래킹에 사용할 각 말
-    // >> char[4] = {a, b, c, d}
-    //명령 순서 정보
-    // >> int[10] move
-    //10개를 뽑은 이동대상정보
-    // >> char[10] moving
-    //
-    //명령대로 이동할때 이동하려는 대상의 위치(Map.get(moving[]))가 -1(끝점) 이면 return ;
-    //
-    //명령대로 이동할때 for (Node ) 요렇게 돌건데, 이때 idx가 첫번째이면 Node.분기여부가 true인쪽으로 이동
-    // >> 이동하는 방법은. 일단 노드를 고른담에 노드가 확정되면, "cur = Node.next,," 이런식으로 하면 되겠지
-    //
-    //이동이 끝나고, 각 말의 위치를 탐색해봄 근데 도착점 아니면서 똑같은게 있으면 return ;
-    // >> if (get(pos) == pos && get(pos) != -1) return ;
-    
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+/*    static int answer = -1;
+    static ArrayList<Node>[] graph;
+    static Map<Integer, Integer> scores;
+    static Map<Character, Integer> pos_map;
+    static int[] moves = new int[10];
+    static char[] moving = new char[10];
+    static char[] horses = {'a', 'b', 'c', 'd'};
+
+    static void backTracking(int depth) {
+        if (depth == 10) {
+//            String tmp = "";  //
+//            for (char c : moving) {
+//                tmp += String.valueOf(c);
+//            }
+
+            // 계산한다.
+            pos_map = new HashMap<>();
+            pos_map.put('a', 0); pos_map.put('b', 0); pos_map.put('c', 0); pos_map.put('d', 0);
+            int sum = 0;
+            for (int i=0; i<10; ++i) {
+                int cur_pos = pos_map.get(moving[i]);
+                if (cur_pos == 32) {  // 이미 끝점인 말이 선택되었다면 PASS한다.
+                    return ;
+                }
+
+                for (int j=0; j<moves[i]; ++j) {
+
+                    // 다음노드 찾기.
+                    int next_pos = 0;
+                    for (Node n : graph[cur_pos]) {
+                        if (j == 0 && n.blueBranch) {
+                            next_pos = n.next;
+                            break;
+                        } else {
+                            if (!n.blueBranch) {
+                                next_pos = n.next;
+                            }
+                        }
+                    }
+
+                    // 다음 노드로 이동
+                    cur_pos = next_pos;
+                    if (cur_pos == 32) {
+                        break;
+                    }
+
+                }
+
+                // 도착한 노드가 도착점이 아니며, 도착한 노드에 다른 말이 있다면 PASS
+                for (char c : pos_map.keySet()) {
+                    if (cur_pos != 32 && pos_map.get(c) == cur_pos) {
+                        return ;
+                    }
+                }
+                // 도착한 노드의 점수를 반영
+                sum += scores.get(cur_pos);
+
+                // 현재 말의 위치를 변경
+                pos_map.remove(moving[i]);
+                pos_map.put(moving[i], cur_pos);
+//
+//                if (tmp.equals("dcddbbaaba")) {
+//                    System.out.println(pos_map);
+//                }
+            }
+            answer = Math.max(answer, sum);
+//            if (sum == 195) {
+//                for (char c : moving) {
+//                    System.out.print(c + " ");
+//                }
+//                System.out.println();
+//                System.out.println(pos_map);
+//            }
+
+        } else {
+            for (int i=0; i<4; ++i) {
+                moving[depth] = horses[i];
+                backTracking(depth+1);
+            }
+        }
+    }
+
     // #17825 주사위 윷놀이
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        graph = new ArrayList[33];
+        for (int i=0; i<33; ++i) {
+            graph[i] = new ArrayList<>();
+        }
+        scores = new HashMap<>();
+
+        makeGraph();
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i=0; i<10; ++i) {
+            moves[i] = Integer.parseInt(st.nextToken());
+        }
+
+        backTracking(0);
+
+        System.out.println(answer);
+    }
+
+    static void makeGraph() {
+        graph[0].add(new Node(1, false));
+        graph[1].add(new Node(2, false));
+        graph[2].add(new Node(3, false));
+        graph[3].add(new Node(4, false));
+        graph[4].add(new Node(5, false));
+        graph[5].add(new Node(6, false));
+        graph[6].add(new Node(7, false));
+        graph[7].add(new Node(8, false));
+        graph[8].add(new Node(9, false));
+        graph[9].add(new Node(10, false));
+        graph[10].add(new Node(11, false));
+        graph[11].add(new Node(12, false));
+        graph[12].add(new Node(13, false));
+        graph[13].add(new Node(14, false));
+        graph[14].add(new Node(15, false));
+        graph[15].add(new Node(16, false));
+        graph[16].add(new Node(17, false));
+        graph[17].add(new Node(18, false));
+        graph[18].add(new Node(19, false));
+        graph[19].add(new Node(20, false));
+        graph[20].add(new Node(32, false));
+
+        graph[21].add(new Node(22, false));
+        graph[22].add(new Node(23, false));
+        graph[23].add(new Node(29, false));
+
+        graph[24].add(new Node(25, false));
+        graph[25].add(new Node(29, false));
+
+        graph[26].add(new Node(27, false));
+        graph[27].add(new Node(28, false));
+        graph[28].add(new Node(29, false));
+
+        graph[29].add(new Node(30, false));
+        graph[30].add(new Node(31, false));
+        graph[31].add(new Node(20, false));
+
+        // 분기점
+        graph[5].add(new Node(21, true));
+        graph[10].add(new Node(24, true));
+        graph[15].add(new Node(26, true));
+
+        scores.put(0, 0);
+        scores.put(1, 2);
+        scores.put(2,4);
+        scores.put(3,6);
+        scores.put(4,8);
+        scores.put(5,10);
+
+        scores.put(6,12);
+        scores.put(7,14);
+        scores.put(8,16);
+        scores.put(9,18);
+        scores.put(10,20);
+
+        scores.put(11,22);
+        scores.put(12,24);
+        scores.put(13,26);
+        scores.put(14,28);
+        scores.put(15,30);
+
+        scores.put(16,32);
+        scores.put(17,34);
+        scores.put(18,36);
+        scores.put(19,38);
+        scores.put(20,40);
+
+        scores.put(32,0);
+
+        scores.put(21,13);
+        scores.put(22,16);
+        scores.put(23,19);
+        scores.put(29,25);
+
+        scores.put(24,22);
+        scores.put(25,24);
+        scores.put(28,26);
+        scores.put(27,27);
+        scores.put(26,28);
+
+        scores.put(30,30);
+        scores.put(31,35);
 
 
     }
+
+    static class Node {
+        int next;
+        boolean blueBranch;
+        Node (int next, boolean blueBranch) {
+            this.next = next;
+            this.blueBranch = blueBranch;
+        }
+        Node () {
+
+        }
+    }*/
 
     // #1941 소문난 칠공주 - 백트래킹, BFS
 /*    static class Node {

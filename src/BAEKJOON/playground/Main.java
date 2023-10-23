@@ -1,11 +1,127 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    }
+
+    // #7677 Fibonacci - 행렬곱셈 분할정복을 이용한 피보나치
+/*    static long[][] fiboMat;
+    static long[][] cur;
+
+    static long[][] divide(long n) {
+        if (n==1) {
+            return fiboMat;
+        }
+
+        cur = divide(n/2);
+
+        if (n%2 == 0) {
+            return multMat(cur, cur);
+        } else {
+            return multMat(multMat(cur, cur), fiboMat);
+        }
+
+    }
+
+    static long[][] multMat(long[][] mat1, long[][] mat2) {
+        long[][] mat3 = new long[mat1.length][mat2.length];
+
+        for(int i=0; i<mat1.length; ++i) {
+            for(int j=0; j<mat2[0].length; ++j) {
+                long sum = 0L;
+                for(int k=0; k<mat1.length; ++k) {
+                    sum += mat1[i][k]*mat2[k][j];
+                }
+                mat3[i][j] = sum % 10000;
+            }
+        }
+        return mat3;
+    }
+
+    public static long getFibo(long n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 1;
+        }
+
+        fiboMat = new long[2][2];
+        fiboMat[0][0] = 1;
+        fiboMat[0][1] = 1;
+        fiboMat[1][0] = 1;
+        fiboMat[1][1] = 0;
+
+        long[][] f0f1 = new long[2][1];
+        f0f1[0][0] = 1;
+        f0f1[1][0] = 0;
+
+        long[][] answer;
+        answer = multMat(divide(n-1), f0f1);
+
+        return answer[0][0];
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        while (true) {
+            long N = Long.parseLong(br.readLine());
+
+            if (N == -1) {
+                break;
+            }
+
+            bw.write(getFibo(N)+"\n");
+
+        }
+
+        bw.flush();
+        bw.close();
+
+    }*/
+
+    // 행렬 이분탐색
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        int M = Integer.parseInt(br.readLine());
+
+        int lt = 1;
+        int rt = M;
+
+        while (lt < rt) {
+            int mid = (lt + rt) / 2;
+
+            int cnt = 0;
+            for (int i=1; i<=N; ++i) {
+                cnt += Math.min(mid / i, N);
+            }
+
+            if (cnt >= M) {
+                rt = mid;
+            } else {
+                lt = mid + 1;
+            }
+        }
+
+        System.out.println(lt);
+
+    }*/
+
+
+    // 그리디 플레문제
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
@@ -39,7 +155,7 @@ public class Main {
             System.out.println(sb);
         }
 
-    }
+    }*/
 
     // #2568 전깃줄2 - 이분탐색을 활용한 LIS ( Nlog(N) ), 역추적
 /*    public static void main(String[] args) throws IOException {

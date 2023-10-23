@@ -7,8 +7,397 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        String[] arr = new String[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        for (int i=0; i<N; ++i) {
+            arr[i] = st.nextToken();
+        }
+
+        Arrays.sort(arr, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return (o2+o1).compareTo(o1+o2);
+            }
+        });
+
+        StringBuilder sb = new StringBuilder();
+        boolean isZero = true;
+        for (String s : arr) {
+            sb.append(s);
+            if (Integer.parseInt(s) != 0) {
+                isZero = false;
+            }
+        }
+
+        if (isZero) {
+            System.out.println(0);
+        } else {
+            System.out.println(sb);
+        }
 
     }
+
+    // #2568 전깃줄2 - 이분탐색을 활용한 LIS ( Nlog(N) ), 역추적
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[500002];
+        int[] seq = new int[500002];
+        boolean[] check = new boolean[500002];
+
+        int len = 0;
+        for (int i=0; i<N; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            arr[a] = b;
+            len = Math.max(len, a);
+            len = Math.max(len, b);
+        }
+
+        // 연결되지 않은 전깃줄은 제거할 필요가 없으므로 check
+        for (int i=0; i<=500001; ++i) {
+            if (arr[i] == 0) {
+                check[i] = true;
+            }
+        }
+
+        List<Integer> list = new ArrayList<>();
+
+        list.add(-1);
+
+        for (int i=0; i<=500001; ++i) {
+
+            // 연결되지 않은 전깃줄은 PASS
+            if (arr[i] == 0) {
+                continue;
+            }
+
+            int cur = arr[i];
+
+            if (cur > list.get(list.size() - 1)) {
+                list.add(cur);
+                seq[i] = list.size()-1;
+                continue;
+            }
+
+            int lt = 0;
+            int rt = list.size()-1;
+
+            while (lt < rt) {
+                int middle = (lt + rt) / 2;
+
+                if (list.get(middle) < cur) {
+                    lt = middle + 1;
+                } else {
+                    rt = middle;
+                }
+            }
+            list.set(rt, cur);
+            seq[i] = rt;
+        }
+
+        int index = list.size()-1;
+
+        for (int i=500001; i>=0; i--) {
+            if (seq[i] == index) {
+                check[i] = true;
+                index--;
+            }
+        }
+
+        int answer = 0;
+        for (int i=0; i<=500001; ++i) {
+            if (!check[i]) answer ++;
+        }
+        bw.write(answer+"\n");
+        for (int i=0; i<=500001; ++i) {
+            if (!check[i]) bw.write(i+"\n");
+        }
+        bw.flush();
+        bw.close();
+
+    }*/
+
+    // #12738 가장 긴 증가하는 부분 수열 3 - 이분탐색을 활용한 LIS ( Nlog(N) )
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        for (int i=0; i<N; ++i) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        List<Integer> list = new ArrayList<>();
+
+        list.add(-1000000001);
+
+        for (int i=0; i<N; ++i) {
+
+            int cur = arr[i];
+
+            if (cur > list.get(list.size() - 1)) {
+                list.add(cur);
+                continue;
+            }
+
+            int lt = 0;
+            int rt = list.size()-1;
+
+            while (lt < rt) {
+                int middle = (lt + rt) / 2;
+
+                if (list.get(middle) < cur) {
+                    lt = middle + 1;
+                } else {
+                    rt = middle;
+                }
+            }
+            list.set(rt, cur);
+        }
+
+        System.out.println(list.size()-1);
+
+    }*/
+
+    // #1655 가운데를 말해요 - 이분탐색, 우선순위 큐
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        List<Integer> list = new ArrayList<>();
+
+        int N = Integer.parseInt(br.readLine());
+
+        int first = Integer.parseInt(br.readLine());
+        list.add(first);
+        bw.write(first+"\n");
+
+        for (int i=1; i<N; ++i) {
+            int cur = Integer.parseInt(br.readLine());
+
+            int index = Collections.binarySearch(list, cur);
+
+            if (index < 0) {
+                index = Math.abs(index + 1);
+            }
+
+            list.add(index, cur);
+
+            if (list.size() % 2 == 0) {
+                bw.write(list.get(list.size()/2 - 1)+"\n");
+            } else {
+                bw.write(list.get(list.size()/2)+"\n");
+            }
+
+        }
+        
+        bw.flush();
+        bw.close();
+
+    }*/
+
+    // #2169 로봇 조종하기 - DP
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        int[][] graph = new int[N+1][M+1];
+
+        for (int i=1; i<=N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j=1; j<=M; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        int[][] dp_left = new int[N+2][M+2];
+        int[][] dp_right = new int[N+2][M+2];
+        int[][] dp = new int[N+2][M+2];
+
+        for (int i=0; i<=N+1; ++i) {
+            for (int j = 0; j <= M + 1; ++j) {
+                dp_left[i][j] = -1000000000;
+                dp_right[i][j] = -1000000000;
+                dp[i][j] = -1000000000;
+            }
+        }
+
+        dp[1][1] = graph[1][1];
+        dp_left[1][1] = graph[1][1];
+        dp_right[1][1] = graph[1][1];
+
+        for (int i=2; i<=M; ++i) {
+            dp[1][i] = dp[1][i-1] + graph[1][i];
+            dp_left[1][i] = dp_left[1][i-1] + graph[1][i];
+            dp_right[1][i] = dp_right[1][i-1] + graph[1][i];
+        }
+
+        for (int i=2; i<=N; ++i) {
+            
+            // 왼쪽 dp row 만들기
+            for (int j=1; j<=M; ++j) {
+                dp_left[i][j] = Math.max(dp[i-1][j], dp_left[i][j-1]) + graph[i][j];
+            }
+
+            // 오른쪽 dp row 만들기
+            for (int j=M; j>=1; j--) {
+                dp_right[i][j] = Math.max(dp[i-1][j], dp_right[i][j+1]) + graph[i][j];
+            }
+
+            // 왼쪽/오른쪽 dp 중 최댓값을 골라서 최종 row 만들기
+            for (int j=1; j<=M; ++j) {
+                dp[i][j] = Math.max(dp_left[i][j], dp_right[i][j]);
+            }
+        }
+
+        System.out.print(dp[N][M]+" ");
+
+//        for (int i=0; i<=N+1; ++i) {
+//            for (int j = 0; j <= M+1; ++j) {
+//                System.out.print(dp[i][j]+" ");
+//            }
+//            System.out.println();
+//        }
+
+
+    }*/
+
+    // #2352 반도체설계 - 이분탐색을 이용한 LIS *시간복잡도:Nlog(N)
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        List<Integer> list = new ArrayList<>();
+        list.add(-1);
+
+        for(int i=0; i<N; ++i) {
+
+            int cur = Integer.parseInt(st.nextToken());
+
+            if (cur > list.get(list.size()-1)) {
+                list.add(cur);
+            } else {
+                int left = 0;
+                int right = list.size()-1;
+                while (left < right) {
+                    int middle = (left + right) / 2;
+
+                    if(list.get(middle) < cur) {
+                        left = middle+1;
+                    } else {
+                        right = middle;
+                    }
+                }
+                list.set(right, cur);
+            }
+        }
+
+        System.out.println(list.size()-1);
+    }*/
+
+    // #2437 저울 - 그리디
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        int sum = 0;
+        for (int i=0; i<N; ++i) {
+            if (sum + 1 < arr[i]) {
+                break;
+            }
+            sum += arr[i];
+        }
+
+        System.out.println(sum+1);
+
+    }*/
+
+
+    // #17136 색종이 붙이기 - DFS
+/*    static int[][] graph = new int[10][10];
+    static int[] select_size = {0, 5, 5, 5, 5, 5};
+    static int answer = Integer.MAX_VALUE;
+
+    static void dfs(int row, int col, int sum) {
+        if (row > 9) {
+            answer = Math.min(answer , sum);
+            return ;
+        }
+        
+        if (col > 9) {
+            dfs (row+1, 0, sum);
+            return ;
+        }
+
+        if (graph[row][col] == 1) {
+            for (int i=5; i>=1; i--) {
+                if (select_size[i] > 0 && check(row, col, i)) {
+                    draw(row, col, i, 0);  // 0으로 칠한다.
+                    select_size[i]--;
+                    dfs(row, col+1, sum+1);
+                    select_size[i]++;
+                    draw(row, col, i, 1);  // 다시 1로 만든다.
+                }
+            }
+        } else {
+            dfs(row, col+1, sum);
+        }
+        
+    }
+
+    static void draw(int row, int col, int size, int value) {
+        for (int i=row; i<row+size; ++i) {
+            for (int j=col; j<col+size; ++j) {
+                graph[i][j] = value;
+            }
+        }
+    }
+
+    static boolean check(int row, int col, int size) {
+        for (int i=row; i<row+size; ++i) {
+            for (int j=col; j<col+size; ++j) {
+                if (i >= 10 || j >= 10 || graph[i][j] != 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i=0; i<10; ++i) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for (int j=0; j<10; ++j) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        dfs(0, 0,0);
+
+        System.out.println(answer != Integer.MAX_VALUE ? answer : -1);
+
+    }*/
 
 /*    static int answer = -1;
     static ArrayList<Node>[] graph;

@@ -14,6 +14,19 @@
 - [문제 유형별 키워드](https://velog.io/@16fekim/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Java%EB%A1%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A4%80%EB%B9%84)
 ## 마구잡이 정리 노트
 - 정렬된 배열 순회시 <strong>이분 검색(Binary Search)</strong> 고려하기
+```java
+/**
+ * Collections.binarySearch 를 활용하면 이분탐색을 아주 쉽게 구현할 수 있다.
+ */
+// 원소가 위치하고 있는 인덱스를 리턴한다.
+int index = collections.binarySearch(list, cur);
+// 해당원소가 리스트에 없다면, 들어가야 할 자리를 리턴한다. 이때 index가 3이라면, (-3-1)을 리턴한다.
+if (index < 0) {
+    index = Math.abs(index + 1);
+}
+// 찾아낸 index에 원소를 삽입한다.
+list.add(index, cur);
+````
 - 무언가 연결해야 한다면 <strong>리스트</strong> 고려하기
 - 쌍을 맞춰야 하는 연산자, 수식이 있다면 <strong>스택</strong> 고려하기
 - 정렬된 배열을 다룬다면 <strong>투포인터</strong> 고려하기

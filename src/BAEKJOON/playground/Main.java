@@ -1,14 +1,32 @@
 package BAEKJOON.playground;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 
-    // #2346 풍선 터뜨리기
     public static void main(String[] args) throws IOException {
 
+        /** 화요일
+         *  - 그래프 알고리즘 복기
+         * */
+        // 백트래킹 (여행 경로)
+
+        // 다익스트라 (배달)
+        // 플로이드 (순위)
+        // 유니온파인드 (네트워크 or 전력망을 둘로 나누기)
+
+        // 최소신장트리 (섬 연결하기)
+        // 위상정렬 (순위)
+
+        /** 수요일
+         *  - DP 대표유형 복기
+         *  - SQL문제 MYSQL로 풀어보기
+         * */
+        // 냅색 (N으로 표현)
+        // 최장공통부분수열-LCS (백준)
+        // 등등
+        // Lv4,5 SQL문제 풀기
 
     }
 

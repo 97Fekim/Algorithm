@@ -7,6 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+
         /** 화요일
          *  - 그래프 알고리즘 복기
          * */
@@ -21,9 +22,11 @@ public class Main {
          *  - DP 대표유형 복기
          *  - SQL문제 MYSQL로 풀어보기
          * */
-        // 냅색 (N으로 표현)
+        // 냅색 (거스름돈)
         // 최장공통부분수열-LCS (백준)
-        // 등등
+        // (X) LIS응용 (전깃줄)
+        // (X) 처음보는DP유형 (N으로 표현)
+
         // Lv4,5 SQL문제 풀기
 
     }

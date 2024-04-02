@@ -7,59 +7,6 @@ public class Main {
 
     public static void main(String[] args){
 
-        // 정수 타입 오름차순
-        Arrays.sort(arr, (o1, o2) -> {
-            return o1[0] - o1[0];
-        });
-
-        // 정수 타입 내림차순
-        Arrays.sort(arr, (o1, o2) -> {
-            return o2[0] - o1[0];
-        });
-
-        // String은
-        // o1.compareTo(o2) 쓰면 오름차순
-        // o2.compareTo(o1) 쓰면 내림차순
-
-        // 2가지 조건으로 정렬할때
-        // 예를들어) order by 시작시간, 종료시간
-        Arrays.sort(arr, (o1, o2) -> {
-           if (o1.srt == o2.srt) {
-               return o1.end - o2.end;
-           } else {
-               return o1.srt - o2.srt;
-           }
-        });
-
-
-    }
-
-    int dajikstra(int target) {
-
-        // 우선순위큐 만들고
-        // 시작좌표 넣고
-        // dis 배열 초기화 하고
-        // dis[0] = 0 으로 초기화 하고
-
-        while (!q.isEmpty()) {
-
-            Node cur = q.poll();
-            if (visited[cur.pos]) {
-                continue;
-            }
-            visited[cur.pos] = true;
-
-            for (int i=0; i<graph[cur.pos].size(); ++i) {
-                Node next = graph[cur.pos].get(i);
-
-                if (dis[cur.pos] + next.cost < dis[next.pos]) {
-                    dis[next.pos] = dis[cur.pos] + next.cost;
-                    q.offer(new Node(next.pos, dis[cur.pos] + next.cost));
-                }
-
-            }
-
-        }
 
     }
 

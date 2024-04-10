@@ -11275,4 +11275,45 @@ public class Main {
     }*/
 
 
+/*    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int cnt = Integer.parseInt(br.readLine());
+
+        int cur_x = 0;
+        int cur_y = 0;
+
+        int max_x = Integer.MIN_VALUE;
+        int min_x = Integer.MAX_VALUE;
+
+        int max_y = Integer.MIN_VALUE;
+        int min_y = Integer.MAX_VALUE;
+
+        for(int i=0; i<cnt; i++) {
+
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+            curX = Integer.parseInt(st.nextToken());
+            curY = Integer.parseInt(st.nextToken());
+
+            if (maxX < curX) {
+                maxX = curX;
+            }
+            if (curX < minX) {
+                minX = curX;
+            }
+
+            if (maxY < curY) {
+                maxY = curY;
+            }
+            if (curY < minY) {
+                minY = curY;
+            }
+
+        }
+
+        System.out.println((maxX-minX)*(maxY-minY));
+
+    }*/
+
 }

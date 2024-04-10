@@ -11303,6 +11303,7 @@ public class Main {
                 minX = curX;
             }
 
+
             if (maxY < curY) {
                 maxY = curY;
             }

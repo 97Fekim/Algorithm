@@ -5,8 +5,17 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    static class Edge {
+        int pos;
+        int wei;
 
+        public Edge(int pos, int wei) {
+            this.pos = pos;
+            this.wei = wei;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
 
         /** 화요일
          *  - 그래프 알고리즘 복기

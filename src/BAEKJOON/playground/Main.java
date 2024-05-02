@@ -5,17 +5,39 @@ import java.util.*;
 
 public class Main {
 
-    static class Edge {
-        int pos;
-        int wei;
-
-        public Edge(int pos, int wei) {
-            this.pos = pos;
-            this.wei = wei;
-        }
-    }
-
     public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        int[][] items = new int[N+1][2];
+        int[][] dp = new int[N+1][K+1];
+
+        for (int i=1; i<=N; ++i) {
+            st = new StringTokenizer(br.readLine(), " ");
+            items[i][0] = Integer.parseInt(st.nextToken());
+            items[i][1] = Integer.parseInt(st.nextToken());
+        }
+
+        for (int i=1; i<=N; ++i) {   // item 순서
+            for (int j=1; j<=K; ++j) {  // 무게자체
+
+                if (items[i][0] > j) {  // 가방에 현재 아이템을 담지 못하는 경우
+                    dp[i][j] = dp[i-1][j];
+
+                } else {                // 가방에 현재 아이템을 담을 수 있는 경우
+
+                    dp[i][j] = Math.max(
+                             dp[i-1][j]                             // 이전 물건과 함께 채운 MAX 가치를 가져오느냐
+                            ,items[i][1] + dp[i-1][j-items[i][0]]   // 현재 가치 + (현재 물건의 무게를 뺀 값으로 채운 MAX 가치를 가져오느냐
+                    );
+                }
+            }
+        }
+
+        System.out.println(dp[N][K]);
 
         /** 화요일
          *  - 그래프 알고리즘 복기
